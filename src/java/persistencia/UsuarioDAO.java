@@ -133,7 +133,7 @@ public class UsuarioDAO implements ICrud {
                 infoUsuario = new Usuario(rs.getInt("id_usuario"), rs.getString("nombre_usuario"), rs.getString("apellido_usuario"), rs.getString("correo_usuario"), rs.getInt("fk_id_perfil"), rs.getInt("active"));
             }
         } catch (Exception e) {
-            System.out.println("no se pudo ingresar al sistema");
+            System.out.println("no se pudo ingresar al sistema "+e.getMessage());
         }
         return infoUsuario;
         
