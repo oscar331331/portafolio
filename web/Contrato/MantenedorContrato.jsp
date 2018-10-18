@@ -27,17 +27,20 @@
             <center><h2>Mantenedor Contratos </h2></center>
                 <table class="table table-striped">
                             <thead>
-                                <tr>                            
+                                <tr>    
+                                    <th>Codigo</th>
                                     <th>Fecha Incorporacion</th>
                                     <th>Fecha Meta</th>
                                     <th>Fecha Final</th>
                                     <th>Monto Meta</th>                                    
                                     <th>Monto Actual Contrato</th>
+                                    <th>Editar</th>
                                 </tr>
                             </thead>
                             <tbody>
                             <c:forEach items="${listadoContrato}" var="contrato">
                                 <tr>
+                                    <td><c:out value="${contrato.codigo}"></c:out></td>
                                     <td><c:out value="${contrato.fechaIncorporacion}"></c:out></td>                            
                                     <td><c:out value="${contrato.fechaMeta}"></c:out></td>                            
                                     <td><c:out value="${contrato.fechaFinal}"></c:out></td>
