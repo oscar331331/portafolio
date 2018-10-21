@@ -82,7 +82,7 @@ public class ColegioDAO implements ICrud {
                 System.out.println("Problemas al actualizar");
             }
         } catch (Exception e) {
-            System.out.println("No se pudo updatear la base de datos");
+            System.out.println("No se pudo updatear la base de datos "+e.getMessage());
         }
         return false;        
     }

@@ -6,8 +6,6 @@
 package entidad;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -39,12 +37,12 @@ public class PagoCuota implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID_PAGO_CUOTA")
-    private BigDecimal idPagoCuota;
+    private int idPagoCuota;
     @Column(name = "VALOR_PAGO_CUOTA")
-    private BigInteger valorPagoCuota;
+    private int valorPagoCuota;
     @Column(name = "FECHA_PAGO_CUOTA")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaPagoCuota;
+    private String fechaPagoCuota;
     @Size(max = 255)
     @Column(name = "URL_PAGO_CUOTA")
     private String urlPagoCuota;
@@ -55,31 +53,44 @@ public class PagoCuota implements Serializable {
     public PagoCuota() {
     }
 
-    public PagoCuota(BigDecimal idPagoCuota) {
+    public PagoCuota(int idPagoCuota) {
         this.idPagoCuota = idPagoCuota;
     }
 
-    public BigDecimal getIdPagoCuota() {
+    public PagoCuota(int valorPagoCuota, String fechaPagoCuota, String urlPagoCuota) {
+        this.valorPagoCuota = valorPagoCuota;
+        this.fechaPagoCuota = fechaPagoCuota;
+        this.urlPagoCuota = urlPagoCuota;
+    }
+
+    public PagoCuota(int idPagoCuota, int valorPagoCuota, String fechaPagoCuota, String urlPagoCuota) {
+        this.idPagoCuota = idPagoCuota;
+        this.valorPagoCuota = valorPagoCuota;
+        this.fechaPagoCuota = fechaPagoCuota;
+        this.urlPagoCuota = urlPagoCuota;
+    }
+    
+    public int getIdPagoCuota() {
         return idPagoCuota;
     }
 
-    public void setIdPagoCuota(BigDecimal idPagoCuota) {
+    public void setIdPagoCuota(int idPagoCuota) {
         this.idPagoCuota = idPagoCuota;
     }
 
-    public BigInteger getValorPagoCuota() {
+    public int getValorPagoCuota() {
         return valorPagoCuota;
     }
 
-    public void setValorPagoCuota(BigInteger valorPagoCuota) {
+    public void setValorPagoCuota(int valorPagoCuota) {
         this.valorPagoCuota = valorPagoCuota;
     }
 
-    public Date getFechaPagoCuota() {
+    public String getFechaPagoCuota() {
         return fechaPagoCuota;
     }
 
-    public void setFechaPagoCuota(Date fechaPagoCuota) {
+    public void setFechaPagoCuota(String fechaPagoCuota) {
         this.fechaPagoCuota = fechaPagoCuota;
     }
 
@@ -97,26 +108,6 @@ public class PagoCuota implements Serializable {
 
     public void setFkIdCuotaViaje1(CuotaViaje fkIdCuotaViaje1) {
         this.fkIdCuotaViaje1 = fkIdCuotaViaje1;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idPagoCuota != null ? idPagoCuota.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PagoCuota)) {
-            return false;
-        }
-        PagoCuota other = (PagoCuota) object;
-        if ((this.idPagoCuota == null && other.idPagoCuota != null) || (this.idPagoCuota != null && !this.idPagoCuota.equals(other.idPagoCuota))) {
-            return false;
-        }
-        return true;
     }
 
     @Override

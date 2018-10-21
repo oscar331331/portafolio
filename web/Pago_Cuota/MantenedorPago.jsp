@@ -96,7 +96,7 @@
         <div class="content-wrapper-before"></div>
         <div class="content-header row">
           <div class="content-header-left col-md-4 col-12 mb-2">
-            <h3 class="content-header-title">Contratos</h3>
+            <h3 class="content-header-title">Pagos</h3>
           </div>
           <div class="content-header-right col-md-8 col-12">
             <div class="breadcrumbs-top float-md-right">
@@ -104,7 +104,7 @@
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="../index_admin.html">Home</a>
                   </li>
-                  <li class="breadcrumb-item active">Contratos
+                  <li class="breadcrumb-item active">Pagos
                   </li>
                 </ol>
               </div>
@@ -116,7 +116,7 @@
 	<div class="col-12">
 		<div class="card">
 			<div class="card-header">
-				<h4 class="card-title">Mantenedor de contratos</h4>
+				<h4 class="card-title">Listado de pagos</h4>
 				<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
 				
 			</div>
@@ -124,42 +124,30 @@
 				<div class="card-body">
 					
 					<div class="table-responsive">
-                                            <jsp:include page="/ContratoServlet" flush="true"/>
-                                            <jsp:useBean id="contrato" class="entidad.Contrato" scope="session"/>
-                                            <center><h2>Mantenedor Contratos </h2></center>
+                                            <jsp:include page="/PagoServlet" flush="true"/>
+                                            <jsp:useBean id="pagocuota" class="entidad.PagoCuota" scope="session"/>
+                                            <center><h2>Pagos </h2></center>
                                                 <table class="table table-striped">
                                                             <thead>
                                                                 <tr>    
-                                                                    <th>Codigo</th>
-                                                                    <th>Fecha Incorporacion</th>
-                                                                    <th>Fecha Meta</th>
-                                                                    <th>Fecha Final</th>
-                                                                    <th>Monto Meta</th>                                    
-                                                                    <th>Monto Actual Contrato</th>
-                                                                    <th>Editar</th>
+                                                                    <th>id</th>
+                                                                    <th>Fecha del pago</th>
+                                                                    <th>Valor del pago</th>
+                                                                    <th>Comprobante</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                            <c:forEach items="${listadoContrato}" var="contrato">
+                                                            <c:forEach items="${listadoPagoCuota}" var="pagocuota">
                                                                 <tr>
-                                                                    <td><c:out value="${contrato.codigo}"></c:out></td>
-                                                                    <td><c:out value="${contrato.fechaIncorporacion}"></c:out></td>                            
-                                                                    <td><c:out value="${contrato.fechaMeta}"></c:out></td>                            
-                                                                    <td><c:out value="${contrato.fechaFinal}"></c:out></td>
-                                                                    <td><c:out value="${contrato.montoMeta}"></c:out></td>
-                                                                    <td><c:out value="${contrato.montoActualContrato}"></c:out></td>
-                                                                    <td>
-                                                                    <c:url value="/ContratoServlet" var="urlEdit">
-                                                                        <c:param name="id_contrato" value="${contrato.idContrato}"></c:param>
-                                                                    </c:url>
-                                                                    <input type="button" class="btn btn-info" name="btnEditar" value="editar" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
-                                                                    </td>
+                                                                    <td><c:out value="${pagocuota.idPagoCuota}"></c:out></td>
+                                                                    <td><c:out value="${pagocuota.fechaPagoCuota}"></c:out></td>                            
+                                                                    <td><c:out value="${pagocuota.valorPagoCuota}"></c:out></td>
+                                                                    <td style="text-align: center;"><a target='_blank' href="../comprobantes/<c:out value="${pagocuota.urlPagoCuota}"></c:out>" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="297" src="../comprobantes/<c:out value="${pagocuota.urlPagoCuota}"></c:out>" width="400" /></a></td>
                                                                 </tr>
                                                             </c:forEach>                                               
                                                         </tbody>
                                                     </table>  
-                                            <center><a href="../Contrato/IngresoContrato.jsp" type="button"  class="btn btn-info btn-min-width mr-1 mb-1"><i class="ft-plus-square"></i> Agregar Contrato</a></center>
-					</div>
+                                        </div>
 				</div>
 			</div>
 		</div>

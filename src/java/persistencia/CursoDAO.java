@@ -71,7 +71,7 @@ public class CursoDAO implements ICrud {
         try {
             Connection con = Conexion.getConexion();
             CallableStatement cs = null;
-            cs = con.prepareCall("{call EditarCursos(?,?,?)}");
+            cs = con.prepareCall("{call EditarCursos(?,?,?,?)}");
             cs.setInt(1, objCurso.getIdCurso());
             cs.setString(2, objCurso.getDescripcionCurso());
             cs.setInt(3, objCurso.getActive());
@@ -82,7 +82,7 @@ public class CursoDAO implements ICrud {
                 System.out.println("Problemas al actualizar");
             }
         } catch (Exception e) {
-            System.out.println("No se pudo updatear la base de datos");
+            System.out.println("No se pudo updatear la base de datos "+e.getMessage());
         }
         return false;        
     }

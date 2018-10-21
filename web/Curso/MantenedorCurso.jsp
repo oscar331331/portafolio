@@ -124,8 +124,8 @@
 				<div class="card-body">
 					
 					<div class="table-responsive">
-						<jsp:include page="/UsuarioServlet" flush="true"/>
-            <jsp:useBean id="usuario" class="entidad.Usuario" scope="session"/>
+						<jsp:include page="/CursoServlet" flush="true"/>
+            <jsp:useBean id="curso" class="entidad.Curso" scope="session"/>
             <center><h2>Mantenedor Cursos </h2></center>
                 <table class="table table-striped">
                             <thead>
