@@ -124,7 +124,7 @@
                     <c:when test="${sessionScope.colegioAEditar==null}">
                         <div class="container">
                             <br><center><h4>Ingresar Colegio</h4></center><br>
-                            <form name="formGuardaColegioNuevo" method="post" action="/WebAppTour/ColegioServlet">
+                            <form name="formGuardaColegioNuevo" method="post" action="../ColegioServlet">
                               <div class="container">
                                     <div class="form-group">
                                         <label>Razon Social</label>

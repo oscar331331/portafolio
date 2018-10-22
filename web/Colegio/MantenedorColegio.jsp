@@ -124,7 +124,7 @@
 				<div class="card-body">
 					
 					<div class="table-responsive">
-						<jsp:include page="/UsuarioServlet" flush="true"/>
+						<jsp:include page="../ColegioServlet" flush="true"/>
             <jsp:useBean id="usuario" class="entidad.Usuario" scope="session"/>
             <center><h2>Mantenedor Colegios </h2></center>
                 <table class="table table-striped">
@@ -141,7 +141,7 @@
                                     <td><c:out value="${colegio.razonSocialColegio}"></c:out></td>                            
                                     <td><c:out value="${colegio.direccionColegio}"></c:out></td> 
                                     <td>
-                                    <c:url value="/ColegioServlet" var="urlEdit">
+                                    <c:url value="../ColegioServlet" var="urlEdit">
                                         <c:param name="id_colegio" value="${colegio.idColegio}"></c:param>
                                     </c:url>
                                     <input type="button" class="btn btn-info" name="btnEditar" value="editar" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>

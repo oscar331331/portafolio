@@ -37,7 +37,7 @@ public class ContratoDAO implements ICrud {
             cs.setInt(3, objContrato.getIdCliente());
             cs.setString(4, "LASFCE"); // codigo
             cs.setDate(5, java.sql.Date.valueOf(objContrato.getFechaFinal()));
-            cs.setInt(6,2); //objContrato.getIdCurso()
+            cs.setInt(6,objContrato.getIdCurso()); //objContrato.getIdCurso()
             cs.setDate(7, java.sql.Date.valueOf(objContrato.getFechaMeta()));
             cs.setInt(8, objContrato.getMontoMeta());
             cs.setInt(9,0);//monto actual

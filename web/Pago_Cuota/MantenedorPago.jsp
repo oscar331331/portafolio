@@ -124,7 +124,7 @@
 				<div class="card-body">
 					
 					<div class="table-responsive">
-                                            <jsp:include page="/PagoServlet" flush="true"/>
+                                            <jsp:include page="../PagoServlet" flush="true"/>
                                             <jsp:useBean id="pagocuota" class="entidad.PagoCuota" scope="session"/>
                                             <center><h2>Pagos </h2></center>
                                                 <table class="table table-striped">

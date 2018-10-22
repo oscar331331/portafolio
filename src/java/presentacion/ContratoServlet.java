@@ -122,7 +122,7 @@ public class ContratoServlet extends HttpServlet {
             int promotor=Integer.parseInt(request.getParameter("Promotor"));
             int curso=Integer.parseInt(request.getParameter("Curso"));
             Contrato infoContrato = new Contrato(fechaincorporacion, fechameta, montometa, fechafinal, montoactual, curso, cliente, promotor);
-                
+             System.out.println("contrato: "+infoContrato.toString());
             
             ContratoBO objContratoBO= new ContratoBO();
             if(objContratoBO.addContrato(infoContrato)){

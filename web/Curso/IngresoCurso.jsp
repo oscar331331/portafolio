@@ -122,7 +122,7 @@
                     <c:when test="${sessionScope.cursoAEditar==null}">
                         <div class="container"><br>
                             <center><h4>Ingresar Curso</h4></center><br>
-                            <form name="formGuardaCursoNuevo" method="post" action="/WebAppTour/CursoServlet">
+                            <form name="formGuardaCursoNuevo" method="post" action="../CursoServlet">
                               <div class="container">
                                     <div class="form-group">
                                         <label>Descripcion</label>

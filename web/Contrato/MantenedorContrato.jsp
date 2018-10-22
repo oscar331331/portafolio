@@ -124,7 +124,7 @@
 				<div class="card-body">
 					
 					<div class="table-responsive">
-                                            <jsp:include page="/ContratoServlet" flush="true"/>
+                                            <jsp:include page="../ContratoServlet" flush="true"/>
                                             <jsp:useBean id="contrato" class="entidad.Contrato" scope="session"/>
                                             <center><h2>Mantenedor Contratos </h2></center>
                                                 <table class="table table-striped">

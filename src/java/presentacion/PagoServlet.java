@@ -91,7 +91,7 @@ public class PagoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sesion= request.getSession();     
-        String archivo="C:\\Users\\Pabarcac\\Downloads\\WebAppTour\\WebAppTour\\web\\comprobantes";
+        String archivo="C:\\Users\\Vito\\Desktop\\Portafolio\\portafolio\\web\\comprobantes";
         DiskFileItemFactory factory=new DiskFileItemFactory();
         factory.setSizeThreshold(1024);
         factory.setRepository(new File(archivo));
@@ -149,7 +149,7 @@ public class PagoServlet extends HttpServlet {
             PagoCuotaBO objPagoCuotaBO= new PagoCuotaBO();
             if(objPagoCuotaBO.addPagoCuota(infoPagoCuota)){
                 sesion.setAttribute("msgError", "Guardado con exito");
-                response.sendRedirect("Pago_Cuota/IngresoPago.jsp");
+                response.sendRedirect("Pago_Cuota/MantenedorPago.jsp");
             }else{
                 sesion.setAttribute("msgError", "no se pudo actualizar a la BD 3");
                 response.sendRedirect("Pago_Cuota/IngresoPago.jsp");

@@ -126,7 +126,7 @@
                     <c:when test="${sessionScope.contratoAEditar==null}">
                         <div class="container">
                            <br> <center><h4>Ingresar Contrato</h4></center><br>
-                            <form name="formGuardaContratoNuevo" method="post" action="/WebAppTour/ContratoServlet">
+                            <form name="formGuardaContratoNuevo" method="post" action="../ContratoServlet">
                               <div class="container">
                                     <div class="form-group">
                                         <label>Fecha Incorporacion</label>
@@ -198,7 +198,7 @@
                         <jsp:useBean id="contratoAEditar" class="entidad.Contrato" scope="session"></jsp:useBean>
                         <div class="container">
                             <center><h2>Editar Contrato</h2></center>
-                            <form name="formGuardaContratoEditado" method="post" action="/WebAppTour/ContratoServlet">
+                            <form name="formGuardaContratoEditado" method="post" action="../ContratoServlet">
                                 <div class="container">
                                     <div class="form-group">
                                         <label>Fecha Incorporacion</label>

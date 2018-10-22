@@ -6,6 +6,8 @@
 package entidad;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -20,35 +22,43 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Pabarcac
+ * @author Vito
  */
 @Entity
 @Table(name = "PAGO_CUOTA")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PagoCuota.findAll", query = "SELECT p FROM PagoCuota p")})
+    @NamedQuery(name = "PagoCuota.findAll", query = "SELECT p FROM PagoCuota p"),
+    @NamedQuery(name = "PagoCuota.findByIdPagoCuota", query = "SELECT p FROM PagoCuota p WHERE p.idPagoCuota = :idPagoCuota"),
+    @NamedQuery(name = "PagoCuota.findByValorPagoCuota", query = "SELECT p FROM PagoCuota p WHERE p.valorPagoCuota = :valorPagoCuota"),
+    @NamedQuery(name = "PagoCuota.findByFechaPagoCuota", query = "SELECT p FROM PagoCuota p WHERE p.fechaPagoCuota = :fechaPagoCuota"),
+    @NamedQuery(name = "PagoCuota.findByUrlPagoCuota", query = "SELECT p FROM PagoCuota p WHERE p.urlPagoCuota = :urlPagoCuota")})
 public class PagoCuota implements Serializable {
-
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID_PAGO_CUOTA")
-    private int idPagoCuota;
+    private int  idPagoCuota;
     @Column(name = "VALOR_PAGO_CUOTA")
-    private int valorPagoCuota;
+    private int  valorPagoCuota;
     @Column(name = "FECHA_PAGO_CUOTA")
     @Temporal(TemporalType.TIMESTAMP)
     private String fechaPagoCuota;
     @Size(max = 255)
     @Column(name = "URL_PAGO_CUOTA")
     private String urlPagoCuota;
-    @JoinColumn(name = "FK_ID_CUOTA_VIAJE1", referencedColumnName = "ID_CUOTA_VIAJE")
+    @JoinColumn(name = "FK_ID_ESTADO_PAGO_CUOTA", referencedColumnName = "ID_ESTADO_PAGO_CUOTA")
     @ManyToOne
-    private CuotaViaje fkIdCuotaViaje1;
+    private EstadoPagoCuota fkIdEstadoPagoCuota;
+    @JoinColumn(name = "FK_ID_CUOTA_VIAJE", referencedColumnName = "ID_CUOTA_VIAJE")
+    @ManyToOne
+    private CuotaViaje fkIdCuotaViaje;
 
     public PagoCuota() {
     }
@@ -103,12 +113,22 @@ public class PagoCuota implements Serializable {
     }
 
     public CuotaViaje getFkIdCuotaViaje1() {
-        return fkIdCuotaViaje1;
+        return fkIdCuotaViaje;
     }
 
     public void setFkIdCuotaViaje1(CuotaViaje fkIdCuotaViaje1) {
-        this.fkIdCuotaViaje1 = fkIdCuotaViaje1;
+        this.fkIdCuotaViaje = fkIdCuotaViaje1;
+        }
+
+    public EstadoPagoCuota getFkIdEstadoPagoCuota() {
+        return fkIdEstadoPagoCuota;
     }
+
+    public void setFkIdEstadoPagoCuota(EstadoPagoCuota fkIdEstadoPagoCuota) {
+        this.fkIdEstadoPagoCuota = fkIdEstadoPagoCuota;
+    }
+
+    
 
     @Override
     public String toString() {
