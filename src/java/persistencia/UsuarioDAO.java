@@ -27,6 +27,7 @@ public class UsuarioDAO implements ICrud {
 
     public boolean addElemento(Object objetoInsert) {
         Usuario objUsuario = (Usuario) objetoInsert;
+        int active = 1;
         try {
             Connection con = Conexion.getConexion();
             CallableStatement cs = null;
@@ -36,7 +37,10 @@ public class UsuarioDAO implements ICrud {
             cs.setString(3, objUsuario.getCorreoUsuario());
             cs.setString(4, objUsuario.getPasswordUsuario());
             cs.setInt(5, objUsuario.getIdPerfil());
-            cs.setInt(6, 1); // valor por defecto 1 para activo
+            if(objUsuario.getIdPerfil()==2){
+                active=2;
+            }
+            cs.setInt(6, active); // valor por defecto 1 para activo
             try {
                 return cs.executeUpdate() == 1;
             } catch (Exception e) {
@@ -91,6 +95,25 @@ public class UsuarioDAO implements ICrud {
             }
         } catch (Exception e) {
             System.out.println("No se pudo updatear la base de datos");
+        }
+        return false;        
+    }
+     public boolean ActualizaApoderadoDelAlumno(Object objetoUpdate,int alumno) {
+       Usuario objUsuario = (Usuario) objetoUpdate;
+        try {
+            System.out.println("ID USER : "+objUsuario.getIdUsuario()+ " Alumno ID: "+alumno);
+            Connection con = Conexion.getConexion();
+            CallableStatement cs = null;
+            cs = con.prepareCall("{call ACTUALIZAAPODERADO(?,?)}");
+            cs.setInt(1, alumno); //Alumno
+            cs.setInt(2, objUsuario.getIdUsuario()); //Usuario            
+            try {
+                return cs.executeUpdate() == 1;
+            } catch (Exception e) {
+                System.out.println("Problemas al actualizar");
+            }
+        } catch (Exception e) {
+            System.out.println("No se pudo updatear la base de datos " +e.getMessage());
         }
         return false;        
     }
@@ -157,5 +180,48 @@ public class UsuarioDAO implements ICrud {
         }
         return infoUsuario;        
     }
+    public Usuario buscaUsuarioPorCorreo(String correo) {
+        Usuario infoUsuario = null;
+        try {
+            Connection con = Conexion.getConexion();
+            CallableStatement cs = null;
+            cs = con.prepareCall("{call BUSCARUSUARIOXCORREO(?,?)}");
+            cs.setString(1, correo);
+            cs.registerOutParameter(2, OracleTypes.CURSOR);
+            cs.executeQuery();
+            ResultSet rs = (ResultSet)cs.getObject(2);
+            while (rs.next()) {
+                infoUsuario = new Usuario(rs.getInt("id_usuario"), rs.getString("nombre_usuario"), rs.getString("apellido_usuario"), rs.getString("correo_usuario"), rs.getInt("fk_id_perfil"), rs.getInt("active"));
+            }
+        } catch (Exception e) {
+            System.out.println("no se pudo ingresar al sistema");
+        }
+        return infoUsuario;        
+    }
+    public int buscaAlumnoXRUTXContratoXCodigo(String rut, String codigo) {
+        try {
+            Connection con = Conexion.getConexion();
+            CallableStatement cs = null;
+            cs = con.prepareCall("{call BUSCARALUMNOXRUTXCODCONTRATO(?,?,?)}");
+            cs.setString(1, rut);
+            cs.setString(2, codigo);
+            cs.registerOutParameter(3, OracleTypes.CURSOR);
+            cs.executeQuery();
+            ResultSet rs = (ResultSet)cs.getObject(3);
+            if(rs.next()){
+                System.out.println("AQUI "+rs.getInt("ID_ALUMNO"));
+                return rs.getInt("ID_ALUMNO");                
+            }
+            else
+            {
+              System.out.println("ALUMNO-----NO ENCONTRADO------");
+              return 0;  
+            }
+        } catch (Exception e) {
+            System.out.println("no se pudo ingresar al sistema");
+        }
+        return 0;        
+    }
+    
 
 }

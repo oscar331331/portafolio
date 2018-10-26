@@ -110,80 +110,65 @@
               </div>
             </div>
           </div>
+        </div>        
+        
+      <section id="chartjs-bar-charts">  
+       <div class="row">
+        <div class="col-12">
+            <div class="card">            
+                        <div class="container">
+                            <br>
+                            <center><h4 class="card-title">Ingresar apoderado</h4></center>
+                              <br>
+                            <form name="formGuardaApoderadoNuevo" method="post" action="/WebAppTour/ApoderadoServlet">
+                              <div class="container">
+                                    <div class="form-group">
+                                        <label>Nombre</label>
+                                        <input type="text" name="Nombre" class="form-control" placeholder="Ingrese Nombre" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Apellido</label>
+                                        <input type="text" name="Apellido" class="form-control" placeholder="Ingrese Apellido" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Correo</label>
+                                        <input type="email" name="Correo" class="form-control" placeholder="Ingrese Correo" required/>
+                                    </div>                                    
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <input type="password" name="Password"  class="form-control" placeholder="Ingrese password" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>RUT alumno</label>
+                                        <input type="text" name="Alumno" class="form-control" placeholder="Ingrese RUT alumno" required/>
+                                    </div> 
+                                    <div class="form-group">
+                                        <label>Codigo contrato</label>
+                                        <input type="text" name="Contrato" class="form-control" placeholder="Ingrese codigo contrato" required/>
+                                    </div> 
+                                    <div class="form-group">
+                                        <label></label>
+                                        <center><input type="submit" class="btn btn-success" name="btnGuardarUsuarioEditado" value="Guardar"/></center>
+                                    </div>
+                                </div>                          
+                            </form>
+                        </div> 
+                        <center> <a class="btn" href="MantenedorUsuario.jsp">Volver</a></center>
+                        <c:if test="${sessionScope.msgError!=null}">
+                            <c:out value="${msgError}"></c:out>
+                            <c:remove var="msgError"></c:remove>
+                        </c:if>                        
+                         </div>
+                <div class="card-content collapse show">
+                    <div class="card-body">
+                            <div class="height-200">
+                        <canvas id="column-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="content-body"><!-- Basic Tables start -->
-<div class="row">
-	<div class="col-12">
-		<div class="card">
-			<div class="card-header">
-				<h4 class="card-title">Mantenedor de usuarios</h4>
-				<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-				
-			</div>
-			<div class="card-content collapse show">
-				<div class="card-body">
-					
-					<div class="table-responsive">
-						<jsp:include page="/UsuarioServlet" flush="true"/>
-            <jsp:useBean id="usuario" class="entidad.Usuario" scope="session"/>
-            <center><h2>Mantenedor Usuarios </h2></center>
-                <table class="table table-striped">
-                            <thead>
-                                <tr>                            
-                                    <th>Nombre</th>
-                                    <th>Apellido</th>
-                                    <th>Correo</th>
-                                    <th>Perfil</th>
-                                    <th>Editar</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach items="${listadoUsuario}" var="usuario">
-                                <tr>
-                                    <td><c:out value="${usuario.nombreUsuario}"></c:out></td>                            
-                                    <td><c:out value="${usuario.apellidoUsuario}"></c:out></td>
-                                    <td><c:out value="${usuario.correoUsuario}"></c:out></td>
-                                    <c:if test= "${usuario.idPerfil ==1}">
-                                        <td><c:out value="Administrador"></c:out></td>
-                                    </c:if>
-                                    <c:if test= "${usuario.idPerfil ==2}">
-                                        <td><c:out value="Apoderado"></c:out></td>
-                                    </c:if>
-                                    <c:if test= "${usuario.idPerfil ==3}">
-                                        <td><c:out value="Encargado"></c:out></td>
-                                    </c:if>
-                                    
-                                    <td>
-                                    <c:url value="/UsuarioServlet" var="urlEdit">
-                                        <c:param name="id_usuario" value="${usuario.idUsuario}"></c:param>
-                                    </c:url>
-                                    <input type="button" class="btn btn-info" name="btnEditar" value="editar" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
-                                    </td>                                    
-                                </tr>
-                            </c:forEach>                                               
-                        </tbody>
-                    </table>  
-                   <center><a href="../Usuario/IngresoUsuario.jsp" type="button"  class="btn btn-info btn-min-width mr-1 mb-1"><i class="ft-plus-square"></i> Agregar Usuario</a></center>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Basic Tables end -->
-<!-- Striped rows start -->
-
-<!-- Bordered table end -->
-        </div>
-      </div>
     </div>
-    <!-- ////////////////////////////////////////////////////////////////////////////-->
 
-
-    
-    <script src="theme-assets/js/core/app-menu-lite.js" type="text/javascript"></script>
-    <script src="theme-assets/js/core/app-lite.js" type="text/javascript"></script>
-    
-  </body>
+    </body>
 </html>

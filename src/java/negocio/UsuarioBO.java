@@ -23,14 +23,23 @@ public class UsuarioBO {
     public Usuario validaUsuario(String user,String pass){
         return this.objUsuarioDAO.validaUsuario(user, pass);
     }
+    public int buscaAlumnoXRUTXContratoXCodigo(String alumno,String contrato){
+        return this.objUsuarioDAO.buscaAlumnoXRUTXContratoXCodigo(alumno, contrato);
+    }    
      public List<Usuario> ListadoUsuarios(){
         return this.objUsuarioDAO.readElementos();
     }
     public Usuario buscaUsuarioPorId(int id){
         return this.objUsuarioDAO.buscaUsuarioPorId(id);
     }
+    public Usuario buscaUsuarioPorCorreo(String correo){
+        return this.objUsuarioDAO.buscaUsuarioPorCorreo(correo);
+    }
     public boolean updateUsuario(Usuario infoUsuario){
         return this.objUsuarioDAO.updateElemento(infoUsuario);
+    }
+    public boolean ActualizaApoderadoDelAlumno(Usuario infoUsuario,int id_alumno){
+        return this.objUsuarioDAO.ActualizaApoderadoDelAlumno(infoUsuario, id_alumno);
     }
     public boolean addUsuario(Usuario infoUsuario){
         return this.objUsuarioDAO.addElemento(infoUsuario);

@@ -31,7 +31,7 @@ public class ContratoDAO implements ICrud {
         try {
             Connection con = Conexion.getConexion();
             CallableStatement cs = null;           
-            cs = con.prepareCall("{call InsertarContratos(?,?,?,?,?,?,?,?,?)}");
+            cs = con.prepareCall("{call INSERTARCONTRATOS_2(?,?,?,?,?,?,?,?,?,?)}");
             cs.setDate(1, java.sql.Date.valueOf(objContrato.getFechaIncorporacion()));
             cs.setInt(2, objContrato.getIdPromotor());
             cs.setInt(3, objContrato.getIdCliente());
@@ -41,6 +41,7 @@ public class ContratoDAO implements ICrud {
             cs.setDate(7, java.sql.Date.valueOf(objContrato.getFechaMeta()));
             cs.setInt(8, objContrato.getMontoMeta());
             cs.setInt(9,0);//monto actual
+            cs.setInt(10, objContrato.getCantAlumnos());
             System.out.println(objContrato.getIdCurso());
             try {
                 return cs.executeUpdate() == 1;
@@ -64,7 +65,7 @@ public class ContratoDAO implements ICrud {
             cs.executeQuery();
             ResultSet rs = (ResultSet)cs.getObject(1); 
             while (rs.next()) {
-                Contrato infoContrato = new Contrato(rs.getInt("ID_CONTRATO"),rs.getString("CODIGO"), rs.getString("FECHA_INCORPORACION"), rs.getString("FECHA_META"), rs.getInt("MONTO_META"), rs.getString("FECHA_FINAL"), rs.getInt("MONTO_ACTUAL_CONTRATO"), rs.getInt("FK_ID_ESTADO_CONTRATO"), rs.getInt("FK_ID_CURSO"), rs.getInt("FK_ID_CLIENTE"), rs.getInt("FK_ID_PROMOTOR"));
+                Contrato infoContrato = new Contrato(rs.getInt("ID_CONTRATO"),rs.getString("CODIGO"), rs.getString("FECHA_INCORPORACION"), rs.getString("FECHA_META"), rs.getInt("MONTO_META"), rs.getString("FECHA_FINAL"), rs.getInt("MONTO_ACTUAL_CONTRATO"), rs.getInt("FK_ID_ESTADO_CONTRATO"), rs.getInt("FK_ID_CURSO"), rs.getInt("FK_ID_CLIENTE"), rs.getInt("FK_ID_PROMOTOR"), rs.getInt("CANT_ALUMNOS"));
                 
                 System.out.println(infoContrato.toString());
                 listadoContrato.add(infoContrato);
@@ -81,7 +82,7 @@ public class ContratoDAO implements ICrud {
         try {
             Connection con = Conexion.getConexion();
             CallableStatement cs = null;
-            cs = con.prepareCall("{call EditarContratos(?,?,?,?,?,?,?,?,?,?)}");
+            cs = con.prepareCall("{call EditarContratos(?,?,?,?,?,?,?,?,?,?,?)}");
             cs.setDate(1, java.sql.Date.valueOf(objContrato.getFechaIncorporacion()));
             cs.setInt(2, objContrato.getIdPromotor());
             cs.setInt(3, objContrato.getIdCliente());
@@ -91,7 +92,8 @@ public class ContratoDAO implements ICrud {
             cs.setDate(7, java.sql.Date.valueOf(objContrato.getFechaMeta()));
             cs.setInt(8, objContrato.getMontoMeta());
             cs.setInt(9,0);//monto actual
-            cs.setInt(10, objContrato.getIdContrato());
+            cs.setInt(10, objContrato.getCantAlumnos());
+            cs.setInt(11, objContrato.getIdContrato());
             try {
                 return cs.executeUpdate() == 1;
             } catch (Exception e) {
@@ -115,7 +117,7 @@ public class ContratoDAO implements ICrud {
             cs.executeQuery();
             ResultSet rs = (ResultSet)cs.getObject(2);
             while (rs.next()) {
-                infoContrato = new Contrato(rs.getInt("ID_CONTRATO"),rs.getString("CODIGO"), rs.getString("FECHA_INCORPORACION"), rs.getString("FECHA_META"), rs.getInt("MONTO_META"), rs.getString("FECHA_FINAL"), rs.getInt("MONTO_ACTUAL_CONTRATO"), rs.getInt("FK_ID_ESTADO_CONTRATO"), rs.getInt("FK_ID_CURSO"), rs.getInt("FK_ID_CLIENTE"), rs.getInt("FK_ID_PROMOTOR"));
+                infoContrato = new Contrato(rs.getInt("ID_CONTRATO"),rs.getString("CODIGO"), rs.getString("FECHA_INCORPORACION"), rs.getString("FECHA_META"), rs.getInt("MONTO_META"), rs.getString("FECHA_FINAL"), rs.getInt("MONTO_ACTUAL_CONTRATO"), rs.getInt("FK_ID_ESTADO_CONTRATO"), rs.getInt("FK_ID_CURSO"), rs.getInt("FK_ID_CLIENTE"), rs.getInt("FK_ID_PROMOTOR"), rs.getInt("CANT_ALUMNOS"));
                 System.out.println(infoContrato.getIdCurso());     
             }
         } catch (Exception e) {

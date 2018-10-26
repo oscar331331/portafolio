@@ -56,6 +56,8 @@ public class Contrato implements Serializable {
     private String fechaFinal;
     @Column(name = "MONTO_ACTUAL_CONTRATO")
     private int montoActualContrato;
+    @Column(name = "CANT_ALUMNOS")
+    private int cantAlumnos;
     @OneToMany(mappedBy = "fkIdContrato")
     private List<Alumno> alumnoList;
     @JoinColumn(name = "FK_ID_CURSO", referencedColumnName = "ID_CURSO")
@@ -81,7 +83,7 @@ public class Contrato implements Serializable {
         this.idContrato = idContrato;
     }
 
-    public Contrato(int idContrato, String codigo, String fechaIncorporacion, String fechaMeta, int montoMeta, String fechaFinal, int montoActualContrato, int IdEstado, int IdCurso, int IdCliente, int IdPromotor) {
+    public Contrato(int idContrato, String codigo, String fechaIncorporacion, String fechaMeta, int montoMeta, String fechaFinal, int montoActualContrato, int IdEstado, int IdCurso, int IdCliente, int IdPromotor, int cantAlumnos) {
         this.idContrato = idContrato;
         this.codigo = codigo;
         this.fechaIncorporacion = fechaIncorporacion;
@@ -93,6 +95,7 @@ public class Contrato implements Serializable {
         this.IdCurso = IdCurso;
         this.IdCliente = IdCliente;
         this.IdPromotor = IdPromotor;
+        this.cantAlumnos = cantAlumnos;
     }
 
     public int getIdEstado() {
@@ -104,7 +107,7 @@ public class Contrato implements Serializable {
     }
     
     
-    public Contrato(String fechaIncorporacion, String fechaMeta, int montoMeta, String fechaFinal, int montoActualContrato, int IdCurso, int IdCliente, int IdPromotor) {
+    public Contrato(String fechaIncorporacion, String fechaMeta, int montoMeta, String fechaFinal, int montoActualContrato, int IdCurso, int IdCliente, int IdPromotor, int cantAlumnos) {
         this.fechaIncorporacion = fechaIncorporacion;
         this.fechaMeta = fechaMeta;
         this.montoMeta = montoMeta;
@@ -113,6 +116,7 @@ public class Contrato implements Serializable {
         this.IdCurso = IdCurso;
         this.IdCliente = IdCliente;
         this.IdPromotor = IdPromotor;
+        this.cantAlumnos = cantAlumnos;
     }
     
     
@@ -171,6 +175,14 @@ public class Contrato implements Serializable {
 
     public void setMontoActualContrato(int montoActualContrato) {
         this.montoActualContrato = montoActualContrato;
+    }
+    
+    public int getCantAlumnos() {
+        return cantAlumnos;
+    }
+
+    public void setCantAlumnos(int cantAlumnos) {
+        this.cantAlumnos = cantAlumnos;
     }
 
     public List<Alumno> getAlumnoList() {
@@ -242,5 +254,4 @@ public class Contrato implements Serializable {
     public String toString() {
         return "entidad.Contrato[ idContrato=" + idContrato + " ]";
     }
-    
 }
