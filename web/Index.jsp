@@ -72,7 +72,7 @@
               <li class=" nav-item"><a href="Pago_Cuota/MantenedorPago.jsp"><i class="ft-credit-card"></i><span class="menu-title" data-i18n="">Pagar</span></a>
               </li>
               <br>
-              <li style= "color: blue "> Bienvenido(a):<c:out value=" ${usuarioConectado.nombreUsuario} ${usuarioConectado.apellidoUsuario}"></c:out></pre>   
+              <li align="center" style= "color: blue "> Bienvenido(a):<c:out value=" ${usuarioConectado.nombreUsuario} ${usuarioConectado.apellidoUsuario}"></c:out></pre>   
               <br> 
               </li>
             </ul>
