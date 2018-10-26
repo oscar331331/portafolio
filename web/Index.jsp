@@ -1,13 +1,13 @@
+<%-- 
+    Document   : Index
+    Created on : 26-oct-2018, 11:44:18
+    Author     : HUGO
+--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-
 <html>
     <head>
-        
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -37,65 +37,54 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
+    
     <body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-color="bg-chartbg" data-col="2-columns">
-        
-        
-        <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="theme-assets/images/backgrounds/02.jpg">
+     <c:choose>        
+            <c:when test="${sessionScope.usuarioConectado==null}">
+                <jsp:forward page="login.jsp"/>
+            </c:when>
+            <c:otherwise>
+                <jsp:useBean id="usuarioConectado" class="entidad.Usuario" scope="session"/>
+                <div style= "color: blue">Bienvenido(a):<c:out value=" ${usuarioConectado.nombreUsuario} "></c:out>
+                <br>
+                </div>
+                <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="theme-assets/images/backgrounds/02.jpg">
       <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">       
           <li class="nav-item mr-auto"><a class="navbar-brand" href="index_admin.html"><img class="brand-logo" alt="Chameleon admin logo" src="theme-assets/images/logo/logo.png"/>
-                  <h5 class="brand-text">Administrador</h5></a></li>  
+                  <h5 class="brand-text">Menu</h5></a></li>  
           <li class="nav-item d-md-none"><a class="nav-link close-navbar"><i class="ft-x"></i></a></li>
           
         </ul>
       </div>
       <div class="main-menu-content">
-        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-          <li class="active"><a href="index_admin.html"><i class="ft-home"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
-          </li>
-          <li class=" nav-item"><a href="Contrato/MantenedorContrato.jsp"><i class="ft-file-text"></i><span class="menu-title" data-i18n="">Contratos</span></a>
-          </li>
-          <li class=" nav-item"><a href="Usuario/MantenedorUsuario.jsp"><i class="ft-users"></i><span class="menu-title" data-i18n="">Usuarios</span></a>
-          </li>
-          <li class=" nav-item"><a href="Colegio/MantenedorColegio.jsp"><i class="ft-book"></i><span class="menu-title" data-i18n="">Colegios</span></a>
-          </li>
-          <li class=" nav-item"><a href="Curso/MantenedorCurso.jsp"><i class="ft-box"></i><span class="menu-title" data-i18n="">Cursos</span></a>
-          </li>
-          <li class=" nav-item"><a href="Pago_Cuota/MantenedorPago.jsp"><i class="ft-credit-card"></i><span class="menu-title" data-i18n="">Pagar</span></a>
-          </li>
-          
-          
-        </ul>
-      <div class="navigation-background"></div>
-    </div>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+            <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+              <li class="active"><a href="index_admin.html"><i class="ft-home"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
+              </li>
+              <li class=" nav-item"><a href="Contrato/MantenedorContrato.jsp"><i class="ft-file-text"></i><span class="menu-title" data-i18n="">Contratos</span></a>
+              </li>
+              <li class=" nav-item"><a href="Usuario/MantenedorUsuario.jsp"><i class="ft-users"></i><span class="menu-title" data-i18n="">Usuarios</span></a>
+              </li>
+              <li class=" nav-item"><a href="Colegio/MantenedorColegio.jsp"><i class="ft-book"></i><span class="menu-title" data-i18n="">Colegios</span></a>
+              </li>
+              <li class=" nav-item"><a href="Curso/MantenedorCurso.jsp"><i class="ft-box"></i><span class="menu-title" data-i18n="">Cursos</span></a>
+              </li>
+              <li class=" nav-item"><a href="Pago_Cuota/MantenedorPago.jsp"><i class="ft-credit-card"></i><span class="menu-title" data-i18n="">Pagar</span></a>
+              </li>
+              <br>
+              <li align="center" style= "color: blue "> Bienvenido(a):<c:out value=" ${usuarioConectado.nombreUsuario} ${usuarioConectado.apellidoUsuario}"></c:out></pre>   
+              <br> 
+              </li>
+            </ul>
+          <div class="navigation-background"></div>
+        </div>
+
         <div>PANEL DE ADMINISTRADOR</div>
         <a class="btn btn-success" href="Usuario/MantenedorUsuario.jsp">Mantenedor de usuarios</a>
         <br><a class="btn btn-success" href="Colegio/MantenedorColegio.jsp">Mantenedor de colegios</a>
         <br><a class="btn btn-success" href="Curso/MantenedorCurso.jsp">Mantenedor de cursos</a>
         <br><a class="btn btn-success" href="Contrato/MantenedorContrato.jsp">Mantenedor de contratos</a>
+            </c:otherwise>
+        </c:choose>   
     </body>
 </html>

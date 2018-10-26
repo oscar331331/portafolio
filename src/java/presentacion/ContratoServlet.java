@@ -98,10 +98,11 @@ public class ContratoServlet extends HttpServlet {
             String fechafinal= request.getParameter("FechaFinalEditar");
             int montometa=Integer.parseInt(request.getParameter("MontoMetaEditar"));            
             int montoactual=Integer.parseInt(request.getParameter("MontoActualEditar"));
+            int cantAlu=Integer.parseInt(request.getParameter("CantAlumnosEditar"));
             int cliente=Integer.parseInt(request.getParameter("ClienteEditar"));
             int promotor=Integer.parseInt(request.getParameter("PromotorEditar"));
             int curso=Integer.parseInt(request.getParameter("CursoEditar"));
-            Contrato infoContrato = new Contrato(fechaincorporacion, fechameta, montometa, fechafinal, montoactual, curso, cliente, promotor);
+            Contrato infoContrato = new Contrato(fechaincorporacion, fechameta, montometa, fechafinal, montoactual, curso, cliente, promotor, cantAlu);
             infoContrato.setIdContrato(((Contrato)sesion.getAttribute("contratoAEditar")).getIdContrato());
             ContratoBO objContratoBO= new ContratoBO();
             if(objContratoBO.updateContrato(infoContrato)){
@@ -118,10 +119,11 @@ public class ContratoServlet extends HttpServlet {
             String fechafinal= request.getParameter("FechaFinal");
             int montometa=Integer.parseInt(request.getParameter("MontoMeta"));            
             int montoactual=Integer.parseInt(request.getParameter("MontoActual"));
+            int cantAlu=Integer.parseInt(request.getParameter("CantAlumnos"));
             int cliente=Integer.parseInt(request.getParameter("Cliente"));
             int promotor=Integer.parseInt(request.getParameter("Promotor"));
             int curso=Integer.parseInt(request.getParameter("Curso"));
-            Contrato infoContrato = new Contrato(fechaincorporacion, fechameta, montometa, fechafinal, montoactual, curso, cliente, promotor);
+            Contrato infoContrato = new Contrato(fechaincorporacion, fechameta, montometa, fechafinal, montoactual, curso, cliente, promotor, cantAlu);
              System.out.println("contrato: "+infoContrato.toString());
             
             ContratoBO objContratoBO= new ContratoBO();

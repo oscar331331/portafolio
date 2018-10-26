@@ -116,7 +116,7 @@
 	<div class="col-12">
 		<div class="card">
 			<div class="card-header">
-				<h4 class="card-title">Mantenedor de contratos</h4>
+				<h4 class="card-title">Mantenedor de Contratos</h4>
 				<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
 				
 			</div>
@@ -136,6 +136,7 @@
                                                                     <th>Fecha Final</th>
                                                                     <th>Monto Meta</th>                                    
                                                                     <th>Monto Actual Contrato</th>
+                                                                    <th>Cantidad de Alumnos</th>
                                                                     <th>Editar</th>
                                                                 </tr>
                                                             </thead>
@@ -148,6 +149,7 @@
                                                                     <td><c:out value="${contrato.fechaFinal}"></c:out></td>
                                                                     <td><c:out value="${contrato.montoMeta}"></c:out></td>
                                                                     <td><c:out value="${contrato.montoActualContrato}"></c:out></td>
+                                                                    <td><c:out value="${contrato.cantAlumnos}"></c:out></td>
                                                                     <td>
                                                                     <c:url value="/ContratoServlet" var="urlEdit">
                                                                         <c:param name="id_contrato" value="${contrato.idContrato}"></c:param>
