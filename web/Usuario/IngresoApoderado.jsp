@@ -120,7 +120,7 @@
                             <br>
                             <center><h4 class="card-title">Ingresar apoderado</h4></center>
                               <br>
-                            <form name="formGuardaApoderadoNuevo" method="post" action="/WebAppTour/ApoderadoServlet">
+                            <form name="formGuardaApoderadoNuevo" method="post" action="../ApoderadoServlet">
                               <div class="container">
                                     <div class="form-group">
                                         <label>Nombre</label>
