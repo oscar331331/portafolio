@@ -73,9 +73,27 @@ public class PagoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PagoCuotaBO objPagoCuotaBO= new PagoCuotaBO();
-        HttpSession session = request.getSession();        
-        session.setAttribute("listadoPagoCuota", objPagoCuotaBO.ListadoPagoCuotas());
+        
+        
+        PagoCuotaBO objPagoBO= new PagoCuotaBO();
+        if(request.getParameter("idPagoCuota")!=null)
+        {
+            HttpSession sesion = request.getSession();
+            int pagoEditar=Integer.parseInt(request.getParameter("idPagoCuota"));        
+            PagoCuota infoPago=objPagoBO.buscaPagoCuotaPorId(pagoEditar);
+            sesion.setAttribute("pagoAEditar", infoPago);
+            response.sendRedirect("Pago_Cuota/IngresoPago.jsp");
+        }
+        else
+        {
+         HttpSession session = request.getSession();        
+        session.setAttribute("listadoPagoCuota", objPagoBO.ListadoPagoCuotas());   
+        }  
+        
+        
+        
+        
+        
                     
     }
 
@@ -144,8 +162,9 @@ public class PagoServlet extends HttpServlet {
             String fecha = map.get("Fecha_pago");            
             int valor = Integer.parseInt(map.get("Valor_pago"));
             String imagen = (map.get("imagen"));
+            int estadoCuota=1;
             
-            PagoCuota infoPagoCuota = new PagoCuota(valor,fecha,imagen);
+            PagoCuota infoPagoCuota = new PagoCuota(valor,estadoCuota,fecha,imagen);
             PagoCuotaBO objPagoCuotaBO= new PagoCuotaBO();
             if(objPagoCuotaBO.addPagoCuota(infoPagoCuota)){
                 sesion.setAttribute("msgError", "Guardado con exito");

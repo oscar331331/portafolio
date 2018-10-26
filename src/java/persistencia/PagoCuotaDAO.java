@@ -59,7 +59,7 @@ public class PagoCuotaDAO implements ICrud {
             cs.executeQuery();
             ResultSet rs = (ResultSet)cs.getObject(1); 
             while (rs.next()) {
-                PagoCuota infoPagoCuota = new PagoCuota(rs.getInt("ID_PAGO_CUOTA"),rs.getInt("VALOR_PAGO_CUOTA"),rs.getString("FECHA_PAGO_CUOTA"),rs.getString("URL_PAGO_CUOTA"));
+                PagoCuota infoPagoCuota = new PagoCuota(rs.getInt("ID_PAGO_CUOTA"),rs.getInt("VALOR_PAGO_CUOTA"),rs.getInt("FK_ID_ESTADO_PAGO_CUOTA"),rs.getString("FECHA_PAGO_CUOTA"),rs.getString("URL_PAGO_CUOTA"));
                 
                 System.out.println(infoPagoCuota.toString());
                 listadoPagoCuota.add(infoPagoCuota);
@@ -99,10 +99,24 @@ public class PagoCuotaDAO implements ICrud {
     }
 
     
-    public PagoCuota buscaPagoCuotaPorId(int id_contrato) {
-        PagoCuota infoPagoCuota = null;
-      
-        return infoPagoCuota;        
+    public PagoCuota buscaPagoCuotaPorId(int id_pago) {
+        PagoCuota infoCuota = null;
+        try {
+            Connection con = Conexion.getConexion();
+            CallableStatement cs = null;
+            cs = con.prepareCall("{call BUSCARPAGOCUOTA(?,?)}");
+            cs.setInt(1, id_pago);
+            cs.registerOutParameter(2, OracleTypes.CURSOR);
+            cs.executeQuery();
+            ResultSet rs = (ResultSet)cs.getObject(2);
+            while (rs.next()) {
+                infoCuota = new PagoCuota(rs.getInt("ID_PAGO_CUOTA"),rs.getInt("VALOR_PAGO_CUOTA"),rs.getInt("FK_ID_ESTADO_PAGO_CUOTA"),rs.getString("FECHA_PAGO_CUOTA"),rs.getString("URL_PAGO_CUOTA"));
+                
+            }
+        } catch (Exception e) {
+            System.out.println("no se pudo ingresar al sistema " +e.getMessage() );
+        }
+        return infoCuota;      
     }
 
     @Override

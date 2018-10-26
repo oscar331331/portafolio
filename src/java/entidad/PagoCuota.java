@@ -55,7 +55,7 @@ public class PagoCuota implements Serializable {
     private String urlPagoCuota;
     @JoinColumn(name = "FK_ID_ESTADO_PAGO_CUOTA", referencedColumnName = "ID_ESTADO_PAGO_CUOTA")
     @ManyToOne
-    private EstadoPagoCuota fkIdEstadoPagoCuota;
+    private int fkIdEstadoPagoCuota;
     @JoinColumn(name = "FK_ID_CUOTA_VIAJE", referencedColumnName = "ID_CUOTA_VIAJE")
     @ManyToOne
     private CuotaViaje fkIdCuotaViaje;
@@ -67,15 +67,18 @@ public class PagoCuota implements Serializable {
         this.idPagoCuota = idPagoCuota;
     }
 
-    public PagoCuota(int valorPagoCuota, String fechaPagoCuota, String urlPagoCuota) {
+    
+    public PagoCuota(int idPagoCuota, int valorPagoCuota,int fkEstadoCuota, String fechaPagoCuota, String urlPagoCuota) {
+        this.idPagoCuota = idPagoCuota;
         this.valorPagoCuota = valorPagoCuota;
+        this.fkIdEstadoPagoCuota=fkEstadoCuota;
         this.fechaPagoCuota = fechaPagoCuota;
         this.urlPagoCuota = urlPagoCuota;
     }
 
-    public PagoCuota(int idPagoCuota, int valorPagoCuota, String fechaPagoCuota, String urlPagoCuota) {
-        this.idPagoCuota = idPagoCuota;
+    public PagoCuota(int valorPagoCuota,int fkEstadoCuota, String fechaPagoCuota, String urlPagoCuota) {
         this.valorPagoCuota = valorPagoCuota;
+        this.fkIdEstadoPagoCuota=fkEstadoCuota;
         this.fechaPagoCuota = fechaPagoCuota;
         this.urlPagoCuota = urlPagoCuota;
     }
@@ -120,11 +123,11 @@ public class PagoCuota implements Serializable {
         this.fkIdCuotaViaje = fkIdCuotaViaje1;
         }
 
-    public EstadoPagoCuota getFkIdEstadoPagoCuota() {
+    public int getFkIdEstadoPagoCuota() {
         return fkIdEstadoPagoCuota;
     }
 
-    public void setFkIdEstadoPagoCuota(EstadoPagoCuota fkIdEstadoPagoCuota) {
+    public void setFkIdEstadoPagoCuota(int fkIdEstadoPagoCuota) {
         this.fkIdEstadoPagoCuota = fkIdEstadoPagoCuota;
     }
 
