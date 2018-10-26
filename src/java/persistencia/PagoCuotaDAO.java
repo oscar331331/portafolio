@@ -72,25 +72,18 @@ public class PagoCuotaDAO implements ICrud {
 
     @Override
     public boolean updateElemento(Object objetoUpdate) {
-       Contrato objContrato = (Contrato) objetoUpdate;
+       PagoCuota objPagoCuota = (PagoCuota) objetoUpdate;
         try {
             Connection con = Conexion.getConexion();
             CallableStatement cs = null;
-            cs = con.prepareCall("{call EditarContratos(?,?,?,?,?,?,?,?,?,?)}");
-            cs.setDate(1, java.sql.Date.valueOf(objContrato.getFechaIncorporacion()));
-            cs.setInt(2, objContrato.getIdPromotor());
-            cs.setInt(3, objContrato.getIdCliente());
-            cs.setString(4, "LASFCE"); // codigo
-            cs.setDate(5, java.sql.Date.valueOf(objContrato.getFechaFinal()));
-            cs.setInt(6, objContrato.getIdCurso());
-            cs.setDate(7, java.sql.Date.valueOf(objContrato.getFechaMeta()));
-            cs.setInt(8, objContrato.getMontoMeta());
-            cs.setInt(9,0);//monto actual
-            cs.setInt(10, objContrato.getIdContrato());
+            cs = con.prepareCall("{call EditarEstadoPagoCuota(?,?)}");
+            cs.setInt(2, objPagoCuota.getIdPagoCuota());
+            cs.setInt(1, objPagoCuota.getFkIdEstadoPagoCuota());
+            
             try {
                 return cs.executeUpdate() == 1;
             } catch (Exception e) {
-                System.out.println("Problemas al actualizar");
+                System.out.println("Problemas al actualizar: "+e);
             }
         } catch (Exception e) {
             System.out.println("No se pudo updatear la base de datos "+ e.getMessage());

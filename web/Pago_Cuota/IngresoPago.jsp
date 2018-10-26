@@ -171,7 +171,11 @@
                                             <option value="2">Pagado</option>
                                             <option value="3">Rechazado</option>                                                                                                                                          
                                         </select>
-                                    </div>                           
+                                    </div> 
+                                <div class="form-group">
+                                        <label></label>
+                                        <center><input type="submit" class="btn btn-success" name="btnGuardarPagoEditado" value="Guardar"/></center>
+                                    </div>
                             </form>                          
                             
                             

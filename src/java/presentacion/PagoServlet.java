@@ -108,7 +108,25 @@ public class PagoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession sesion= request.getSession();     
+        HttpSession sesion= request.getSession();
+        if(sesion.getAttribute("pagoAEditar") != null){
+           
+            int Estadopago =Integer.parseInt(request.getParameter("IdEstado"));
+           
+
+            int id_pago = ((PagoCuota)sesion.getAttribute("pagoAEditar")).getIdPagoCuota();
+            PagoCuota infoPago= new PagoCuota(id_pago, id_pago, Estadopago, null, null);
+            
+            PagoCuotaBO objPagoBO= new PagoCuotaBO();
+            if(objPagoBO.updatePagoCuota(infoPago)){
+                response.sendRedirect("Pago_Cuota/MantenedorPagoVendedor.jsp");
+                sesion.removeAttribute("pagoAEditar");
+            }else{
+                sesion.setAttribute("msgError", "no se pudo actualizar a la BD");
+                response.sendRedirect("Pago_Cuota/MantenedorPagoVendedor.jsp");
+            } 
+        }
+        else {
         String archivo="C:\\Users\\Vito\\Desktop\\Portafolio\\portafolio\\web\\comprobantes";
         DiskFileItemFactory factory=new DiskFileItemFactory();
         factory.setSizeThreshold(1024);
@@ -174,7 +192,7 @@ public class PagoServlet extends HttpServlet {
                 response.sendRedirect("Pago_Cuota/IngresoPago.jsp");
             } 
         }
-    }
+    }}
     
 
     @Override
