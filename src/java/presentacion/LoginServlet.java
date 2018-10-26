@@ -40,12 +40,13 @@ public class LoginServlet extends HttpServlet {
         UsuarioBO objUsuarioBO= new UsuarioBO();
         Usuario objUsuario = objUsuarioBO.loginUsuario(u,p);
         if(objUsuario != null){
+            sesion.setAttribute("usuarioConectado",objUsuario);
             sesion.setAttribute("conectado","true");
             sesion.setAttribute("user",u);
             sesion.setAttribute("perfil",objUsuario.getIdPerfil());
             if(objUsuario.getIdPerfil()==1)
             {
-               response.sendRedirect("index_admin.html"); 
+               response.sendRedirect("Index.jsp"); 
             }
             else
             {
