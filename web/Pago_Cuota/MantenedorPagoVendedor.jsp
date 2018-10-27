@@ -63,28 +63,23 @@
     </nav>
 
     <!-- ////////////////////////////////////////////////////////////////////////////-->
-
+    <c:choose>        
+                <c:when test="${sessionScope.usuarioConectado==null}">
+                    <% response.sendRedirect("../login.jsp"); %>
+                </c:when>
+            <c:otherwise>  
 
     <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="theme-assets/images/backgrounds/02.jpg">
       <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">       
-          <li class="nav-item mr-auto"><a class="navbar-brand" href="../index_admin.html"><img class="brand-logo" alt="Chameleon admin logo" src="../theme-assets/images/logo/logo.png"/>
-              <h3 class="brand-text">Turismo</h3></a></li>
+          
           <li class="nav-item d-md-none"><a class="nav-link close-navbar"><i class="ft-x"></i></a></li>
         </ul>
       </div>
       <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-          <li class="nav-item"><a href="../index_admin.html"><i class="ft-home"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
-          </li>
-          <li class=" active"><a href="../Contrato/MantenedorContrato.jsp"><i class="ft-file-text"></i><span class="menu-title" data-i18n="">Contratos</span></a>
-          </li>
-          <li class=" nav-item"><a href="../Usuario/MantenedorUsuario.jsp"><i class="ft-users"></i><span class="menu-title" data-i18n="">Usuarios</span></a>
-          </li>
-          <li class=" nav-item"><a href="../Colegio/MantenedorColegio.jsp"><i class="ft-book"></i><span class="menu-title" data-i18n="">Colegios</span></a>
-          </li>
-          <li class=" nav-item"><a href="../Curso/MantenedorCurso.jsp"><i class="ft-box"></i><span class="menu-title" data-i18n="">Cursos</span></a>
-          </li>
+          
+          <jsp:include page="../menu_admin_interior.jsp"/>
 
         </ul>
       </div>
@@ -162,6 +157,8 @@
 		</div>
 	</div>
 </div>
+                                            </c:otherwise>
+        </c:choose>  
 <!-- Basic Tables end -->
 <!-- Striped rows start -->
 
