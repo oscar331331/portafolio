@@ -45,7 +45,6 @@
               
                 <ul class="dropdown-menu">
                   <li class="arrow_box">
-                    
                   </li>
                 </ul>
               </li>
@@ -64,112 +63,100 @@
 
     <!-- ////////////////////////////////////////////////////////////////////////////-->
     <c:choose>        
-                <c:when test="${sessionScope.usuarioConectado==null}">
-                    <% response.sendRedirect("../login.jsp"); %>
-                </c:when>
-            <c:otherwise>  
-
+        <c:when test="${sessionScope.usuarioConectado==null}">
+            <% response.sendRedirect("../login.jsp"); %>
+        </c:when>
+    <c:otherwise>  
     <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="theme-assets/images/backgrounds/02.jpg">
-      <div class="navbar-header">
-        <ul class="nav navbar-nav flex-row">       
-          
-          <li class="nav-item d-md-none"><a class="nav-link close-navbar"><i class="ft-x"></i></a></li>
-        </ul>
-      </div>
-      <div class="main-menu-content">
-        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-          
-          <jsp:include page="../menu_admin_interior.jsp"/>
-
-        </ul>
-      </div>
-      <div class="navigation-background"></div>
+        <div class="navbar-header">
+            <ul class="nav navbar-nav flex-row">       
+                <li class="nav-item d-md-none"><a class="nav-link close-navbar"><i class="ft-x"></i></a></li>
+            </ul>
+        </div>
+        <div class="main-menu-content">
+            <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                <jsp:include page="../menu_admin_interior.jsp"/>
+            </ul>
+        </div>
+        <div class="navigation-background"></div>
     </div>
 
     <div class="app-content content">
-      <div class="content-wrapper">
+    <div class="content-wrapper">
         <div class="content-wrapper-before"></div>
         <div class="content-header row">
-          <div class="content-header-left col-md-4 col-12 mb-2">
-            <h3 class="content-header-title">Pagos</h3>
-          </div>
-          <div class="content-header-right col-md-8 col-12">
-            <div class="breadcrumbs-top float-md-right">
-              <div class="breadcrumb-wrapper mr-1">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="../index_admin.html">Home</a>
-                  </li>
-                  <li class="breadcrumb-item active">Pagos
-                  </li>
-                </ol>
-              </div>
+            <div class="content-header-left col-md-4 col-12 mb-2">
+              <h3 class="content-header-title">Pagos</h3>
             </div>
-          </div>
+            <div class="content-header-right col-md-8 col-12">
+                <div class="breadcrumbs-top float-md-right">
+                    <div class="breadcrumb-wrapper mr-1">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="../index_admin.html">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active">Pagos
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="content-body"><!-- Basic Tables start -->
-<div class="row">
-	<div class="col-12">
-		<div class="card">
-			<div class="card-header">
-				<h4 class="card-title">Listado de pagos</h4>
-				<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-				
-			</div>
-			<div class="card-content collapse show">
-				<div class="card-body">
-					
-					<div class="table-responsive">
-                                            <jsp:include page="../PagoServlet" flush="true"/>
-                                            <jsp:useBean id="pagocuota" class="entidad.PagoCuota" scope="session"/>
-                                            <center><h2>Pagos </h2></center>
-                                                <table class="table table-striped">
-                                                            <thead>
-                                                                <tr>    
-                                                                    <th>id</th>
-                                                                    <th>Fecha del pago</th>
-                                                                    <th>Valor del pago</th>
-                                                                    <th>Estado</th>
-                                                                    <th>Comprobante</th>                                                                    
-                                                                    <th>Cambiar estado</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <c:forEach items="${listadoPagoCuota}" var="pagocuota">
-                                                                <tr>
-                                                                    <td><c:out value="${pagocuota.idPagoCuota}"></c:out></td>
-                                                                    <td><c:out value="${pagocuota.fechaPagoCuota}"></c:out></td>                            
-                                                                    <td><c:out value="${pagocuota.valorPagoCuota}"></c:out></td>
-                                                                    <td><c:out value="${pagocuota.fkIdEstadoPagoCuota}"></c:out></td>
-                                                                    <td style="text-align: center;"><a target='_blank' href="../comprobantes/<c:out value="${pagocuota.urlPagoCuota}"></c:out>" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="297" src="../comprobantes/<c:out value="${pagocuota.urlPagoCuota}"></c:out>" width="400" /></a></td>
-                                                                    <td>
-                                                                    <c:url value="../PagoServlet" var="urlEdit">
-                                                                        <c:param name="idPagoCuota" value="${pagocuota.idPagoCuota}"></c:param>
-                                                                    </c:url>
-                                                                    <input type="button" class="btn btn-info" name="btnEditar" value="editar" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
-                                                                    </td>
-                                                                </tr>
-                                                            </c:forEach>                                               
-                                                        </tbody>
-                                                    </table>  
-                                        </div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-                                            </c:otherwise>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                                <h4 class="card-title">Listado de Pagos</h4>
+                                <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+
+                        </div>
+                        <div class="card-content collapse show">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <jsp:include page="../PagoServlet" flush="true"/>
+                                    <jsp:useBean id="pagocuota" class="entidad.PagoCuota" scope="session"/>
+                                    <center><h2>Pagos </h2></center>
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>    
+                                                <th>id</th>
+                                                <th>Fecha del pago</th>
+                                                <th>Valor del pago</th>
+                                                <th>Estado</th>
+                                                <th>Comprobante</th>                                                                    
+                                                <th>Cambiar estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach items="${listadoPagoCuota}" var="pagocuota">
+                                            <tr>
+                                                <td><c:out value="${pagocuota.idPagoCuota}"></c:out></td>
+                                                <td><c:out value="${pagocuota.fechaPagoCuota}"></c:out></td>                            
+                                                <td><c:out value="${pagocuota.valorPagoCuota}"></c:out></td>
+                                                <td><c:out value="${pagocuota.fkIdEstadoPagoCuota}"></c:out></td>
+                                                <td style="text-align: center;"><a target='_blank' href="../comprobantes/<c:out value="${pagocuota.urlPagoCuota}"></c:out>" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="297" src="../comprobantes/<c:out value="${pagocuota.urlPagoCuota}"></c:out>" width="400" /></a></td>
+                                                <td>
+                                                <c:url value="../PagoServlet" var="urlEdit">
+                                                    <c:param name="idPagoCuota" value="${pagocuota.idPagoCuota}"></c:param>
+                                                </c:url>
+                                                <input type="button" class="btn btn-info" name="btnEditar" value="editar" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>                                               
+                                        </tbody>
+                                    </table>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </c:otherwise>
         </c:choose>  
-<!-- Basic Tables end -->
-<!-- Striped rows start -->
-
-<!-- Bordered table end -->
         </div>
-      </div>
     </div>
-    <!-- ////////////////////////////////////////////////////////////////////////////-->
+    </div>
 
-
-    
     <script src="theme-assets/js/core/app-menu-lite.js" type="text/javascript"></script>
     <script src="theme-assets/js/core/app-lite.js" type="text/javascript"></script>
     

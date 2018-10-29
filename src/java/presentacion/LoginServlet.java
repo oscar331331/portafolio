@@ -44,16 +44,19 @@ public class LoginServlet extends HttpServlet {
             sesion.setAttribute("conectado","true");
             sesion.setAttribute("user",u);
             sesion.setAttribute("perfil",objUsuario.getIdPerfil());
-            if(objUsuario.getIdPerfil()==1)
+            
+            response.sendRedirect("Index.jsp"); 
+            /*if(objUsuario.getIdPerfil()==1)
             {
                response.sendRedirect("Index.jsp"); 
             }
             else
             {
                response.sendRedirect("index.html");
-            }
+            }*/
             sesion.setAttribute("msgLogin", "Datos Correctos");
             sesion.removeAttribute("msgLogin");
+            
         }else{
             sesion.setAttribute("msgError", "no se pudo ingresar a la BD");
             sesion.setAttribute("msgLogin", "Datos Incorrectos, vuelva a ingresar");

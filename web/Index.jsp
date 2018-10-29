@@ -33,17 +33,17 @@
     <!-- BEGIN Custom CSS-->
     <!-- END Custom CSS-->
   
-        <title>ADMINISTRADOR</title>
+        <title>Home</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     
     <body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-color="bg-chartbg" data-col="2-columns">
-     <c:choose>        
+        <c:choose>        
             <c:when test="${sessionScope.usuarioConectado==null}">
                 <jsp:forward page="login.jsp"/>
             </c:when>
-            
+
             <c:otherwise>      
                 <jsp:include page="menu_admin.jsp"/> 
             </c:otherwise>

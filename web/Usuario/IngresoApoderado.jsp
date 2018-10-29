@@ -113,7 +113,7 @@
             <div class="card">            
                         <div class="container">
                             <br>
-                            <center><h4 class="card-title">Ingresar apoderado</h4></center>
+                            <center><h4 class="card-title">Ingresar Apoderado</h4></center>
                               <br>
                             <form name="formGuardaApoderadoNuevo" method="post" action="../ApoderadoServlet">
                               <div class="container">
