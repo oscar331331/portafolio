@@ -42,20 +42,15 @@
           <div class="collapse navbar-collapse show" id="navbar-mobile">
             <ul class="nav navbar-nav mr-auto float-left">
               <li class="nav-item d-block d-md-none"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu"></i></a></li>
-              
                 <ul class="dropdown-menu">
                   <li class="arrow_box">
-                    
                   </li>
                 </ul>
               </li>
             </ul>
             <ul class="nav navbar-nav float-right">         
-              
             </ul>
             <ul class="nav navbar-nav float-right">
-              
-              
             </ul>
           </div>
         </div>
@@ -77,9 +72,7 @@
       </div>
       <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-          
-                            <jsp:include page="../menu_admin_interior.jsp"/>
-
+            <jsp:include page="../menu_admin_interior.jsp"/>
         </ul>
       </div>
       <div class="navigation-background"></div>
@@ -116,6 +109,8 @@
             <jsp:useBean id="curso" class="entidad.Curso" scope="session"/>
             <jsp:include page="/UsuarioServlet" flush="true"/>
             <jsp:useBean id="usuario" class="entidad.Usuario" scope="session"/>
+            <jsp:include page="/PaqueteServlet" flush="true"/>
+            <jsp:useBean id="paquete" class="entidad.PaqueteTuristico" scope="session"/>
             <c:choose>
                     <c:when test="${sessionScope.contratoAEditar==null}">
                         <div class="container">
@@ -147,6 +142,18 @@
                                         <label>Cantidad de Alumnos</label>
                                         <input type="number" name="CantAlumnos" min="0" max="700" value="0" class="form-control" placeholder="Ingrese contidad de alumnos" required/>
                                     </div>
+                                  
+                                  <div class="form-group">
+                                         <label>Paquete Turistico</label>
+                                         <fieldset class="form-group">
+                                         <select class="form-control" name="Paquete" required="true">                                            
+                                             <option value="">Seleccione un paquete...</option>
+                                             <c:forEach items="${listadoPaquetes}" var="paquete">
+                                                 <option value="${paquete.idPaquete}">${paquete.descripcion}</option>
+                                             </c:forEach>                                                                                        
+                                         </select></fieldset>
+                                    </div>
+                                  
                                     <div class="form-group">
                                          <label>Curso codigo </label>
                                          <fieldset class="form-group">
@@ -156,7 +163,7 @@
                                                  <option value="${curso.idCurso}">${curso.idCurso}</option>
                                              </c:forEach>                                                                                        
                                          </select></fieldset>
-                                     </div>
+                                    </div>                                  
                                     <div class="form-group">
                                         <label>Cliente </label>
                                         <fieldset class="form-group">
@@ -223,6 +230,18 @@
                                         <label>Cantidad de Alumnos</label>
                                         <input type="number" name="CantAlumnosEditar" min="0" max="700" value="<c:out value="${contratoAEditar.cantAlumnos}" ></c:out>" class="form-control" placeholder="" required/>
                                     </div>
+                                    
+                                    <div class="form-group">
+                                         <label>Paquete Turistico</label>
+                                         <fieldset class="form-group">
+                                         <select class="form-control" name="PaqueteEditar" required="true">                                            
+                                             <option value="">Seleccione un paquete...</option>
+                                             <c:forEach items="${listadoPaquetes}" var="paquete">
+                                                 <option value="${paquete.idPaquete}">${paquete.descripcion}</option>
+                                             </c:forEach>                                                                                        
+                                         </select></fieldset>
+                                    </div>
+                                    
                                     <div class="form-group">
                                          <label>Codigo Curso </label>
                                          <fieldset class="form-group">

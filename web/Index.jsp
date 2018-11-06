@@ -43,7 +43,6 @@
             <c:when test="${sessionScope.usuarioConectado==null}">
                 <jsp:forward page="login.jsp"/>
             </c:when>
-
             <c:otherwise>      
                 <jsp:include page="menu_admin.jsp"/> 
             </c:otherwise>
