@@ -23,6 +23,8 @@
     <link rel="stylesheet" type="text/css" href="../theme-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="../theme-assets/css/core/colors/palette-gradient.css">
     <link rel="stylesheet" type="text/css" href="../theme-assets/css/pages/dashboard-ecommerce.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->
     <!-- END Custom CSS-->
@@ -126,7 +128,7 @@
                             <br>
                             <center><h4 class="card-title">Ingresar usuario</h4></center>
                               <br>
-                            <form name="formGuardaUsuarioNuevo" method="post" action="/WebAppTour/UsuarioServlet">
+                            <form name="formGuardaUsuarioNuevo" method="post" action="../UsuarioServlet">
                               <div class="container">
                                     <div class="form-group">
                                         <label>Nombre</label>
@@ -163,8 +165,11 @@
                         </div> 
                         <center> <a class="btn" href="MantenedorUsuario.jsp">Volver</a></center>
                         <c:if test="${sessionScope.msgError!=null}">
-                            <c:out value="${msgError}"></c:out>
+                        <div class="alert alert-danger">
+                            <a href="#" class="close" data-dismiss="alert">&times;</a>
+                            <strong>Error! </strong><c:out value="${msgError}"></c:out>
                             <c:remove var="msgError"></c:remove>
+                        </div>
                         </c:if>
                     </c:when>
                     <c:when test="${sessionScope.usuarioAEditar!=null}">
@@ -224,8 +229,11 @@
                         </div>
                    <center><a href="../Usuario/MantenedorUsuario.jsp" type="button"  class="btn btn-info btn-min-width mr-1 mb-1"><i class="ft-arrow-left"></i> Volver </a></center>
                         <c:if test="${sessionScope.msgError!=null}">
-                            <c:out value="${msgError}"></c:out>
+                        <div class="alert alert-danger">
+                            <a href="#" class="close" data-dismiss="alert">&times;</a>
+                            <strong>Error! </strong><c:out value="${msgError}"></c:out>
                             <c:remove var="msgError"></c:remove>
+                        </div>
                         </c:if>
                     </c:when>
                 </c:choose>   

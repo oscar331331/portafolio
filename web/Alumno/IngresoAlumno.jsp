@@ -8,6 +8,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>    
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Ingreso Alumno</title>
     </head>
@@ -37,8 +38,11 @@
                         </div> 
                         <center> <a class="btn" href="MantenedorAlumno.jsp">Volver</a></center>
                         <c:if test="${sessionScope.msgError!=null}">
-                            <c:out value="${msgError}"></c:out>
+                        <div class="alert alert-danger">
+                            <a href="#" class="close" data-dismiss="alert">&times;</a>
+                            <strong>Error! </strong><c:out value="${msgError}"></c:out>
                             <c:remove var="msgError"></c:remove>
+                        </div>
                         </c:if>
                     </c:when>                    
                 </c:choose>         

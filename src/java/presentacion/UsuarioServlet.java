@@ -116,7 +116,9 @@ public class UsuarioServlet extends HttpServlet {
             Usuario infoUsuario= new Usuario(nombre,apellido,correo,password,perfil);
             UsuarioBO objUsuarioBO= new UsuarioBO();
             if(objUsuarioBO.addUsuario(infoUsuario)){
-                response.sendRedirect("Usuario/MantenedorUsuario.jsp");                
+                //response.sendRedirect("Usuario/MantenedorUsuario.jsp");
+                sesion.setAttribute("msgError", "no se pudo ingresar a la BD");
+                response.sendRedirect("Usuario/IngresoUsuario.jsp");
             }else{
                 sesion.setAttribute("msgError", "no se pudo ingresar a la BD");
                 response.sendRedirect("Usuario/IngresoUsuario.jsp");
