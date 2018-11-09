@@ -1,4 +1,6 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -122,13 +124,16 @@
                                             <jsp:include page="../ContratoServlet" flush="true"/>
                                             <jsp:useBean id="contrato" class="entidad.Contrato" scope="session"/>
                                             <center><h2>Mantenedor Contratos </h2></center>
+                                            <% HttpSession sesion = request.getSession(); %>
+                                            <% sesion.setAttribute("contratoAEditar", null); %>
+                                            
                                                 <table class="table table-striped">
                                                             <thead>
                                                                 <tr>    
                                                                     <th>Codigo</th>
                                                                     <th>Fecha Incorporacion</th>
-                                                                    <th>Fecha Meta</th>
-                                                                    <th>Fecha Final</th>
+                                                                    <th width="9%">Fecha Meta</th>
+                                                                    <th width="9%">Fecha Final</th>
                                                                     <th>Monto Meta</th>                                    
                                                                     <th>Monto Actual Contrato</th>
                                                                     <th>Cantidad de Alumnos</th>
@@ -143,9 +148,16 @@
                                                             <c:forEach items="${listadoContrato}" var="contrato">
                                                                 <tr>
                                                                     <td><c:out value="${contrato.codigo}"></c:out></td>
-                                                                    <td><c:out value="${contrato.fechaIncorporacion}"></c:out></td>                            
-                                                                    <td><c:out value="${contrato.fechaMeta}"></c:out></td>                            
-                                                                    <td><c:out value="${contrato.fechaFinal}"></c:out></td>
+                                                                    
+                                                                    <fmt:parseDate value="${contrato.fechaIncorporacion}" pattern="yyyy-MM-dd" var="fechaI"></fmt:parseDate>
+                                                                    <td><fmt:formatDate value="${fechaI}" pattern="dd-MM-yyyy" /></td>  
+                                                                    
+                                                                    <fmt:parseDate value="${contrato.fechaMeta}" pattern="yyyy-MM-dd" var="fechaM"></fmt:parseDate>
+                                                                    <td><fmt:formatDate value="${fechaM}" pattern="dd-MM-yyyy" /></td>  
+                                                                    
+                                                                    <fmt:parseDate value="${contrato.fechaFinal}" pattern="yyyy-MM-dd" var="fechaF"></fmt:parseDate>
+                                                                    <td><fmt:formatDate value="${fechaF}" pattern="dd-MM-yyyy" /></td>
+                                                                    
                                                                     <td><c:out value="${contrato.montoMeta}"></c:out></td>
                                                                     <td><c:out value="${contrato.montoActualContrato}"></c:out></td>
                                                                     <td><c:out value="${contrato.cantAlumnos}"></c:out></td>

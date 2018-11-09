@@ -1,4 +1,5 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -131,7 +132,10 @@
                                         <c:forEach items="${listadoPagoCuota}" var="pagocuota">
                                             <tr>
                                                 <td><c:out value="${pagocuota.idPagoCuota}"></c:out></td>
-                                                <td><c:out value="${pagocuota.fechaPagoCuota}"></c:out></td>                            
+                                                
+                                                <fmt:parseDate value="${pagocuota.fechaPagoCuota}" pattern="yyyy-MM-dd" var="fechaP"></fmt:parseDate>
+                                                <td><fmt:formatDate value="${fechaP}" pattern="dd-MM-yyyy" /></td> 
+                                                
                                                 <td><c:out value="${pagocuota.valorPagoCuota}"></c:out></td>
                                                 
                                                 <c:if test= "${pagocuota.fkIdEstadoPagoCuota == 1}">
