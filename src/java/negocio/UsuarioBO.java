@@ -38,6 +38,9 @@ public class UsuarioBO {
     public boolean updateUsuario(Usuario infoUsuario){
         return this.objUsuarioDAO.updateElemento(infoUsuario);
     }
+    public boolean updateUsuarioSinPw(Usuario infoUsuario){
+        return this.objUsuarioDAO.updateElementoSinPw(infoUsuario);
+    }
     public boolean ActualizaApoderadoDelAlumno(Usuario infoUsuario,int id_alumno){
         return this.objUsuarioDAO.ActualizaApoderadoDelAlumno(infoUsuario, id_alumno);
     }

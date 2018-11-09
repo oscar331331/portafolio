@@ -94,18 +94,40 @@ public class UsuarioServlet extends HttpServlet {
             String apellido =request.getParameter("ApellidoEditar");
             String correo=request.getParameter("CorreoEditar");
             String password=request.getParameter("PasswordEditar");
+            
             int perfil=Integer.parseInt(request.getParameter("PerfilEditar"));
             int active=Integer.parseInt(request.getParameter("ActiveEditar"));
-            Usuario infoUsuario= new Usuario(nombre,apellido,correo,password,perfil,active);
+            Usuario infoUsuario= new Usuario();
+            
+            if(!"".equals(password)){
+                
+                infoUsuario= new Usuario(nombre,apellido,correo,password,perfil,active);
+            }
+            else
+                infoUsuario= new Usuario(nombre,apellido,correo,perfil,active);
+            
             infoUsuario.setIdUsuario(((Usuario)sesion.getAttribute("usuarioAEditar")).getIdUsuario());
             UsuarioBO objUsuarioBO= new UsuarioBO();
-            if(objUsuarioBO.updateUsuario(infoUsuario)){
+            
+            if(!"".equals(password)){
+                if(objUsuarioBO.updateUsuario(infoUsuario)){
                 response.sendRedirect("Usuario/MantenedorUsuario.jsp");
                 sesion.removeAttribute("usuarioAEditar");
             }else{
                 sesion.setAttribute("msgError", "no se pudo actualizar a la BD");
                 response.sendRedirect("Usuario/IngresoUsuario.jsp");
             } 
+            } else
+            {
+                if(objUsuarioBO.updateUsuarioSinPw(infoUsuario)){
+                response.sendRedirect("Usuario/MantenedorUsuario.jsp");
+                sesion.removeAttribute("usuarioAEditar");
+            }else{
+                sesion.setAttribute("msgError", "no se pudo actualizar a la BD");
+                response.sendRedirect("Usuario/IngresoUsuario.jsp");
+            } 
+            }
+            
         }
         else {
             String nombre=request.getParameter("Nombre");
@@ -113,7 +135,7 @@ public class UsuarioServlet extends HttpServlet {
             String correo=request.getParameter("Correo");
             String password=request.getParameter("Password");
             int perfil=Integer.parseInt(request.getParameter("Perfil"));
-            Usuario infoUsuario= new Usuario(nombre,apellido,correo,password,perfil);
+            Usuario infoUsuario= new Usuario(nombre,apellido,correo,perfil,1);
             UsuarioBO objUsuarioBO= new UsuarioBO();
             if(objUsuarioBO.addUsuario(infoUsuario)){
                 //response.sendRedirect("Usuario/MantenedorUsuario.jsp");

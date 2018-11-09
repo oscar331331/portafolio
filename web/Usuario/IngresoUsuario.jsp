@@ -176,7 +176,7 @@
                         <jsp:useBean id="usuarioAEditar" class="entidad.Usuario" scope="session"></jsp:useBean>
                         <div class="container">
                             <center><h2>Editar Usuario</h2></center>
-                            <form name="formGuardaUsuarioEditado" method="post" action="/WebAppTour/UsuarioServlet">
+                            <form name="formGuardaUsuarioEditado" method="post" action="../UsuarioServlet">
                                 <div class="container">
                                     <div class="form-group">
                                         <label>Nombre</label>
@@ -192,7 +192,7 @@
                                     </div>                                    
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input type="password" name="PasswordEditar"  class="form-control" placeholder="Ingrese Password" />
+                                        <input type="password" name="PasswordEditar"  class="form-control" placeholder="(dejar en blanco para no modificar)" />
                                     </div>
                                     <div class="form-group">
                                         <label>Perfil </label>
@@ -200,7 +200,13 @@
                                          <select class="form-control" name="PerfilEditar" required="true">                                            
                                             <option value="">Seleccione un perfil...</option>
                                             <c:forEach items="${listadoPerfil}" var="perfil">
-                                                <option value="${perfil.idPerfil}">${perfil.descripcionPerfil}</option>
+                                                <c:if test= "${usuarioAEditar.idPerfil == perfil.idPerfil}">
+                                                    <option value="${perfil.idPerfil}" selected="">${perfil.descripcionPerfil}</option>
+                                                </c:if>
+                                                    
+                                                <c:if test= "${usuarioAEditar.idPerfil != perfil.idPerfil}">
+                                                    <option value="${perfil.idPerfil}">${perfil.descripcionPerfil}</option>
+                                                </c:if>
                                             </c:forEach>                                                                                        
                                          </select></fieldset>
                                     </div>  
@@ -222,7 +228,7 @@
                                     </div>  
                                     <div class="form-group">
                                         <label></label>
-                                        <center><input type="submit" class="btn btn-success" name="btnGuardarUsuarioEditado" class="btn btn-info btn-min-width mr-1 mb-1" value="Guardar"/><i class="ft-arrow-left"></i></center>
+                                        <center><input type="submit" class="btn btn-success" name="btnGuardarUsuarioEditado" class="btn btn-info btn-min-width mr-1 mb-1" value="Guardar"/></i></center>
                                     </div>
                                 </div>                        
                             </form>
