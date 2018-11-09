@@ -92,7 +92,7 @@
                 <div class="breadcrumbs-top float-md-right">
                     <div class="breadcrumb-wrapper mr-1">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="../index_admin.html">Home</a>
+                            <li class="breadcrumb-item"><a href="../Index.jsp">Home</a>
                             </li>
                             <li class="breadcrumb-item active">Pagos
                             </li>

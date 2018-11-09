@@ -132,6 +132,10 @@
                                                                     <th>Monto Meta</th>                                    
                                                                     <th>Monto Actual Contrato</th>
                                                                     <th>Cantidad de Alumnos</th>
+                                                                    <th>ID Curso</th>
+                                                                    <th>ID Promotor</th>
+                                                                    <th>ID Cliente</th>
+                                                                    <th>Paquete Turistico</th>
                                                                     <th>Editar</th>
                                                                 </tr>
                                                             </thead>
@@ -144,6 +148,10 @@
                                                                     <td><c:out value="${contrato.fechaFinal}"></c:out></td>
                                                                     <td><c:out value="${contrato.montoMeta}"></c:out></td>
                                                                     <td><c:out value="${contrato.montoActualContrato}"></c:out></td>
+                                                                    <td><c:out value="${contrato.cantAlumnos}"></c:out></td>
+                                                                    <td><c:out value="${contrato.idCurso}"></c:out></td>
+                                                                    <td><c:out value="${contrato.idPromotor}"></c:out></td>
+                                                                    <td><c:out value="${contrato.idPaquete}"></c:out></td>
                                                                     <td><c:out value="${contrato.cantAlumnos}"></c:out></td>
                                                                     <td>
                                                                     <c:url value="/ContratoServlet" var="urlEdit">
