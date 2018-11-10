@@ -79,7 +79,7 @@
                   <div class="main-menu-content">
                     <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
 
-                      <jsp:include page="../menu_admin.jsp"/>
+                      <jsp:include page="../menu_admin_interior.jsp"/>
 
                     </ul>
                   </div>
@@ -112,7 +112,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="container">
-                                 <br> <center><h4>Ingresar Alumnos</h4></center><br>
+                                 <br> <center><h4>Ingresar Alumnos de forma masiva</h4></center><br>
                                   <form name="formGuardaPagoNuevo" method="post" action="../AlumnoCargaMasivaServlet" enctype="multipart/form-data">
                                     <div class="container">
                                           <fieldset>

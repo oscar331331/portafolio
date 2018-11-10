@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+    <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>UsuarioServlet</servlet-name>
@@ -8,10 +8,6 @@
         <servlet-name>PerfilServlet</servlet-name>
         <servlet-class>presentacion.PerfilServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>AlumnoCargaMasivaServlet</servlet-name>
-        <servlet-class>presentacion.AlumnoCargaMasivaServlet</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>UsuarioServlet</servlet-name>
         <url-pattern>/UsuarioServlet</url-pattern>
@@ -19,10 +15,6 @@
     <servlet-mapping>
         <servlet-name>PerfilServlet</servlet-name>
         <url-pattern>/PerfilServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AlumnoCargaMasivaServlet</servlet-name>
-        <url-pattern>/AlumnoCargaMasivaServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
