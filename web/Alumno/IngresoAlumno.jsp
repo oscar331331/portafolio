@@ -79,7 +79,7 @@
       <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
           
-          <jsp:include page="../menu_admin_interior.jsp"/>
+          <jsp:include page="../menu_admin.jsp"/>
 
         </ul>
       </div>

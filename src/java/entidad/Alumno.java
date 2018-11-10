@@ -6,7 +6,6 @@
 package entidad;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -38,7 +37,7 @@ public class Alumno implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID_ALUMNO")
-    private BigDecimal idAlumno;
+    private int idAlumno;
     @Size(max = 255)
     @Column(name = "NOMBRE_ALUMNO")
     private String nombreAlumno;
@@ -56,24 +55,41 @@ public class Alumno implements Serializable {
     private Usuario_1 fkIdUsuario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkIdAlumno")
     private List<CuotaViaje> cuotaViajeList;
+    private int idContrato;
 
     public Alumno() {
     }
 
-    public Alumno(BigDecimal idAlumno) {
+    public Alumno(int idAlumno) {
         this.idAlumno = idAlumno;
     }
 
-    public BigDecimal getIdAlumno() {
+    public Alumno(String nombreAlumno, String apellidoAlumno, String rutAlumno, int idContrato) {
+        this.nombreAlumno = nombreAlumno;
+        this.apellidoAlumno = apellidoAlumno;
+        this.rutAlumno = rutAlumno;
+        this.idContrato = idContrato;
+    }
+    
+    
+    public int getIdAlumno() {
         return idAlumno;
     }
 
-    public void setIdAlumno(BigDecimal idAlumno) {
+    public void setIdAlumno(int idAlumno) {
         this.idAlumno = idAlumno;
     }
 
     public String getNombreAlumno() {
         return nombreAlumno;
+    }
+
+    public int getIdContrato() {
+        return idContrato;
+    }
+
+    public void setIdContrato(int idContrato) {
+        this.idContrato = idContrato;
     }
 
     public void setNombreAlumno(String nombreAlumno) {
@@ -121,28 +137,9 @@ public class Alumno implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idAlumno != null ? idAlumno.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Alumno)) {
-            return false;
-        }
-        Alumno other = (Alumno) object;
-        if ((this.idAlumno == null && other.idAlumno != null) || (this.idAlumno != null && !this.idAlumno.equals(other.idAlumno))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
-        return "entidad.Alumno[ idAlumno=" + idAlumno + " ]";
+        return "Alumno{" + "idAlumno=" + idAlumno + ", nombreAlumno=" + nombreAlumno + ", apellidoAlumno=" + apellidoAlumno + ", rutAlumno=" + rutAlumno + ", idContrato=" + idContrato + '}';
     }
+   
     
 }

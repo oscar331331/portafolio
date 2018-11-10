@@ -27,6 +27,9 @@ public class ContratoBO {
     public Contrato buscaContratoPorId(int id){
         return this.objContratoDAO.buscaContratoPorId(id);
     }
+    public Contrato buscaContratoPorCodigo(String cod){
+        return this.objContratoDAO.buscaContratoPorCodigo(cod);
+    }
     public boolean updateContrato(Contrato infoContrato){
         return this.objContratoDAO.updateElemento(infoContrato);
     }

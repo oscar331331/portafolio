@@ -127,72 +127,74 @@ public class PagoServlet extends HttpServlet {
             } 
         }
         else {
-        String archivo="C:\\Users\\Vito\\Desktop\\Portafolio\\portafolio\\web\\comprobantes";
-        DiskFileItemFactory factory=new DiskFileItemFactory();
-        factory.setSizeThreshold(1024);
-        factory.setRepository(new File(archivo));
-        ServletFileUpload upload=null;
-        try {
-            upload=new ServletFileUpload(factory);
-        } catch (Exception e) {
-            System.out.println("Pruebas");;
-        }
-        
-         if( upload == null){
-
-            sesion.setAttribute("msgError", "no se pudo actualizar a la BD");
-            response.sendRedirect("Pago_Cuota/IngresoPago.jsp");
-            
-        } else {
-            HashMap<String, String>  map = new HashMap();
-            
+            String archivo="../../../web/comprobantes";
+            DiskFileItemFactory factory=new DiskFileItemFactory();
+            factory.setSizeThreshold(1024);
+            factory.setRepository(new File(archivo));
+            ServletFileUpload upload=null;
             try {
-                List items = upload.parseRequest(request);
-                for (Object item : items) {
-                    FileItem uploaded = (FileItem) item;
-
-                    // Hay que comprobar si es un campo de formulario. Si no lo es, se guarda el fichero
-                    // subido donde nos interese
-                    if (!uploaded.isFormField()) {
-                       File fichero = new File(archivo, uploaded.getName());
-                        uploaded.write(fichero);
-
-                        String key = uploaded.getFieldName();
-                        String valor = uploaded.getName();
-                        map.put(key,valor);
-
-                    } else {
-                        // es un campo de formulario, podemos obtener clave y valor
-
-                        String key = uploaded.getFieldName();
-                        String valor = uploaded.getString();
-                        map.put(key,valor);
-
-                    }
-                }
+                upload=new ServletFileUpload(factory);
             } catch (Exception e) {
-                //session.setAttribute("msg_response", "Ha ocurrido un error al intentar guardar el producto.");
-                //session.setAttribute("class_msg_response", "danger");
-                sesion.setAttribute("msgError", "no se pudo actualizar a la BD 2");
-                response.sendRedirect("Pago_Cuota/IngresoPago.jsp");                
+                System.out.println("Pruebas");;
             }
-            
-            String fecha = map.get("Fecha_pago");            
-            int valor = Integer.parseInt(map.get("Valor_pago"));
-            String imagen = (map.get("imagen"));
-            int estadoCuota=1;
-            
-            PagoCuota infoPagoCuota = new PagoCuota(valor,estadoCuota,fecha,imagen);
-            PagoCuotaBO objPagoCuotaBO= new PagoCuotaBO();
-            if(objPagoCuotaBO.addPagoCuota(infoPagoCuota)){
-                sesion.setAttribute("msgError", "Guardado con exito");
-                response.sendRedirect("Pago_Cuota/MantenedorPago.jsp");
-            }else{
-                sesion.setAttribute("msgError", "no se pudo actualizar a la BD 3");
+
+             if( upload == null){
+
+                sesion.setAttribute("msgError", "no se pudo actualizar a la BD");
                 response.sendRedirect("Pago_Cuota/IngresoPago.jsp");
+
             } 
+            else {
+                HashMap<String, String>  map = new HashMap();
+
+                try {
+                    List items = upload.parseRequest(request);
+                    for (Object item : items) {
+                        FileItem uploaded = (FileItem) item;
+
+                        // Hay que comprobar si es un campo de formulario. Si no lo es, se guarda el fichero
+                        // subido donde nos interese
+                        if (!uploaded.isFormField()) {
+                           File fichero = new File(archivo, uploaded.getName());
+                            uploaded.write(fichero);
+
+                            String key = uploaded.getFieldName();
+                            String valor = uploaded.getName();
+                            map.put(key,valor);
+
+                        } else {
+                            // es un campo de formulario, podemos obtener clave y valor
+
+                            String key = uploaded.getFieldName();
+                            String valor = uploaded.getString();
+                            map.put(key,valor);
+
+                        }
+                    }
+                } catch (Exception e) {
+                    //session.setAttribute("msg_response", "Ha ocurrido un error al intentar guardar el producto.");
+                    //session.setAttribute("class_msg_response", "danger");
+                    sesion.setAttribute("msgError", "no se pudo actualizar a la BD 2");
+                    response.sendRedirect("Pago_Cuota/IngresoPago.jsp");                
+                }
+
+                String fecha = map.get("Fecha_pago");            
+                int valor = Integer.parseInt(map.get("Valor_pago"));
+                String imagen = (map.get("imagen"));
+                int estadoCuota=1;
+
+                PagoCuota infoPagoCuota = new PagoCuota(valor,estadoCuota,fecha,imagen);
+                PagoCuotaBO objPagoCuotaBO= new PagoCuotaBO();
+                if(objPagoCuotaBO.addPagoCuota(infoPagoCuota)){
+                    sesion.setAttribute("msgError", "Guardado con exito");
+                    response.sendRedirect("Pago_Cuota/MantenedorPago.jsp");
+                }else{
+                    sesion.setAttribute("msgError", "no se pudo actualizar a la BD 3");
+                    response.sendRedirect("Pago_Cuota/IngresoPago.jsp");
+                } 
+            }
         }
-    }}
+    }
     
 
     @Override
