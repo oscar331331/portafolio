@@ -69,7 +69,8 @@
                     <% response.sendRedirect("../login.jsp"); %>
                 </c:when>
             <c:otherwise>  
-
+                <% HttpSession sesion = request.getSession(); %>
+                <% sesion.setAttribute("pagoAEditar", null); %>
     <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="theme-assets/images/backgrounds/02.jpg">
       <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">       
@@ -126,7 +127,7 @@
                                                 <table class="table table-striped">
                                                             <thead>
                                                                 <tr>    
-                                                                    <th>id</th>
+                                                                    <th>ID</th>
                                                                     <th>Fecha del pago</th>
                                                                     <th>Valor del pago</th>
                                                                     <th>Comprobante</th>
@@ -140,7 +141,7 @@
                                                                     <fmt:parseDate value="${pagocuota.fechaPagoCuota}" pattern="yyyy-MM-dd" var="fechaP"></fmt:parseDate>
                                                                     <td><fmt:formatDate value="${fechaP}" pattern="dd-MM-yyyy" /></td>
                                                                     
-                                                                    <td><c:out value="${pagocuota.valorPagoCuota}"></c:out></td>
+                                                                    <td>$ <c:out value="${pagocuota.valorPagoCuota}"></c:out></td>
                                                                     <td style="text-align: center;"><a target='_blank' href="../comprobantes/<c:out value="${pagocuota.urlPagoCuota}"></c:out>" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="297" src="../comprobantes/<c:out value="${pagocuota.urlPagoCuota}"></c:out>" width="400" /></a></td>
                                                                 </tr>
                                                             </c:forEach>                                               

@@ -68,6 +68,8 @@
             <% response.sendRedirect("../login.jsp"); %>
         </c:when>
     <c:otherwise>  
+        <% HttpSession sesion = request.getSession(); %>
+        <% sesion.setAttribute("pagoAEditar", null); %>
     <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="theme-assets/images/backgrounds/02.jpg">
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">       
@@ -107,7 +109,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                                <h4 class="card-title">Listado de Pagos</h4>
+                                <h4 class="card-title">Listado de Pagos para revision</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
 
                         </div>
@@ -120,9 +122,9 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>    
-                                                <th>id</th>
-                                                <th>Fecha del pago</th>
-                                                <th>Valor del pago</th>
+                                                <th>ID</th>
+                                                <th>Fecha pago</th>
+                                                <th>Valor pago<font style="color:white;">aaaa</font></th>
                                                 <th>Estado</th>
                                                 <th>Comprobante</th>                                                                    
                                                 <th>Cambiar estado</th>
@@ -136,7 +138,7 @@
                                                 <fmt:parseDate value="${pagocuota.fechaPagoCuota}" pattern="yyyy-MM-dd" var="fechaP"></fmt:parseDate>
                                                 <td><fmt:formatDate value="${fechaP}" pattern="dd-MM-yyyy" /></td> 
                                                 
-                                                <td><c:out value="${pagocuota.valorPagoCuota}"></c:out></td>
+                                                <td>$ <c:out value="${pagocuota.valorPagoCuota}"></c:out></td>
                                                 
                                                 <c:if test= "${pagocuota.fkIdEstadoPagoCuota == 1}">
                                                     <td>Pendiente</td>

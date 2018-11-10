@@ -137,6 +137,19 @@
                                             </c:forEach>                                                                                        
                                          </select></fieldset>
                                     </div>   
+                                   <% /*   EL ENCARGADO SE DEBE ELEGIR EN CURSO Y NO EN COLEGIO, ESTE ES EL CODIGO.
+                                            FALTA IMPLEMENTARLO EN LOS DAO/PROCEDURE
+                                  <div class="form-group">
+                                        <label>Encargado </label>
+                                        <fieldset class="form-group">
+                                        <select class="form-control" name="IdUsuario" required="true">                                            
+                                            <option value="">Seleccione un correo...</option>
+                                            <c:forEach items="${listadoUsuario}" var="usuario">
+                                                <option value="${usuario.idUsuario}">${usuario.correoUsuario}</option>
+                                            </c:forEach>                                                                                        
+                                        </select>
+                                        </fieldset>
+                                    </div>  */ %>  
                                     
                                     <div class="form-group">
                                         <label></label>
@@ -197,6 +210,26 @@
                                             </c:choose>                                                                                                                                     
                                          </select></fieldset>
                                     </div> 
+                                    
+                                    <% /*   EL ENCARGADO SE DEBE ELEGIR EN CURSO Y NO EN COLEGIO, ESTE ES EL CODIGO.
+                                        FALTA IMPLEMENTARLO EN LOS DAO/PROCEDURE
+                                    <div class="form-group">
+                                        <label>Encargado </label>
+                                        <select name="IdUsuario" required="true">                                            
+                                            <option value="">Seleccione un correo...</option>
+                                            <c:forEach items="${listadoUsuario}" var="usuario">
+                                                <c:choose>
+                                                    <c:when test="${usuario.idUsuario == colegioAEditar.idColegio}">
+                                                        <option value="${usuario.idUsuario}" selected="selected">${usuario.correoUsuario}</option>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <option value="${usuario.idUsuario}">${usuario.correoUsuario}</option>
+                                                    </c:otherwise>
+                                                </c:choose>                                                
+                                            </c:forEach>                                                                                        
+                                        </select>
+                                    </div>  */ %>  
+                                    
                                     <div class="form-group">
                                         <label></label>
                                         <center><input type="submit" class="btn btn-success" name="btnGuardarCursoEditado" value="Guardar"/></center>

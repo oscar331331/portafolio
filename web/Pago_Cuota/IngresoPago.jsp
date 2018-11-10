@@ -129,7 +129,7 @@
                               <div class="container">
                                     <fieldset>
                                         <div class="form-group">
-                                            <label>Valor a pagar</label>
+                                            <label>Valor a pagar: $</label>
                                             <input type="number" min="1" max="900000000" name="Valor_pago" class="form-control"  required/>
                                         </div>
                                     </fieldset>  
