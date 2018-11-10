@@ -144,7 +144,7 @@ public class ContratoDAO implements ICrud {
             cs.executeQuery();
             ResultSet rs = (ResultSet)cs.getObject(2);
             while (rs.next()) {
-                infoContrato = new Contrato(rs.getInt("ID_CONTRATO"),rs.getString("CODIGO"), rs.getString("FECHA_INCORPORACION"), rs.getString("FECHA_META"), rs.getInt("MONTO_META"), rs.getString("FECHA_FINAL"), rs.getInt("MONTO_ACTUAL_CONTRATO"), rs.getInt("FK_ID_ESTADO_CONTRATO"), rs.getInt("FK_ID_CURSO"), rs.getInt("FK_ID_CLIENTE"), rs.getInt("FK_ID_PROMOTOR"), rs.getInt("CANT_ALUMNOS"));
+                infoContrato = new Contrato(rs.getInt("ID_CONTRATO"),rs.getString("CODIGO"), rs.getString("FECHA_INCORPORACION"), rs.getString("FECHA_META"), rs.getInt("MONTO_META"), rs.getString("FECHA_FINAL"), rs.getInt("MONTO_ACTUAL_CONTRATO"), rs.getInt("FK_ID_ESTADO_CONTRATO"), rs.getInt("FK_ID_CURSO"), rs.getInt("FK_ID_CLIENTE"), rs.getInt("FK_ID_PROMOTOR"), rs.getInt("CANT_ALUMNOS"), rs.getInt("FK_ID_PAQUETE"));
                 System.out.println(infoContrato.getIdCurso());     
             }
         } catch (Exception e) {
