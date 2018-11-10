@@ -68,7 +68,8 @@
                     <% response.sendRedirect("../login.jsp"); %>
                 </c:when>
             <c:otherwise>  
-
+                <% HttpSession sesion = request.getSession(); %>
+                <% sesion.setAttribute("usuarioAEditar", null); %>
     <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="theme-assets/images/backgrounds/02.jpg">
       <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">       
@@ -129,6 +130,7 @@
                                     <th>Apellido</th>
                                     <th>Correo</th>
                                     <th>Perfil</th>
+                                    <th>Estado</th>
                                     <th>Editar</th>
                                 </tr>
                             </thead>
@@ -138,6 +140,7 @@
                                     <td><c:out value="${usuario.nombreUsuario}"></c:out></td>                            
                                     <td><c:out value="${usuario.apellidoUsuario}"></c:out></td>
                                     <td><c:out value="${usuario.correoUsuario}"></c:out></td>
+                                    
                                     <c:if test= "${usuario.idPerfil ==1}">
                                         <td><c:out value="Administrador"></c:out></td>
                                     </c:if>
@@ -145,7 +148,21 @@
                                         <td><c:out value="Apoderado"></c:out></td>
                                     </c:if>
                                     <c:if test= "${usuario.idPerfil ==3}">
+                                        <td><c:out value="Ejecutivo"></c:out></td>
+                                    </c:if>
+                                    <c:if test= "${usuario.idPerfil ==4}">
                                         <td><c:out value="Encargado"></c:out></td>
+                                    </c:if>
+                                    <c:if test= "${usuario.idPerfil ==5}">
+                                        <td><c:out value="Owner"></c:out></td>
+                                    </c:if>
+                                        
+                                    <c:if test= "${usuario.active ==1}">
+                                        <td>Activo</td>
+                                    </c:if>
+                                        
+                                    <c:if test= "${usuario.active ==0}">
+                                        <td><font color="red">Desactivado</font></td>
                                     </c:if>
                                     
                                     <td>

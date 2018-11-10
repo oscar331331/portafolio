@@ -35,124 +35,122 @@
     
     <body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-color="bg-gradient-x-purple-blue" data-col="2-columns">
 
-    <!-- fixed-top-->
-    <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
-      <div class="navbar-wrapper">
-        <div class="navbar-container content">
-          <div class="collapse navbar-collapse show" id="navbar-mobile">
-            <ul class="nav navbar-nav mr-auto float-left">
-              <li class="nav-item d-block d-md-none"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu"></i></a></li>
-              
-                <ul class="dropdown-menu">
-                  <li class="arrow_box">
-                    
+        <!-- fixed-top-->
+        <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
+          <div class="navbar-wrapper">
+            <div class="navbar-container content">
+              <div class="collapse navbar-collapse show" id="navbar-mobile">
+                <ul class="nav navbar-nav mr-auto float-left">
+                  <li class="nav-item d-block d-md-none"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu"></i></a></li>
+
+                    <ul class="dropdown-menu">
+                      <li class="arrow_box">
+
+                      </li>
+                    </ul>
                   </li>
                 </ul>
-              </li>
-            </ul>
-            <ul class="nav navbar-nav float-right">         
-              
-            </ul>
-            <ul class="nav navbar-nav float-right">
-              
-              
-            </ul>
-          </div>
-        </div>
-      </div>
-    </nav>
+                <ul class="nav navbar-nav float-right">         
 
-    <!-- ////////////////////////////////////////////////////////////////////////////-->
-<c:choose>        
-                <c:when test="${sessionScope.usuarioConectado==null}">
-                    <% response.sendRedirect("../login.jsp"); %>
-                </c:when>
-            <c:otherwise>  
+                </ul>
+                <ul class="nav navbar-nav float-right">
 
-    <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="theme-assets/images/backgrounds/02.jpg">
-      <div class="navbar-header">
-        <ul class="nav navbar-nav flex-row">       
-          
-          <li class="nav-item d-md-none"><a class="nav-link close-navbar"><i class="ft-x"></i></a></li>
-        </ul>
-      </div>
-      <div class="main-menu-content">
-        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-          
-          <jsp:include page="../menu_admin.jsp"/>
 
-        </ul>
-      </div>
-      <div class="navigation-background"></div>
-    </div>
-
-    <div class="app-content content">
-      <div class="content-wrapper">
-        <div class="content-wrapper-before"></div>
-        <div class="content-header row">
-          <div class="content-header-left col-md-4 col-12 mb-2">
-            <h3 class="content-header-title">Pagos</h3>
-          </div>
-          <div class="content-header-right col-md-8 col-12">
-            <div class="breadcrumbs-top float-md-right">
-              <div class="breadcrumb-wrapper mr-1">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="../index_admin.html">Home</a>
-                  </li>
-                  <li class="breadcrumb-item active">Alumnos
-                  </li>
-                </ol>
+                </ul>
               </div>
             </div>
           </div>
-        </div>
+        </nav>
 
-      <section id="chartjs-bar-charts">  
-       <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="container">
-                     <br> <center><h4>Ingresar Alumnos</h4></center><br>
-                      <form name="formGuardaPagoNuevo" method="post" action="../AlumnoCargaMasivaServlet" enctype="multipart/form-data">
-                        <div class="container">
-                              <fieldset>
-                                  <div class="form-group">
-                                      <label>Codigo del contrato: </label>
-                                      <input type="text" name="codigo" class="form-control"  required/>
-                                  </div>
-                              </fieldset>  
-                              <fieldset> 
-                                  <div class="form-group">
-                                      <label>Excel con alumnos: </label>
-                                      <input type="file" name="file" id="file" required>    
-                                  </div>
-                              </fieldset>                                   
-                              <div class="form-group">
-                                  <label></label>
-                                  <center><input type="submit" class="btn btn-success" name="btnGuardarPago" value="Guardar"/></center>
-                              </div>
-                          </div>                          
-                      </form>
-                 </div>
-                <center> <a class="btn" href="MantenedorPago.jsp">Volver</a></center>
-                <c:if test="${sessionScope.msgError!=null}">
-                    <c:out value="${msgError}"></c:out>
-                    <c:remove var="msgError"></c:remove>
-                </c:if>  
-            </div>
-                <div class="card-content collapse show">
-                    <div class="card-body">
-                        <div class="height-200">
-                            <canvas id="column-chart"></canvas>
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
+        <c:choose>        
+            <c:when test="${sessionScope.usuarioConectado==null}">
+                <% response.sendRedirect("../login.jsp"); %>
+            </c:when>
+            <c:otherwise>  
+
+                <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="theme-assets/images/backgrounds/02.jpg">
+                  <div class="navbar-header">
+                    <ul class="nav navbar-nav flex-row">       
+
+                      <li class="nav-item d-md-none"><a class="nav-link close-navbar"><i class="ft-x"></i></a></li>
+                    </ul>
+                  </div>
+                  <div class="main-menu-content">
+                    <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+
+                      <jsp:include page="../menu_admin.jsp"/>
+
+                    </ul>
+                  </div>
+                  <div class="navigation-background"></div>
+                </div>
+
+                <div class="app-content content">
+                  <div class="content-wrapper">
+                    <div class="content-wrapper-before"></div>
+                    <div class="content-header row">
+                      <div class="content-header-left col-md-4 col-12 mb-2">
+                        <h3 class="content-header-title">Pagos</h3>
+                      </div>
+                      <div class="content-header-right col-md-8 col-12">
+                        <div class="breadcrumbs-top float-md-right">
+                          <div class="breadcrumb-wrapper mr-1">
+                            <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="../index_admin.html">Home</a>
+                              </li>
+                              <li class="breadcrumb-item active">Alumnos
+                              </li>
+                            </ol>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  <section id="chartjs-bar-charts">  
+                   <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="container">
+                                 <br> <center><h4>Ingresar Alumnos</h4></center><br>
+                                  <form name="formGuardaPagoNuevo" method="post" action="../AlumnoCargaMasivaServlet" enctype="multipart/form-data">
+                                    <div class="container">
+                                          <fieldset>
+                                              <div class="form-group">
+                                                  <label>Codigo del contrato: </label>
+                                                  <input type="text" name="codigo" class="form-control"  required/>
+                                              </div>
+                                          </fieldset>  
+                                          <fieldset> 
+                                              <div class="form-group">
+                                                  <label>Excel con alumnos: </label>
+                                                  <input type="file" name="file" id="file" required>    
+                                              </div>
+                                          </fieldset>                                   
+                                          <div class="form-group">
+                                              <label></label>
+                                              <center><input type="submit" class="btn btn-success" name="btnGuardarPago" value="Guardar"/></center>
+                                          </div>
+                                      </div>                          
+                                  </form>
+                             </div>
+                            <center> <a class="btn" href="MantenedorPago.jsp">Volver</a></center>
+                            <c:if test="${sessionScope.msgError!=null}">
+                                <c:out value="${msgError}"></c:out>
+                                <c:remove var="msgError"></c:remove>
+                            </c:if>  
+                        </div>
+                            <div class="card-content collapse show">
+                                <div class="card-body">
+                                    <div class="height-200">
+                                        <canvas id="column-chart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-            
-</c:otherwise>
+            </c:otherwise>
         </c:choose>  
     </body>
 </html>

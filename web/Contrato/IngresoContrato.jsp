@@ -23,6 +23,8 @@
     <link rel="stylesheet" type="text/css" href="../theme-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="../theme-assets/css/core/colors/palette-gradient.css">
     <link rel="stylesheet" type="text/css" href="../theme-assets/css/pages/dashboard-ecommerce.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->
     <!-- END Custom CSS-->
@@ -42,20 +44,15 @@
           <div class="collapse navbar-collapse show" id="navbar-mobile">
             <ul class="nav navbar-nav mr-auto float-left">
               <li class="nav-item d-block d-md-none"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu"></i></a></li>
-              
                 <ul class="dropdown-menu">
                   <li class="arrow_box">
-                    
                   </li>
                 </ul>
               </li>
             </ul>
             <ul class="nav navbar-nav float-right">         
-              
             </ul>
             <ul class="nav navbar-nav float-right">
-              
-              
             </ul>
           </div>
         </div>
@@ -77,9 +74,7 @@
       </div>
       <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-          
-                            <jsp:include page="../menu_admin_interior.jsp"/>
-
+            <jsp:include page="../menu_admin_interior.jsp"/>
         </ul>
       </div>
       <div class="navigation-background"></div>
@@ -116,6 +111,8 @@
             <jsp:useBean id="curso" class="entidad.Curso" scope="session"/>
             <jsp:include page="/UsuarioServlet" flush="true"/>
             <jsp:useBean id="usuario" class="entidad.Usuario" scope="session"/>
+            <jsp:include page="/PaqueteServlet" flush="true"/>
+            <jsp:useBean id="paquete" class="entidad.PaqueteTuristico" scope="session"/>
             <c:choose>
                     <c:when test="${sessionScope.contratoAEditar==null}">
                         <div class="container">
@@ -147,6 +144,18 @@
                                         <label>Cantidad de Alumnos</label>
                                         <input type="number" name="CantAlumnos" min="0" max="700" value="0" class="form-control" placeholder="Ingrese contidad de alumnos" required/>
                                     </div>
+                                  
+                                  <div class="form-group">
+                                         <label>Paquete Turistico</label>
+                                         <fieldset class="form-group">
+                                         <select class="form-control" name="Paquete" required="true">                                            
+                                             <option value="">Seleccione un paquete...</option>
+                                             <c:forEach items="${listadoPaquetes}" var="paquete">
+                                                 <option value="${paquete.idPaquete}">${paquete.descripcion}</option>
+                                             </c:forEach>                                                                                        
+                                         </select></fieldset>
+                                    </div>
+                                  
                                     <div class="form-group">
                                          <label>Curso codigo </label>
                                          <fieldset class="form-group">
@@ -156,7 +165,7 @@
                                                  <option value="${curso.idCurso}">${curso.idCurso}</option>
                                              </c:forEach>                                                                                        
                                          </select></fieldset>
-                                     </div>
+                                    </div>                                  
                                     <div class="form-group">
                                         <label>Cliente </label>
                                         <fieldset class="form-group">
@@ -188,8 +197,11 @@
                         </div> 
                         <center> <a class="btn" href="MantenedorContrato.jsp">Volver</a></center>
                         <c:if test="${sessionScope.msgError!=null}">
-                            <c:out value="${msgError}"></c:out>
+                        <div class="alert alert-danger">
+                            <a href="#" class="close" data-dismiss="alert">&times;</a>
+                            <strong>Error! </strong><c:out value="${msgError}"></c:out>
                             <c:remove var="msgError"></c:remove>
+                        </div>
                         </c:if>
                     </c:when>
                     <c:when test="${sessionScope.contratoAEditar!=null}">
@@ -223,13 +235,38 @@
                                         <label>Cantidad de Alumnos</label>
                                         <input type="number" name="CantAlumnosEditar" min="0" max="700" value="<c:out value="${contratoAEditar.cantAlumnos}" ></c:out>" class="form-control" placeholder="" required/>
                                     </div>
+                                    
+                                    <div class="form-group">
+                                         <label>Paquete Turistico</label>
+                                         <fieldset class="form-group">
+                                         <select class="form-control" name="PaqueteEditar" required="true">                                            
+                                             <option value="">Seleccione un paquete...</option>
+                                             <c:forEach items="${listadoPaquetes}" var="paquete">
+                                                 <c:if test= "${contratoAEditar.idPaquete == paquete.idPaquete}">
+                                                     <option value="${paquete.idPaquete}" selected="">${paquete.descripcion}</option>
+                                                 </c:if>
+                                                    
+                                                 <c:if test= "${contratoAEditar.idPaquete != paquete.idPaquete}">
+                                                     <option value="${paquete.idPaquete}">${paquete.descripcion}</option>
+                                                 </c:if>
+                                                    
+                                             </c:forEach>                                                                                        
+                                         </select></fieldset>
+                                    </div>
+                                    
                                     <div class="form-group">
                                          <label>Codigo Curso </label>
                                          <fieldset class="form-group">
                                          <select class="form-control" name="CursoEditar" required="true">                                            
                                              <option value="">Seleccione un curso...</option>
                                              <c:forEach items="${listadoCurso}" var="curso">
-                                                 <option value="${curso.idCurso}">${curso.idCurso}</option>
+                                                 <c:if test= "${contratoAEditar.idCurso == curso.idCurso}"> 
+                                                     <option value="${curso.idCurso}" selected="">${curso.idCurso}</option>
+                                                 </c:if>
+                                                    
+                                                 <c:if test= "${contratoAEditar.idCurso != curso.idCurso}"> 
+                                                    <option value="${curso.idCurso}">${curso.idCurso}</option>
+                                                 </c:if>   
                                              </c:forEach>                                                                                        
                                          </select></fieldset>
                                      </div>
@@ -239,7 +276,14 @@
                                          <select class="form-control" name="ClienteEditar" required="true">                                            
                                                  <option value="">Seleccione un correo...</option>
                                                  <c:forEach items="${listadoUsuario}" var="usuario">
-                                                     <option value="${usuario.idUsuario}">${usuario.correoUsuario}</option>
+                                                     <c:if test= "${contratoAEditar.idCliente == usuario.idUsuario}">  
+                                                        <option value="${usuario.idUsuario}" selected="">${usuario.correoUsuario}</option>
+                                                    </c:if>
+                                                    <c:if test= "${contratoAEditar.idCliente != usuario.idUsuario}">  
+                                                        <option value="${usuario.idUsuario}">${usuario.correoUsuario}</option>
+                                                    </c:if>
+                                                        
+                                                     
                                                  </c:forEach>                                                                                        
                                          </select></fieldset>
                                          </div>
@@ -249,7 +293,13 @@
                                          <select class="form-control" name="PromotorEditar" required="true">                                            
                                                  <option value="">Seleccione un correo...</option>
                                                  <c:forEach items="${listadoUsuario}" var="usuario">
-                                                     <option value="${usuario.idUsuario}">${usuario.correoUsuario}</option>
+                                                     <c:if test= "${contratoAEditar.idPromotor == usuario.idUsuario}">   
+                                                         <option value="${usuario.idUsuario}" selected="">${usuario.correoUsuario}</option>
+                                                    </c:if>
+                                                        
+                                                    <c:if test= "${contratoAEditar.idPromotor != usuario.idUsuario}">   
+                                                         <option value="${usuario.idUsuario}">${usuario.correoUsuario}</option>
+                                                    </c:if>    
                                                  </c:forEach>                                                                                        
                                          </select></fieldset>
                                          </div>
@@ -262,8 +312,11 @@
                         </div>
                         <center> <a class="btn" href="MantenedorContrato.jsp">Volver</a></center>
                         <c:if test="${sessionScope.msgError!=null}">
-                            <c:out value="${msgError}"></c:out>
+                        <div class="alert alert-danger">
+                            <a href="#" class="close" data-dismiss="alert">&times;</a>
+                            <strong>Error! </strong><c:out value="${msgError}"></c:out>
                             <c:remove var="msgError"></c:remove>
+                        </div>
                         </c:if>
                     </c:when>
                 </c:choose> 

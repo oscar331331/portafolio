@@ -98,6 +98,32 @@ public class UsuarioDAO implements ICrud {
         }
         return false;        
     }
+    
+    
+    public boolean updateElementoSinPw(Object objetoUpdate) {
+       Usuario objUsuario = (Usuario) objetoUpdate;
+        try {
+            Connection con = Conexion.getConexion();
+            CallableStatement cs = null;
+            cs = con.prepareCall("{call EditarUsuariosSinPw(?,?,?,?,?,?)}");
+            cs.setInt(1, objUsuario.getIdUsuario());
+            cs.setString(2, objUsuario.getNombreUsuario());
+            cs.setString(3, objUsuario.getApellidoUsuario());
+            cs.setString(4, objUsuario.getCorreoUsuario());
+            cs.setInt(5, objUsuario.getIdPerfil());
+            cs.setInt(6, objUsuario.getActive());//active
+            
+            try {
+                return cs.executeUpdate() == 1;
+            } catch (Exception e) {
+                System.out.println("Problemas al actualizar");
+            }
+        } catch (Exception e) {
+            System.out.println("No se pudo updatear la base de datos");
+        }
+        return false;        
+    }
+    
      public boolean ActualizaApoderadoDelAlumno(Object objetoUpdate,int alumno) {
        Usuario objUsuario = (Usuario) objetoUpdate;
         try {

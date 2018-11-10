@@ -40,23 +40,23 @@
                         </li>
                         <li class="nav-item"><a href=""><i class="ft-users"></i><span class="menu-title" data-i18n="">Alumno</span></a>
                         </li>
-                        <li class="nav-item"><a href=""><i class="ft-book"></i><span class="menu-title" data-i18n="">Pagar Cuota</span></a>
+                        <li class="nav-item"><a href=""><i class="ft-credit-card"></i><span class="menu-title" data-i18n="">Pagar Cuota</span></a>
                         </li>
                     </c:when>
                     <c:when test="${usuarioConectado.idPerfil==3}">
-                    <li class="nav-item"><a href=""><i class="ft-file-plus"></i><span class="menu-title" data-i18n="">Seguros</span></a>
-                    </li>
-                    <li class="nav-item"><a href=""><i class="ft-file-text"></i><span class="menu-title" data-i18n="">Contratos</span></a>
-                    </li>
-                    <li class="nav-item"><a href=""><i class="ft-book"></i><span class="menu-title" data-i18n="">Pagar Cuota</span></a>
-                    </li>
+                        <li class="nav-item"><a href=""><i class="ft-file-plus"></i><span class="menu-title" data-i18n="">Seguros</span></a>
+                        </li>
+                        <li class="nav-item"><a href=""><i class="ft-file-text"></i><span class="menu-title" data-i18n="">Contratos</span></a>
+                        </li>
+                        <li class="nav-item"><a href=""><i class="ft-credit-card"></i><span class="menu-title" data-i18n="">Pagar Cuota</span></a>
+                        </li>
                     </c:when>
                     <c:when test="${usuarioConectado.idPerfil==4}">
                         <li class="nav-item"><a href=""><i class="ft-battery"></i><span class="menu-title" data-i18n="">Estado de Cuenta</span></a>
                         </li>
                         <li class="nav-item"><a href=""><i class="ft-file-text"></i><span class="menu-title" data-i18n="">Contratos</span></a>
                         </li>
-                        <li class="nav-item"><a href=""><i class="ft-book"></i><span class="menu-title" data-i18n="">Pagar Cuota</span></a>
+                        <li class="nav-item"><a href=""><i class="ft-credit-card"></i><span class="menu-title" data-i18n="">Pagar Cuota</span></a>
                         </li>
                     </c:when>
                     <c:when test="${usuarioConectado.idPerfil==5}">
@@ -69,7 +69,7 @@
                 <li class=" nav-item"><a href="../CerrarSesionServlet"><i class="ft-log-out"></i><span class="menu-title" data-i18n="">Cerrar Sesion</span></a>
                 </li>
                 <br>
-                <li align="center" style= "color: blue">Bienvenido(a):<c:out value=" ${usuarioConectado.nombreUsuario} ${usuarioConectado.apellidoUsuario}"></c:out></pre>   
+                <li align="center" style= "color: blue">Bienvenido(a):<c:out value=" ${usuarioConectado.nombreUsuario} ${usuarioConectado.apellidoUsuario}"></c:out> 
                 </li>
             </ul>
             <div class="navigation-background"></div>

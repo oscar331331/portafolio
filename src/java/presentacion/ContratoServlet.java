@@ -102,7 +102,8 @@ public class ContratoServlet extends HttpServlet {
             int cliente=Integer.parseInt(request.getParameter("ClienteEditar"));
             int promotor=Integer.parseInt(request.getParameter("PromotorEditar"));
             int curso=Integer.parseInt(request.getParameter("CursoEditar"));
-            Contrato infoContrato = new Contrato(fechaincorporacion, fechameta, montometa, fechafinal, montoactual, curso, cliente, promotor, cantAlu);
+            int paquete=Integer.parseInt(request.getParameter("PaqueteEditar"));
+            Contrato infoContrato = new Contrato(fechaincorporacion, fechameta, montometa, fechafinal, montoactual, curso, cliente, promotor, cantAlu, paquete);
             infoContrato.setIdContrato(((Contrato)sesion.getAttribute("contratoAEditar")).getIdContrato());
             ContratoBO objContratoBO= new ContratoBO();
             if(objContratoBO.updateContrato(infoContrato)){
@@ -123,12 +124,14 @@ public class ContratoServlet extends HttpServlet {
             int cliente=Integer.parseInt(request.getParameter("Cliente"));
             int promotor=Integer.parseInt(request.getParameter("Promotor"));
             int curso=Integer.parseInt(request.getParameter("Curso"));
-            Contrato infoContrato = new Contrato(fechaincorporacion, fechameta, montometa, fechafinal, montoactual, curso, cliente, promotor, cantAlu);
+            int paquete=Integer.parseInt(request.getParameter("Paquete"));
+            Contrato infoContrato = new Contrato(fechaincorporacion, fechameta, montometa, fechafinal, montoactual, curso, cliente, promotor, cantAlu, paquete);
              System.out.println("contrato: "+infoContrato.toString());
             
             ContratoBO objContratoBO= new ContratoBO();
             if(objContratoBO.addContrato(infoContrato)){
-                response.sendRedirect("Contrato/MantenedorContrato.jsp");                
+                response.sendRedirect("Contrato/MantenedorContrato.jsp");   
+                
             }else{
                 sesion.setAttribute("msgError", "no se pudo ingresar a la BD");
                 response.sendRedirect("Contrato/IngresoContrato.jsp");

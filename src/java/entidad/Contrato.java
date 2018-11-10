@@ -76,6 +76,7 @@ public class Contrato implements Serializable {
     private int IdCurso;
     private int IdCliente;
     private int IdPromotor;
+    private int IdPaquete;
     public Contrato() {
     }
 
@@ -83,7 +84,7 @@ public class Contrato implements Serializable {
         this.idContrato = idContrato;
     }
 
-    public Contrato(int idContrato, String codigo, String fechaIncorporacion, String fechaMeta, int montoMeta, String fechaFinal, int montoActualContrato, int IdEstado, int IdCurso, int IdCliente, int IdPromotor, int cantAlumnos) {
+    public Contrato(int idContrato, String codigo, String fechaIncorporacion, String fechaMeta, int montoMeta, String fechaFinal, int montoActualContrato, int IdEstado, int IdCurso, int IdCliente, int IdPromotor, int cantAlumnos, int IdPaquete) {
         this.idContrato = idContrato;
         this.codigo = codigo;
         this.fechaIncorporacion = fechaIncorporacion;
@@ -96,6 +97,7 @@ public class Contrato implements Serializable {
         this.IdCliente = IdCliente;
         this.IdPromotor = IdPromotor;
         this.cantAlumnos = cantAlumnos;
+        this.IdPaquete = IdPaquete;
     }
 
     public int getIdEstado() {
@@ -107,7 +109,7 @@ public class Contrato implements Serializable {
     }
     
     
-    public Contrato(String fechaIncorporacion, String fechaMeta, int montoMeta, String fechaFinal, int montoActualContrato, int IdCurso, int IdCliente, int IdPromotor, int cantAlumnos) {
+    public Contrato(String fechaIncorporacion, String fechaMeta, int montoMeta, String fechaFinal, int montoActualContrato, int IdCurso, int IdCliente, int IdPromotor, int cantAlumnos, int IdPaquete) {
         this.fechaIncorporacion = fechaIncorporacion;
         this.fechaMeta = fechaMeta;
         this.montoMeta = montoMeta;
@@ -117,6 +119,7 @@ public class Contrato implements Serializable {
         this.IdCliente = IdCliente;
         this.IdPromotor = IdPromotor;
         this.cantAlumnos = cantAlumnos;
+        this.IdPaquete = IdPaquete;
     }
     
     
@@ -183,6 +186,14 @@ public class Contrato implements Serializable {
 
     public void setCantAlumnos(int cantAlumnos) {
         this.cantAlumnos = cantAlumnos;
+    }
+    
+    public int getIdPaquete() {
+        return IdPaquete;
+    }
+
+    public void setIdPaquete(int IdPaquete) {
+        this.IdPaquete = IdPaquete;
     }
 
     public List<Alumno> getAlumnoList() {

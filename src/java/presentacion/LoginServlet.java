@@ -35,6 +35,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sesion= request.getSession();
+        sesion.setMaxInactiveInterval(300);
         String u=request.getParameter("u");
         String p=request.getParameter("p");        
         UsuarioBO objUsuarioBO= new UsuarioBO();

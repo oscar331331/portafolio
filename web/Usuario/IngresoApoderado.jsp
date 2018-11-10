@@ -23,6 +23,8 @@
     <link rel="stylesheet" type="text/css" href="../theme-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="../theme-assets/css/core/colors/palette-gradient.css">
     <link rel="stylesheet" type="text/css" href="../theme-assets/css/pages/dashboard-ecommerce.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->
     <!-- END Custom CSS-->
@@ -150,9 +152,11 @@
                         </div> 
                         <center> <a class="btn" href="MantenedorUsuario.jsp">Volver</a></center>
                         <c:if test="${sessionScope.msgError!=null}">
-                            <c:out value="${msgError}"></c:out>
+                        <div class="alert alert-danger">
+                            <c:out value="${msgError}"></c:out>                           
+                        </div>                            
                             <c:remove var="msgError"></c:remove>
-                        </c:if>                        
+                        </c:if>                       
                          </div>
                 <div class="card-content collapse show">
                     <div class="card-body">
