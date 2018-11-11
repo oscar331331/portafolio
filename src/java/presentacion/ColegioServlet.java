@@ -97,6 +97,7 @@ public class ColegioServlet extends HttpServlet {
             infoColegio.setIdColegio(((Colegio)sesion.getAttribute("colegioAEditar")).getIdColegio());
             ColegioBO objColegioBO= new ColegioBO();
             if(objColegioBO.updateColegio(infoColegio)){
+                sesion.setAttribute("msgBueno", "Colegio creado");
                 response.sendRedirect("Colegio/MantenedorColegio.jsp");
                 sesion.removeAttribute("colegioAEditar");
             }else{
@@ -110,6 +111,7 @@ public class ColegioServlet extends HttpServlet {
             Colegio infoColegio= new Colegio(razonsocial,direccion);
             ColegioBO objColegioBO= new ColegioBO();
             if(objColegioBO.addColegio(infoColegio)){
+                sesion.setAttribute("msgBueno", "Colegio creado");
                 response.sendRedirect("Colegio/MantenedorColegio.jsp");                
             }else{
                 sesion.setAttribute("msgError", "no se pudo ingresar a la BD");

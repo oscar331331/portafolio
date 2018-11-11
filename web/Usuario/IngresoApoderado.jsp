@@ -108,7 +108,20 @@
             </div>
           </div>
         </div>        
-        
+        <c:if test="${sessionScope.msgError!=null}">
+             <div class="container"><div class="alert alert-danger">
+                     <a href="#" class="close" data-dismiss="alert">&times;</a>       
+                     <center><c:out value="${msgError}"></c:out> </center>                          
+                        </div>                            
+                            <c:remove var="msgError"></c:remove>
+                        </div></c:if>
+        <c:if test="${sessionScope.msgBueno!=null}">
+             <div class="container"><div class="alert alert-danger">
+                     <a href="#" class="close" data-dismiss="alert">&times;</a>       
+                     <center><c:out value="${msgBueno}"></c:out> </center>                          
+                        </div>                            
+                            <c:remove var="msgError"></c:remove>
+                        </div></c:if> 
       <section id="chartjs-bar-charts">  
        <div class="row">
         <div class="col-12">
@@ -117,7 +130,7 @@
                             <br>
                             <center><h4 class="card-title">Ingresar Apoderado</h4></center>
                               <br>
-                            <form name="formGuardaApoderadoNuevo" method="post" action="../ApoderadoServlet">
+                            <form name="formGuardaApoderadoNuevo" method="post" action="../Apoderado">
                               <div class="container">
                                     <div class="form-group">
                                         <label>Nombre</label>
@@ -151,12 +164,7 @@
                             </form>
                         </div> 
                         <center> <a class="btn" href="MantenedorUsuario.jsp">Volver</a></center>
-                        <c:if test="${sessionScope.msgError!=null}">
-                        <div class="alert alert-danger">
-                            <c:out value="${msgError}"></c:out>                           
-                        </div>                            
-                            <c:remove var="msgError"></c:remove>
-                        </c:if>                       
+                                              
                          </div>
                 <div class="card-content collapse show">
                     <div class="card-body">

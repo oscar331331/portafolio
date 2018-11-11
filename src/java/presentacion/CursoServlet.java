@@ -99,6 +99,7 @@ public class CursoServlet extends HttpServlet {
             
             CursoBO objCursoBO= new CursoBO();
             if(objCursoBO.updateCurso(infoCurso)){
+                sesion.setAttribute("msgBueno", "Curso creado");
                 response.sendRedirect("Curso/MantenedorCurso.jsp");
                 sesion.removeAttribute("cursoAEditar");
             }else{
@@ -112,6 +113,7 @@ public class CursoServlet extends HttpServlet {
             Curso infoCurso= new Curso(descripcion,colegio);
             CursoBO objCursoBO= new CursoBO();
             if(objCursoBO.addCurso(infoCurso)){
+                sesion.setAttribute("msgBueno", "Curso creado");
                 response.sendRedirect("Curso/MantenedorCurso.jsp");                
             }else{
                 sesion.setAttribute("msgError", "no se pudo ingresar a la BD");

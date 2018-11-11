@@ -107,6 +107,7 @@ public class ContratoServlet extends HttpServlet {
             infoContrato.setIdContrato(((Contrato)sesion.getAttribute("contratoAEditar")).getIdContrato());
             ContratoBO objContratoBO= new ContratoBO();
             if(objContratoBO.updateContrato(infoContrato)){
+                sesion.setAttribute("msgBueno", "Contrato creado");
                 response.sendRedirect("Contrato/MantenedorContrato.jsp");
                 sesion.removeAttribute("contratoAEditar");
             }else{
@@ -130,6 +131,7 @@ public class ContratoServlet extends HttpServlet {
             
             ContratoBO objContratoBO= new ContratoBO();
             if(objContratoBO.addContrato(infoContrato)){
+                sesion.setAttribute("msgBueno", "Contrato creado");
                 response.sendRedirect("Contrato/MantenedorContrato.jsp");   
                 
             }else{

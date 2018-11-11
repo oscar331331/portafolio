@@ -109,7 +109,14 @@
             </div>
           </div>
         </div>
-           
+           <c:if test="${sessionScope.msgError!=null}">
+             <div class="container"><div class="alert alert-danger">
+                     <a href="#" class="close" data-dismiss="alert">&times;</a>       
+                     <center><c:out value="${msgError}"></c:out> </center>                          
+                        </div>                            
+                            <c:remove var="msgError"></c:remove>
+                        </div></c:if>
+        
         
         
         
@@ -234,13 +241,7 @@
                             </form>
                         </div>
                    <center><a href="../Usuario/MantenedorUsuario.jsp" type="button"  class="btn btn-info btn-min-width mr-1 mb-1"><i class="ft-arrow-left"></i> Volver </a></center>
-                        <c:if test="${sessionScope.msgError!=null}">
-                        <div class="alert alert-danger">
-                            <a href="#" class="close" data-dismiss="alert">&times;</a>
-                            <strong>Error! </strong><c:out value="${msgError}"></c:out>
-                            <c:remove var="msgError"></c:remove>
-                        </div>
-                        </c:if>
+                        
                     </c:when>
                 </c:choose>   
                         

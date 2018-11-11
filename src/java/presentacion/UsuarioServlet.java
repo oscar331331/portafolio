@@ -141,6 +141,7 @@ public class UsuarioServlet extends HttpServlet {
                 //response.sendRedirect("Usuario/MantenedorUsuario.jsp");
                 //sesion.setAttribute("msgError", "Ingresado correctamente");
                 response.sendRedirect("Usuario/MantenedorUsuario.jsp");
+                sesion.setAttribute("msgBueno", "Usuario creado");
             }else{
                 sesion.setAttribute("msgError", "no se pudo ingresar a la BD");
                 response.sendRedirect("Usuario/IngresoUsuario.jsp");

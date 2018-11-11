@@ -31,7 +31,7 @@
                      <center><c:out value="${msgError}"></c:out> </center>                          
                         </div>                            
                             <c:remove var="msgError"></c:remove>
-                        </c:if> </div>        
+                        </div></c:if>         
             <br>
             <form name="formGuardaApoderadoNuevo" method="post" action="../RegistroServlet">
                               <div class="container">

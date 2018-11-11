@@ -40,6 +40,7 @@ public class LoginServlet extends HttpServlet {
         String p=request.getParameter("p");        
         UsuarioBO objUsuarioBO= new UsuarioBO();
         Usuario objUsuario = objUsuarioBO.loginUsuario(u,p);
+        
         if(objUsuario != null){
             sesion.setAttribute("usuarioConectado",objUsuario);
             sesion.setAttribute("conectado","true");
