@@ -28,8 +28,11 @@
                 <input type="password" id="p" name="p" placeholder="Password" required="required" />
                 <button type="submit" class="btn btn-primary btn-block btn-large">Ingresar</button>
             </form>
-            <br>            
-        <!-- login bootsnipp -->
+            <br>
+            <form method="post" name="formRegistrar" action="Usuario/Registrarse.jsp">
+            <button type="submit" class="btn btn-secondary btn-block" a hre>Registrarse</button>
+            </form>
+            <!-- login bootsnipp -->
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-9155049400353686"
