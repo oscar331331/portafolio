@@ -157,11 +157,11 @@
                                         <td><c:out value="Owner"></c:out></td>
                                     </c:if>
                                         
-                                    <c:if test= "${usuario.active ==1}">
+                                    <c:if test= "${usuario.active == 1}">
                                         <td>Activo</td>
                                     </c:if>
                                         
-                                    <c:if test= "${usuario.active ==0}">
+                                    <c:if test= "${usuario.active != 1}">
                                         <td><font color="red">Desactivado</font></td>
                                     </c:if>
                                     

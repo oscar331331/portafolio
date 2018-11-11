@@ -135,12 +135,12 @@ public class UsuarioServlet extends HttpServlet {
             String correo=request.getParameter("Correo");
             String password=request.getParameter("Password");
             int perfil=Integer.parseInt(request.getParameter("Perfil"));
-            Usuario infoUsuario= new Usuario(nombre,apellido,correo,perfil,1);
+            Usuario infoUsuario= new Usuario(nombre,apellido,correo,password,perfil,1);
             UsuarioBO objUsuarioBO= new UsuarioBO();
             if(objUsuarioBO.addUsuario(infoUsuario)){
                 //response.sendRedirect("Usuario/MantenedorUsuario.jsp");
-                sesion.setAttribute("msgError", "no se pudo ingresar a la BD");
-                response.sendRedirect("Usuario/IngresoUsuario.jsp");
+                //sesion.setAttribute("msgError", "Ingresado correctamente");
+                response.sendRedirect("Usuario/MantenedorUsuario.jsp");
             }else{
                 sesion.setAttribute("msgError", "no se pudo ingresar a la BD");
                 response.sendRedirect("Usuario/IngresoUsuario.jsp");
