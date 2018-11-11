@@ -1,50 +1,156 @@
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-   <head>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">    
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>    
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+    <head>
         
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ingreso Alumno</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <link rel="apple-touch-icon" href="../theme-assets/images/ico/apple-icon-120.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../theme-assets/images/ico/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,600,600i,700,700i%7CComfortaa:300,400,700" rel="stylesheet">
+    <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
+    <!-- BEGIN VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="../theme-assets/css/vendors.css">
+    <link rel="stylesheet" type="text/css" href="../theme-assets/vendors/css/charts/chartist.css">
+    <!-- END VENDOR CSS-->
+    <!-- BEGIN CHAMELEON  CSS-->
+    <link rel="stylesheet" type="text/css" href="../theme-assets/css/app-lite.css">
+    <!-- END CHAMELEON  CSS-->
+    <!-- BEGIN Page Level CSS-->
+    <link rel="stylesheet" type="text/css" href="../theme-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="../theme-assets/css/core/colors/palette-gradient.css">
+    <link rel="stylesheet" type="text/css" href="../theme-assets/css/pages/dashboard-ecommerce.css">
+    <!-- END Page Level CSS-->
+    <!-- BEGIN Custom CSS-->
+    <!-- END Custom CSS-->
+  
+        <title>ADMINISTRADOR</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body>
-            <jsp:include page="/UsuarioServlet" flush="true"/>
-            <jsp:useBean id="usuario" class="entidad.Usuario" scope="session"/>
-            <c:choose>
-                    <c:when test="${sessionScope.alumnoAEditar==null}">
-                        <div class="container">
-                            <center><h2>Ingresar Alumno</h2></center>
-                            <form name="formGuardaAlumnoNuevo" method="post" action="/WebAppTour/AlumnoServlet">
-                              <div class="container">
-                                    <div class="form-group">
-                                        <label>Cargar alumnos</label>
-                                        <input type="file" name="Alumnos" class="form-control" placeholder="Ingrese Razon Social" required/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Codigo contrato</label>
-                                        <input type="text" name="codigo" class="form-control" placeholder="Ingrese codigo" required/>
-                                    </div> 
-                                    <div class="form-group">
-                                        <label></label>
-                                        <center><input type="submit" class="btn btn-success" name="btnGuardarAlumnoEditado" value="Guardar"/></center>
-                                    </div>
-                                </div>                          
-                            </form>
-                        </div> 
-                        <center> <a class="btn" href="MantenedorAlumno.jsp">Volver</a></center>
-                        <c:if test="${sessionScope.msgError!=null}">
-                        <div class="alert alert-danger">
-                            <a href="#" class="close" data-dismiss="alert">&times;</a>
-                            <strong>Error! </strong><c:out value="${msgError}"></c:out>
-                            <c:remove var="msgError"></c:remove>
+    
+    
+    <body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-color="bg-gradient-x-purple-blue" data-col="2-columns">
+
+        <!-- fixed-top-->
+        <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
+          <div class="navbar-wrapper">
+            <div class="navbar-container content">
+              <div class="collapse navbar-collapse show" id="navbar-mobile">
+                <ul class="nav navbar-nav mr-auto float-left">
+                  <li class="nav-item d-block d-md-none"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu"></i></a></li>
+
+                    <ul class="dropdown-menu">
+                      <li class="arrow_box">
+
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+                <ul class="nav navbar-nav float-right">         
+
+                </ul>
+                <ul class="nav navbar-nav float-right">
+
+
+                </ul>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
+        <c:choose>        
+            <c:when test="${sessionScope.usuarioConectado==null}">
+                <% response.sendRedirect("../login.jsp"); %>
+            </c:when>
+            <c:otherwise>  
+
+                <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="theme-assets/images/backgrounds/02.jpg">
+                  <div class="navbar-header">
+                    <ul class="nav navbar-nav flex-row">       
+
+                      <li class="nav-item d-md-none"><a class="nav-link close-navbar"><i class="ft-x"></i></a></li>
+                    </ul>
+                  </div>
+                  <div class="main-menu-content">
+                    <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+
+                      <jsp:include page="../menu_admin_interior.jsp"/>
+
+                    </ul>
+                  </div>
+                  <div class="navigation-background"></div>
+                </div>
+
+                <div class="app-content content">
+                  <div class="content-wrapper">
+                    <div class="content-wrapper-before"></div>
+                    <div class="content-header row">
+                      <div class="content-header-left col-md-4 col-12 mb-2">
+                        <h3 class="content-header-title">Pagos</h3>
+                      </div>
+                      <div class="content-header-right col-md-8 col-12">
+                        <div class="breadcrumbs-top float-md-right">
+                          <div class="breadcrumb-wrapper mr-1">
+                            <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="../index_admin.html">Home</a>
+                              </li>
+                              <li class="breadcrumb-item active">Alumnos
+                              </li>
+                            </ol>
+                          </div>
                         </div>
-                        </c:if>
-                    </c:when>                    
-                </c:choose>         
+                      </div>
+                    </div>
+
+                  <section id="chartjs-bar-charts">  
+                   <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="container">
+                                 <br> <center><h4>Ingresar Alumnos de forma masiva</h4></center><br>
+                                  <form name="formGuardaPagoNuevo" method="post" action="../AlumnoCargaMasivaServlet" enctype="multipart/form-data">
+                                    <div class="container">
+                                          <fieldset>
+                                              <div class="form-group">
+                                                  <label>Codigo del contrato: </label>
+                                                  <input type="text" name="codigo" class="form-control"  required/>
+                                              </div>
+                                          </fieldset>  
+                                          <fieldset> 
+                                              <div class="form-group">
+                                                  <label>Excel con alumnos: </label>
+                                                  <input type="file" name="file" id="file" required>    
+                                              </div>
+                                          </fieldset>                                   
+                                          <div class="form-group">
+                                              <label></label>
+                                              <center><input type="submit" class="btn btn-success" name="btnGuardarPago" value="Guardar"/></center>
+                                          </div>
+                                      </div>                          
+                                  </form>
+                             </div>
+                            <center> <a class="btn" href="MantenedorPago.jsp">Volver</a></center>
+                            <c:if test="${sessionScope.msgError!=null}">
+                                <c:out value="${msgError}"></c:out>
+                                <c:remove var="msgError"></c:remove>
+                            </c:if>  
+                        </div>
+                            <div class="card-content collapse show">
+                                <div class="card-body">
+                                    <div class="height-200">
+                                        <canvas id="column-chart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:otherwise>
+        </c:choose>  
     </body>
 </html>

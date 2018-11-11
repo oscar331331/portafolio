@@ -129,7 +129,7 @@
                               <div class="container">
                                     <fieldset>
                                         <div class="form-group">
-                                            <label>Valor a pagar</label>
+                                            <label>Valor a pagar: $</label>
                                             <input type="number" min="1" max="900000000" name="Valor_pago" class="form-control"  required/>
                                         </div>
                                     </fieldset>  
@@ -157,11 +157,21 @@
                         <c:when test="${sessionScope.pagoAEditar!=null}">
                             <jsp:useBean id="pagoAEditar" class="entidad.PagoCuota" scope="session"></jsp:useBean>
                         <div class="container">
-                            <center><h2>Editar estado pago</h2></center>
-                            <c:out value="${pagoAEditar.fkIdEstadoPagoCuota}"></c:out>
+                            <center><br><h2>Editar estado pago ID <c:out value="${pagoAEditar.idPagoCuota}"></c:out></h2></center>
+                            Estado Actual: <c:if test= "${pagoAEditar.fkIdEstadoPagoCuota == 1}">
+                                                <b>Pendiente</b>
+                                            </c:if>
+                                                    
+                                            <c:if test= "${pagoAEditar.fkIdEstadoPagoCuota == 2}">
+                                                    <b>Pagado</b>
+                                            </c:if>
+                                                    
+                                            <c:if test= "${pagoAEditar.fkIdEstadoPagoCuota == 3}">
+                                                   <b>Rechazado</b>
+                                            </c:if>
                             <form name="formGuardaPagoEditado" method="post" action="../PagoServlet">
                                 <div class="form-group">
-                                        <label>Estado </label>
+                                        <label>Estado Nuevo: </label>
                                         <select name="IdEstado" required="true">                                            
                                             <option value="">Seleccione un estado...</option>
                                             <option value="1">Pendiente</option>
@@ -180,7 +190,7 @@
                             
                         </c:when>
                </c:choose> 
-                        <center> <a class="btn" href="MantenedorPago.jsp">Volver</a></center>
+                        <center> <a class="btn" href="MantenedorPagoVendedor.jsp">Volver</a></center>
                         <c:if test="${sessionScope.msgError!=null}">
                         <div class="alert alert-danger">
                             <a href="#" class="close" data-dismiss="alert">&times;</a>

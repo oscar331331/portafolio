@@ -32,6 +32,8 @@
                         </li>
                         <li class=" nav-item"><a href="../Pago_Cuota/MantenedorPagoVendedor.jsp"><i class="ft-credit-card"></i><span class="menu-title" data-i18n="">Pagos Vendedor</span></a>
                         </li>
+                        <li class="nav-item"><a href="../Alumno/IngresoAlumno.jsp"><i class="ft-users"></i><span class="menu-title" data-i18n="">Cargar Alumnos</span></a>
+                        </li>
                     </c:when>
                     <c:when test="${usuarioConectado.idPerfil==2}">
                         <li class="nav-item"><a href="../Usuario/IngresoApoderado.jsp"><i class="ft-user-check"></i><span class="menu-title" data-i18n="">Asociar Alumno</span></a>

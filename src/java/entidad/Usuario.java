@@ -52,12 +52,20 @@ public class Usuario implements Serializable {
         this.idUsuario = idUsuario;
     }
 
-    public Usuario(int aInt, String nombre, String apellido, String correo, int aInt0, int active) {
-        this.idUsuario = aInt;
+    public Usuario(String nombre, String apellido, String correo, int idPerfil, int active) {
         this.nombreUsuario = nombre;
         this.apellidoUsuario= apellido;
         this.correoUsuario = correo;
-        this.idPerfil = aInt0;
+        this.idPerfil = idPerfil;
+        this.active = active;
+    }
+    
+    public Usuario(int id, String nombre, String apellido, String correo, int idPerfil, int active) {
+        this.idUsuario = id;
+        this.nombreUsuario = nombre;
+        this.apellidoUsuario= apellido;
+        this.correoUsuario = correo;
+        this.idPerfil = idPerfil;
         this.active = active;
     }
 
@@ -70,12 +78,12 @@ public class Usuario implements Serializable {
         this.active = active;
     }
     
-    public Usuario(String nombre, String apellido, String correo, String password, int aInt0) {
+    public Usuario(String nombre, String apellido, String correo, String password, int perfil) {
         this.nombreUsuario = nombre;
         this.apellidoUsuario= apellido;
         this.correoUsuario = correo;
         this.passwordUsuario = password;
-        this.idPerfil = aInt0;
+        this.idPerfil = perfil;
     }    
 
     public Integer getIdUsuario() {

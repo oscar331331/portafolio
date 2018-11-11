@@ -132,17 +132,7 @@
                                         <label>Dirección</label>
                                         <input type="text" name="Direccion" class="form-control" placeholder="Ingrese Direccion" required/>
                                     </div> 
-                                    <div class="form-group">
-                                        <label>Encargado </label>
-                                        <fieldset class="form-group">
-                                        <select class="form-control" name="IdUsuario" required="true">                                            
-                                            <option value="">Seleccione un correo...</option>
-                                            <c:forEach items="${listadoUsuario}" var="usuario">
-                                                <option value="${usuario.idUsuario}">${usuario.correoUsuario}</option>
-                                            </c:forEach>                                                                                        
-                                        </select>
-                                        </fieldset>
-                                    </div>    
+                                      
                                     <div class="form-group">
                                         <label></label>
                                         <center><input type="submit" class="btn btn-success" name="btnGuardarColegioEditado" value="Guardar"/></center>
@@ -173,22 +163,7 @@
                                         <label>Dirección</label>
                                         <input type="text" name="DireccionEditar" value="<c:out value="${colegioAEditar.direccionColegio}" ></c:out>" class="form-control" placeholder="Ingrese Direccion" required/>
                                     </div> 
-                                    <div class="form-group">
-                                        <label>Encargado </label>
-                                        <select name="IdUsuario" required="true">                                            
-                                            <option value="">Seleccione un correo...</option>
-                                            <c:forEach items="${listadoUsuario}" var="usuario">
-                                                <c:choose>
-                                                    <c:when test="${usuario.idUsuario == colegioAEditar.idColegio}">
-                                                        <option value="${usuario.idUsuario}" selected="selected">${usuario.correoUsuario}</option>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <option value="${usuario.idUsuario}">${usuario.correoUsuario}</option>
-                                                    </c:otherwise>
-                                                </c:choose>                                                
-                                            </c:forEach>                                                                                        
-                                        </select>
-                                    </div>    
+                                    
                                     
                                     <div class="form-group">
                                         <label></label>

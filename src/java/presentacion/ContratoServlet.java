@@ -130,7 +130,8 @@ public class ContratoServlet extends HttpServlet {
             
             ContratoBO objContratoBO= new ContratoBO();
             if(objContratoBO.addContrato(infoContrato)){
-                response.sendRedirect("Contrato/MantenedorContrato.jsp");                
+                response.sendRedirect("Contrato/MantenedorContrato.jsp");   
+                
             }else{
                 sesion.setAttribute("msgError", "no se pudo ingresar a la BD");
                 response.sendRedirect("Contrato/IngresoContrato.jsp");
