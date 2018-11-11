@@ -110,6 +110,13 @@
             </div>
           </div>
         </div>
+        <c:if test="${sessionScope.msgBueno!=null}">
+             <div class="container"><div class="alert alert-success">
+                     <a href="#" class="close" data-dismiss="alert">&times;</a>       
+                     <center><c:out value="${msgBueno}"></c:out> </center>                          
+                        </div>                            
+                            <c:remove var="msgBueno"></c:remove>
+                        </div></c:if>
         <div class="content-body"><!-- Basic Tables start -->
 <div class="row">
 	<div class="col-12">

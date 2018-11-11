@@ -114,7 +114,7 @@
                      <a href="#" class="close" data-dismiss="alert">&times;</a>       
                      <center><c:out value="${msgBueno}"></c:out> </center>                          
                         </div>                            
-                            <c:remove var="msgError"></c:remove>
+                            <c:remove var="msgBueno"></c:remove>
                         </div></c:if>
         <div class="content-body"><!-- Basic Tables start -->
 <div class="row">

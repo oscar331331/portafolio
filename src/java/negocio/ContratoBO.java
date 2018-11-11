@@ -24,6 +24,9 @@ public class ContratoBO {
     public List<Contrato> ListadoContratos(){
         return this.objContratoDAO.readElementos();
     }
+    public List<Contrato> ListadoContratosApoderado(int id){
+        return this.objContratoDAO.readElementosApoderado(id);
+    }
     public Contrato buscaContratoPorId(int id){
         return this.objContratoDAO.buscaContratoPorId(id);
     }

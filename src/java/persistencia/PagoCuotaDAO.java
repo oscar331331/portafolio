@@ -69,6 +69,28 @@ public class PagoCuotaDAO implements ICrud {
         }
         return listadoPagoCuota;
     }
+    
+    public List readElementosApoderado(int id) {
+        List<PagoCuota> listadoPagoCuota = new LinkedList<>();
+        try {
+            Connection con = Conexion.getConexion();
+            CallableStatement cs = null;
+            cs = con.prepareCall("{call MostrarPagoCuotasApoderado(?,?)}");
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.setInt(2, id);
+            cs.executeQuery();
+            ResultSet rs = (ResultSet)cs.getObject(1); 
+            while (rs.next()) {
+                PagoCuota infoPagoCuota = new PagoCuota(rs.getInt("ID_PAGO_CUOTA"),rs.getInt("VALOR_PAGO_CUOTA"),rs.getInt("FK_ID_ESTADO_PAGO_CUOTA"),rs.getString("FECHA_PAGO_CUOTA"),rs.getString("URL_PAGO_CUOTA"));
+                
+                System.out.println(infoPagoCuota.toString());
+                listadoPagoCuota.add(infoPagoCuota);
+            }
+        } catch (Exception e) {
+            System.out.println("no se pudo ingresar al sistema "+e.getMessage());
+        }
+        return listadoPagoCuota;
+    }
 
     @Override
     public boolean updateElemento(Object objetoUpdate) {

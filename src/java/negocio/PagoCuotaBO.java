@@ -24,6 +24,9 @@ public class PagoCuotaBO {
     public List<PagoCuota> ListadoPagoCuotas(){
         return this.objPagoCuotaDAO.readElementos();
     }
+    public List<PagoCuota> ListadoPagoCuotasApoderado(int id){
+        return this.objPagoCuotaDAO.readElementosApoderado(id);
+    }
     public PagoCuota buscaPagoCuotaPorId(int id){
         return this.objPagoCuotaDAO.buscaPagoCuotaPorId(id);
     }

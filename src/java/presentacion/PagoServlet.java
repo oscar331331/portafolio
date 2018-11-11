@@ -86,15 +86,17 @@ public class PagoServlet extends HttpServlet {
         }
         else
         {
-         HttpSession session = request.getSession();        
+        HttpSession session = request.getSession();    
+        int perfil = (int) session.getAttribute("perfil");
+          if (perfil==2){
+          int id = (int) session.getAttribute("idUsuario");    
+          session.setAttribute("listadoContrato", objPagoBO.ListadoPagoCuotasApoderado(id));
+          }
+          else{      
         session.setAttribute("listadoPagoCuota", objPagoBO.ListadoPagoCuotas());   
-        }  
-        
-        
-        
-        
-        
-                    
+        }
+        }
+                
     }
 
     /**

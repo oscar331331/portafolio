@@ -46,6 +46,7 @@ public class LoginServlet extends HttpServlet {
             sesion.setAttribute("conectado","true");
             sesion.setAttribute("user",u);
             sesion.setAttribute("perfil",objUsuario.getIdPerfil());
+            sesion.setAttribute("idUsuario",objUsuario.getIdUsuario());
             
             response.sendRedirect("Index.jsp"); 
             /*if(objUsuario.getIdPerfil()==1)

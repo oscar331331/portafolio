@@ -44,7 +44,8 @@
                 <jsp:forward page="login.jsp"/>
             </c:when>
             <c:otherwise>      
-                <jsp:include page="menu_admin.jsp"/> 
+                <jsp:include page="menu_admin.jsp"/>
+                
             </c:otherwise>
         </c:choose>   
     </body>

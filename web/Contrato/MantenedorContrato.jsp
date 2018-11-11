@@ -143,7 +143,9 @@
                                                                     <th>ID Promotor</th>
                                                                     <th>ID Cliente</th>
                                                                     <th>Paquete Turistico</th>
+                                                                    <c:if test="${sessionScope.perfil!=2}">
                                                                     <th>Editar</th>
+                                                                    </c:if>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -167,18 +169,22 @@
                                                                     <td><c:out value="${contrato.idPromotor}"></c:out></td>
                                                                     <td><c:out value="${contrato.idPaquete}"></c:out></td>
                                                                     <td><c:out value="${contrato.cantAlumnos}"></c:out></td>
+                                                                    <c:if test="${sessionScope.perfil!=2}">
                                                                     <td>
                                                                     <c:url value="/ContratoServlet" var="urlEdit">
                                                                         <c:param name="id_contrato" value="${contrato.idContrato}"></c:param>
                                                                     </c:url>
                                                                     <input type="button" class="btn btn-info" name="btnEditar" value="editar" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
                                                                     </td>
+                                                                    </c:if>
                                                                 </tr>
                                                             </c:forEach>                                               
                                                         </tbody>
                                                     </table>  
+                                            <c:if test="${sessionScope.perfil!=2}">
                                             <center><a href="../Contrato/IngresoContrato.jsp" type="button"  class="btn btn-info btn-min-width mr-1 mb-1"><i class="ft-plus-square"></i> Agregar Contrato</a></center>
-					</div>
+                                            </c:if>
+                                            </div>
 				</div>
 			</div>
 		</div>
