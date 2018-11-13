@@ -1,5 +1,6 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -143,7 +144,7 @@
                                     <fieldset> 
                                         <div class="form-group">
                                             <label>Comprobante</label>
-                                            <input type="file" name="imagen" id="imagen" required>    
+                                            <input type="file" name="imagen" id="imagen" accept="image/png, .jpeg, .jpg, application/pdf" required>    
                                         </div>
                                     </fieldset>                                   
                                     <div class="form-group">

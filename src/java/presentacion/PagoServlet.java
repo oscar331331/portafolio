@@ -129,7 +129,8 @@ public class PagoServlet extends HttpServlet {
             } 
         }
         else {
-            String archivo="../../../web/comprobantes";
+            
+            String archivo="D:\\Documentos\\NetBeansProjects\\portafolio2\\web\\comprobantes";
             DiskFileItemFactory factory=new DiskFileItemFactory();
             factory.setSizeThreshold(1024);
             factory.setRepository(new File(archivo));
