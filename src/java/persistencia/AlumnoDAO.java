@@ -46,6 +46,25 @@ public class AlumnoDAO implements ICrud {
         }
         return false; 
     }
+    
+    public Alumno buscaAlumnoPorId(int id_alumno) {
+        Alumno infoAlumno = null;
+        try {
+            Connection con = Conexion.getConexion();
+            CallableStatement cs = null;
+            cs = con.prepareCall("{call BUSCARALUMNO(?,?)}");
+            cs.setInt(1, id_alumno);
+            cs.registerOutParameter(2, OracleTypes.CURSOR);
+            cs.executeQuery();
+            ResultSet rs = (ResultSet)cs.getObject(2);
+            while (rs.next()) {
+                infoAlumno = new Alumno(rs.getInt("ID_ALUMNO"), rs.getString("NOMBRE_ALUMNO"), rs.getString("APELLIDO_ALUMNO"), rs.getString("RUT_ALUMNO"), rs.getInt("FK_ID_CONTRATO"), rs.getInt("FK_ID_USUARIO"));
+            }
+        } catch (Exception e) {
+            System.out.println("no se pudo ingresar al sistema");
+        }
+        return infoAlumno;        
+    }
 /*
     @Override
     public List readElementos() {
@@ -223,7 +242,45 @@ public class AlumnoDAO implements ICrud {
 
     @Override
     public List readElementos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Alumno> listadoAlumnos = new LinkedList<>();
+        try {
+            Connection con = Conexion.getConexion();
+            CallableStatement cs = null;
+            cs = con.prepareCall("{call MOSTRARALUMNOS(?)}");
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.executeQuery();
+            ResultSet rs = (ResultSet)cs.getObject(1); 
+            while (rs.next()) {
+                Alumno infoAlumno = new Alumno(rs.getInt("ID_ALUMNO"), rs.getString("NOMBRE_ALUMNO"), rs.getString("APELLIDO_ALUMNO"), rs.getString("RUT_ALUMNO"), rs.getInt("FK_ID_CONTRATO"), rs.getInt("FK_ID_USUARIO"));
+                System.out.println(infoAlumno.toString());
+                listadoAlumnos.add(infoAlumno);
+            }
+        } catch (Exception e) {
+            System.out.println("no se pudo ingresar al sistema");
+        }
+        return listadoAlumnos;
+    }
+    
+    public List readElementosXApoderado(int id) {
+        List<Alumno> listadoAlumnos = new LinkedList<>();
+        try {
+            Connection con = Conexion.getConexion();
+            CallableStatement cs = null;
+            cs = con.prepareCall("{call BUSCARALUMNOXAPODERADO(?,?)}");
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.setInt(2, id);
+            cs.executeQuery();
+            ResultSet rs = (ResultSet)cs.getObject(1); 
+            while (rs.next()) {
+                Alumno infoAlumno = new Alumno(rs.getInt("ID_ALUMNO"), rs.getString("NOMBRE_ALUMNO"), rs.getString("APELLIDO_ALUMNO"), rs.getString("RUT_ALUMNO"), rs.getInt("FK_ID_CONTRATO"), rs.getInt("FK_ID_USUARIO"));
+                
+                System.out.println(infoAlumno.toString());
+                listadoAlumnos.add(infoAlumno);
+            }
+        } catch (Exception e) {
+            System.out.println("no se pudo ingresar al sistema");
+        }
+        return listadoAlumnos;
     }
 
     @Override

@@ -54,8 +54,8 @@ public class Alumno implements Serializable {
     @ManyToOne
     private Usuario_1 fkIdUsuario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkIdAlumno")
-    private List<CuotaViaje> cuotaViajeList;
     private int idContrato;
+    private int idUsuario;
 
     public Alumno() {
     }
@@ -64,12 +64,31 @@ public class Alumno implements Serializable {
         this.idAlumno = idAlumno;
     }
 
+    public Alumno(int idAlumno, String nombreAlumno, String apellidoAlumno, String rutAlumno, int idContrato, int idUsuario) {
+        this.idAlumno = idAlumno;
+        this.nombreAlumno = nombreAlumno;
+        this.apellidoAlumno = apellidoAlumno;
+        this.rutAlumno = rutAlumno;
+        this.idContrato = idContrato;
+        this.idUsuario = idUsuario;
+    }
+
     public Alumno(String nombreAlumno, String apellidoAlumno, String rutAlumno, int idContrato) {
         this.nombreAlumno = nombreAlumno;
         this.apellidoAlumno = apellidoAlumno;
         this.rutAlumno = rutAlumno;
         this.idContrato = idContrato;
     }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+    
+    
     
     
     public int getIdAlumno() {
@@ -128,13 +147,6 @@ public class Alumno implements Serializable {
         this.fkIdUsuario = fkIdUsuario;
     }
 
-    public List<CuotaViaje> getCuotaViajeList() {
-        return cuotaViajeList;
-    }
-
-    public void setCuotaViajeList(List<CuotaViaje> cuotaViajeList) {
-        this.cuotaViajeList = cuotaViajeList;
-    }
 
     @Override
     public String toString() {

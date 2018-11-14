@@ -68,10 +68,10 @@
 
     <!-- ////////////////////////////////////////////////////////////////////////////-->
     <c:choose>        
-                <c:when test="${sessionScope.usuarioConectado==null}">
-                    <% response.sendRedirect("../login.jsp"); %>
-                </c:when>
-            <c:otherwise>  
+        <c:when test="${sessionScope.usuarioConectado==null}">
+            <% response.sendRedirect("../login.jsp"); %>
+        </c:when>
+    <c:otherwise>  
 
     <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="theme-assets/images/backgrounds/02.jpg">
       <div class="navbar-header">
@@ -125,7 +125,7 @@
 					<div class="table-responsive">
                                             <jsp:include page="../ContratoServlet" flush="true"/>
                                             <jsp:useBean id="contrato" class="entidad.Contrato" scope="session"/>
-                                            <center><h2>Mantenedor Contratos </h2></center>
+                                            <center><h2>Mantenedor Contratos</h2></center>
                                             <% HttpSession sesion = request.getSession(); %>
                                             <% sesion.setAttribute("contratoAEditar", null); %>
                                             
@@ -174,7 +174,7 @@
                                                                     <c:url value="/ContratoServlet" var="urlEdit">
                                                                         <c:param name="id_contrato" value="${contrato.idContrato}"></c:param>
                                                                     </c:url>
-                                                                    <input type="button" class="btn btn-info" name="btnEditar" value="editar" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
+                                                                    <input type="button" class="btn btn-info" name="btnEditar" value="Editar" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
                                                                     </td>
                                                                     </c:if>
                                                                 </tr>

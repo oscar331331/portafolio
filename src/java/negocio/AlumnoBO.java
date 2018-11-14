@@ -22,7 +22,12 @@ public class AlumnoBO {
      public List<Alumno> ListadoAlumnos(){
         return this.objAlumnoDAO.readElementos();
     }
-    
+    public List<Alumno> ListadoAlumnosXApoderado(int id){
+        return this.objAlumnoDAO.readElementosXApoderado(id);
+    }
+    public Alumno buscaAlumnoPorId(int id){
+        return this.objAlumnoDAO.buscaAlumnoPorId(id);
+    }
     public boolean updateAlumno(Alumno infoAlumno){
         return this.objAlumnoDAO.updateElemento(infoAlumno);
     }

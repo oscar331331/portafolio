@@ -75,15 +75,15 @@ public class ContratoServlet extends HttpServlet {
         }
         else
         {
-          HttpSession session = request.getSession();
-          int perfil = (int) session.getAttribute("perfil");
-          if (perfil==2){
-          int id = (int) session.getAttribute("idUsuario");    
-          session.setAttribute("listadoContrato", objContratoBO.ListadoContratosApoderado(id));
-          }
-          else{
-              session.setAttribute("listadoContrato", objContratoBO.ListadoContratos());
-          }   
+            HttpSession session = request.getSession();
+            int perfil = (int) session.getAttribute("perfil");
+            if (perfil==2){
+                int id = (int) session.getAttribute("idUsuario");    
+                session.setAttribute("listadoContrato", objContratoBO.ListadoContratosApoderado(id));
+            }
+            else{
+                session.setAttribute("listadoContrato", objContratoBO.ListadoContratos());
+            }   
         }               
     }
 

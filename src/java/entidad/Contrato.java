@@ -77,6 +77,7 @@ public class Contrato implements Serializable {
     private int IdCliente;
     private int IdPromotor;
     private int IdPaquete;
+    
     public Contrato() {
     }
 

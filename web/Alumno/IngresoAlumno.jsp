@@ -134,7 +134,7 @@
                                       </div>                          
                                   </form>
                              </div>
-                            <center> <a class="btn" href="MantenedorPago.jsp">Volver</a></center>
+                            <center> <a class="btn" href="MantenedorAlumno.jsp">Volver</a></center>
                             <c:if test="${sessionScope.msgError!=null}">
                                 <c:out value="${msgError}"></c:out>
                                 <c:remove var="msgError"></c:remove>

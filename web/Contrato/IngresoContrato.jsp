@@ -240,7 +240,7 @@
                                          <label>Paquete Turistico</label>
                                          <fieldset class="form-group">
                                          <select class="form-control" name="PaqueteEditar" required="true">                                            
-                                             <option value="">Seleccione un paquete...</option>
+                                             <option value="">Seleccione un paquete turistico...</option>
                                              <c:forEach items="${listadoPaquetes}" var="paquete">
                                                  <c:if test= "${contratoAEditar.idPaquete == paquete.idPaquete}">
                                                      <option value="${paquete.idPaquete}" selected="">${paquete.descripcion}</option>
@@ -274,7 +274,7 @@
                                              <label>Cliente </label>
                                              <fieldset class="form-group">
                                          <select class="form-control" name="ClienteEditar" required="true">                                            
-                                                 <option value="">Seleccione un correo...</option>
+                                                 <option value="">Seleccione un cliente...</option>
                                                  <c:forEach items="${listadoUsuario}" var="usuario">
                                                      <c:if test= "${contratoAEditar.idCliente == usuario.idUsuario}">  
                                                         <option value="${usuario.idUsuario}" selected="">${usuario.correoUsuario}</option>

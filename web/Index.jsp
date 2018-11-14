@@ -45,7 +45,6 @@
             </c:when>
             <c:otherwise>      
                 <jsp:include page="menu_admin.jsp"/>
-                
             </c:otherwise>
         </c:choose>   
     </body>
