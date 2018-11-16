@@ -162,6 +162,9 @@
                             <c:if test="${sessionScope.perfil==1}">
                             <center><a href="../Alumno/IngresoAlumno.jsp" type="button"  class="btn btn-info btn-min-width mr-1 mb-1"><i class="ft-plus-square"></i> Agregar Alumnos</a></center>
                             </c:if>
+                            <c:if test="${sessionScope.perfil==2}">
+                            <center><a href="../Usuario/IngresoApoderado.jsp" type="button"  class="btn btn-info btn-min-width mr-1 mb-1"><i class="ft-plus-square"></i> Agregar Alumno</a></center>
+                            </c:if>
                             </div>
                         </div>
                     </div>

@@ -77,7 +77,7 @@ public class AlumnoServlet extends HttpServlet {
                 int idApoderado = (int) session.getAttribute("idUsuario");    
                 session.setAttribute("listadoAlumnos", objAlumnoBO.ListadoAlumnosXApoderado(idApoderado));
             }
-            if ((int)session.getAttribute("perfil")==4){
+            else if ((int)session.getAttribute("perfil")==4){
                 int idEncargado = (int) session.getAttribute("idUsuario");    
                 session.setAttribute("listadoAlumnos", objAlumnoBO.ListadoAlumnosXEncargado(idEncargado));
             }
