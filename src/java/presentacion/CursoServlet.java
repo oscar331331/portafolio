@@ -93,9 +93,9 @@ public class CursoServlet extends HttpServlet {
             String descripcion=request.getParameter("DescripcionEditar");
             int colegio =Integer.parseInt(request.getParameter("ColegioEditar"));
             int estado =Integer.parseInt(request.getParameter("ActiveEditar"));
-
+            int cantidad =Integer.parseInt(request.getParameter("CantidadEditar"));
             int id_curso = ((Curso)sesion.getAttribute("cursoAEditar")).getIdCurso();
-            Curso infoCurso= new Curso(id_curso,descripcion,colegio,estado);
+            Curso infoCurso= new Curso(id_curso,descripcion,colegio,estado,cantidad);
             
             CursoBO objCursoBO= new CursoBO();
             if(objCursoBO.updateCurso(infoCurso)){
@@ -110,7 +110,8 @@ public class CursoServlet extends HttpServlet {
         else {
             String descripcion=request.getParameter("Descripcion");
             int colegio =Integer.parseInt(request.getParameter("Colegio"));
-            Curso infoCurso= new Curso(descripcion,colegio);
+            int cantidad =Integer.parseInt(request.getParameter("Cantidad"));
+            Curso infoCurso= new Curso(descripcion,colegio,cantidad);
             CursoBO objCursoBO= new CursoBO();
             if(objCursoBO.addCurso(infoCurso)){
                 sesion.setAttribute("msgBueno", "Curso creado");

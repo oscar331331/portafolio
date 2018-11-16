@@ -63,6 +63,8 @@
                         </li>
                         <li class="nav-item"><a href=""><i class="ft-credit-card"></i><span class="menu-title" data-i18n="">Pagar Cuota</span></a>
                         </li>
+                        <li class="nav-item"><a href="Alumno/MantenedorAlumno.jsp"><i class="ft-users"></i><span class="menu-title" data-i18n="">Alumnos</span></a>
+                        </li>
                     </c:when>
                     <c:when test="${usuarioConectado.idPerfil==5}">
                         <li class="nav-item"><a href=""><i class="ft-battery"></i><span class="menu-title" data-i18n="">Estado de Cuenta</span></a>

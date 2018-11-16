@@ -282,6 +282,28 @@ public class AlumnoDAO implements ICrud {
         }
         return listadoAlumnos;
     }
+    
+    public List readElementosXContrato(int id) {
+        List<Alumno> listadoAlumnos = new LinkedList<>();
+        try {
+            Connection con = Conexion.getConexion();
+            CallableStatement cs = null;
+            cs = con.prepareCall("{call BUSCARALUMNOSXENCARGADO(?,?)}");
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.setInt(2, id);
+            cs.executeQuery();
+            ResultSet rs = (ResultSet)cs.getObject(1); 
+            while (rs.next()) {
+                Alumno infoAlumno = new Alumno(rs.getInt("ID_ALUMNO"), rs.getString("NOMBRE_ALUMNO"), rs.getString("APELLIDO_ALUMNO"), rs.getString("RUT_ALUMNO"), rs.getInt("FK_ID_CONTRATO"), rs.getInt("FK_ID_USUARIO"));
+                
+                System.out.println(infoAlumno.toString());
+                listadoAlumnos.add(infoAlumno);
+            }
+        } catch (Exception e) {
+            System.out.println("no se pudo ingresar al sistema");
+        }
+        return listadoAlumnos;
+    }
 
     @Override
     public boolean updateElemento(Object objetoUpdate) {

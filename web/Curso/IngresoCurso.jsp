@@ -126,6 +126,10 @@
                                     <div class="form-group">
                                         <label>Descripcion</label>
                                         <input type="text" name="Descripcion" class="form-control" placeholder="Ingrese Descripcion" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Cantidad de Alumnos</label>
+                                        <input type="number" name="Cantidad" class="form-control" placeholder="Ingrese Cantidad de Alumnos" required/>
                                     </div> 
                                     <div class="form-group">
                                         <label>Colegio </label>
@@ -153,7 +157,7 @@
                                     
                                     <div class="form-group">
                                         <label></label>
-                                        <center><input type="submit" class="btn btn-success" name="btnGuardarCursoEditado" value="Guardar"/></center>
+                                        <center><input type="submit" class="btn btn-success" name="btnGuardarCurso" value="Guardar"/></center>
                                     </div>
                                 </div>                          
                             </form>
@@ -171,11 +175,15 @@
                         <jsp:useBean id="cursoAEditar" class="entidad.Curso" scope="session"></jsp:useBean>
                         <div class="container">
                             <center><h2>Editar Curso</h2></center>
-                            <form name="formGuardaCursoEditado" method="post" action="/WebAppTour/CursoServlet">
+                            <form name="formGuardaCursoEditado" method="post" action="../CursoServlet">
                                 <div class="container">
                                     <div class="form-group">
                                         <label>Descripcion</label>
                                         <input type="text" name="DescripcionEditar" value="<c:out value="${cursoAEditar.descripcionCurso}" ></c:out>" class="form-control" placeholder="Ingrese Direccion" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Cantidad de Alumnos</label>
+                                        <input type="number" name="CantidadEditar" value="<c:out value="${cursoAEditar.cantAlumnos}" ></c:out>" class="form-control" placeholder="Ingrese Cantidad de Alumnos" required/>
                                     </div> 
                                     <div class="form-group">
                                         <label>Colegio </label>

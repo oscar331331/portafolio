@@ -25,6 +25,9 @@ public class AlumnoBO {
     public List<Alumno> ListadoAlumnosXApoderado(int id){
         return this.objAlumnoDAO.readElementosXApoderado(id);
     }
+    public List<Alumno> ListadoAlumnosXEncargado(int id){
+        return this.objAlumnoDAO.readElementosXContrato(id);
+    }
     public Alumno buscaAlumnoPorId(int id){
         return this.objAlumnoDAO.buscaAlumnoPorId(id);
     }

@@ -30,9 +30,10 @@ public class CursoDAO implements ICrud {
         try {
             Connection con = Conexion.getConexion();
             CallableStatement cs = null;
-            cs = con.prepareCall("{call InsertarCursos(?,?)}");
+            cs = con.prepareCall("{call InsertarCursos(?,?,?)}");
             cs.setString(1, objCurso.getDescripcionCurso());
-            cs.setInt(2, objCurso.getIdColegio());             
+            cs.setInt(2, objCurso.getIdColegio());
+            cs.setInt(3, objCurso.getCantAlumnos()); 
             try {
                 return cs.executeUpdate() == 1;
             } catch (Exception e) {
@@ -55,7 +56,7 @@ public class CursoDAO implements ICrud {
             cs.executeQuery();
             ResultSet rs = (ResultSet)cs.getObject(1); 
             while (rs.next()) {
-                Curso infoCurso = new Curso(rs.getInt("ID_CURSO"), rs.getString("DESCRIPCION_CURSO"), rs.getInt("ACTIVE"), rs.getInt("FK_ID_COLEGIO"));
+                Curso infoCurso = new Curso(rs.getInt("ID_CURSO"), rs.getString("DESCRIPCION_CURSO"), rs.getInt("ACTIVE"), rs.getInt("FK_ID_COLEGIO"), rs.getInt("CANT_ALUMNOS"));
                 System.out.println(infoCurso.toString());
                 listadoCurso.add(infoCurso);
             }
@@ -71,11 +72,12 @@ public class CursoDAO implements ICrud {
         try {
             Connection con = Conexion.getConexion();
             CallableStatement cs = null;
-            cs = con.prepareCall("{call EditarCursos(?,?,?,?)}");
+            cs = con.prepareCall("{call EditarCursos(?,?,?,?,?)}");
             cs.setInt(1, objCurso.getIdCurso());
             cs.setString(2, objCurso.getDescripcionCurso());
             cs.setInt(3, objCurso.getActive());
             cs.setInt(4, objCurso.getIdColegio());
+            cs.setInt(5, objCurso.getCantAlumnos());
             try {
                 return cs.executeUpdate() == 1;
             } catch (Exception e) {
@@ -120,7 +122,7 @@ public class CursoDAO implements ICrud {
             cs.executeQuery();
             ResultSet rs = (ResultSet)cs.getObject(2);
             while (rs.next()) {
-                infoCurso = new Curso(rs.getInt("ID_CURSO"), rs.getString("DESCRIPCION_CURSO"), rs.getInt("ACTIVE"),rs.getInt("FK_ID_COLEGIO"));
+                infoCurso = new Curso(rs.getInt("ID_CURSO"), rs.getString("DESCRIPCION_CURSO"), rs.getInt("ACTIVE"),rs.getInt("FK_ID_COLEGIO"), rs.getInt("CANT_ALUMNOS"));
             }
         } catch (Exception e) {
             System.out.println("no se pudo ingresar al sistema " +e.getMessage() );

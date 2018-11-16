@@ -41,6 +41,8 @@ public class Curso implements Serializable {
     @Size(max = 255)
     @Column(name = "DESCRIPCION_CURSO")
     private String descripcionCurso;
+    @Column(name = "CANT_ALUMNOS")
+    private int CantAlumnos;
     @Column(name = "ACTIVE")
     private int active;
     @JoinColumn(name = "FK_ID_COLEGIO", referencedColumnName = "ID_COLEGIO")
@@ -57,18 +59,29 @@ public class Curso implements Serializable {
         this.idCurso = idCurso;
     }
 
-    public Curso(int idCurso, String descripcionCurso, int active, int idColegio) {
+    public Curso(int idCurso, String descripcionCurso, int active, int idColegio, int CantAlumnos) {
         this.idCurso = idCurso;
         this.descripcionCurso = descripcionCurso;
         this.active = active;
         this.idColegio = idColegio;
-    }
-
-    public Curso(String descripcionCurso, int idColegio) {
-        this.descripcionCurso = descripcionCurso;
-        this.idColegio = idColegio;
+        this.CantAlumnos = CantAlumnos;
     }
     
+    
+
+    public Curso(String descripcionCurso, int idColegio, int CantAlumnos) {
+        this.descripcionCurso = descripcionCurso;
+        this.idColegio = idColegio;
+        this.CantAlumnos = CantAlumnos;
+    }
+
+    public int getCantAlumnos() {
+        return CantAlumnos;
+    }
+
+    public void setCantAlumnos(int CantAlumnos) {
+        this.CantAlumnos = CantAlumnos;
+    }
     
     public int getIdCurso() {
         return idCurso;
@@ -117,7 +130,6 @@ public class Curso implements Serializable {
     public void setIdColegio(int idColegio) {
         this.idColegio = idColegio;
     }
-    
 
     @Override
     public String toString() {

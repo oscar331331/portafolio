@@ -134,7 +134,7 @@
                                         <th>Apellido</th>
                                         <th>Id Contrato</th>
                                         <th>Id Apoderado</th>
-                                        <c:if test="${sessionScope.perfil!=2}">
+                                        <c:if test="${sessionScope.perfil==1}">
                                             <th>Editar</th>
                                         </c:if>
                                     </tr>
@@ -147,7 +147,7 @@
                                         <td><c:out value="${alumno.apellidoAlumno}"></c:out></td>
                                         <td><c:out value="${alumno.idContrato}"></c:out></td>
                                         <td><c:out value="${alumno.idUsuario}"></c:out></td>
-                                        <c:if test="${sessionScope.perfil!=2}">
+                                        <c:if test="${sessionScope.perfil==1}">
                                             <td>
                                             <c:url value="../AlumnoServlet" var="urlEdit">
                                                 <c:param name="id_alumno" value="${alumno.idAlumno}"></c:param>
@@ -159,7 +159,7 @@
                                 </c:forEach>                                               
                                 </tbody>
                             </table>
-                            <c:if test="${sessionScope.perfil!=2}">
+                            <c:if test="${sessionScope.perfil==1}">
                             <center><a href="../Alumno/IngresoAlumno.jsp" type="button"  class="btn btn-info btn-min-width mr-1 mb-1"><i class="ft-plus-square"></i> Agregar Alumnos</a></center>
                             </c:if>
                             </div>

@@ -138,6 +138,7 @@
                                 <tr>                            
                                     <th>Descripcion</th>
                                     <th>Codigo Colegio</th>
+                                    <th>Cantidad de Alumnos</th>
                                     <th>Editar</th>
                                 </tr>
                             </thead>
@@ -146,11 +147,12 @@
                                 <tr>
                                     <td><c:out value="${curso.descripcionCurso}"></c:out></td>                            
                                     <td><c:out value="${curso.idColegio}"></c:out></td> 
+                                    <td><c:out value="${curso.cantAlumnos}"></c:out></td> 
                                     <td>
                                     <c:url value="/CursoServlet" var="urlEdit">
                                         <c:param name="id_curso" value="${curso.idCurso}"></c:param>
                                     </c:url>
-                                    <input type="button" class="btn btn-info" name="btnEditar" value="editar" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
+                                    <input type="button" class="btn btn-info" name="btnEditar" value="Editar" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
                                     </td>
                                 </tr>
                             </c:forEach>                                               
