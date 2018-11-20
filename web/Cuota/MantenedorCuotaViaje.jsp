@@ -155,7 +155,12 @@
                                                                         <c:param name="id_cuota" value="${cuota.idCuotaViaje}"></c:param>
                                                                         <c:param name="cant_cuota" value="${cuota.valorCuotaViaje}"></c:param>
                                                                     </c:url>
+                                                                    <c:if test="${cuota.valorCuotaViaje==0}">
+                                                                        <input type="button" class="btn btn-success" name="btnPagar" disabled="true" value="Pagado" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
+                                                                    </c:if>
+                                                                    <c:if test="${cuota.valorCuotaViaje!=0}">
                                                                     <input type="button" class="btn btn-info" name="btnPagar" value="Pagar" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
+                                                                    </c:if>
                                                                     </td>
                                                                     </c:if>
                                                                 </tr>
