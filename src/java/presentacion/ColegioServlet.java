@@ -108,7 +108,8 @@ public class ColegioServlet extends HttpServlet {
         else {
             String razonsocial=request.getParameter("RazonSocial");
             String direccion =request.getParameter("Direccion");            
-            Colegio infoColegio= new Colegio(razonsocial,direccion);
+            String rutSostenedor =request.getParameter("RutSostenedor");            
+            Colegio infoColegio= new Colegio(rutSostenedor,razonsocial,direccion);
             ColegioBO objColegioBO= new ColegioBO();
             if(objColegioBO.addColegio(infoColegio)){
                 sesion.setAttribute("msgBueno", "Colegio creado");
