@@ -30,9 +30,10 @@ public class ColegioDAO implements ICrud {
         try {
             Connection con = Conexion.getConexion();
             CallableStatement cs = null;
-            cs = con.prepareCall("{call InsertarColegios(?,?)}");
+            cs = con.prepareCall("{call InsertarColegios(?,?,?)}");
             cs.setString(1, objColegio.getRazonSocialColegio());
             cs.setString(2, objColegio.getDireccionColegio()); 
+            cs.setString(3, objColegio.getRutSostenedor()); 
             
             try {
                 return cs.executeUpdate() == 1;
@@ -56,7 +57,7 @@ public class ColegioDAO implements ICrud {
             cs.executeQuery();
             ResultSet rs = (ResultSet)cs.getObject(1); 
             while (rs.next()) {
-                Colegio infoColegio = new Colegio(rs.getInt("ID_COLEGIO"), rs.getString("RAZON_SOCIAL_COLEGIO"), rs.getString("DIRECCION_COLEGIO"));
+                Colegio infoColegio = new Colegio(rs.getInt("ID_COLEGIO"), rs.getString("RUT_SOSTENEDOR"), rs.getString("RAZON_SOCIAL_COLEGIO"), rs.getString("DIRECCION_COLEGIO"));
                 System.out.println(infoColegio.toString());
                 listadoColegio.add(infoColegio);
             }
@@ -120,7 +121,7 @@ public class ColegioDAO implements ICrud {
             cs.executeQuery();
             ResultSet rs = (ResultSet)cs.getObject(2);
             while (rs.next()) {
-                infoColegio = new Colegio(rs.getInt("ID_COLEGIO"), rs.getString("RAZON_SOCIAL_COLEGIO"), rs.getString("DIRECCION_COLEGIO"));
+                infoColegio = new Colegio(rs.getInt("ID_COLEGIO"), rs.getString("RUT_SOSTENEDOR"), rs.getString("RAZON_SOCIAL_COLEGIO"), rs.getString("DIRECCION_COLEGIO"));
             }
         } catch (Exception e) {
             System.out.println("no se pudo ingresar al sistema");

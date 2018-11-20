@@ -2,6 +2,9 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+
+
 <html>
     <head>
         
@@ -124,6 +127,10 @@
                             <br><center><h4>Ingresar Colegio</h4></center><br>
                             <form name="formGuardaColegioNuevo" method="post" action="../ColegioServlet">
                               <div class="container">
+                                  <div class="form-group">
+                                        <label>RUT Sostenedor</label>
+                                        <input type="text" name="RutSostenedor" oninput="checkRut(this)" class="form-control" placeholder="RUT del sostenedor, SIN puntos, CON guion y digito verificador" required/>
+                                    </div>
                                     <div class="form-group">
                                         <label>Razon Social</label>
                                         <input type="text" name="RazonSocial" class="form-control" placeholder="Ingrese Razon Social" required/>
@@ -135,9 +142,10 @@
                                       
                                     <div class="form-group">
                                         <label></label>
-                                        <center><input type="submit" class="btn btn-success" name="btnGuardarColegioEditado" value="Guardar"/></center>
+                                        <center><input type="submit" class="btn btn-success" name="btnGuardarColegioEditado" value="Guardar" /></center>
                                     </div>
-                                </div>                          
+                                </div>         
+                                <script src="validaRUT.js"></script>
                             </form>
                         </div> 
                         <center> <a class="btn" href="MantenedorColegio.jsp">Volver</a></center>
@@ -153,8 +161,12 @@
                         <jsp:useBean id="colegioAEditar" class="entidad.Colegio" scope="session"></jsp:useBean>
                         <div class="container">
                             <center><h2>Editar Colegio</h2></center>
-                            <form name="formGuardaColegioEditado" method="post" action="/WebAppTour/ColegioServlet">
+                            <form name="formGuardaColegioEditado" method="post" action="../ColegioServlet">
                                 <div class="container">
+                                    <div class="form-group">
+                                        <label>RUT Sostenedor</label>
+                                        <input type="text" name="RutSostenedorEditar" value="<c:out value="${colegioAEditar.rutSostenedor}" ></c:out>" class="form-control" placeholder="Ingrese RUT sostenedor" readonly=""/>
+                                    </div>
                                     <div class="form-group">
                                         <label>Razon Social</label>
                                         <input type="text" name="RazonSocialEditar" value="<c:out value="${colegioAEditar.razonSocialColegio}" ></c:out>" class="form-control" placeholder="Ingrese razon social" required/>
@@ -167,7 +179,7 @@
                                     
                                     <div class="form-group">
                                         <label></label>
-                                        <center><input type="submit" class="btn btn-success" name="btnGuardarColegioEditado" value="Guardar"/></center>
+                                        <center><input type="submit"  class="btn btn-success" name="btnGuardarColegioEditado" value="Guardar"/></center>
                                     </div>
                                 </div>                        
                             </form>

@@ -41,6 +41,10 @@ public class Colegio implements Serializable {
     private String razonSocialColegio;
     @Size(max = 255)
     @Column(name = "DIRECCION_COLEGIO")
+     private String rutSostenedor;
+    @Size(max = 255)
+    @Column(name = "RUT_SOSTENEDOR")
+
     private String direccionColegio;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkIdColegio")
     private List<Curso> cursoList;
@@ -48,12 +52,19 @@ public class Colegio implements Serializable {
     public Colegio() {
     }
 
-    public Colegio(int idColegio, String razonSocialColegio, String direccionColegio) {
+    public Colegio(int idColegio, String rutSostenedor, String razonSocialColegio, String direccionColegio) {
+        this.rutSostenedor = rutSostenedor;
         this.idColegio = idColegio;
         this.razonSocialColegio = razonSocialColegio;
         this.direccionColegio = direccionColegio;
     }
 
+    public Colegio(String rutSostenedor, String razonSocialColegio, String direccionColegio) {
+        this.rutSostenedor = rutSostenedor;
+        this.razonSocialColegio = razonSocialColegio;
+        this.direccionColegio = direccionColegio;
+    }
+    
     public Colegio(String razonSocialColegio, String direccionColegio) {
         this.razonSocialColegio = razonSocialColegio;
         this.direccionColegio = direccionColegio;
@@ -66,6 +77,14 @@ public class Colegio implements Serializable {
 
     public int getIdColegio() {
         return idColegio;
+    }
+
+    public String getRutSostenedor() {
+        return rutSostenedor;
+    }
+
+    public void setRutSostenedor(String rutSostenedor) {
+        this.rutSostenedor = rutSostenedor;
     }
 
     public void setIdColegio(int idColegio) {
@@ -98,7 +117,7 @@ public class Colegio implements Serializable {
 
     @Override
     public String toString() {
-        return this.razonSocialColegio + " - " + this.direccionColegio;
+        return this.rutSostenedor + " - " + this.razonSocialColegio + " - " + this.direccionColegio;
     }
     
 }

@@ -135,6 +135,7 @@
                 <table class="table table-striped">
                             <thead>
                                 <tr>                            
+                                    <th>RUT Sostenedor</th>
                                     <th>Razon Social</th>
                                     <th>Dirección</th>
                                     <th>Editar</th>
@@ -143,6 +144,7 @@
                             <tbody>
                             <c:forEach items="${listadoColegio}" var="colegio">
                                 <tr>
+                                    <td><c:out value="${colegio.rutSostenedor}"></c:out></td>                            
                                     <td><c:out value="${colegio.razonSocialColegio}"></c:out></td>                            
                                     <td><c:out value="${colegio.direccionColegio}"></c:out></td> 
                                     <td>
