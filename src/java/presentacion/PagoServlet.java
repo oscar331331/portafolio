@@ -90,7 +90,7 @@ public class PagoServlet extends HttpServlet {
         int perfil = (int) session.getAttribute("perfil");
           if (perfil==2){
           int id = (int) session.getAttribute("idUsuario");    
-          session.setAttribute("listadoContrato", objPagoBO.ListadoPagoCuotasApoderado(id));
+          session.setAttribute("listadoPagoCuota", objPagoBO.ListadoPagoCuotasApoderado(id));
           }
           else{      
         session.setAttribute("listadoPagoCuota", objPagoBO.ListadoPagoCuotas());   
@@ -130,7 +130,7 @@ public class PagoServlet extends HttpServlet {
         }
         else {
             
-            String archivo="D:\\Documentos\\NetBeansProjects\\portafolio2\\web\\comprobantes";
+            String archivo="C:\\Users\\Vito\\Desktop\\WebAppTour\\WebAppTour\\web\\comprobantes";
             DiskFileItemFactory factory=new DiskFileItemFactory();
             factory.setSizeThreshold(1024);
             factory.setRepository(new File(archivo));
@@ -190,7 +190,7 @@ public class PagoServlet extends HttpServlet {
                 PagoCuota infoPagoCuota = new PagoCuota(valor,estadoCuota,fecha,imagen,idCuotaViaje);
                 PagoCuotaBO objPagoCuotaBO= new PagoCuotaBO();
                 if(objPagoCuotaBO.addPagoCuota(infoPagoCuota)){
-                    sesion.setAttribute("msgError", "Guardado con exito");
+                    sesion.setAttribute("msgBueno", "Pago realizado, será validado por un vendedor para confirmación");
                     response.sendRedirect("Pago_Cuota/MantenedorPago.jsp");
                 }else{
                     sesion.setAttribute("msgError", "no se pudo actualizar a la BD 3");

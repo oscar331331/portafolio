@@ -76,7 +76,7 @@ public class PagoCuotaDAO implements ICrud {
         try {
             Connection con = Conexion.getConexion();
             CallableStatement cs = null;
-            cs = con.prepareCall("{call MostrarPagoCuotasApoderado(?,?)}");
+            cs = con.prepareCall("{call MOSTRARPAGOCUOTASXAPODERADO(?,?)}");
             cs.registerOutParameter(1, OracleTypes.CURSOR);
             cs.setInt(2, id);
             cs.executeQuery();

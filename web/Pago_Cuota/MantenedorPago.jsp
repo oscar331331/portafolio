@@ -26,6 +26,8 @@
     <link rel="stylesheet" type="text/css" href="../theme-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="../theme-assets/css/core/colors/palette-gradient.css">
     <link rel="stylesheet" type="text/css" href="../theme-assets/css/pages/dashboard-ecommerce.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->
     <!-- END Custom CSS-->
@@ -110,6 +112,13 @@
             </div>
           </div>
         </div>
+        <c:if test="${sessionScope.msgBueno!=null}">
+             <div class="container"><div class="alert alert-success">
+                     <a href="#" class="close" data-dismiss="alert">&times;</a>       
+                     <center><c:out value="${msgBueno}"></c:out> </center>                          
+                        </div>                            
+                            <c:remove var="msgBueno"></c:remove>
+                        </div></c:if>
         <div class="content-body"><!-- Basic Tables start -->
 <div class="row">
 	<div class="col-12">
