@@ -31,7 +31,7 @@
     <!-- BEGIN Custom CSS-->
     <!-- END Custom CSS-->
   
-        <title>ADMINISTRADOR</title>
+        <title>TOUR</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
@@ -95,7 +95,7 @@
         <div class="content-wrapper-before"></div>
         <div class="content-header row">
           <div class="content-header-left col-md-4 col-12 mb-2">
-            <h3 class="content-header-title">Contratos</h3>
+            <h3 class="content-header-title">Cuotas</h3>
           </div>
           <div class="content-header-right col-md-8 col-12">
             <div class="breadcrumbs-top float-md-right">
@@ -103,7 +103,7 @@
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="../Index.jsp">Home</a>
                   </li>
-                  <li class="breadcrumb-item active">Contratos
+                  <li class="breadcrumb-item active">Cuotas
                   </li>
                 </ol>
               </div>
@@ -115,7 +115,7 @@
 	<div class="col-12">
 		<div class="card">
 			<div class="card-header">
-				<h4 class="card-title">Mantenedor de Contratos</h4>
+				<h4 class="card-title">Mis Cuotas</h4>
 				<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
 				
 			</div>
@@ -123,79 +123,46 @@
 				<div class="card-body">
 					
 					<div class="table-responsive">
-                                            <jsp:include page="../ContratoServlet" flush="true"/>
-                                            <jsp:useBean id="contrato" class="entidad.Contrato" scope="session"/>
-                                            <center><h2>Mantenedor Contratos</h2></center>
+                                            <jsp:include page="../CuotaServlet" flush="true"/>
+                                            <jsp:useBean id="cuota" class="entidad.CuotaViaje" scope="session"/>
+                                            <center><h2>Mis Cuotas</h2></center>
                                             <% HttpSession sesion = request.getSession(); %>
-                                            <% sesion.setAttribute("contratoAEditar", null); %>
+                                            
                                             
                                                 <table class="table table-striped">
                                                             <thead>
                                                                 <tr>    
-                                                                    <th>Codigo</th>
-                                                                    <th>Fecha Incorporacion</th>
-                                                                    <th>Fecha Meta<font style="color:white;">aaaa</font></th>
-                                                                    <th>Fecha Final<font style="color:white;">aaaa</font></th>
-                                                                    <th>Monto Meta<font style="color:white;">aaaa</font></th>                                    
-                                                                    <th>Monto Actual Contrato</th>
-                                                                    <th>Cantidad Alumnos</th>
-                                                                    <th>ID Curso</th>
-                                                                    <th>ID Promotor</th>
-                                                                    <th>ID Cliente</th>
-                                                                    <th>Paquete Turistico</th>
+                                                                    <th>Id Cuota</th>
+                                                                    <th>Valor</th>                                                                                                   
+                                                                    <th>Estado</th>
+                                                                    <th>Alumno</th>                                                                    
                                                                     <c:if test="${sessionScope.perfil==2}">
-                                                                    <th>Cuotas</th>
-                                                                    </c:if>
-                                                                    <c:if test="${sessionScope.perfil!=2}">
-                                                                    <th>Editar</th>
-                                                                    </c:if>
+                                                                    <th>Pagar</th>
+                                                                    </c:if>                                                                  
                                                                     
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                            <c:forEach items="${listadoContrato}" var="contrato">
+                                                            <c:forEach items="${listadoCuotaViaje}" var="cuota">
                                                                 <tr>
-                                                                    <td><c:out value="${contrato.codigo}"></c:out></td>
-                                                                    
-                                                                    <fmt:parseDate value="${contrato.fechaIncorporacion}" pattern="yyyy-MM-dd" var="fechaI"></fmt:parseDate>
-                                                                    <td><fmt:formatDate value="${fechaI}" pattern="dd-MM-yy" /></td>  
-                                                                    
-                                                                    <fmt:parseDate value="${contrato.fechaMeta}" pattern="yyyy-MM-dd" var="fechaM"></fmt:parseDate>
-                                                                    <td><fmt:formatDate value="${fechaM}" pattern="dd-MM-yy" /></td>  
-                                                                    
-                                                                    <fmt:parseDate value="${contrato.fechaFinal}" pattern="yyyy-MM-dd" var="fechaF"></fmt:parseDate>
-                                                                    <td><fmt:formatDate value="${fechaF}" pattern="dd-MM-yy" /></td>
-                                                                    
-                                                                    <td>$ <c:out value="${contrato.montoMeta}"></c:out></td>
-                                                                    <td>$ <c:out value="${contrato.montoActualContrato}"></c:out></td>
-                                                                    <td><c:out value="${contrato.cantAlumnos}"></c:out></td>
-                                                                    <td><c:out value="${contrato.idCurso}"></c:out></td>
-                                                                    <td><c:out value="${contrato.idPromotor}"></c:out></td>
-                                                                    <td><c:out value="${contrato.idPaquete}"></c:out></td>
-                                                                    <td><c:out value="${contrato.cantAlumnos}"></c:out></td>
-                                                                    <c:if test="${sessionScope.perfil!=2}">
-                                                                    <td>
-                                                                    <c:url value="/ContratoServlet" var="urlEdit">
-                                                                        <c:param name="id_contrato" value="${contrato.idContrato}"></c:param>
-                                                                    </c:url>
-                                                                    <input type="button" class="btn btn-info" name="btnEditar" value="Editar" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
-                                                                    </td>
-                                                                    </c:if>
+                                                                    <td><c:out value="${cuota.idCuotaViaje}"></c:out></td>
+                                                                    <td>$ <c:out value="${cuota.valorCuotaViaje}"></c:out></td>
+                                                                    <td><c:out value="${cuota.fkIdEstadoCuota}"></c:out></td>
+                                                                    <td><c:out value="${cuota.fkIdAlumno}"></c:out></td>
                                                                     <c:if test="${sessionScope.perfil==2}">
                                                                     <td>
-                                                                    <c:url value="/Pago_Cuota/MantenedorPago.jsp" var="urlEdit">
-                                                                        <c:param name="id_contrato" value="${contrato.idContrato}"></c:param>
+                                                                    <c:url value="/CuotaServlet" var="urlEdit">
+                                                                        <c:param name="id_cuota" value="${cuota.idCuotaViaje}"></c:param>
+                                                                        <c:param name="cant_cuota" value="${cuota.valorCuotaViaje}"></c:param>
                                                                     </c:url>
-                                                                    <input type="button" class="btn btn-info" name="btnCuota" value="Cuota" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
+                                                                    <input type="button" class="btn btn-info" name="btnPagar" value="Pagar" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
                                                                     </td>
                                                                     </c:if>
                                                                 </tr>
                                                             </c:forEach>                                               
                                                         </tbody>
                                                     </table>  
-                                            <c:if test="${sessionScope.perfil!=2}">
-                                            <center><a href="../Contrato/IngresoContrato.jsp" type="button"  class="btn btn-info btn-min-width mr-1 mb-1"><i class="ft-plus-square"></i> Agregar Contrato</a></center>
-                                            </c:if>
+                                            
                                             </div>
 				</div>
 			</div>

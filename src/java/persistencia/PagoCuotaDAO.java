@@ -32,10 +32,11 @@ public class PagoCuotaDAO implements ICrud {
         try {
             Connection con = Conexion.getConexion();
             CallableStatement cs = null;           
-            cs = con.prepareCall("{call InsertarPagoCuotas(?,?,?)}");
+            cs = con.prepareCall("{call InsertarPagoCuotas(?,?,?,?)}");
             cs.setInt(1, objPagoCuota.getValorPagoCuota() );
-            cs.setDate(2, java.sql.Date.valueOf(objPagoCuota.getFechaPagoCuota()));
-            cs.setString(3, objPagoCuota.getUrlPagoCuota());
+            cs.setInt(2, objPagoCuota.getFkIdCuotaViaje());
+            cs.setDate(3, java.sql.Date.valueOf(objPagoCuota.getFechaPagoCuota()));
+            cs.setString(4, objPagoCuota.getUrlPagoCuota());
             System.out.println(objPagoCuota.getUrlPagoCuota());
             try {
                 return cs.executeUpdate() == 1;

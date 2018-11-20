@@ -183,10 +183,11 @@ public class PagoServlet extends HttpServlet {
 
                 String fecha = map.get("Fecha_pago");            
                 int valor = Integer.parseInt(map.get("Valor_pago"));
+                int idCuotaViaje = Integer.parseInt(map.get("idCuotaViaje"));
                 String imagen = (map.get("imagen"));
                 int estadoCuota=1;
 
-                PagoCuota infoPagoCuota = new PagoCuota(valor,estadoCuota,fecha,imagen);
+                PagoCuota infoPagoCuota = new PagoCuota(valor,estadoCuota,fecha,imagen,idCuotaViaje);
                 PagoCuotaBO objPagoCuotaBO= new PagoCuotaBO();
                 if(objPagoCuotaBO.addPagoCuota(infoPagoCuota)){
                     sesion.setAttribute("msgError", "Guardado con exito");

@@ -122,6 +122,7 @@
             <jsp:include page="/UsuarioServlet" flush="true"/>
             <jsp:useBean id="usuario" class="entidad.Usuario" scope="session"/>
             <jsp:include page="/PagoServlet" flush="true"/>
+            <jsp:useBean id="objCuota" class="entidad.CuotaViaje" scope="session"></jsp:useBean>
             
             <c:choose>
                     <c:when test="${sessionScope.pagoAEditar==null}">
@@ -129,10 +130,22 @@
                            <br> <center><h4>Ingresar Pago</h4></center><br>
                             <form name="formGuardaPagoNuevo" method="post" action="../PagoServlet" enctype="multipart/form-data">
                               <div class="container">
-                                    <fieldset>
+                                  <fieldset>
                                         <div class="form-group">
-                                            <label>Valor a pagar: $</label>
-                                            <input type="number" min="1" max="900000000" name="Valor_pago" class="form-control"  required/>
+                                            
+                                            <label>Identificador de cuota:</label>
+                                            
+                                            <input type="number" value="${objCuota.idCuotaViaje}" name="idCuotaViaje" class="form-control"  readonly/>
+                                        </div>
+                                    </fieldset>  
+                                  
+                                  
+                                  <fieldset>
+                                        <div class="form-group">
+                                            
+                                            <label>Valor a pagar: $</label> Valor maximo: <c:out value=" ${objCuota.valorCuotaViaje}"></c:out> 
+                                            <input type="number" min="1" max="${objCuota.valorCuotaViaje}" name="Valor_pago" class="form-control"  required/>
+                                            
                                         </div>
                                     </fieldset>  
                                     <fieldset> 
