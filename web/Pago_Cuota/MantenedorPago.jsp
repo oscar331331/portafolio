@@ -112,14 +112,8 @@
             </div>
           </div>
         </div>
-        <c:if test="${sessionScope.msgBueno!=null}">
-             <div class="container"><div class="alert alert-success">
-                     <a href="#" class="close" data-dismiss="alert">&times;</a>       
-                     <center><c:out value="${msgBueno}"></c:out> </center>                          
-                        </div>                            
-                            <c:remove var="msgBueno"></c:remove>
-                        </div></c:if>
-        <div class="content-body"><!-- Basic Tables start -->
+        
+        
 <div class="row">
 	<div class="col-12">
 		<div class="card">
@@ -128,6 +122,8 @@
 				<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
 				
 			</div>
+                    <div class="content-body"><!-- Basic Tables start -->
+            
 			<div class="card-content collapse show">
 				<div class="card-body">
 					
@@ -135,6 +131,17 @@
                                             <jsp:include page="../PagoServlet" flush="true"/>
                                             <jsp:useBean id="pagocuota" class="entidad.PagoCuota" scope="session"/>
                                             <center><h2>Pagos </h2></center>
+                                            <div class="tooltip">Hover over me
+  <span class="tooltiptext">Tooltip text</span>
+</div>
+                                            
+                                            <c:if test="${sessionScope.msgBueno!=null}">
+             <div class="container"><div class="alert alert-success">
+                     <a href="#" class="close" data-dismiss="alert">&times;</a>       
+                     <center><c:out value="${msgBueno}"></c:out> </center>                          
+                        </div>                            
+                            <c:remove var="msgBueno"></c:remove>
+                        </div></c:if>
                                                 <table class="table table-striped">
                                                             <thead>
                                                                 <tr>    
@@ -142,6 +149,7 @@
                                                                     <th>Fecha del pago</th>
                                                                     <th>Valor del pago</th>
                                                                     <th>Comprobante</th>
+                                                                    <th>Estado</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -154,6 +162,17 @@
                                                                     
                                                                     <td>$ <c:out value="${pagocuota.valorPagoCuota}"></c:out></td>
                                                                     <td style="text-align: center;"><a target='_blank' href="../comprobantes/<c:out value="${pagocuota.urlPagoCuota}"></c:out>" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="297" src="../comprobantes/<c:out value="${pagocuota.urlPagoCuota}"></c:out>" width="400" /></a></td>
+                                                                    
+                                                                    
+                                                                    <c:if test= "${pagocuota.fkIdEstadoPagoCuota ==1}">
+                                                                        <td> <input type="button" class="btn btn-warning" value="Pendiente"/></td>
+                                                                    </c:if>
+                                                                    <c:if test= "${pagocuota.fkIdEstadoPagoCuota ==2}">
+                                                                        <td> <input type="button" class="btn btn-success" value="Aceptado"/></td>
+                                                                    </c:if>
+                                                                    <c:if test= "${pagocuota.fkIdEstadoPagoCuota ==3}">
+                                                                        <td> <input type="button" class="btn btn-danger" value="Rechazado"/></td>
+                                                                    </c:if>
                                                                 </tr>
                                                             </c:forEach>                                               
                                                         </tbody>
