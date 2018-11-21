@@ -34,6 +34,8 @@
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body>
+    <c:choose>        
+        <c:when test="${sessionScope.usuarioConectado==null}">
 	<c:remove var="usuario"></c:remove>
 	<div class="limiter">
 		<div class="container-login100">
@@ -74,8 +76,8 @@
 						<span class="focus-input100" data-placeholder="Contraseña"></span>
 					</div>
 					<div class="wrap-input100 validate-input">
-						<input type="text" name="Alumno" class="input100" required/>
-						<span class="focus-input100" data-placeholder="RUT alumno"></span>
+						<input type="text" name="Alumno" class="input100" oninput="checkRut(this)" required/>
+						<span class="focus-input100" data-placeholder="RUT alumno (Ej: 12345678-5)"></span>
 					</div>
 					<div class="wrap-input100 validate-input">
 						<input type="text" name="Contrato" class="input100"  required/>
@@ -99,7 +101,7 @@
 							Volver
 						</a>
 					</div>
-					
+					<script src="../Colegio/validaRUT.js"></script>
 				</form>
 			</div>
 		</div>
@@ -124,6 +126,10 @@
 	<script src="../loginCSS/vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 	<script src="../loginCSS/js/main.js"></script>
-
+            </c:when>
+           <c:otherwise> 
+               <% response.sendRedirect("../Index.jsp"); %>
+           </c:otherwise>
+    </c:choose>
 </body>
 </html>

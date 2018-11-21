@@ -55,7 +55,7 @@
             <ul class="nav navbar-nav float-right">
               <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown">Bienvenido(a):<c:out value=" ${usuarioConectado.nombreUsuario} ${usuarioConectado.apellidoUsuario}"></c:out>  </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                  <div class="arrow_box_right"><a class="dropdown-item" href="../CerrarSesionServlet"><i class="ft-book"></i> Cerrar sesión</a></div>
+                  <div class="arrow_box_right"><a class="dropdown-item" href="../CerrarSesion"><i class="ft-book"></i> Cerrar sesión</a></div>
                 </div>
               </li>
               
@@ -142,8 +142,8 @@
                                   <fieldset>
                                         <div class="form-group">
                                             
-                                            <label>Valor a pagar: $</label> Valor maximo: <c:out value=" ${objCuota.valorCuotaViaje}"></c:out> 
-                                            <input type="number" min="1" max="${objCuota.valorCuotaViaje}" name="Valor_pago" class="form-control"  required/>
+                                            <label>Valor a pagar: $</label>  
+                                            <input type="number" min="1" max="${objCuota.valorCuotaViaje}" placeholder="Pago minimo: 1 - Pago maximo: <c:out value=" ${objCuota.valorCuotaViaje}"></c:out>" name="Valor_pago" class="form-control" required/>
                                             
                                         </div>
                                     </fieldset>  

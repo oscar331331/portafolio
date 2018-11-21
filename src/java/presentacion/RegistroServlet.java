@@ -99,7 +99,7 @@ public class RegistroServlet extends HttpServlet {
                 else if(objUsuarioBO.addUsuario(infoUsuario)){
                     //Usuario infoUsuario_up= (Usuario) objUsuarioBO.buscaUsuarioPorCorreo(correo);
                     if(objUsuarioBO.ActualizaApoderadoDelAlumno(infoUsuario_up,id_alumno)){
-                        sesion.setAttribute("msgError", "Registrado! Contacte con su Encargado de curso para habilitar su cuenta");
+                        sesion.setAttribute("msgError", "Registrado correctamente! Contacte con su Encargado de curso para habilitar su cuenta");
                         response.sendRedirect("../login.jsp");
                     }
                     else{

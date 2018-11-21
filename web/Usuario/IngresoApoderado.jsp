@@ -54,7 +54,7 @@
             <ul class="nav navbar-nav float-right">
               <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown">Bienvenido(a):<c:out value=" ${usuarioConectado.nombreUsuario} ${usuarioConectado.apellidoUsuario}"></c:out>  </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                  <div class="arrow_box_right"><a class="dropdown-item" href="../CerrarSesionServlet"><i class="ft-book"></i> Cerrar sesión</a></div>
+                  <div class="arrow_box_right"><a class="dropdown-item" href="../CerrarSesion"><i class="ft-book"></i> Cerrar sesión</a></div>
                 </div>
               </li>
               
@@ -69,6 +69,12 @@
                 <c:when test="${sessionScope.usuarioConectado==null}">
                     <% response.sendRedirect("../login.jsp"); %>
                 </c:when>
+                <c:when test="${sessionScope.perfil==2}">
+                   <% response.sendRedirect("../Index.jsp"); %>
+               </c:when>
+               <c:when test="${sessionScope.perfil==4}">
+                   <% response.sendRedirect("../Index.jsp"); %>
+               </c:when>
             <c:otherwise>  
 
     <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="theme-assets/images/backgrounds/02.jpg">

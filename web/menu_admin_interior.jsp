@@ -39,12 +39,12 @@
                     <c:when test="${usuarioConectado.idPerfil==2}">
                         <li class="nav-item"><a href="../Contrato/MantenedorContrato.jsp"><i class="ft-file-text"></i><span class="menu-title" data-i18n="">Mis Contratos</span></a>
                         </li>
-                        <li class=" nav-item"><a href="../Cuota/MantenedorCuotaViaje.jsp"><i class="ft-pie-chart"></i><span class="menu-title" data-i18n="">Mis cuotas</span></a>
+                        <li class=" nav-item"><a href="../Cuota/MantenedorCuotaViaje.jsp"><i class="ft-pie-chart"></i><span class="menu-title" data-i18n="">Mis Cuotas</span></a>
                         </li>
-                        <li class=" nav-item"><a href="../Pago_Cuota/MantenedorPago.jsp"><i class="ft-clipboard"></i><span class="menu-title" data-i18n="">Mis pagos</span></a>
+                        <li class=" nav-item"><a href="../Pago_Cuota/MantenedorPago.jsp"><i class="ft-clipboard"></i><span class="menu-title" data-i18n="">Mis Pagos</span></a>
                         </li>
                         
-                        <li class="nav-item"><a href="../Alumno/MantenedorAlumno.jsp"><i class="ft-users"></i><span class="menu-title" data-i18n=""> Mis Alumno</span></a>
+                        <li class="nav-item"><a href="../Alumno/MantenedorAlumno.jsp"><i class="ft-users"></i><span class="menu-title" data-i18n=""> Mis Alumnos</span></a>
                         </li>
                         
                     </c:when>

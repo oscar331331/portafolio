@@ -112,6 +112,7 @@ public class UsuarioServlet extends HttpServlet {
             if(!"".equals(password)){
                 if(objUsuarioBO.updateUsuario(infoUsuario)){
                 response.sendRedirect("Usuario/MantenedorUsuario.jsp");
+                sesion.setAttribute("msgBueno", "Usuario editado correctamente");
                 sesion.removeAttribute("usuarioAEditar");
             }else{
                 sesion.setAttribute("msgError", "no se pudo actualizar a la BD");
@@ -121,6 +122,7 @@ public class UsuarioServlet extends HttpServlet {
             {
                 if(objUsuarioBO.updateUsuarioSinPw(infoUsuario)){
                 response.sendRedirect("Usuario/MantenedorUsuario.jsp");
+                sesion.setAttribute("msgBueno", "Usuario editado correctamente");
                 sesion.removeAttribute("usuarioAEditar");
             }else{
                 sesion.setAttribute("msgError", "no se pudo actualizar a la BD");
@@ -141,7 +143,7 @@ public class UsuarioServlet extends HttpServlet {
                 //response.sendRedirect("Usuario/MantenedorUsuario.jsp");
                 //sesion.setAttribute("msgError", "Ingresado correctamente");
                 response.sendRedirect("Usuario/MantenedorUsuario.jsp");
-                sesion.setAttribute("msgBueno", "Usuario creado");
+                sesion.setAttribute("msgBueno", "Usuario creado correctamente");
             }else{
                 sesion.setAttribute("msgError", "no se pudo ingresar a la BD");
                 response.sendRedirect("Usuario/IngresoUsuario.jsp");
