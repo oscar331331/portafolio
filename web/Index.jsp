@@ -69,7 +69,12 @@
             </c:when>
             <c:otherwise>      
                 <jsp:include page="menu_admin.jsp"/>
-                <h1>bienvenido</h1>
+                <div class="app-content content">
+                    
+                <h1>Bienvenido a OnTour Web.</h1>
+                Visita nuestra oficina en Morande con San Pablo.
+                
+                </div>
             </c:otherwise>
         </c:choose> 
                 
