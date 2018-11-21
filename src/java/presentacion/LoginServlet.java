@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
             
         }else{
             sesion.setAttribute("msgError", "no se pudo ingresar a la BD");
-            sesion.setAttribute("msgLogin", "Datos Incorrectos, vuelva a ingresar");
+            sesion.setAttribute("msgLogin", "Uusario o password incorrectos, verifique e intente nuevamente");
             response.sendRedirect("login.jsp");
         }
     }
