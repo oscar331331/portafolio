@@ -1,100 +1,129 @@
-<%-- 
-    Document   : Login
-    Created on : 23-jun-2018, 0:18:23
-    Author     : Pablo Abarca
---%>
-
-<%@page import="javax.jms.Session"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>OnTour - Registro</title>
-    </head>
-    <body>
-        <c:remove var="usuario"></c:remove>
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<html lang="en">
+<head>
+	<title>Registro</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="../loginCSS/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../loginCSS/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../loginCSS/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../loginCSS/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../loginCSS/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="../loginCSS/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../loginCSS/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../loginCSS/vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="../loginCSS/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../loginCSS/css/util.css">
+	<link rel="stylesheet" type="text/css" href="../loginCSS/css/main.css">
+<!--===============================================================================================-->
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <LINK REL=StyleSheet HREF="../cssLogin.css" TYPE="text/css" MEDIA=screen> 
-        <!------ Include the above in your HEAD tag ---------->
-        <c:choose>        
-            <c:when test="${sessionScope.usuarioConectado==null}">
-               
-        <div class="form-group">
-            <center><font color="white"><h1>Registrarse</h1></font></center>
-             <c:if test="${sessionScope.msgError!=null}">
-             <div class="container"><div class="alert alert-danger">
-                     <a href="#" class="close" data-dismiss="alert">&times;</a>       
-                     <center><c:out value="${msgError}"></c:out> </center>                          
-                        </div>                            
-                            <c:remove var="msgError"></c:remove>
-                        </div></c:if>         
-            
-            <form name="formGuardaApoderadoNuevo" method="post" action="../RegistroServlet">
-                              <div class="container">
-                                    <div class="form-group">
-                                        <label><font color="white">Nombre</font></label>
-                                        <input type="text" name="Nombre" class="form-control" placeholder="Ingrese Nombre" required/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label><font color="white">Apellido</font></label>
-                                        <input type="text" name="Apellido" class="form-control" placeholder="Ingrese Apellido" required/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label><font color="white">Correo</font></label>
-                                        <input type="email" name="Correo" class="form-control" placeholder="Ingrese Correo" required/>
-                                    </div>                                    
-                                    <div class="form-group">
-                                        <label><font color="white">Password</font></label>
-                                        <input type="password" name="Password"  class="form-control" placeholder="Ingrese password" required/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label><font color="white">RUT alumno</font></label>
-                                        <input type="text" name="Alumno" class="form-control" placeholder="Ingrese RUT alumno" required/>
-                                    </div> 
-                                    <div class="form-group">
-                                        <label><font color="white">Codigo contrato</font></label>
-                                        <input type="text" name="Contrato" class="form-control" placeholder="Ingrese codigo contrato" required/>
-                                        
-                                    </div> 
-                                    <div class="form-group">
-                                        <label></label>
-                                        <center><input type="submit" class="btn btn-success" name="btnGuardarUsuarioEditado" value="Registrarse"/></center>
-                                    </div>
-                                </div>                          
-                            </form>
-            <center> <a class="btn" href="../login.jsp">Volver</a></center>
-                        
-            
-            </c:when>
-            
-            <c:otherwise>
-                <% response.sendRedirect("../Index.jsp"); %>
-            </c:otherwise>
-        </c:choose>
-            
-            
-            <br>
-            
-            <!-- login bootsnipp -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-9155049400353686"
-             data-ad-slot="9589048256"
-             data-ad-format="auto"></ins>
-        
-        </div>
-        <c:if test="${sessionScope.msgLogin!=null}">
-            <script>
-              alert("<c:out value="${msgLogin}"></c:out>")
-            </script>
-            <c:remove var="msgLogin"></c:remove>
-        </c:if>
-    </body>
-    
+</head>
+<body>
+	<c:remove var="usuario"></c:remove>
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" name="formGuardaApoderadoNuevo" method="post" action="../RegistroServlet">
+					<span class="login100-form-title p-b-26">
+						Registrarse
+					</span>
+                                    
+					<span class="login100-form-title p-b-48">
+						<img src="../loginCSS/images/img-01.png" alt="IMG">
+					</span>
+                                        <br>
+                                    <c:if test="${sessionScope.msgError!=null}">
+                                                <div class="alert alert-danger">
+                                                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                                    <c:out value="${msgError}"></c:out>
+                                                    <c:remove var="msgError"></c:remove>
+                                                </div>
+                                                </c:if>
+					<div class="wrap-input100 validate-input">
+						<input type="text" name="Nombre" class="input100"  required/>
+						<span class="focus-input100" data-placeholder="Nombre"></span>
+					</div>
+					<div class="wrap-input100 validate-input">
+						<input type="text" name="Apellido" class="input100"  required/>
+						<span class="focus-input100" data-placeholder="Apellido"></span>
+					</div>
+					<div class="wrap-input100 validate-input">
+						<input type="email" name="Correo" class="input100"  required/>
+						<span class="focus-input100" data-placeholder="Email"></span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<span class="btn-show-pass">
+							<i class="zmdi zmdi-eye"></i>
+						</span>
+						<input type="password" name="Password"  class="input100"  required/>
+						<span class="focus-input100" data-placeholder="Contraseña"></span>
+					</div>
+					<div class="wrap-input100 validate-input">
+						<input type="text" name="Alumno" class="input100" required/>
+						<span class="focus-input100" data-placeholder="RUT alumno"></span>
+					</div>
+					<div class="wrap-input100 validate-input">
+						<input type="text" name="Contrato" class="input100"  required/>
+						<span class="focus-input100" data-placeholder="Codigo contrato"></span>
+					</div>
+
+					
+
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button type="submit" class="login100-form-btn">
+								Registrarse
+							</button>
+						</div>
+					</div>
+                                        <div class="text-center p-t-115">
+						
+
+						<a class="txt2" href="../login.jsp">
+							Volver
+						</a>
+					</div>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script src="../loginCSS/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../loginCSS/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../loginCSS/vendor/bootstrap/js/popper.js"></script>
+	<script src="../loginCSS/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../loginCSS/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../loginCSS/vendor/daterangepicker/moment.min.js"></script>
+	<script src="../loginCSS/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="../loginCSS/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="../loginCSS/js/main.js"></script>
+
+</body>
 </html>

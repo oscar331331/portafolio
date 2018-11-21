@@ -38,6 +38,7 @@
     <body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-color="bg-gradient-x-purple-blue" data-col="2-columns">
 
     <!-- fixed-top-->
+    <jsp:useBean id="usuarioConectado" class="entidad.Usuario" scope="session"/> 
     <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
       <div class="navbar-wrapper">
         <div class="navbar-container content">
@@ -45,18 +46,16 @@
             <ul class="nav navbar-nav mr-auto float-left">
               <li class="nav-item d-block d-md-none"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu"></i></a></li>
               
-                <ul class="dropdown-menu">
-                  <li class="arrow_box">
-                    
-                  </li>
-                </ul>
+                
               </li>
             </ul>
-            <ul class="nav navbar-nav float-right">         
-              
-            </ul>
+            
             <ul class="nav navbar-nav float-right">
-              
+              <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown">Bienvenido(a):<c:out value=" ${usuarioConectado.nombreUsuario} ${usuarioConectado.apellidoUsuario}"></c:out>  </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <div class="arrow_box_right"><a class="dropdown-item" href="../CerrarSesionServlet"><i class="ft-book"></i> Cerrar sesión</a></div>
+                </div>
+              </li>
               
             </ul>
           </div>
@@ -69,12 +68,6 @@
                 <c:when test="${sessionScope.usuarioConectado==null}">
                     <% response.sendRedirect("../login.jsp"); %>
                 </c:when>
-                <c:when test="${sessionScope.perfil==2}">
-                <% response.sendRedirect("../Index.jsp"); %>
-            </c:when>
-            <c:when test="${sessionScope.perfil==4}">
-                <% response.sendRedirect("../Index.jsp"); %>
-            </c:when>
             <c:otherwise>  
 
     <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="theme-assets/images/backgrounds/02.jpg">
@@ -263,6 +256,19 @@
         </div>
     </div>
 </c:otherwise>
-        </c:choose>  
+        </c:choose> 
+        <script src="../theme-assets/js/core/app-menu-lite.js" type="text/javascript"></script>
+    <script src="../theme-assets/js/core/app-lite.js" type="text/javascript"></script>
+    <!-- BEGIN VENDOR JS-->
+    <script src="../theme-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
+    <!-- BEGIN VENDOR JS-->
+    <!-- BEGIN PAGE VENDOR JS-->
+    <!-- END PAGE VENDOR JS-->
+    <!-- BEGIN CHAMELEON  JS-->
+    <script src="../theme-assets/js/core/app-menu-lite.js" type="text/javascript"></script>
+    <script src="../theme-assets/js/core/app-lite.js" type="text/javascript"></script>
+    <!-- END CHAMELEON  JS-->
+    <!-- BEGIN PAGE LEVEL JS-->
+    <!-- END PAGE LEVEL JS-->
     </body>
 </html>

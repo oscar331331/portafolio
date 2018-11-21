@@ -73,11 +73,7 @@
                         </li>
                     </c:when>
                 </c:choose>
-                <li class=" nav-item"><a href="../CerrarSesionServlet"><i class="ft-log-out"></i><span class="menu-title" data-i18n="">Cerrar Sesion</span></a>
-                </li>
-                <br>
-                <li align="center" style= "color: blue">Bienvenida/o:<c:out value=" ${usuarioConectado.nombreUsuario} ${usuarioConectado.apellidoUsuario}"></c:out> 
-                </li>
+                
             </ul>
             <div class="navigation-background"></div>
         </div>
