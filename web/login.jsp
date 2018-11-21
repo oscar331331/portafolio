@@ -20,7 +20,10 @@
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <LINK REL=StyleSheet HREF="cssLogin.css" TYPE="text/css" MEDIA=screen> 
         <!------ Include the above in your HEAD tag ---------->
-
+        <c:choose>        
+            <c:when test="${sessionScope.usuarioConectado==null}">
+                
+            
         <div class="login">
             <h1>Login</h1>
             <form method="post" name="formLogin" action="./login">
@@ -40,12 +43,19 @@
              data-ad-format="auto"></ins>
         
         </div>
-        <c:if test="${sessionScope.msgLogin!=null}">
-            <script>
-              alert("<c:out value="${msgLogin}"></c:out>")
-            </script>
-            <c:remove var="msgLogin"></c:remove>
-        </c:if>
+            <c:if test="${sessionScope.msgLogin!=null}">
+                <script>
+                  alert("<c:out value="${msgLogin}"></c:out>")
+                </script>
+                <c:remove var="msgLogin"></c:remove>
+                </c:if>
+            </c:when>
+            
+        <c:otherwise>
+                <% response.sendRedirect("Index.jsp"); %>
+            </c:otherwise>
+        </c:choose>
+
     </body>
     
 </html>

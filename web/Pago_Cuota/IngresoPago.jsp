@@ -71,6 +71,7 @@
                 <c:when test="${sessionScope.usuarioConectado==null}">
                     <% response.sendRedirect("../login.jsp"); %>
                 </c:when>
+                
             <c:otherwise>  
 
     <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="theme-assets/images/backgrounds/02.jpg">
@@ -143,8 +144,9 @@
                                   <fieldset>
                                         <div class="form-group">
                                             
-                                            <label>Valor a pagar: $</label> Valor maximo: <c:out value=" ${objCuota.valorCuotaViaje}"></c:out> 
-                                            <input type="number" min="1" max="${objCuota.valorCuotaViaje}" name="Valor_pago" class="form-control"  required/>
+                                            <label>Valor a pagar: $</label><br>
+                                             
+                                            <input type="number" min="1" max="${objCuota.valorCuotaViaje}" name="Valor_pago" class="form-control" placeholder="Pago minimo: 1 - Pago maximo: <c:out value=" ${objCuota.valorCuotaViaje}"></c:out>" required/>
                                             
                                         </div>
                                     </fieldset>  

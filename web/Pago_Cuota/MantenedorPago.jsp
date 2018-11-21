@@ -72,7 +72,7 @@
                 <c:when test="${sessionScope.usuarioConectado==null}">
                     <% response.sendRedirect("../login.jsp"); %>
                 </c:when>
-            <c:otherwise>  
+                <c:otherwise>  
                 <% HttpSession sesion = request.getSession(); %>
                 <% sesion.setAttribute("pagoAEditar", null); %>
     <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="theme-assets/images/backgrounds/02.jpg">

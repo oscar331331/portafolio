@@ -69,6 +69,12 @@
                 <c:when test="${sessionScope.usuarioConectado==null}">
                     <% response.sendRedirect("../login.jsp"); %>
                 </c:when>
+                <c:when test="${sessionScope.perfil==2}">
+                <% response.sendRedirect("../Index.jsp"); %>
+            </c:when>
+            <c:when test="${sessionScope.perfil==4}">
+                <% response.sendRedirect("../Index.jsp"); %>
+            </c:when>
             <c:otherwise>  
                 <% HttpSession sesion = request.getSession(); %>
                 <% sesion.setAttribute("usuarioAEditar", null); %>

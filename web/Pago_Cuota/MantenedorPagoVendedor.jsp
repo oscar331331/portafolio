@@ -65,13 +65,23 @@
     </nav>
 
     <!-- ////////////////////////////////////////////////////////////////////////////-->
+    <% HttpSession sesion = request.getSession(); %>
     <c:choose>        
         <c:when test="${sessionScope.usuarioConectado==null}">
             <% response.sendRedirect("../login.jsp"); %>
         </c:when>
+        <c:when test="${sessionScope.perfil==2}">
+                <% sesion.setAttribute("objCuota", null); %>
+                <% response.sendRedirect("../Index.jsp"); %>
+            </c:when>
+            <c:when test="${sessionScope.perfil==4}">
+                <% sesion.setAttribute("objCuota", null); %>
+                <% response.sendRedirect("../Index.jsp"); %>
+            </c:when>
     <c:otherwise>  
-        <% HttpSession sesion = request.getSession(); %>
+        
         <% sesion.setAttribute("pagoAEditar", null); %>
+        <% sesion.setAttribute("objCuota", null); %>
     <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="theme-assets/images/backgrounds/02.jpg">
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">       

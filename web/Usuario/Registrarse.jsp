@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login</title>
+        <title>OnTour - Registro</title>
     </head>
     <body>
         <c:remove var="usuario"></c:remove>
@@ -22,9 +22,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <LINK REL=StyleSheet HREF="../cssLogin.css" TYPE="text/css" MEDIA=screen> 
         <!------ Include the above in your HEAD tag ---------->
-
+        <c:choose>        
+            <c:when test="${sessionScope.usuarioConectado==null}">
+               
         <div class="form-group">
-            <center><font color="white"><h1>Registrarse</h1></font></center><br>
+            <center><font color="white"><h1>Registrarse</h1></font></center>
              <c:if test="${sessionScope.msgError!=null}">
              <div class="container"><div class="alert alert-danger">
                      <a href="#" class="close" data-dismiss="alert">&times;</a>       
@@ -32,7 +34,7 @@
                         </div>                            
                             <c:remove var="msgError"></c:remove>
                         </div></c:if>         
-            <br>
+            
             <form name="formGuardaApoderadoNuevo" method="post" action="../RegistroServlet">
                               <div class="container">
                                     <div class="form-group">
@@ -66,11 +68,15 @@
                                     </div>
                                 </div>                          
                             </form>
-            <center> <a class="btn" href="login.jsp">Volver</a></center>
+            <center> <a class="btn" href="../login.jsp">Volver</a></center>
                         
             
+            </c:when>
             
-            
+            <c:otherwise>
+                <% response.sendRedirect("../Index.jsp"); %>
+            </c:otherwise>
+        </c:choose>
             
             
             <br>
