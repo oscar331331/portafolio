@@ -40,10 +40,21 @@
     
     
     <body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-color="bg-gradient-x-purple-blue" data-col="2-columns">
-
+        <jsp:useBean id="usuarioConectado" class="entidad.Usuario" scope="session"/> 
+    <c:choose>        
+                <c:when test="${sessionScope.usuarioConectado.idUsuario==null}">
+                    <% response.sendRedirect("../login.jsp"); %>
+                </c:when>
+                <c:when test="${sessionScope.perfil==2}">
+                <% response.sendRedirect("../Index.jsp"); %>
+            </c:when>
+            <c:when test="${sessionScope.perfil==4}">
+                <% response.sendRedirect("../Index.jsp"); %>
+            </c:when>
+            <c:otherwise> 
     <!-- fixed-top-->
     <!-- fixed-top-->
-    <jsp:useBean id="usuarioConectado" class="entidad.Usuario" scope="session"/> 
+    
     <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
       <div class="navbar-wrapper">
         <div class="navbar-container content">
@@ -69,17 +80,7 @@
     </nav>
 
     <!-- ////////////////////////////////////////////////////////////////////////////-->
-    <c:choose>        
-                <c:when test="${sessionScope.usuarioConectado==null}">
-                    <% response.sendRedirect("../login.jsp"); %>
-                </c:when>
-                <c:when test="${sessionScope.perfil==2}">
-                <% response.sendRedirect("../Index.jsp"); %>
-            </c:when>
-            <c:when test="${sessionScope.perfil==4}">
-                <% response.sendRedirect("../Index.jsp"); %>
-            </c:when>
-            <c:otherwise>  
+     
 
     <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="../theme-assets/images/backgrounds/02.jpg">
       <div class="navbar-header">
@@ -347,8 +348,7 @@
         </div>
     </div>
             
-            </c:otherwise>
-        </c:choose>  
+              
 <script src="../theme-assets/js/core/app-menu-lite.js" type="text/javascript"></script>
     <script src="../theme-assets/js/core/app-lite.js" type="text/javascript"></script>
     <!-- BEGIN VENDOR JS-->
@@ -362,5 +362,7 @@
     <!-- END CHAMELEON  JS-->
     <!-- BEGIN PAGE LEVEL JS-->
     <!-- END PAGE LEVEL JS-->
+    </c:otherwise>
+        </c:choose>
     </body>
 </html>

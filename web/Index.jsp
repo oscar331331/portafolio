@@ -64,7 +64,7 @@
     
     
     <c:choose>        
-            <c:when test="${sessionScope.usuarioConectado==null}">
+            <c:when test="${sessionScope.usuarioConectado.idUsuario==null}">
                 <jsp:forward page="login.jsp"/>
             </c:when>
             <c:otherwise>      

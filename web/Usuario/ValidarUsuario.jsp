@@ -60,7 +60,7 @@
 
     <!-- ////////////////////////////////////////////////////////////////////////////-->
         <c:choose>        
-            <c:when test="${sessionScope.usuarioConectado==null}">
+            <c:when test="${sessionScope.usuarioConectado.idUsuario==null}">
                 <% response.sendRedirect("../login.jsp"); %>
             </c:when>
             <c:when test="${sessionScope.perfil==2}">

@@ -34,8 +34,7 @@
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body>
-    <c:choose>        
-        <c:when test="${sessionScope.usuarioConectado==null}">
+    
 	<c:remove var="usuario"></c:remove>
 	<div class="limiter">
 		<div class="container-login100">
@@ -111,10 +110,7 @@
 	<script src="loginCSS/vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 	<script src="loginCSS/js/main.js"></script>
-        </c:when>
-           <c:otherwise> 
-               <% response.sendRedirect("../Index.jsp"); %>
-           </c:otherwise>
-    </c:choose>
+        
+    
 </body>
 </html>
