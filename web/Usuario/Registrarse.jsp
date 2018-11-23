@@ -3,7 +3,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html lang="en">
 <head>
-	<title>Registro</title>
+	<title>OnTour - Registro</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -44,7 +44,7 @@
 			<div class="wrap-login100">
 				<form class="login100-form validate-form" name="formGuardaApoderadoNuevo" onsubmit="return validapass()" method="post" action="../RegistroServlet">
 					<span class="login100-form-title p-b-26">
-						Registrarse
+						Registro
 					</span>
                                     
 					<span class="login100-form-title p-b-48">

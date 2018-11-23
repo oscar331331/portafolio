@@ -71,7 +71,7 @@
                 <jsp:include page="menu_admin.jsp"/>
                 <div class="app-content content">
                     
-                <h1>Bienvenido a OnTour Web.</h1>
+                <h1>Bienvenid@s a OnTour Web.</h1>
                 Visita nuestra oficina en Morande con San Pablo.
                 
                 </div>

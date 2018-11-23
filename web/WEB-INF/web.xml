@@ -21,4 +21,15 @@
             5
         </session-timeout>
     </session-config>
+    
+    <servlet>   
+        <servlet-name>IngresoAlumno</servlet-name>
+        <jsp-file>/Alumno/IngresoAlumno.jsp</jsp-file>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>IngresoAlumno</servlet-name>
+        <url-pattern>/Alumno/IngresoAlumno</url-pattern>
+    </servlet-mapping>
+    
 </web-app>
