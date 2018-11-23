@@ -140,7 +140,7 @@
                             <br>
                             <center><h4 class="card-title">Ingresar usuario</h4></center>
                               <br>
-                            <form name="formGuardaUsuarioNuevo" method="post" action="../UsuarioServlet">
+                            <form name="formGuardaUsuarioNuevo" onsubmit="return validapass()" method="post" action="../UsuarioServlet">
                               <div class="container">
                                     <div class="form-group">
                                         <label>Nombre</label>
@@ -156,7 +156,11 @@
                                     </div>                                    
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input type="password" name="Password"  class="form-control" placeholder="Ingrese password" required/>
+                                        <input type="password" name="Password" id="pass1" class="form-control" placeholder="Minimo 6 caracteres" required/>
+                                    </div>
+                                  <div class="form-group">
+                                        <label>Repetir Password</label>
+                                        <input type="password" name="PasswordRep" id="pass2" class="form-control" placeholder="Repetir password" required/>
                                     </div>
                                     <div class="form-group">
                                         <label>Perfil</label>
@@ -172,7 +176,9 @@
                                         <label></label>
                                         <center><input type="submit" class="btn btn-success" name="btnGuardarUsuarioEditado" value="Guardar"/></center>
                                     </div>
-                                </div>                          
+                                </div>       
+                                <script src="validaRUT.js"></script>
+                                <script src="validaPass.js"></script>
                             </form>
                         </div> 
                         <center> <a class="btn" href="MantenedorUsuario.jsp">Volver</a></center>
@@ -188,7 +194,7 @@
                         <jsp:useBean id="usuarioAEditar" class="entidad.Usuario" scope="session"></jsp:useBean>
                         <div class="container">
                             <center><h2>Editar Usuario</h2></center>
-                            <form name="formGuardaUsuarioEditado" method="post" action="../UsuarioServlet">
+                            <form name="formGuardaUsuarioEditado" method="post" onsubmit="return validapass()" action="../UsuarioServlet">
                                 <div class="container">
                                     <div class="form-group">
                                         <label>Nombre</label>
@@ -204,7 +210,11 @@
                                     </div>                                    
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input type="password" name="PasswordEditar"  class="form-control" placeholder="(dejar en blanco para no modificar)" />
+                                        <input type="password" name="PasswordEditar" id="pass1" class="form-control" placeholder="(dejar en blanco para no modificar). Minimo 6 caracteres." />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Repetir Password</label>
+                                        <input type="password" name="PasswordEditarRep" id="pass2" class="form-control" placeholder="(dejar en blanco para no modificar)" />
                                     </div>
                                     <div class="form-group">
                                         <label>Perfil </label>
@@ -242,7 +252,8 @@
                                         <label></label>
                                         <center><input type="submit" class="btn btn-success" name="btnGuardarUsuarioEditado" class="btn btn-info btn-min-width mr-1 mb-1" value="Guardar"/></i></center>
                                     </div>
-                                </div>                        
+                                </div>                  
+                                    <script src="validaPass.js"></script>
                             </form>
                         </div>
                    <center><a href="../Usuario/MantenedorUsuario.jsp" type="button"  class="btn btn-info btn-min-width mr-1 mb-1"><i class="ft-arrow-left"></i> Volver </a></center>

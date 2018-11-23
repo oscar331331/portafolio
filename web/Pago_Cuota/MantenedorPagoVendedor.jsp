@@ -64,7 +64,9 @@
         </div>
       </div>
     </nav>
-
+                <% HttpSession sesion = request.getSession(); %>
+                <% sesion.setAttribute("objCuota", null); %>
+                
     <!-- ////////////////////////////////////////////////////////////////////////////-->
     <c:choose>        
         <c:when test="${sessionScope.usuarioConectado.idUsuario==null}">
@@ -77,7 +79,6 @@
            <% response.sendRedirect("../Index.jsp"); %>
        </c:when>
     <c:otherwise>  
-        <% HttpSession sesion = request.getSession(); %>
         <% sesion.setAttribute("pagoAEditar", null); %>
     <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="../theme-assets/images/backgrounds/02.jpg">
         <div class="navbar-header">

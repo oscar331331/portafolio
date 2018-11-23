@@ -70,6 +70,10 @@
                 <c:when test="${sessionScope.usuarioConectado.idUsuario==null}">
                     <% response.sendRedirect("../login.jsp"); %>
                 </c:when>
+    <c:when test="${objCuota.idCuotaViaje == 0 || objCuota == null}">
+                    <% response.sendRedirect("../Cuota/MantenedorCuotaViaje.jsp"); %>
+                </c:when>
+
             <c:otherwise>  
 
     <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="../theme-assets/images/backgrounds/02.jpg">

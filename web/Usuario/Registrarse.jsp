@@ -29,17 +29,20 @@
 	<link rel="stylesheet" type="text/css" href="../loginCSS/css/main.css">
 <!--===============================================================================================-->
 
+  
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body>
-    
+    <c:choose>        
+                <c:when test="${sessionScope.usuarioConectado.idUsuario==null}">
+                    
 	<c:remove var="usuario"></c:remove>
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form" name="formGuardaApoderadoNuevo" method="post" action="../RegistroServlet">
+				<form class="login100-form validate-form" name="formGuardaApoderadoNuevo" onsubmit="return validapass()" method="post" action="../RegistroServlet">
 					<span class="login100-form-title p-b-26">
 						Registrarse
 					</span>
@@ -71,8 +74,15 @@
 						<span class="btn-show-pass">
 							<i class="zmdi zmdi-eye"></i>
 						</span>
-						<input type="password" name="Password"  class="input100"  required/>
-						<span class="focus-input100" data-placeholder="Contraseña"></span>
+						<input type="password" name="Password" id="pass1"  class="input100"  required/>
+						<span class="focus-input100" data-placeholder="Contraseña (min. 6 caracteres)"></span>
+					</div>
+                                        <div class="wrap-input100 validate-input" data-validate="Enter password">
+						<span class="btn-show-pass">
+							<i class="zmdi zmdi-eye"></i>
+						</span>
+						<input type="password" name="PasswordRep" id="pass2"  class="input100"  required/>
+						<span class="focus-input100" data-placeholder="Repetir Contraseña"></span>
 					</div>
 					<div class="wrap-input100 validate-input">
 						<input type="text" name="Alumno" class="input100" oninput="checkRut(this)" required/>
@@ -101,6 +111,7 @@
 						</a>
 					</div>
 					<script src="../Colegio/validaRUT.js"></script>
+                                        <script src="validaPass.js"></script>
 				</form>
 			</div>
 		</div>
@@ -126,5 +137,10 @@
 <!--===============================================================================================-->
 	<script src="../loginCSS/js/main.js"></script>
             
+                </c:when>
+        <c:otherwise>
+            <% response.sendRedirect("../login.jsp"); %>
+        </c:otherwise>
+    </c:choose>
 </body>
 </html>
