@@ -85,7 +85,7 @@ public class Contrato implements Serializable {
         this.idContrato = idContrato;
     }
 
-    public Contrato(int idContrato, String codigo, String fechaIncorporacion, String fechaMeta, int montoMeta, String fechaFinal, int montoActualContrato, int IdEstado, int IdCurso, int IdCliente, int IdPromotor, int cantAlumnos, int IdPaquete) {
+    public Contrato(int idContrato, String codigo, String fechaIncorporacion, String fechaMeta, int montoMeta, String fechaFinal, int montoActualContrato, int IdEstado, int IdCurso, int IdCliente, int IdPromotor, int IdPaquete) {
         this.idContrato = idContrato;
         this.codigo = codigo;
         this.fechaIncorporacion = fechaIncorporacion;
@@ -97,7 +97,6 @@ public class Contrato implements Serializable {
         this.IdCurso = IdCurso;
         this.IdCliente = IdCliente;
         this.IdPromotor = IdPromotor;
-        this.cantAlumnos = cantAlumnos;
         this.IdPaquete = IdPaquete;
     }
 
@@ -110,7 +109,7 @@ public class Contrato implements Serializable {
     }
     
     
-    public Contrato(String fechaIncorporacion, String fechaMeta, int montoMeta, String fechaFinal, int montoActualContrato, int IdCurso, int IdCliente, int IdPromotor, int cantAlumnos, int IdPaquete) {
+    public Contrato(String fechaIncorporacion, String fechaMeta, int montoMeta, String fechaFinal, int montoActualContrato, int IdCurso, int IdCliente, int IdPromotor, int IdPaquete) {
         this.fechaIncorporacion = fechaIncorporacion;
         this.fechaMeta = fechaMeta;
         this.montoMeta = montoMeta;
@@ -119,7 +118,6 @@ public class Contrato implements Serializable {
         this.IdCurso = IdCurso;
         this.IdCliente = IdCliente;
         this.IdPromotor = IdPromotor;
-        this.cantAlumnos = cantAlumnos;
         this.IdPaquete = IdPaquete;
     }
     
@@ -265,5 +263,17 @@ public class Contrato implements Serializable {
     @Override
     public String toString() {
         return "entidad.Contrato[ idContrato=" + idContrato + " ]";
+    }
+    
+    public String generarCodigo(){
+        String codigo = "";
+        for (int i = 0; i < 3; i++) {
+            char letra = (char) ((int) (Math.random() * (90 - 65 + 1) + 65));
+            codigo += letra;
+        }
+        codigo += (int) (Math.random() * (10000 - 1000 + 1) + 1000);
+        codigo += "-";
+        codigo += (char) ((int) (Math.random() * (90 - 65 + 1) + 65));
+        return codigo;
     }
 }

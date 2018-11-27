@@ -156,10 +156,6 @@
                                         <label>Monto Actual</label>
                                         <input type="number" name="MontoActual" min="0" max="700000000" value="0" class="form-control" placeholder="Ingrese monto actual en pesos" required/>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Cantidad de Alumnos</label>
-                                        <input type="number" name="CantAlumnos" min="0" max="700" value="0" class="form-control" placeholder="Ingrese contidad de alumnos" required/>
-                                    </div>
                                   
                                   <div class="form-group">
                                          <label>Paquete Turistico</label>
@@ -246,10 +242,6 @@
                                     <div class="form-group">
                                         <label>Monto Actual</label>
                                         <input type="number" name="MontoActualEditar" min="0" max="700000000" value="<c:out value="${contratoAEditar.montoActualContrato}" ></c:out>" class="form-control" placeholder="Ingrese monto actual en pesos" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Cantidad de Alumnos</label>
-                                        <input type="number" name="CantAlumnosEditar" min="0" max="700" value="<c:out value="${contratoAEditar.cantAlumnos}" ></c:out>" class="form-control" placeholder="" required/>
                                     </div>
                                     
                                     <div class="form-group">

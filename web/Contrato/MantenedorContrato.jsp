@@ -143,10 +143,9 @@
                                                                     <th>Fecha Final<font style="color:white;">aaaa</font></th>
                                                                     <th>Monto Meta<font style="color:white;">aaaa</font></th>                                    
                                                                     <th>Monto Actual Contrato</th>
-                                                                    <th>Cantidad Alumnos</th>
                                                                     <th>ID Curso</th>
-                                                                    <th>ID Promotor</th>
-                                                                    <th>ID Cliente</th>
+                                                                    <th>ID Ejecutivo de Venta</th>
+                                                                    <th>ID Encargado Curso</th>
                                                                     <th>Paquete Turistico</th>
                                                                     <c:if test="${sessionScope.perfil==2}">
                                                                     <th>Cuotas</th>
@@ -173,11 +172,10 @@
                                                                     
                                                                     <td>$ <c:out value="${contrato.montoMeta}"></c:out></td>
                                                                     <td>$ <c:out value="${contrato.montoActualContrato}"></c:out></td>
-                                                                    <td><c:out value="${contrato.cantAlumnos}"></c:out></td>
                                                                     <td><c:out value="${contrato.idCurso}"></c:out></td>
                                                                     <td><c:out value="${contrato.idPromotor}"></c:out></td>
+                                                                    <td><c:out value="${contrato.idCliente}"></c:out></td>
                                                                     <td><c:out value="${contrato.idPaquete}"></c:out></td>
-                                                                    <td><c:out value="${contrato.cantAlumnos}"></c:out></td>
                                                                     <c:if test="${sessionScope.perfil!=2}">
                                                                     <td>
                                                                     <c:url value="/ContratoServlet" var="urlEdit">
