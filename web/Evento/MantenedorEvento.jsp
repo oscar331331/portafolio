@@ -1,4 +1,8 @@
-<%@page import="java.text.SimpleDateFormat"%>
+<%-- 
+    Document   : MantenedorEvento
+    Created on : 2/12/2018, 06:11:50 PM
+    Author     : Vito
+--%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -13,7 +17,7 @@
     <meta name="description" content="Chameleon Admin is a modern Bootstrap 4 webapp &amp; admin dashboard html template with a large number of components, elegant design, clean and organized code.">
     <meta name="keywords" content="admin template, Chameleon admin template, dashboard template, gradient admin template, responsive admin template, webapp, eCommerce dashboard, analytic dashboard">
     <meta name="author" content="ThemeSelect">
-    <title>OnTour - Cuotas</title>
+    <title>OnTour - Pagos</title>
     <link rel="apple-touch-icon" href="theme-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="theme-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,600,600i,700,700i%7CComfortaa:300,400,700" rel="stylesheet">
@@ -71,11 +75,12 @@
 
     <!-- ////////////////////////////////////////////////////////////////////////////-->
     <c:choose>        
-        <c:when test="${sessionScope.usuarioConectado.idUsuario==null}">
-            <% response.sendRedirect("../login.jsp"); %>
-        </c:when>
-    <c:otherwise>  
-
+                <c:when test="${sessionScope.usuarioConectado.idUsuario==null}">
+                    <% response.sendRedirect("../login.jsp"); %>
+                </c:when>
+            <c:otherwise>  
+                <% HttpSession sesion = request.getSession(); %>
+                <% sesion.setAttribute("pagoAEditar", null); %>
     <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="../theme-assets/images/backgrounds/02.jpg">
       <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">       
@@ -98,80 +103,91 @@
         <div class="content-wrapper-before"></div>
         <div class="content-header row">
           <div class="content-header-left col-md-4 col-12 mb-2">
-            <h3 class="content-header-title">Cuotas</h3>
+            <h3 class="content-header-title">Pagos</h3>
           </div>
           <div class="content-header-right col-md-8 col-12">
             <div class="breadcrumbs-top float-md-right">
               <div class="breadcrumb-wrapper mr-1">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="../Index.jsp">Home</a>
+                  <li class="breadcrumb-item"><a href="../index_admin.html">Home</a>
                   </li>
-                  <li class="breadcrumb-item active">Cuotas
+                  <li class="breadcrumb-item active">Eventos
                   </li>
                 </ol>
               </div>
             </div>
           </div>
         </div>
-        <div class="content-body"><!-- Basic Tables start -->
+        
+        
 <div class="row">
 	<div class="col-12">
 		<div class="card">
 			<div class="card-header">
-				<h4 class="card-title">Mis Cuotas</h4>
+				<h4 class="card-title">Listado de eventos</h4>
 				<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
 				
 			</div>
+                    <div class="content-body"><!-- Basic Tables start -->
+            
 			<div class="card-content collapse show">
 				<div class="card-body">
 					
 					<div class="table-responsive">
-                                            <jsp:include page="../CuotaServlet" flush="true"/>
-                                            <jsp:useBean id="cuota" class="entidad.CuotaViaje" scope="session"/>
-                                            <center><h2>Mis Cuotas</h2></center>
-                                            <% HttpSession sesion = request.getSession(); %>
+                                            <jsp:include page="../EventoServlet" flush="true"/>
+                                            <jsp:useBean id="evento" class="entidad.Evento" scope="session"/>
+                                            <center><h2>Eventos </h2></center>
+                                            <div class="tooltip">Hover over me
+  <span class="tooltiptext">Tooltip text</span>
+</div>
                                             
-                                            
+                                            <c:if test="${sessionScope.msgBueno!=null}">
+             <div class="container"><div class="alert alert-success">
+                     <a href="#" class="close" data-dismiss="alert">&times;</a>       
+                     <center><c:out value="${msgBueno}"></c:out> </center>                          
+                        </div>                            
+                            <c:remove var="msgBueno"></c:remove>
+                        </div></c:if>
                                                 <table class="table table-striped">
                                                             <thead>
                                                                 <tr>    
-                                                                    <th>Id Cuota</th>
-                                                                    <th>Valor</th>                                                                                                   
+                                                                    <th>ID</th>
+                                                                    <th>Fecha del evento</th>
+                                                                    <th>Recaudado del evento</th>
+                                                                    <th>Descripcion</th>
+                                                                    <th>Identificar de Contrato</th>
+                                                                    <th>Comprobante</th>
                                                                     <th>Estado</th>
-                                                                    <th>Alumno</th>                                                                    
-                                                                    <c:if test="${sessionScope.perfil==2 || sessionScope.perfil==4}">
-                                                                    <th>Pagar</th>
-                                                                    </c:if>                                                                  
-                                                                    
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                            <c:forEach items="${listadoCuotaViaje}" var="cuota">
+                                                            <c:forEach items="${listadoEvento}" var="evento">
                                                                 <tr>
-                                                                    <td><c:out value="${cuota.idCuotaViaje}"></c:out></td>
-                                                                    <td>$ <c:out value="${cuota.valorCuotaViaje}"></c:out></td>
-                                                                    <td><c:out value="${cuota.fkIdEstadoCuota}"></c:out></td>
-                                                                    <td><c:out value="${cuota.fkIdAlumno}"></c:out></td>
-                                                                    <c:if test="${sessionScope.perfil==2 || sessionScope.perfil==4}">
-                                                                    <td>
-                                                                    <c:url value="/CuotaServlet" var="urlEdit">
-                                                                        <c:param name="id_cuota" value="${cuota.idCuotaViaje}"></c:param>
-                                                                        <c:param name="cant_cuota" value="${cuota.valorCuotaViaje}"></c:param>
-                                                                    </c:url>
-                                                                    <c:if test="${cuota.valorCuotaViaje==0}">
-                                                                        <input type="button" class="btn btn-success" name="btnPagar" disabled="true" value="Pagado" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
+                                                                    <td><c:out value="${evento.idEvento}"></c:out></td>
+                                                                    
+                                                                    <fmt:parseDate value="${evento.fechaEvento}" pattern="yyyy-MM-dd" var="fechaP"></fmt:parseDate>
+                                                                    <td><fmt:formatDate value="${fechaP}" pattern="dd-MM-yyyy" /></td>
+                                                                    
+                                                                    <td>$<c:out value="${evento.recaudadoEvento}"></c:out></td>
+                                                                    <td><c:out value="${evento.descripcionEvento}"></c:out></td>
+                                                                    <td><c:out value="${evento.fkIdContrato}"></c:out></td>
+                                                                    <td style="text-align: center;"><a target='_blank' href="../comprobantes/<c:out value="${evento.urlDocumentoEvento}"></c:out>" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="297" src="../comprobantes/<c:out value="${evento.urlDocumentoEvento}"></c:out>" width="400" /></a></td>
+                                                                    
+                                                                    
+                                                                    <c:if test= "${evento.fkIdEstadoEvento ==1}">
+                                                                        <td> <input type="button" class="btn btn-warning" value="Pendiente"/></td>
                                                                     </c:if>
-                                                                    <c:if test="${cuota.valorCuotaViaje!=0}">
-                                                                    <input type="button" class="btn btn-info" name="btnPagar" value="Pagar" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
+                                                                    <c:if test= "${evento.fkIdEstadoEvento ==2}">
+                                                                        <td> <input type="button" class="btn btn-success" value="Aceptado"/></td>
                                                                     </c:if>
-                                                                    </td>
+                                                                    <c:if test= "${evento.fkIdEstadoEvento ==3}">
+                                                                        <td> <input type="button" class="btn btn-danger" value="Rechazado"/></td>
                                                                     </c:if>
                                                                 </tr>
                                                             </c:forEach>                                               
                                                         </tbody>
                                                     </table>  
-                                            
-                                            </div>
+                                        </div>
 				</div>
 			</div>
 		</div>
@@ -207,3 +223,4 @@
     <!-- END PAGE LEVEL JS-->
   </body>
 </html>
+

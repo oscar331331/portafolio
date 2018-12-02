@@ -84,6 +84,10 @@ public class CuotaViajeServlet extends HttpServlet {
                 int id = (int) session.getAttribute("idUsuario");    
                 session.setAttribute("listadoCuotaViaje", objCuotaViajeBO.ListadoCuotaViajeApoderado(id));
             }
+            if (perfil==4){
+                int id = (int) session.getAttribute("idUsuario");    
+                session.setAttribute("listadoCuotaViaje", objCuotaViajeBO.ListadoCuotaViajeApoderado(id));
+            }
             else{
                 session.setAttribute("listadoCuotaViaje", objCuotaViajeBO.ListadoCuotaViaje());
             } 

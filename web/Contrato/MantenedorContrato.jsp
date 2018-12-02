@@ -150,7 +150,11 @@
                                                                     <c:if test="${sessionScope.perfil==2}">
                                                                     <th>Cuotas</th>
                                                                     </c:if>
-                                                                    <c:if test="${sessionScope.perfil!=2}">
+                                                                    <c:if test="${sessionScope.perfil==4}">
+                                                                    <th>Cuotas</th>
+                                                                    <th>Pago evento</th>
+                                                                    </c:if>
+                                                                    <c:if test="${sessionScope.perfil==1}">
                                                                     <th>Editar</th>
                                                                     </c:if>
                                                                     
@@ -176,7 +180,9 @@
                                                                     <td><c:out value="${contrato.idPromotor}"></c:out></td>
                                                                     <td><c:out value="${contrato.idCliente}"></c:out></td>
                                                                     <td><c:out value="${contrato.idPaquete}"></c:out></td>
-                                                                    <c:if test="${sessionScope.perfil!=2}">
+                                                                    
+                                                                    
+                                                                    <c:if test="${sessionScope.perfil==1 || sessionScope.perfil==3}">
                                                                     <td>
                                                                     <c:url value="/ContratoServlet" var="urlEdit">
                                                                         <c:param name="id_contrato" value="${contrato.idContrato}"></c:param>
@@ -184,6 +190,8 @@
                                                                     <input type="button" class="btn btn-info" name="btnEditar" value="Editar" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
                                                                     </td>
                                                                     </c:if>
+                                                                    
+                                                                    
                                                                     <c:if test="${sessionScope.perfil==2}">
                                                                     <td>
                                                                     <c:url value="/Pago_Cuota/MantenedorPago.jsp" var="urlEdit">
@@ -192,6 +200,26 @@
                                                                     <input type="button" class="btn btn-info" name="btnCuota" value="Cuota" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
                                                                     </td>
                                                                     </c:if>
+                                                                    
+                                                                    
+                                                                    <c:if test="${contrato.idCliente == usuarioConectado.idUsuario}">
+                                                                    <td>
+                                                                    <c:url value="/Cuota/MantenedorCuotaViaje.jsp" var="urlEdit">
+                                                                        <c:param name="id_contrato" value="${contrato.idContrato}"></c:param>
+                                                                    </c:url>
+                                                                    <input type="button" class="btn btn-info" name="btnCuota" value="Cuota" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                    <c:url value="/EventoServlet" var="urlEvento">
+                                                                        <c:param name="id_contrato" value="${contrato.idContrato}"></c:param>
+                                                                        <c:param name="pagoEvento" value="${contrato.montoMeta - contrato.montoActualContrato}"></c:param>
+                                                                    </c:url>
+                                                                    <input type="button" class="btn btn-info" name="btnEvento" value="Evento" onclick="window.location.href = '<c:out value="${urlEvento}"></c:out>'"/>
+                                                                    </td>
+                                                                    </c:if>
+                                                                    
+                                                                    
                                                                 </tr>
                                                             </c:forEach>                                               
                                                         </tbody>

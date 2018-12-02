@@ -58,13 +58,16 @@
                         </li>
                     </c:when>
                     <c:when test="${usuarioConectado.idPerfil==4}">
-                        <li class="nav-item"><a href=""><i class="ft-battery"></i><span class="menu-title" data-i18n="">Estado de Cuenta</span></a>
+                        <li class="nav-item"><a href="Contrato/MantenedorContrato.jsp"><i class="ft-file-text"></i><span class="menu-title" data-i18n="">Mis Contratos</span></a>
                         </li>
-                        <li class="nav-item"><a href=""><i class="ft-file-text"></i><span class="menu-title" data-i18n="">Contratos</span></a>
+                        <li class=" nav-item"><a href="Cuota/MantenedorCuotaViaje.jsp"><i class="ft-pie-chart"></i><span class="menu-title" data-i18n="">Mis Cuotas</span></a>
                         </li>
-                        <li class="nav-item"><a href=""><i class="ft-credit-card"></i><span class="menu-title" data-i18n="">Pagar Cuota</span></a>
+                        <li class=" nav-item"><a href="Pago_Cuota/MantenedorPago.jsp"><i class="ft-clipboard"></i><span class="menu-title" data-i18n="">Mis Pagos</span></a>
                         </li>
-                        <li class="nav-item"><a href="Alumno/MantenedorAlumno.jsp"><i class="ft-users"></i><span class="menu-title" data-i18n="">Alumnos</span></a>
+                        <li class=" nav-item"><a href="Evento/MantenedorEvento.jsp"><i class="ft-speaker"></i><span class="menu-title" data-i18n="">Eventos</span></a>
+                        </li>
+                        
+                        <li class="nav-item"><a href="Alumno/MantenedorAlumno.jsp"><i class="ft-users"></i><span class="menu-title" data-i18n=""> Mis Alumnos</span></a>
                         </li>
                     </c:when>
                     <c:when test="${usuarioConectado.idPerfil==5}">

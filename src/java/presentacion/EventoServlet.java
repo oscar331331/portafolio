@@ -5,35 +5,33 @@
  */
 package presentacion;
 
-import entidad.PagoCuota;
-import negocio.PagoCuotaBO;
+import entidad.Contrato;
+import entidad.CuotaViaje;
+import entidad.Evento;
 import java.io.File;
-import java.util.HashMap;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.nio.charset.StandardCharsets.ISO_8859_1;
-import static java.nio.charset.StandardCharsets.UTF_8;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import negocio.ContratoBO;
+import negocio.CuotaViajeBO;
+import negocio.EventoBO;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 /**
  *
- * @author pablo.abarca
+ * @author Vito
  */
-@WebServlet(name = "PagoServlet", urlPatterns = {"/PagoServlet","/Pago"})
-public class PagoServlet extends HttpServlet {
+@WebServlet(name = "EventoServlet", urlPatterns = {"/EventoServlet"})
+public class EventoServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,10 +50,10 @@ public class PagoServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ContratoServlet</title>");            
+            out.println("<title>Servlet EventoServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ContratoServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet EventoServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -73,34 +71,33 @@ public class PagoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-        PagoCuotaBO objPagoBO= new PagoCuotaBO();
-        if(request.getParameter("idPagoCuota")!=null)
-        {
+            ContratoBO objContratoBO= new ContratoBO();
+            EventoBO objEventoBO= new EventoBO();
+            
+            if(request.getParameter("id_contrato")!=null)
+            {
             HttpSession sesion = request.getSession();
-            int pagoEditar=Integer.parseInt(request.getParameter("idPagoCuota"));        
-            PagoCuota infoPago=objPagoBO.buscaPagoCuotaPorId(pagoEditar);
-            sesion.setAttribute("pagoAEditar", infoPago);
-            response.sendRedirect("Pago_Cuota/IngresoPago.jsp");
-        }
-        else
-        {
-        HttpSession session = request.getSession();    
-        int perfil = (int) session.getAttribute("perfil");
-          if (perfil==2){
-          int id = (int) session.getAttribute("idUsuario");    
-          session.setAttribute("listadoPagoCuota", objPagoBO.ListadoPagoCuotasApoderado(id));
-          }
-          if (perfil==4){
-          int id = (int) session.getAttribute("idUsuario");    
-          session.setAttribute("listadoPagoCuota", objPagoBO.ListadoPagoCuotasApoderado(id));
-          }
-          else{      
-        session.setAttribute("listadoPagoCuota", objPagoBO.ListadoPagoCuotas());   
-        }
-        }
-                
+            int contratoAPagar=Integer.parseInt(request.getParameter("id_contrato"));        
+            int valorAPagar=Integer.parseInt(request.getParameter("pagoEvento")); 
+            Contrato infoContrato=objContratoBO.buscaContratoPorId(contratoAPagar);
+            sesion.setAttribute("objContrato", infoContrato);
+            response.sendRedirect("Evento/IngresoEvento.jsp");
+            }else{              
+            
+        
+            HttpSession session = request.getSession();    
+            int perfil = (int) session.getAttribute("perfil");
+            if (perfil==2){
+            int id = (int) session.getAttribute("idUsuario");    
+            session.setAttribute("listadoEvento", objEventoBO.ListadoEventos());
+            }
+            else if (perfil==3){  
+            session.setAttribute("listadoEvento", objEventoBO.ListadoEventos());   
+            }else{
+            session.setAttribute("listadoEvento", objEventoBO.ListadoEventos());   
+            }
+            }
+        
     }
 
     /**
@@ -115,16 +112,14 @@ public class PagoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sesion= request.getSession();
-        if(sesion.getAttribute("pagoAEditar") != null){
+       if(sesion.getAttribute("eventoAEditar") != null){
            
             int Estadopago =Integer.parseInt(request.getParameter("IdEstado"));
-           
-
-            int id_pago = ((PagoCuota)sesion.getAttribute("pagoAEditar")).getIdPagoCuota();
-            PagoCuota infoPago= new PagoCuota(id_pago, id_pago, Estadopago, null, null);
+            int id_pago = ((Evento)sesion.getAttribute("pagoAEditar")).getIdEvento();
+            Evento infoEvento= new Evento();
             
-            PagoCuotaBO objPagoBO= new PagoCuotaBO();
-            if(objPagoBO.updatePagoCuota(infoPago)){
+            EventoBO objPagoBO= new EventoBO();
+            if(objPagoBO.updateEvento(infoEvento)){
                 response.sendRedirect("Pago_Cuota/MantenedorPagoVendedor.jsp");
                 sesion.removeAttribute("pagoAEditar");
             }else{
@@ -186,25 +181,30 @@ public class PagoServlet extends HttpServlet {
                 }
 
                 String fecha = map.get("Fecha_pago");            
+                String desc = map.get("desc_evento");            
                 int valor = Integer.parseInt(map.get("Valor_pago"));
-                int idCuotaViaje = Integer.parseInt(map.get("idCuotaViaje"));
+                int idContrato = Integer.parseInt(map.get("idContrato"));
                 String imagen = (map.get("imagen"));
-                int estadoCuota=1;
+                int estadoEvento=1;
 
-                PagoCuota infoPagoCuota = new PagoCuota(valor,estadoCuota,fecha,imagen,idCuotaViaje);
-                PagoCuotaBO objPagoCuotaBO= new PagoCuotaBO();
-                if(objPagoCuotaBO.addPagoCuota(infoPagoCuota)){
+                Evento infoEvento = new Evento(fecha, valor, desc, imagen, idContrato, estadoEvento);
+                EventoBO objEventoBO= new EventoBO();
+                if(objEventoBO.addEvento(infoEvento)){
                     sesion.setAttribute("msgBueno", "Pago realizado, será validado por un vendedor para confirmación");
                     response.sendRedirect("Pago_Cuota/MantenedorPago.jsp");
                 }else{
                     sesion.setAttribute("msgError", "no se pudo actualizar a la BD 3");
-                    response.sendRedirect("Pago_Cuota/IngresoPago.jsp");
+                    response.sendRedirect("Evento/IngresoEvento.jsp");
                 } 
             }
         }
     }
-    
 
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
     @Override
     public String getServletInfo() {
         return "Short description";
