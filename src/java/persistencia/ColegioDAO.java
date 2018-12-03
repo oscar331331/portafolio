@@ -25,6 +25,7 @@ public class ColegioDAO implements ICrud {
     public ColegioDAO() {
     }
 
+    @Override
     public boolean addElemento(Object objetoInsert) {
         Colegio objColegio = (Colegio) objetoInsert;
         try {

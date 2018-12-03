@@ -31,16 +31,17 @@ public class UsuarioDAO implements ICrud {
         try {
             Connection con = Conexion.getConexion();
             CallableStatement cs = null;
-            cs = con.prepareCall("{call InsertarUsuarios(?,?,?,?,?,?)}");
+            cs = con.prepareCall("{call InsertarUsuarios(?,?,?,?,?,?,?)}");
             cs.setString(1, objUsuario.getNombreUsuario());
             cs.setString(2, objUsuario.getApellidoUsuario());
             cs.setString(3, objUsuario.getCorreoUsuario());
             cs.setString(4, objUsuario.getPasswordUsuario());
-            cs.setInt(5, objUsuario.getIdPerfil());
+            cs.setInt(5, objUsuario.getIdPerfil());        
             if(objUsuario.getIdPerfil()==2){
                 active=2;
             }
             cs.setInt(6, active); // valor por defecto 1 para activo
+            cs.setString(7, objUsuario.getRutUsuario());
             try {
                 return cs.executeUpdate() == 1;
             } catch (Exception e) {
@@ -63,7 +64,7 @@ public class UsuarioDAO implements ICrud {
             cs.executeQuery();
             ResultSet rs = (ResultSet)cs.getObject(1); 
             while (rs.next()) {
-                Usuario  infoUsuario = new Usuario(rs.getInt("id_usuario"), rs.getString("nombre_usuario"), rs.getString("apellido_usuario"), rs.getString("correo_usuario"), rs.getInt("fk_id_perfil"), rs.getInt("active"));
+                Usuario  infoUsuario = new Usuario(rs.getInt("id_usuario"), rs.getString("nombre_usuario"), rs.getString("apellido_usuario"), rs.getString("correo_usuario"), rs.getInt("fk_id_perfil"), rs.getInt("active"), rs.getString("rut_usuario"));
                 System.out.println(infoUsuario.toString());
                 listadoUsuario.add(infoUsuario);
             }
@@ -79,7 +80,7 @@ public class UsuarioDAO implements ICrud {
         try {
             Connection con = Conexion.getConexion();
             CallableStatement cs = null;
-            cs = con.prepareCall("{call EditarUsuarios(?,?,?,?,?,?,?)}");
+            cs = con.prepareCall("{call EditarUsuarios(?,?,?,?,?,?,?,?)}");
             cs.setInt(1, objUsuario.getIdUsuario());
             cs.setString(2, objUsuario.getNombreUsuario());
             cs.setString(3, objUsuario.getApellidoUsuario());
@@ -87,6 +88,7 @@ public class UsuarioDAO implements ICrud {
             cs.setString(5, objUsuario.getPasswordUsuario());
             cs.setInt(6, objUsuario.getIdPerfil());
             cs.setInt(7, objUsuario.getActive());//active
+            cs.setString(8, objUsuario.getRutUsuario());
             
             try {
                 return cs.executeUpdate() == 1;
@@ -179,7 +181,7 @@ public class UsuarioDAO implements ICrud {
             ResultSet rs = (ResultSet)cs.getObject(3); 
             while (rs.next()) {
                 System.out.println(rs.getString("nombre_usuario"));
-                infoUsuario = new Usuario(rs.getInt("id_usuario"), rs.getString("nombre_usuario"), rs.getString("apellido_usuario"), rs.getString("correo_usuario"), rs.getInt("fk_id_perfil"), rs.getInt("active"));
+                infoUsuario = new Usuario(rs.getInt("id_usuario"), rs.getString("nombre_usuario"), rs.getString("apellido_usuario"), rs.getString("correo_usuario"), rs.getInt("fk_id_perfil"), rs.getInt("active"), rs.getString("rut_usuario"));
             }
         } catch (Exception e) {
             System.out.println("no se pudo ingresar al sistema "+e.getMessage());
@@ -199,13 +201,14 @@ public class UsuarioDAO implements ICrud {
             cs.executeQuery();
             ResultSet rs = (ResultSet)cs.getObject(2);
             while (rs.next()) {
-                infoUsuario = new Usuario(rs.getInt("id_usuario"), rs.getString("nombre_usuario"), rs.getString("apellido_usuario"), rs.getString("correo_usuario"), rs.getInt("fk_id_perfil"), rs.getInt("active"));
+                infoUsuario = new Usuario(rs.getInt("id_usuario"), rs.getString("nombre_usuario"), rs.getString("apellido_usuario"), rs.getString("correo_usuario"), rs.getInt("fk_id_perfil"), rs.getInt("active"), rs.getString("rut_usuario"));
             }
         } catch (Exception e) {
             System.out.println("no se pudo ingresar al sistema");
         }
         return infoUsuario;        
     }
+    
     public Usuario buscaUsuarioPorCorreo(String correo) {
         Usuario infoUsuario = null;
         try {
@@ -217,13 +220,14 @@ public class UsuarioDAO implements ICrud {
             cs.executeQuery();
             ResultSet rs = (ResultSet)cs.getObject(2);
             while (rs.next()) {
-                infoUsuario = new Usuario(rs.getInt("id_usuario"), rs.getString("nombre_usuario"), rs.getString("apellido_usuario"), rs.getString("correo_usuario"), rs.getInt("fk_id_perfil"), rs.getInt("active"));
+                infoUsuario = new Usuario(rs.getInt("id_usuario"), rs.getString("nombre_usuario"), rs.getString("apellido_usuario"), rs.getString("correo_usuario"), rs.getInt("fk_id_perfil"), rs.getInt("active"), rs.getString("rut_usuario"));
             }
         } catch (Exception e) {
             System.out.println("no se pudo ingresar al sistema");
         }
         return infoUsuario;        
     }
+    
     public int buscaAlumnoXRUTXContratoXCodigo(String rut, String codigo) {
         try {
             Connection con = Conexion.getConexion();
@@ -247,6 +251,25 @@ public class UsuarioDAO implements ICrud {
             System.out.println("no se pudo ingresar al sistema");
         }
         return 0;        
+    }
+    
+    public boolean buscaUsuarioPorRut(String rut) {
+        //Usuario infoUsuario = null;
+        try {
+            Connection con = Conexion.getConexion();
+            CallableStatement cs = null;
+            cs = con.prepareCall("{call BUSCARUSUARIOXRUT(?,?)}");
+            cs.setString(1, rut);
+            cs.registerOutParameter(2, OracleTypes.CURSOR);
+            cs.executeQuery();
+            ResultSet rs = (ResultSet)cs.getObject(2);
+            //while (rs.next()) {
+                //infoUsuario = new Usuario(rs.getInt("id_usuario"), rs.getString("nombre_usuario"), rs.getString("apellido_usuario"), rs.getString("correo_usuario"), rs.getInt("fk_id_perfil"), rs.getInt("active"), rs.getString("rut_usuario"));
+            //}
+        } catch (Exception e) {
+            System.out.println("No se pudo ingresar al sistema");
+        }
+        return false;        
     }
     
 

@@ -90,6 +90,7 @@ public class UsuarioServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession sesion= request.getSession();     
         if(sesion.getAttribute("usuarioAEditar") != null){
+            String rut=request.getParameter("RutEditar");
             String nombre=request.getParameter("NombreEditar");
             String apellido =request.getParameter("ApellidoEditar");
             String correo=request.getParameter("CorreoEditar");
@@ -101,10 +102,10 @@ public class UsuarioServlet extends HttpServlet {
             
             if(!"".equals(password)){
                 
-                infoUsuario= new Usuario(nombre,apellido,correo,password,perfil,active);
+                infoUsuario= new Usuario(nombre,apellido,correo,password,perfil,active,rut);
             }
             else
-                infoUsuario= new Usuario(nombre,apellido,correo,perfil,active);
+                infoUsuario= new Usuario(nombre,apellido,correo,perfil,active,rut);
             
             infoUsuario.setIdUsuario(((Usuario)sesion.getAttribute("usuarioAEditar")).getIdUsuario());
             UsuarioBO objUsuarioBO= new UsuarioBO();
@@ -132,22 +133,28 @@ public class UsuarioServlet extends HttpServlet {
             
         }
         else {
+            String rut=request.getParameter("Rut");
             String nombre=request.getParameter("Nombre");
             String apellido =request.getParameter("Apellido");
             String correo=request.getParameter("Correo");
             String password=request.getParameter("Password");
             int perfil=Integer.parseInt(request.getParameter("Perfil"));
-            Usuario infoUsuario= new Usuario(nombre,apellido,correo,password,perfil,1);
+            Usuario infoUsuario= new Usuario(nombre,apellido,correo,password,perfil,1,rut);
             UsuarioBO objUsuarioBO= new UsuarioBO();
-            if(objUsuarioBO.addUsuario(infoUsuario)){
-                //response.sendRedirect("Usuario/MantenedorUsuario.jsp");
-                //sesion.setAttribute("msgError", "Ingresado correctamente");
-                response.sendRedirect("Usuario/MantenedorUsuario.jsp");
-                sesion.setAttribute("msgBueno", "Usuario creado correctamente");
-            }else{
-                sesion.setAttribute("msgError", "no se pudo ingresar a la BD");
-                response.sendRedirect("Usuario/IngresoUsuario.jsp");
-            }   
+            //if(objUsuarioBO.buscaUsuarioPorRut(rut)){
+                //response.sendRedirect("Usuario/IngresoUsuario.jsp");
+                if(objUsuarioBO.addUsuario(infoUsuario)){
+                    sesion.setAttribute("msgError", "Ingresado correctamente");
+                    response.sendRedirect("Usuario/MantenedorUsuario.jsp");
+                    sesion.setAttribute("msgBueno", "Usuario creado correctamente");
+                }else{
+                    sesion.setAttribute("msgError", "no se pudo ingresar a la BD");
+                    response.sendRedirect("Usuario/IngresoUsuario.jsp");
+                }
+            //}else{
+                //sesion.setAttribute("msgError", "Rut ya registrado en la BD");
+                //response.sendRedirect("Usuario/IngresoUsuario.jsp");
+            //}
         }
     }
     

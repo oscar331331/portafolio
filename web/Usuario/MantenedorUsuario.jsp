@@ -139,7 +139,8 @@
             <center><h2>Mantenedor Usuarios </h2></center>
                 <table class="table table-striped">
                             <thead>
-                                <tr>                            
+                                <tr>
+                                    <th>Rut</th>
                                     <th>Nombre</th>
                                     <th>Apellido</th>
                                     <th>Correo</th>
@@ -151,6 +152,7 @@
                             <tbody>
                             <c:forEach items="${listadoUsuario}" var="usuario">
                                 <tr>
+                                    <td><c:out value="${usuario.rutUsuario}"></c:out></td> 
                                     <td><c:out value="${usuario.nombreUsuario}"></c:out></td>                            
                                     <td><c:out value="${usuario.apellidoUsuario}"></c:out></td>
                                     <td><c:out value="${usuario.correoUsuario}"></c:out></td>
@@ -183,7 +185,7 @@
                                     <c:url value="/UsuarioServlet" var="urlEdit">
                                         <c:param name="id_usuario" value="${usuario.idUsuario}"></c:param>
                                     </c:url>
-                                    <input type="button" class="btn btn-info" name="btnEditar" value="editar" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
+                                    <input type="button" class="btn btn-info" name="btnEditar" value="Editar" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
                                     </td>                                    
                                 </tr>
                             </c:forEach>                                               

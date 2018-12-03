@@ -50,6 +50,10 @@ public class UsuarioBO {
     public boolean deleteUsuario(int id){
         return this.objUsuarioDAO.deleteElemento(id);
     }
+    
+    public boolean buscaUsuarioPorRut(String rut){
+        return this.objUsuarioDAO.buscaUsuarioPorRut(rut);
+    }
 
     public Usuario loginUsuario(String u, String p) {
         Usuario objUsuario = null;

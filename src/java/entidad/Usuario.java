@@ -31,6 +31,8 @@ public class Usuario implements Serializable {
     @Size(max = 52)
     @Column(name = "apellido_usuario", length = 52)
     private String apellidoUsuario;
+    @Column(name = "rut_usuario", length = 52)
+    private String rutUsuario;
     @Size(max = 255)
     @Column(name = "correo_usuario", length = 255)
     private String correoUsuario;
@@ -52,30 +54,33 @@ public class Usuario implements Serializable {
         this.idUsuario = idUsuario;
     }
 
-    public Usuario(String nombre, String apellido, String correo, int idPerfil, int active) {
+    public Usuario(String nombre, String apellido, String correo, int idPerfil, int active, String rutUsuario) {
         this.nombreUsuario = nombre;
         this.apellidoUsuario= apellido;
         this.correoUsuario = correo;
         this.idPerfil = idPerfil;
         this.active = active;
+        this.rutUsuario = rutUsuario;
     }
     
-    public Usuario(int id, String nombre, String apellido, String correo, int idPerfil, int active) {
+    public Usuario(int id, String nombre, String apellido, String correo, int idPerfil, int active, String rutUsuario) {
         this.idUsuario = id;
         this.nombreUsuario = nombre;
         this.apellidoUsuario= apellido;
         this.correoUsuario = correo;
         this.idPerfil = idPerfil;
         this.active = active;
+        this.rutUsuario = rutUsuario;
     }
 
-    public Usuario(String nombreUsuario, String apellidoUsuario, String correoUsuario, String passwordUsuario, int idPerfil, int active) {
+    public Usuario(String nombreUsuario, String apellidoUsuario, String correoUsuario, String passwordUsuario, int idPerfil, int active, String rutUsuario) {
         this.apellidoUsuario = apellidoUsuario;
         this.correoUsuario = correoUsuario;
         this.nombreUsuario = nombreUsuario;
         this.passwordUsuario = passwordUsuario;
         this.idPerfil = idPerfil;
         this.active = active;
+        this.rutUsuario = rutUsuario;
     }
     
     public Usuario(String nombre, String apellido, String correo, String password, int perfil) {
@@ -84,7 +89,15 @@ public class Usuario implements Serializable {
         this.correoUsuario = correo;
         this.passwordUsuario = password;
         this.idPerfil = perfil;
-    }    
+    } 
+
+    public String getRutUsuario() {
+        return rutUsuario;
+    }
+
+    public void setRutUsuario(String rutUsuario) {
+        this.rutUsuario = rutUsuario;
+    }
 
     public Integer getIdUsuario() {
         return idUsuario;

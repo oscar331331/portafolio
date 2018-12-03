@@ -143,6 +143,10 @@
                             <form name="formGuardaUsuarioNuevo" onsubmit="return validapass()" method="post" action="../UsuarioServlet">
                               <div class="container">
                                     <div class="form-group">
+                                        <label>Rut Usuario</label>
+                                        <input type="text" name="Rut" class="form-control" placeholder="Ingrese Rut" required/>
+                                    </div>
+                                    <div class="form-group">
                                         <label>Nombre</label>
                                         <input type="text" name="Nombre" class="form-control" placeholder="Ingrese Nombre" required/>
                                     </div>
@@ -196,6 +200,10 @@
                             <center><h2>Editar Usuario</h2></center>
                             <form name="formGuardaUsuarioEditado" method="post" onsubmit="return validapass()" action="../UsuarioServlet">
                                 <div class="container">
+                                    <div class="form-group">
+                                        <label>Rut Usuario</label>
+                                        <input type="text" name="RutEditar" value="<c:out value="${usuarioAEditar.rutUsuario}" ></c:out>" class="form-control" placeholder="Ingrese Rut" required/>
+                                    </div>
                                     <div class="form-group">
                                         <label>Nombre</label>
                                         <input type="text" name="NombreEditar" value="<c:out value="${usuarioAEditar.nombreUsuario}" ></c:out>" class="form-control" placeholder="Ingrese Nombre" required/>
