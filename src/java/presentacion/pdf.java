@@ -22,6 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import entidad.Contrato;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import negocio.ContratoBO;
 
 /**
@@ -68,14 +70,15 @@ public class pdf extends HttpServlet {
                 par2.add(new Phrase(Chunk.NEWLINE));
                 documento.add(par2);
                 
+               
                 Paragraph par3 = new Paragraph();
                 Font fonttitulo5 = new Font(Font.FontFamily.HELVETICA,10,Font.NORMAL,BaseColor.BLACK);
-                par2.add(new Phrase("Con fecha " + infoContrato.getFechaIncorporacion() + " la prestadora de servicios"
-                        + "ONTOUR LIMITADA, viene a celebrar contrato de prestacion de servicios con ...",fonttitulo5));
-                par2.add(new Phrase(Chunk.NEWLINE));
-                par2.setAlignment(Element.ALIGN_JUSTIFIED);
-                par2.add(new Phrase(Chunk.NEWLINE));
-                documento.add(par2);
+                par3.add(new Phrase("Con fecha " + infoContrato.getFechaIncorporacion() + " la prestadora de servicios"
+                        + " ONTOUR LIMITADA, viene a celebrar contrato de prestacion de servicios con ...",fonttitulo5));
+                par3.add(new Phrase(Chunk.NEWLINE));
+                par3.setAlignment(Element.ALIGN_JUSTIFIED);
+                par3.add(new Phrase(Chunk.NEWLINE));
+                documento.add(par3);
                 
                 
                 
