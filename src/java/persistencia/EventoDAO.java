@@ -71,8 +71,25 @@ public class EventoDAO implements ICrud {
 
     @Override
     public boolean updateElemento(Object objetoUpdate) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Evento objEvento = (Evento) objetoUpdate;
+        try {
+            Connection con = Conexion.getConexion();
+            CallableStatement cs = null;
+            cs = con.prepareCall("{call EDITARESTADOEVENTO(?,?)}");
+            cs.setInt(2, objEvento.getIdEvento());
+            cs.setInt(1, objEvento.getFkIdEstadoEvento());
+            
+            try {
+                return cs.executeUpdate() == 1;
+            } catch (Exception e) {
+                System.out.println("Problemas al actualizar: "+e);
+            }
+        } catch (Exception e) {
+            System.out.println("No se pudo updatear la base de datos "+ e.getMessage());
+        }
+        return false;  
     }
+    
 
     @Override
     public boolean deleteElemento(int codigo) {
@@ -99,6 +116,69 @@ public class EventoDAO implements ICrud {
             System.out.println("no se pudo ingresar al sistema "+e.getMessage());
         }
         return listadoPagoCuota;
+    }
+    
+    public List readElementosApoderado(int id) {
+    List<Evento> listadoEvento = new LinkedList<>();
+        try {
+            Connection con = Conexion.getConexion();
+            CallableStatement cs = null;
+            cs = con.prepareCall("{call BUSCAREVENTOSXAPODERADO(?,?)}");
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.setInt(2, id);
+            cs.executeQuery();
+            ResultSet rs = (ResultSet)cs.getObject(1); 
+            while (rs.next()) {
+                Evento infoEvento = new Evento(rs.getInt("ID_EVENTO"), rs.getString("FECHA_EVENTO"), rs.getInt("RECAUDADO_EVENTO"), rs.getString("DESCRIPCION_EVENTO"), rs.getString("URL_DOCUMENTO_EVENTO"), rs.getInt("FK_ID_CONTRATO"), rs.getInt("FK_ID_ESTADO_EVENTO"));
+                System.out.println(infoEvento.toString());
+                listadoEvento.add(infoEvento);
+            }
+        } catch (Exception e) {
+            System.out.println("no se pudo ingresar al sistema "+e.getMessage());
+        }
+        return listadoEvento;
+    }
+    
+    
+    public List readElementosEncargado(int id) {
+    List<Evento> listadoEvento = new LinkedList<>();
+        try {
+            Connection con = Conexion.getConexion();
+            CallableStatement cs = null;
+            cs = con.prepareCall("{call BUSCAREVENTOSXENCARGADO(?,?)}");
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.setInt(2, id);
+            cs.executeQuery();
+            ResultSet rs = (ResultSet)cs.getObject(1); 
+            while (rs.next()) {
+                Evento infoEvento = new Evento(rs.getInt("ID_EVENTO"), rs.getString("FECHA_EVENTO"), rs.getInt("RECAUDADO_EVENTO"), rs.getString("DESCRIPCION_EVENTO"), rs.getString("URL_DOCUMENTO_EVENTO"), rs.getInt("FK_ID_CONTRATO"), rs.getInt("FK_ID_ESTADO_EVENTO"));
+                System.out.println(infoEvento.toString());
+                listadoEvento.add(infoEvento);
+            }
+        } catch (Exception e) {
+            System.out.println("no se pudo ingresar al sistema "+e.getMessage());
+        }
+        return listadoEvento;
+    }
+
+    public Evento buscaEventoPorId(int id) {
+        Evento infoEvento = null;
+        try {
+            Connection con = Conexion.getConexion();
+            CallableStatement cs = null;
+            cs = con.prepareCall("{call BUSCAREVENTO(?,?)}");
+            cs.setInt(1, id);
+            cs.registerOutParameter(2, OracleTypes.CURSOR);
+            cs.executeQuery();
+            ResultSet rs = (ResultSet)cs.getObject(2);
+            while (rs.next()) {
+                infoEvento = new Evento(rs.getInt("ID_EVENTO"), rs.getString("FECHA_EVENTO"), rs.getInt("RECAUDADO_EVENTO"), rs.getString("DESCRIPCION_EVENTO"), rs.getString("URL_DOCUMENTO_EVENTO"), rs.getInt("FK_ID_CONTRATO"), rs.getInt("FK_ID_ESTADO_EVENTO"));
+                System.out.println(infoEvento.getIdEvento());     
+            }
+        } catch (Exception e) {
+            System.out.println("no se pudo ingresar al sistema");
+        }
+        return infoEvento;  
     }
     
 }

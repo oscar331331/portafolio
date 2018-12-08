@@ -92,7 +92,7 @@ public class PagoServlet extends HttpServlet {
           int id = (int) session.getAttribute("idUsuario");    
           session.setAttribute("listadoPagoCuota", objPagoBO.ListadoPagoCuotasApoderado(id));
           }
-          if (perfil==4){
+          else if (perfil==4){
           int id = (int) session.getAttribute("idUsuario");    
           session.setAttribute("listadoPagoCuota", objPagoBO.ListadoPagoCuotasApoderado(id));
           }

@@ -81,6 +81,14 @@ public class ContratoServlet extends HttpServlet {
                 int id = (int) session.getAttribute("idUsuario");    
                 session.setAttribute("listadoContrato", objContratoBO.ListadoContratosApoderado(id));
             }
+            else if(perfil==4){
+
+                int id = (int) session.getAttribute("idUsuario");    
+                session.setAttribute("listadoContrato", objContratoBO.ListadoContratosEncargado(id));
+
+            }
+                    
+            
             else{
                 session.setAttribute("listadoContrato", objContratoBO.ListadoContratos());
             }   

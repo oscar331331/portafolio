@@ -74,14 +74,14 @@ public class EventoServlet extends HttpServlet {
             ContratoBO objContratoBO= new ContratoBO();
             EventoBO objEventoBO= new EventoBO();
             
-            if(request.getParameter("id_contrato")!=null)
+            if(request.getParameter("eventoAEditarVende")!=null)
             {
             HttpSession sesion = request.getSession();
-            int contratoAPagar=Integer.parseInt(request.getParameter("id_contrato"));        
-            int valorAPagar=Integer.parseInt(request.getParameter("pagoEvento")); 
-            Contrato infoContrato=objContratoBO.buscaContratoPorId(contratoAPagar);
-            sesion.setAttribute("objContrato", infoContrato);
-            response.sendRedirect("Evento/IngresoEvento.jsp");
+            int eventoEditar=Integer.parseInt(request.getParameter("eventoAEditarVende"));        
+            Evento infoEvento=objEventoBO.buscaEventoPorId(eventoEditar);
+            sesion.setAttribute("eventoAEditarVende", infoEvento);
+            response.sendRedirect("Evento/IngresoEvento.jsp");    
+
             }else{              
             
         
@@ -89,7 +89,11 @@ public class EventoServlet extends HttpServlet {
             int perfil = (int) session.getAttribute("perfil");
             if (perfil==2){
             int id = (int) session.getAttribute("idUsuario");    
-            session.setAttribute("listadoEvento", objEventoBO.ListadoEventos());
+            session.setAttribute("listadoEvento", objEventoBO.ListadoEventosApoderado(id));
+            }
+            else if (perfil==4){
+            int id = (int) session.getAttribute("idUsuario");    
+            session.setAttribute("listadoEvento", objEventoBO.ListadoEventosEncargado(id));
             }
             else if (perfil==3){  
             session.setAttribute("listadoEvento", objEventoBO.ListadoEventos());   
@@ -112,19 +116,22 @@ public class EventoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sesion= request.getSession();
-       if(sesion.getAttribute("eventoAEditar") != null){
+       if(sesion.getAttribute("eventoAEditarVende") != null){
            
-            int Estadopago =Integer.parseInt(request.getParameter("IdEstado"));
-            int id_pago = ((Evento)sesion.getAttribute("pagoAEditar")).getIdEvento();
-            Evento infoEvento= new Evento();
+            int EstadoEvento =Integer.parseInt(request.getParameter("IdEstado"));
+           
+
+            int id_evento = ((Evento)sesion.getAttribute("eventoAEditarVende")).getIdEvento();
+            Evento infoEvento = new Evento(id_evento, null, EstadoEvento, null, null, id_evento, EstadoEvento);
             
-            EventoBO objPagoBO= new EventoBO();
-            if(objPagoBO.updateEvento(infoEvento)){
-                response.sendRedirect("Pago_Cuota/MantenedorPagoVendedor.jsp");
-                sesion.removeAttribute("pagoAEditar");
+            EventoBO objEventoBO= new EventoBO();
+            if(objEventoBO.updateEvento(infoEvento)){
+                response.sendRedirect("Evento/MantenedorEvento.jsp");
+                sesion.removeAttribute("EventoAEditar");
+                sesion.removeAttribute("eventoAEditarVende");
             }else{
                 sesion.setAttribute("msgError", "no se pudo actualizar a la BD");
-                response.sendRedirect("Pago_Cuota/MantenedorPagoVendedor.jsp");
+                response.sendRedirect("Evento/MantenedorPagoVendedor.jsp");
             } 
         }
         else {

@@ -23,6 +23,16 @@ public class EventoBO {
     public List<Evento> ListadoEventos(){
         return this.objEventoDAO.readElementos();
     }
+    public List<Evento> ListadoEventosApoderado(int id){
+        return this.objEventoDAO.readElementosApoderado(id);
+    }
+    public List<Evento> ListadoEventosEncargado(int id){
+        return this.objEventoDAO.readElementosEncargado(id);
+    }
+    
+    public Evento buscaEventoPorId(int id){
+        return this.objEventoDAO.buscaEventoPorId(id);
+    }
     public List<Evento> ListadoEventosContrato(int id){
         return this.objEventoDAO.readElementosContrato(id);
     }

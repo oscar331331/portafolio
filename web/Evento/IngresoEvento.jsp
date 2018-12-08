@@ -125,9 +125,9 @@
             
             
             <c:choose>
-                    <c:when test="${sessionScope.pagoAEditar==null}">
+                    <c:when test="${sessionScope.eventoAEditarVende==null}">
                         <div class="container">
-                           <br> <center><h4>Ingresar Pago</h4></center><br>
+                           <br> <center><h4>Ingresar Evento</h4></center><br>
                             <form name="formGuardaPagoNuevo" method="post" action="../EventoServlet" enctype="multipart/form-data">
                               <div class="container">
                                   <fieldset>
@@ -175,22 +175,22 @@
                         </div> 
                         
                         </c:when>
-                        <c:when test="${sessionScope.pagoAEditar!=null}">
-                            <jsp:useBean id="pagoAEditar" class="entidad.PagoCuota" scope="session"></jsp:useBean>
+                        <c:when test="${sessionScope.eventoAEditarVende!=null}">
+                            <jsp:useBean id="eventoAEditar" class="entidad.Evento" scope="session"></jsp:useBean>
                         <div class="container">
-                            <center><br><h2>Editar estado pago ID <c:out value="${pagoAEditar.idPagoCuota}"></c:out></h2></center>
-                            Estado Actual: <c:if test= "${pagoAEditar.fkIdEstadoPagoCuota == 1}">
+                            <center><br><h2>Editar estado pago ID <c:out value="${eventoAEditarVende.idEvento}"></c:out></h2></center>
+                        Estado Actual: <c:if test= "${eventoAEditarVende.fkIdEstadoEvento == 1}">
                                                 <b>Pendiente</b>
                                             </c:if>
                                                     
-                                            <c:if test= "${pagoAEditar.fkIdEstadoPagoCuota == 2}">
+                                            <c:if test= "${eventoAEditarVende.fkIdEstadoEvento == 2}">
                                                     <b>Pagado</b>
                                             </c:if>
                                                     
-                                            <c:if test= "${pagoAEditar.fkIdEstadoPagoCuota == 3}">
+                                            <c:if test= "${eventoAEditarVende.fkIdEstadoEvento == 3}">
                                                    <b>Rechazado</b>
                                             </c:if>
-                            <form name="formGuardaPagoEditado" method="post" action="../PagoServlet">
+                            <form name="formGuardaEventoEditado" method="post" action="../EventoServlet">
                                 <div class="form-group">
                                         <label>Estado Nuevo: </label>
                                         <select name="IdEstado" required="true">                                            

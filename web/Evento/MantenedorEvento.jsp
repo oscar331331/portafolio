@@ -158,6 +158,9 @@
                                                                     <th>Identificar de Contrato</th>
                                                                     <th>Comprobante</th>
                                                                     <th>Estado</th>
+                                                                    <c:if test="${sessionScope.perfil==1}">
+                                                                    <th>Editar</th>
+                                                                    </c:if>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -182,6 +185,14 @@
                                                                     </c:if>
                                                                     <c:if test= "${evento.fkIdEstadoEvento ==3}">
                                                                         <td> <input type="button" class="btn btn-danger" value="Rechazado"/></td>
+                                                                    </c:if>
+                                                                    <c:if test="${sessionScope.perfil==1 || sessionScope.perfil==3}">
+                                                                    <td>
+                                                                    <c:url value="../EventoServlet" var="urlEdit">
+                                                                        <c:param name="eventoAEditarVende" value="${evento.idEvento}"></c:param>
+                                                                    </c:url>
+                                                                    <input type="button" class="btn btn-info" name="btnEditar" value="Editar" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
+                                                                    </td>
                                                                     </c:if>
                                                                 </tr>
                                                             </c:forEach>                                               

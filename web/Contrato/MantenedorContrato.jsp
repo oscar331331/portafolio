@@ -234,7 +234,7 @@
                                                             </c:forEach>                                               
                                                         </tbody>
                                                     </table>  
-                                            <c:if test="${sessionScope.perfil!=2}">
+                                            <c:if test="${sessionScope.perfil==1 || sessionScope.perfil==3}">
                                             <center><a href="../Contrato/IngresoContrato.jsp" type="button"  class="btn btn-info btn-min-width mr-1 mb-1"><i class="ft-plus-square"></i> Agregar Contrato</a></center>
                                             </c:if>
                                             </div>

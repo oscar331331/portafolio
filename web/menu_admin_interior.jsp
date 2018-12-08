@@ -36,6 +36,8 @@
                         </li>
                         <li class="nav-item"><a href="../Alumno/MantenedorAlumno.jsp"><i class="ft-users"></i><span class="menu-title" data-i18n="">Alumnos</span></a>
                         </li>
+                        <li class=" nav-item"><a href="../Evento/MantenedorEvento.jsp"><i class="ft-speaker"></i><span class="menu-title" data-i18n="">Eventos</span></a>
+                        </li>
                     </c:when>
                     <c:when test="${usuarioConectado.idPerfil==2}">
                         <li class="nav-item"><a href="../Contrato/MantenedorContrato.jsp"><i class="ft-file-text"></i><span class="menu-title" data-i18n="">Mis Contratos</span></a>
