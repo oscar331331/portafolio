@@ -162,7 +162,8 @@
                                                     <td>Rechazado</td>
                                                 </c:if>
                                                     
-                                                <td style="text-align: center;"><a target='_blank' href="../comprobantes/<c:out value="${pagocuota.urlPagoCuota}"></c:out>" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="297" src="../comprobantes/<c:out value="${pagocuota.urlPagoCuota}"></c:out>" width="400" /></a></td>
+                                                <td style="text-align: center;">
+                                                    <a target='_blank' href="../comprobantes/<c:out value="${pagocuota.urlPagoCuota}"></c:out>">Ver Imagen</a></td>
                                                 <td>
                                                 <c:url value="../PagoServlet" var="urlEdit">
                                                     <c:param name="idPagoCuota" value="${pagocuota.idPagoCuota}"></c:param>

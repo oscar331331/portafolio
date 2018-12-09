@@ -17,7 +17,7 @@
     <meta name="description" content="Chameleon Admin is a modern Bootstrap 4 webapp &amp; admin dashboard html template with a large number of components, elegant design, clean and organized code.">
     <meta name="keywords" content="admin template, Chameleon admin template, dashboard template, gradient admin template, responsive admin template, webapp, eCommerce dashboard, analytic dashboard">
     <meta name="author" content="ThemeSelect">
-    <title>OnTour - Pagos</title>
+    <title>OnTour - Eventos</title>
     <link rel="apple-touch-icon" href="theme-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="theme-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,600,600i,700,700i%7CComfortaa:300,400,700" rel="stylesheet">
@@ -39,7 +39,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     
     
-        <title>ADMINISTRADOR</title>
+        
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
@@ -61,7 +61,7 @@
             </ul>
             
             <ul class="nav navbar-nav float-right">
-              <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown">Bienvenido(a):<c:out value=" ${usuarioConectado.nombreUsuario} ${usuarioConectado.apellidoUsuario}"></c:out>  </a>
+              <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown">Bienvenido(a): <c:out value=" ${usuarioConectado.nombreUsuario} ${usuarioConectado.apellidoUsuario}"></c:out>  </a>
                 <div class="dropdown-menu dropdown-menu-right">
                   <div class="arrow_box_right"><a class="dropdown-item" href="../CerrarSesion"><i class="ft-book"></i> Cerrar sesión</a></div>
                 </div>
@@ -103,7 +103,7 @@
         <div class="content-wrapper-before"></div>
         <div class="content-header row">
           <div class="content-header-left col-md-4 col-12 mb-2">
-            <h3 class="content-header-title">Pagos</h3>
+            <h3 class="content-header-title">Eventos</h3>
           </div>
           <div class="content-header-right col-md-8 col-12">
             <div class="breadcrumbs-top float-md-right">
@@ -174,7 +174,8 @@
                                                                     <td>$<c:out value="${evento.recaudadoEvento}"></c:out></td>
                                                                     <td><c:out value="${evento.descripcionEvento}"></c:out></td>
                                                                     <td><c:out value="${evento.fkIdContrato}"></c:out></td>
-                                                                    <td style="text-align: center;"><a target='_blank' href="../comprobantes/<c:out value="${evento.urlDocumentoEvento}"></c:out>" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="297" src="../comprobantes/<c:out value="${evento.urlDocumentoEvento}"></c:out>" width="400" /></a></td>
+                                                                    <td style="text-align: center;">
+                                                                        <a target='_blank' href="../comprobantes/<c:out value="${evento.urlDocumentoEvento}"></c:out>">Ver Imagen</a></td>
                                                                     
                                                                     
                                                                     <c:if test= "${evento.fkIdEstadoEvento ==1}">

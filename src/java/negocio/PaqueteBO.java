@@ -27,4 +27,8 @@ public class PaqueteBO {
      public List<PaqueteTuristico> ListadoPaquetes(){
         return this.objPaqueteDAO.readElementos();
     }
+     
+     public PaqueteTuristico buscaPaquetePorId(int id){
+        return this.objPaqueteDAO.buscaPaquetePorId(id);
+    }
 }

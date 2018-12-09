@@ -11,6 +11,7 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import entidad.Colegio;
 import entidad.Contrato;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -22,9 +23,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import entidad.Contrato;
+import entidad.Curso;
+import entidad.PaqueteTuristico;
+import entidad.Usuario;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import negocio.ColegioBO;
 import negocio.ContratoBO;
+import negocio.CursoBO;
+import negocio.PaqueteBO;
+import negocio.UsuarioBO;
 
 /**
  *
@@ -53,11 +61,24 @@ public class pdf extends HttpServlet {
             try {
                 Document documento = new Document();
                 PdfWriter.getInstance(documento, out);
-                ContratoBO objContratoBO= new ContratoBO();
                 documento.open();
-                HttpSession sesion = request.getSession();
+                
+                ContratoBO objContratoBO= new ContratoBO();
+                UsuarioBO objUsuarioBO= new UsuarioBO();
+                CursoBO objCursoBO=new CursoBO();
+                ColegioBO objColegioBO= new ColegioBO();
+                PaqueteBO objPaqueteBO = new PaqueteBO();
+                
                 int usuarioEditar=Integer.parseInt(request.getParameter("id_contrato"));        
                 Contrato infoContrato=objContratoBO.buscaContratoPorId(usuarioEditar);
+                Usuario infoUsuario = objUsuarioBO.buscaUsuarioPorId(infoContrato.getIdCliente());
+                Curso infoCurso = objCursoBO.buscaCursoPorId(infoContrato.getIdCurso());
+                Colegio infoColegio = objColegioBO.buscaColegioPorId(infoCurso.getIdColegio());
+                PaqueteTuristico infoPaquete = objPaqueteBO.buscaPaquetePorId(infoContrato.getIdPaquete());
+                
+                HttpSession sesion = request.getSession();
+                
+                
                 sesion.setAttribute("contratoPDF", infoContrato);
                 
                 
@@ -70,18 +91,49 @@ public class pdf extends HttpServlet {
                 par2.add(new Phrase(Chunk.NEWLINE));
                 documento.add(par2);
                 
-               
                 Paragraph par3 = new Paragraph();
                 Font fonttitulo5 = new Font(Font.FontFamily.HELVETICA,10,Font.NORMAL,BaseColor.BLACK);
                 par3.add(new Phrase("Con fecha " + infoContrato.getFechaIncorporacion() + " la prestadora de servicios"
-                        + " ONTOUR LIMITADA, viene a celebrar contrato de prestacion de servicios con ...",fonttitulo5));
+                        + " ONTOUR LIMITADA, viene a celebrar contrato de prestacion de servicios con " + infoUsuario.getNombreUsuario() + infoUsuario.getApellidoUsuario()
+                        + ", RUT " + infoUsuario.getRutUsuario() + ", representante del Curso " + infoCurso.getDescripcionCurso()
+                        + " del Colegio " + infoColegio.getRazonSocialColegio() + " a cargo del Sostenedor RUT " + infoColegio.getRutSostenedor() + ".",fonttitulo5));
                 par3.add(new Phrase(Chunk.NEWLINE));
                 par3.setAlignment(Element.ALIGN_JUSTIFIED);
                 par3.add(new Phrase(Chunk.NEWLINE));
                 documento.add(par3);
                 
+                Paragraph par4 = new Paragraph();
+                Font fonttituloitem = new Font(Font.FontFamily.HELVETICA,10,Font.BOLD,BaseColor.BLACK);
+                par4.add(new Phrase("- Codigo de Contrato: ",fonttituloitem));
+                par4.add(new Phrase(infoContrato.getCodigo(),fonttitulo5));
+                par4.add(new Phrase(Chunk.NEWLINE));
+                par4.add(new Phrase("- Fecha de Incorporacion: ",fonttituloitem));
+                par4.add(new Phrase(infoContrato.getFechaIncorporacion(),fonttitulo5));
+                par4.add(new Phrase(Chunk.NEWLINE));
+                par4.add(new Phrase("- Fecha de Meta: " ,fonttituloitem));
+                par4.add(new Phrase(infoContrato.getFechaMeta() ,fonttitulo5));
+                par4.add(new Phrase(Chunk.NEWLINE));
+                par4.add(new Phrase("- Fecha Final: ",fonttituloitem));
+                par4.add(new Phrase(infoContrato.getFechaFinal(),fonttitulo5));
+                par4.add(new Phrase(Chunk.NEWLINE));
+                par4.add(new Phrase("- Monto meta a reunir: $",fonttituloitem));
+                par4.add(new Phrase(" " + infoContrato.getMontoMeta(),fonttitulo5));
+                par4.add(new Phrase(Chunk.NEWLINE));
+                par4.add(new Phrase("- Paquete tursitico contratado: ",fonttituloitem));
+                par4.add(new Phrase(infoPaquete.getDescripcion(),fonttitulo5));
+                par4.add(new Phrase(Chunk.NEWLINE));
+                par4.setAlignment(Element.ALIGN_JUSTIFIED);
+                par4.add(new Phrase(Chunk.NEWLINE));
+                documento.add(par4);
                 
-                
+                Paragraph par5 = new Paragraph();
+                par5.add(new Phrase(Chunk.NEWLINE)); par5.add(new Phrase(Chunk.NEWLINE)); par5.add(new Phrase(Chunk.NEWLINE));
+                Font fontfirmas = new Font(Font.FontFamily.HELVETICA,10,Font.NORMAL,BaseColor.BLACK);
+                par5.add(new Phrase("__________________________________                                          __________________________________ ",fontfirmas));
+                par5.add(new Phrase("    FIRMA REPRESENTANTE CURSO                                                     FIRMA GERENTE DE VENTAS   ",fontfirmas));
+                par5.setAlignment(Element.ALIGN_CENTER);
+                par5.add(new Phrase(Chunk.NEWLINE));
+                documento.add(par5);
                 
                 documento.close();
                 

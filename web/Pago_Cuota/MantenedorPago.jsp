@@ -162,7 +162,8 @@
                                                                     <td><fmt:formatDate value="${fechaP}" pattern="dd-MM-yyyy" /></td>
                                                                     
                                                                     <td>$ <c:out value="${pagocuota.valorPagoCuota}"></c:out></td>
-                                                                    <td style="text-align: center;"><a target='_blank' href="../comprobantes/<c:out value="${pagocuota.urlPagoCuota}"></c:out>" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="297" src="../comprobantes/<c:out value="${pagocuota.urlPagoCuota}"></c:out>" width="400" /></a></td>
+                                                                    <td style="text-align: center;">
+                                                                        <a target='_blank' href="../comprobantes/<c:out value="${pagocuota.urlPagoCuota}"></c:out>">Ver Imagen</a></td>
                                                                     
                                                                     
                                                                     <c:if test= "${pagocuota.fkIdEstadoPagoCuota ==1}">

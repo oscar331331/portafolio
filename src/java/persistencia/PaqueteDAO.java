@@ -44,6 +44,25 @@ public class PaqueteDAO implements ICrud{
         }
         return listadoPaquetes;
     }
+    
+    public PaqueteTuristico buscaPaquetePorId(int id_alumno) {
+        PaqueteTuristico infoAlumno = null;
+        try {
+            Connection con = Conexion.getConexion();
+            CallableStatement cs = null;
+            cs = con.prepareCall("{call BUSCARPAQUETETURISTICO(?,?)}");
+            cs.setInt(1, id_alumno);
+            cs.registerOutParameter(2, OracleTypes.CURSOR);
+            cs.executeQuery();
+            ResultSet rs = (ResultSet)cs.getObject(2);
+            while (rs.next()) {
+                infoAlumno = new PaqueteTuristico(rs.getInt("ID_PAQUETE"), rs.getString("DESCRIPCION"));
+            }
+        } catch (Exception e) {
+            System.out.println("no se pudo ingresar al sistema");
+        }
+        return infoAlumno;        
+    }
 
     @Override
     public boolean addElemento(Object objetoInsert) {
