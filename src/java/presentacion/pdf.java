@@ -8,6 +8,7 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -26,6 +27,7 @@ import entidad.Contrato;
 import entidad.Curso;
 import entidad.PaqueteTuristico;
 import entidad.Usuario;
+import java.io.FileOutputStream;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import negocio.ColegioBO;
@@ -61,6 +63,10 @@ public class pdf extends HttpServlet {
             try {
                 Document documento = new Document();
                 PdfWriter.getInstance(documento, out);
+                Image imagen = Image.getInstance("D:\\Documentos\\NetBeansProjects\\portafolio\\web\\images\\logo.png");
+        
+                PdfWriter.getInstance(documento, new FileOutputStream("pdf.pdf"));
+                
                 documento.open();
                 
                 ContratoBO objContratoBO= new ContratoBO();
@@ -78,8 +84,30 @@ public class pdf extends HttpServlet {
                 
                 HttpSession sesion = request.getSession();
                 
-                
                 sesion.setAttribute("contratoPDF", infoContrato);
+                
+                if(sesion.getAttribute("pdfAVer") == request.getParameter("id_contrato"))
+                    documento.open();
+                
+                imagen.setAlignment(Element.ALIGN_LEFT);
+                imagen.scalePercent(50);
+                imagen.setAbsolutePosition(30f, 750f);
+
+                documento.add(imagen);
+                
+                Paragraph par1 = new Paragraph();
+                Font fontcabecera = new Font(Font.FontFamily.HELVETICA,8,Font.NORMAL,BaseColor.BLACK);
+                par1.add(new Phrase("                  ONTOUR Limitada",fontcabecera));
+                par1.add(new Phrase(Chunk.NEWLINE));
+                par1.add(new Phrase("                  www.ontour.cl",fontcabecera));
+                par1.add(new Phrase(Chunk.NEWLINE));
+                par1.add(new Phrase("                  Morande 540, Santiago.",fontcabecera));
+                par1.add(new Phrase(Chunk.NEWLINE));
+                par1.add(new Phrase("                  (2) 2222 3333",fontcabecera));
+                par1.add(new Phrase(Chunk.NEWLINE));
+                par1.setAlignment(Element.ALIGN_LEFT);
+                par1.add(new Phrase(Chunk.NEWLINE));
+                documento.add(par1);    
                 
                 
                 
@@ -94,9 +122,9 @@ public class pdf extends HttpServlet {
                 Paragraph par3 = new Paragraph();
                 Font fonttitulo5 = new Font(Font.FontFamily.HELVETICA,10,Font.NORMAL,BaseColor.BLACK);
                 par3.add(new Phrase("Con fecha " + infoContrato.getFechaIncorporacion() + " la prestadora de servicios"
-                        + " ONTOUR LIMITADA, viene a celebrar contrato de prestacion de servicios con " + infoUsuario.getNombreUsuario() + infoUsuario.getApellidoUsuario()
-                        + ", RUT " + infoUsuario.getRutUsuario() + ", representante del Curso " + infoCurso.getDescripcionCurso()
-                        + " del Colegio " + infoColegio.getRazonSocialColegio() + " a cargo del Sostenedor RUT " + infoColegio.getRutSostenedor() + ".",fonttitulo5));
+                        + " ONTOUR LIMITADA, viene a celebrar contrato de prestacion de servicios con el Sr./Sra. " + infoUsuario.getNombreUsuario() + " " + infoUsuario.getApellidoUsuario()
+                        + ", RUT " + infoUsuario.getRutUsuario() + ", representante del curso " + infoCurso.getDescripcionCurso()
+                        + " del establecimiento educacional " + infoColegio.getRazonSocialColegio() + " a cargo del sostenedor RUT " + infoColegio.getRutSostenedor() + ".",fonttitulo5));
                 par3.add(new Phrase(Chunk.NEWLINE));
                 par3.setAlignment(Element.ALIGN_JUSTIFIED);
                 par3.add(new Phrase(Chunk.NEWLINE));
@@ -119,8 +147,14 @@ public class pdf extends HttpServlet {
                 par4.add(new Phrase("- Monto meta a reunir: $",fonttituloitem));
                 par4.add(new Phrase(" " + infoContrato.getMontoMeta(),fonttitulo5));
                 par4.add(new Phrase(Chunk.NEWLINE));
+                par4.add(new Phrase("- Cantidad de alumnos: ",fonttituloitem));
+                par4.add(new Phrase(" " + infoContrato.getCantAlumnos(),fonttitulo5));
+                par4.add(new Phrase(Chunk.NEWLINE));
                 par4.add(new Phrase("- Paquete tursitico contratado: ",fonttituloitem));
                 par4.add(new Phrase(infoPaquete.getDescripcion(),fonttitulo5));
+                par4.add(new Phrase(Chunk.NEWLINE));
+                par4.add(new Phrase("- Seguro Contratado: ",fonttituloitem));
+                par4.add(new Phrase("Aca va su seguro (si es que tiene uno)",fonttitulo5));
                 par4.add(new Phrase(Chunk.NEWLINE));
                 par4.setAlignment(Element.ALIGN_JUSTIFIED);
                 par4.add(new Phrase(Chunk.NEWLINE));
@@ -130,7 +164,7 @@ public class pdf extends HttpServlet {
                 par5.add(new Phrase(Chunk.NEWLINE)); par5.add(new Phrase(Chunk.NEWLINE)); par5.add(new Phrase(Chunk.NEWLINE));
                 Font fontfirmas = new Font(Font.FontFamily.HELVETICA,10,Font.NORMAL,BaseColor.BLACK);
                 par5.add(new Phrase("__________________________________                                          __________________________________ ",fontfirmas));
-                par5.add(new Phrase("    FIRMA REPRESENTANTE CURSO                                                     FIRMA GERENTE DE VENTAS   ",fontfirmas));
+                par5.add(new Phrase("   FIRMA REPRESENTANTE CURSO                                                         FIRMA GERENTE DE VENTAS   ",fontfirmas));
                 par5.setAlignment(Element.ALIGN_CENTER);
                 par5.add(new Phrase(Chunk.NEWLINE));
                 documento.add(par5);

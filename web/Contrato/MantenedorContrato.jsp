@@ -225,7 +225,8 @@
                                                                     <c:url value="/pdf" var="urlEdit">
                                                                         <c:param name="id_contrato" value="${contrato.idContrato}"></c:param>
                                                                     </c:url>
-                                                                    <input type="button" class="btn btn-info" name="btnCuota" value="Ver PDF" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
+                                                                    <input type="button" class="btn btn-info" name="btnPDF" value="Ver PDF" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
+                                                                    
                                                                     </td>
                                                                     
                                                                     

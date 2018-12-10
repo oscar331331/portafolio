@@ -275,5 +275,21 @@
     </div>
 </c:otherwise>
         </c:choose>  
+        
+         <script src="theme-assets/js/core/app-menu-lite.js" type="text/javascript"></script>
+    <script src="theme-assets/js/core/app-lite.js" type="text/javascript"></script>
+    <script src="../theme-assets/js/core/app-menu-lite.js" type="text/javascript"></script>
+    <script src="../theme-assets/js/core/app-lite.js" type="text/javascript"></script>
+    <!-- BEGIN VENDOR JS-->
+    <script src="../theme-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
+    <!-- BEGIN VENDOR JS-->
+    <!-- BEGIN PAGE VENDOR JS-->
+    <!-- END PAGE VENDOR JS-->
+    <!-- BEGIN CHAMELEON  JS-->
+    <script src="../theme-assets/js/core/app-menu-lite.js" type="text/javascript"></script>
+    <script src="../theme-assets/js/core/app-lite.js" type="text/javascript"></script>
+    <!-- END CHAMELEON  JS-->
+    <!-- BEGIN PAGE LEVEL JS-->
+    <!-- END PAGE LEVEL JS-->
     </body>
 </html>
