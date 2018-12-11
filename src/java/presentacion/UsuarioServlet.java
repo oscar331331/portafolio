@@ -141,9 +141,12 @@ public class UsuarioServlet extends HttpServlet {
             int perfil=Integer.parseInt(request.getParameter("Perfil"));
             Usuario infoUsuario= new Usuario(nombre,apellido,correo,password,perfil,1,rut);
             UsuarioBO objUsuarioBO= new UsuarioBO();
-            //if(objUsuarioBO.buscaUsuarioPorRut(rut)){
-                //response.sendRedirect("Usuario/IngresoUsuario.jsp");
-                if(objUsuarioBO.addUsuario(infoUsuario)){
+           
+                if(!objUsuarioBO.buscaUsuarioPorRut(rut)){
+                        sesion.setAttribute("msgError", "El RUT ingresado ya se encuentra registrado");
+                        response.sendRedirect("Usuario/IngresoUsuario.jsp");
+                    }
+                else if(objUsuarioBO.addUsuario(infoUsuario)){
                     sesion.setAttribute("msgError", "Ingresado correctamente");
                     response.sendRedirect("Usuario/MantenedorUsuario.jsp");
                     sesion.setAttribute("msgBueno", "Usuario creado correctamente");

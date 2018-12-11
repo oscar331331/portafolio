@@ -75,7 +75,7 @@
 							<i class="zmdi zmdi-eye"></i>
 						</span>
 						<input type="password" name="Password" id="pass1"  class="input100"  required/>
-						<span class="focus-input100" data-placeholder="Contraseña (min. 6 caracteres)"></span>
+						<span class="focus-input100" data-placeholder="Contraseña (min. 6 caracteres sin espacios)"></span>
 					</div>
                                         <div class="wrap-input100 validate-input" data-validate="Enter password">
 						<span class="btn-show-pass">

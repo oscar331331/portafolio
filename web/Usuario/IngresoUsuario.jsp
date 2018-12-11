@@ -25,6 +25,7 @@
     <link rel="stylesheet" type="text/css" href="../theme-assets/css/pages/dashboard-ecommerce.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../Colegio/validaRUT.js"></script>
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->
     <!-- END Custom CSS-->
@@ -123,11 +124,6 @@
                         </div></c:if>
         
         
-        
-        
-        
-        
-        
       <section id="chartjs-bar-charts">  
        <div class="row">
         <div class="col-12">
@@ -143,8 +139,8 @@
                             <form name="formGuardaUsuarioNuevo" onsubmit="return validapass()" method="post" action="../UsuarioServlet">
                               <div class="container">
                                     <div class="form-group">
-                                        <label>Rut Usuario</label>
-                                        <input type="text" name="Rut" class="form-control" placeholder="Ingrese Rut" required/>
+                                        <label>RUT Usuario</label>
+                                        <input type="text" oninput="checkRut(this)" name="Rut" class="form-control" placeholder="RUT SIN puntos, CON guion y digito verificador. Ej: 12345678-5" required/>
                                     </div>
                                     <div class="form-group">
                                         <label>Nombre</label>
@@ -160,7 +156,7 @@
                                     </div>                                    
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input type="password" name="Password" id="pass1" class="form-control" placeholder="Minimo 6 caracteres" required/>
+                                        <input type="password" name="Password" id="pass1" class="form-control" placeholder="Minimo 6 caracteres, sin espacios" required/>
                                     </div>
                                   <div class="form-group">
                                         <label>Repetir Password</label>
@@ -198,11 +194,11 @@
                         <jsp:useBean id="usuarioAEditar" class="entidad.Usuario" scope="session"></jsp:useBean>
                         <div class="container">
                             <center><h2>Editar Usuario</h2></center>
-                            <form name="formGuardaUsuarioEditado" method="post" onsubmit="return validapass()" action="../UsuarioServlet">
+                            <form name="formGuardaUsuarioEditado" method="post" onsubmit="return validapassvacia()" action="../UsuarioServlet">
                                 <div class="container">
                                     <div class="form-group">
-                                        <label>Rut Usuario</label>
-                                        <input type="text" name="RutEditar" value="<c:out value="${usuarioAEditar.rutUsuario}" ></c:out>" class="form-control" placeholder="Ingrese Rut" required/>
+                                        <label>RUT Usuario</label>
+                                        <input type="text" oninput="checkRut(this)" name="RutEditar" value="<c:out value="${usuarioAEditar.rutUsuario}" ></c:out>" class="form-control" placeholder="Ingrese Rut" required readonly=""/>
                                     </div>
                                     <div class="form-group">
                                         <label>Nombre</label>
@@ -218,7 +214,7 @@
                                     </div>                                    
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input type="password" name="PasswordEditar" id="pass1" class="form-control" placeholder="(dejar en blanco para no modificar). Minimo 6 caracteres." />
+                                        <input type="password" name="PasswordEditar" id="pass1" class="form-control" placeholder="(dejar en blanco para no modificar). Minimo 6 caracteres, sin espacios." />
                                     </div>
                                     <div class="form-group">
                                         <label>Repetir Password</label>
@@ -261,7 +257,7 @@
                                         <center><input type="submit" class="btn btn-success" name="btnGuardarUsuarioEditado" class="btn btn-info btn-min-width mr-1 mb-1" value="Guardar"/></i></center>
                                     </div>
                                 </div>                  
-                                    <script src="validaPass.js"></script>
+                                    <script src="validaPassVacia.js"></script>
                             </form>
                         </div>
                    <center><a href="../Usuario/MantenedorUsuario.jsp" type="button"  class="btn btn-info btn-min-width mr-1 mb-1"><i class="ft-arrow-left"></i> Volver </a></center>
@@ -280,8 +276,10 @@
             </div>
         </div>
     </div>
+        sessionscope.msgError = null;
 </c:otherwise>
         </c:choose> 
+        
         <script src="../theme-assets/js/core/app-menu-lite.js" type="text/javascript"></script>
     <script src="../theme-assets/js/core/app-lite.js" type="text/javascript"></script>
     <!-- BEGIN VENDOR JS-->

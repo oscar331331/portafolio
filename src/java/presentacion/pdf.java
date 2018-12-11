@@ -55,8 +55,10 @@ public class pdf extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        response.setContentType("application/pdf");
+        
+        //response.setContentType("application/pdf");
         OutputStream out = response.getOutputStream();
+        response.setHeader("Content-Type: application/pdf","contrato.pdf");
         
         try {
             
@@ -83,6 +85,7 @@ public class pdf extends HttpServlet {
                 PaqueteTuristico infoPaquete = objPaqueteBO.buscaPaquetePorId(infoContrato.getIdPaquete());
                 
                 HttpSession sesion = request.getSession();
+                response.addHeader("Content-Disposition", "attachment; filename=contrato-" + infoContrato.getCodigo() +".pdf");
                 
                 sesion.setAttribute("contratoPDF", infoContrato);
                 

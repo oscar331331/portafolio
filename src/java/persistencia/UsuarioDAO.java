@@ -254,7 +254,7 @@ public class UsuarioDAO implements ICrud {
     }
     
     public boolean buscaUsuarioPorRut(String rut) {
-        //Usuario infoUsuario = null;
+        Usuario infoUsuario = null;
         try {
             Connection con = Conexion.getConexion();
             CallableStatement cs = null;
@@ -263,13 +263,16 @@ public class UsuarioDAO implements ICrud {
             cs.registerOutParameter(2, OracleTypes.CURSOR);
             cs.executeQuery();
             ResultSet rs = (ResultSet)cs.getObject(2);
-            //while (rs.next()) {
-                //infoUsuario = new Usuario(rs.getInt("id_usuario"), rs.getString("nombre_usuario"), rs.getString("apellido_usuario"), rs.getString("correo_usuario"), rs.getInt("fk_id_perfil"), rs.getInt("active"), rs.getString("rut_usuario"));
-            //}
+            while (rs.next()) {
+                infoUsuario = new Usuario(rs.getInt("id_usuario"), rs.getString("nombre_usuario"), rs.getString("apellido_usuario"), rs.getString("correo_usuario"), rs.getInt("fk_id_perfil"), rs.getInt("active"), rs.getString("rut_usuario"));
+            }
         } catch (Exception e) {
             System.out.println("No se pudo ingresar al sistema");
         }
-        return false;        
+        if (infoUsuario!=null)
+            return false;
+        else
+            return true;
     }
     
 
