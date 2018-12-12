@@ -5,18 +5,13 @@ import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
-import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Image;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import entidad.Colegio;
-import entidad.Contrato;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,8 +23,8 @@ import entidad.Curso;
 import entidad.PaqueteTuristico;
 import entidad.Usuario;
 import java.io.FileOutputStream;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
+import javax.enterprise.context.SessionScoped;
 import negocio.ColegioBO;
 import negocio.ContratoBO;
 import negocio.CursoBO;
@@ -56,13 +51,15 @@ public class pdf extends HttpServlet {
             throws ServletException, IOException {
         
         
-        //response.setContentType("application/pdf");
+        response.setContentType("application/pdf");
         OutputStream out = response.getOutputStream();
-        response.setHeader("Content-Type: application/pdf","contrato.pdf");
+        //response.setHeader("Content-Type: application/pdf","contrato.pdf");
         
         try {
             
             try {
+                HttpSession sesion = request.getSession();
+                if (sesion.getAttribute("usuarioConectado")!="") {
                 Document documento = new Document();
                 PdfWriter.getInstance(documento, out);
                 Image imagen = Image.getInstance("D:\\Documentos\\NetBeansProjects\\portafolio\\web\\images\\logo.png");
@@ -83,8 +80,10 @@ public class pdf extends HttpServlet {
                 Curso infoCurso = objCursoBO.buscaCursoPorId(infoContrato.getIdCurso());
                 Colegio infoColegio = objColegioBO.buscaColegioPorId(infoCurso.getIdColegio());
                 PaqueteTuristico infoPaquete = objPaqueteBO.buscaPaquetePorId(infoContrato.getIdPaquete());
+                SimpleDateFormat fromUser = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat myFormat = new SimpleDateFormat("dd-MM-yyyy");
                 
-                HttpSession sesion = request.getSession();
+                
                 response.addHeader("Content-Disposition", "attachment; filename=contrato-" + infoContrato.getCodigo() +".pdf");
                 
                 sesion.setAttribute("contratoPDF", infoContrato);
@@ -98,22 +97,22 @@ public class pdf extends HttpServlet {
 
                 documento.add(imagen);
                 
+                //CABECERA DEL CONTRATO
                 Paragraph par1 = new Paragraph();
                 Font fontcabecera = new Font(Font.FontFamily.HELVETICA,8,Font.NORMAL,BaseColor.BLACK);
                 par1.add(new Phrase("                  ONTOUR Limitada",fontcabecera));
                 par1.add(new Phrase(Chunk.NEWLINE));
-                par1.add(new Phrase("                  www.ontour.cl",fontcabecera));
+                par1.add(new Phrase("                  http://oscar.dyndns.tv:8081",fontcabecera));
                 par1.add(new Phrase(Chunk.NEWLINE));
-                par1.add(new Phrase("                  Morande 540, Santiago.",fontcabecera));
+                par1.add(new Phrase("                  Morande #540, Santiago, Chile.",fontcabecera));
                 par1.add(new Phrase(Chunk.NEWLINE));
-                par1.add(new Phrase("                  (2) 2222 3333",fontcabecera));
+                par1.add(new Phrase("                  (2) 2222 3333 - (9) 3062 3655.",fontcabecera));
                 par1.add(new Phrase(Chunk.NEWLINE));
                 par1.setAlignment(Element.ALIGN_LEFT);
                 par1.add(new Phrase(Chunk.NEWLINE));
                 documento.add(par1);    
                 
-                
-                
+                //TITULO CONTRATO
                 Paragraph par2 = new Paragraph();
                 Font fonttitulo4 = new Font(Font.FontFamily.HELVETICA,16,Font.BOLD,BaseColor.BLACK);
                 par2.add(new Phrase("CONTRATO DE PRESTACION DE SERVICIOS",fonttitulo4));
@@ -122,58 +121,66 @@ public class pdf extends HttpServlet {
                 par2.add(new Phrase(Chunk.NEWLINE));
                 documento.add(par2);
                 
+                //PARRAFO DATOS CONTRATO
+                //parseo fechas
+                String fechaIncorporacion = myFormat.format(fromUser.parse(infoContrato.getFechaIncorporacion()));
+                String fechaMeta = myFormat.format(fromUser.parse(infoContrato.getFechaMeta()));
+                String fechaFinal = myFormat.format(fromUser.parse(infoContrato.getFechaFinal()));
                 Paragraph par3 = new Paragraph();
                 Font fonttitulo5 = new Font(Font.FontFamily.HELVETICA,10,Font.NORMAL,BaseColor.BLACK);
-                par3.add(new Phrase("Con fecha " + infoContrato.getFechaIncorporacion() + " la prestadora de servicios"
-                        + " ONTOUR LIMITADA, viene a celebrar contrato de prestacion de servicios con el Sr./Sra. " + infoUsuario.getNombreUsuario() + " " + infoUsuario.getApellidoUsuario()
+                par3.add(new Phrase("Con fecha " + fechaIncorporacion + " la agencia de viajes"
+                        + " ONTOUR LIMITADA, representada legalmente por su Gerente de Ventas don PABLO ABARCA CABELLO, viene a celebrar contrato de prestacion de servicios con el Sr./Sra. " + infoUsuario.getNombreUsuario() + " " + infoUsuario.getApellidoUsuario()
                         + ", RUT " + infoUsuario.getRutUsuario() + ", representante del curso " + infoCurso.getDescripcionCurso()
-                        + " del establecimiento educacional " + infoColegio.getRazonSocialColegio() + " a cargo del sostenedor RUT " + infoColegio.getRutSostenedor() + ".",fonttitulo5));
+                        + " del establecimiento educacional " + infoColegio.getRazonSocialColegio() + " a cargo del sostenedor RUT " + infoColegio.getRutSostenedor() + " por el concepto de Paquete Turistico, a continuacion detallado.",fonttitulo5));
                 par3.add(new Phrase(Chunk.NEWLINE));
                 par3.setAlignment(Element.ALIGN_JUSTIFIED);
                 par3.add(new Phrase(Chunk.NEWLINE));
                 documento.add(par3);
                 
+                
+                //PARRAFO DETALLES
                 Paragraph par4 = new Paragraph();
                 Font fonttituloitem = new Font(Font.FontFamily.HELVETICA,10,Font.BOLD,BaseColor.BLACK);
                 par4.add(new Phrase("- Codigo de Contrato: ",fonttituloitem));
                 par4.add(new Phrase(infoContrato.getCodigo(),fonttitulo5));
                 par4.add(new Phrase(Chunk.NEWLINE));
                 par4.add(new Phrase("- Fecha de Incorporacion: ",fonttituloitem));
-                par4.add(new Phrase(infoContrato.getFechaIncorporacion(),fonttitulo5));
+                par4.add(new Phrase(fechaIncorporacion,fonttitulo5));
                 par4.add(new Phrase(Chunk.NEWLINE));
                 par4.add(new Phrase("- Fecha de Meta: " ,fonttituloitem));
-                par4.add(new Phrase(infoContrato.getFechaMeta() ,fonttitulo5));
+                par4.add(new Phrase(fechaMeta, fonttitulo5));
                 par4.add(new Phrase(Chunk.NEWLINE));
                 par4.add(new Phrase("- Fecha Final: ",fonttituloitem));
-                par4.add(new Phrase(infoContrato.getFechaFinal(),fonttitulo5));
+                par4.add(new Phrase(fechaFinal,fonttitulo5));
                 par4.add(new Phrase(Chunk.NEWLINE));
                 par4.add(new Phrase("- Monto meta a reunir: $",fonttituloitem));
-                par4.add(new Phrase(" " + infoContrato.getMontoMeta(),fonttitulo5));
+                par4.add(new Phrase(" " + infoContrato.getMontoMeta() + " (Pesos Chilenos CLP)",fonttitulo5));
                 par4.add(new Phrase(Chunk.NEWLINE));
                 par4.add(new Phrase("- Cantidad de alumnos: ",fonttituloitem));
-                par4.add(new Phrase(" " + infoContrato.getCantAlumnos(),fonttitulo5));
+                par4.add(new Phrase("" + infoContrato.getCantAlumnos(),fonttitulo5));
                 par4.add(new Phrase(Chunk.NEWLINE));
                 par4.add(new Phrase("- Paquete tursitico contratado: ",fonttituloitem));
                 par4.add(new Phrase(infoPaquete.getDescripcion(),fonttitulo5));
                 par4.add(new Phrase(Chunk.NEWLINE));
                 par4.add(new Phrase("- Seguro Contratado: ",fonttituloitem));
-                par4.add(new Phrase("Aca va su seguro (si es que tiene uno)",fonttitulo5));
+                par4.add(new Phrase("Aca va su seguro (si es que tiene uno).",fonttitulo5));
                 par4.add(new Phrase(Chunk.NEWLINE));
                 par4.setAlignment(Element.ALIGN_JUSTIFIED);
                 par4.add(new Phrase(Chunk.NEWLINE));
                 documento.add(par4);
                 
                 Paragraph par5 = new Paragraph();
-                par5.add(new Phrase(Chunk.NEWLINE)); par5.add(new Phrase(Chunk.NEWLINE)); par5.add(new Phrase(Chunk.NEWLINE));
+                par5.add(new Phrase(Chunk.NEWLINE)); par5.add(new Phrase(Chunk.NEWLINE));
                 Font fontfirmas = new Font(Font.FontFamily.HELVETICA,10,Font.NORMAL,BaseColor.BLACK);
                 par5.add(new Phrase("__________________________________                                          __________________________________ ",fontfirmas));
                 par5.add(new Phrase("   FIRMA REPRESENTANTE CURSO                                                         FIRMA GERENTE DE VENTAS   ",fontfirmas));
                 par5.setAlignment(Element.ALIGN_CENTER);
-                par5.add(new Phrase(Chunk.NEWLINE));
                 documento.add(par5);
                 
                 documento.close();
-                
+                }
+                else
+                    response.sendRedirect("login.jsp");
             } catch (Exception ex) { ex.getMessage(); }
             
         } finally {
