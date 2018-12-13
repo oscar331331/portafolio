@@ -25,6 +25,7 @@ public class UsuarioDAO implements ICrud {
     public UsuarioDAO() {
     }
 
+    @Override
     public boolean addElemento(Object objetoInsert) {
         Usuario objUsuario = (Usuario) objetoInsert;
         int active = 1;
@@ -61,6 +62,27 @@ public class UsuarioDAO implements ICrud {
             CallableStatement cs = null;
             cs = con.prepareCall("{call MostrarUsuarios(?)}");
             cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.executeQuery();
+            ResultSet rs = (ResultSet)cs.getObject(1); 
+            while (rs.next()) {
+                Usuario  infoUsuario = new Usuario(rs.getInt("id_usuario"), rs.getString("nombre_usuario"), rs.getString("apellido_usuario"), rs.getString("correo_usuario"), rs.getInt("fk_id_perfil"), rs.getInt("active"), rs.getString("rut_usuario"));
+                System.out.println(infoUsuario.toString());
+                listadoUsuario.add(infoUsuario);
+            }
+        } catch (Exception e) {
+            System.out.println("no se pudo ingresar al sistema");
+        }
+        return listadoUsuario;
+    }
+    
+    public List readElementosXContrato(int id) {
+        List<Usuario> listadoUsuario = new LinkedList<>();
+        try {
+            Connection con = Conexion.getConexion();
+            CallableStatement cs = null;
+            cs = con.prepareCall("{call BUSCARAPODERADOSXCONTRATO(?,?)}");
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.setInt(2, id);
             cs.executeQuery();
             ResultSet rs = (ResultSet)cs.getObject(1); 
             while (rs.next()) {
@@ -127,7 +149,7 @@ public class UsuarioDAO implements ICrud {
     }
     
      public boolean ActualizaApoderadoDelAlumno(Object objetoUpdate,int alumno) {
-       Usuario objUsuario = (Usuario) objetoUpdate;
+        Usuario objUsuario = (Usuario) objetoUpdate;
         try {
             System.out.println("ID USER : "+objUsuario.getIdUsuario()+ " Alumno ID: "+alumno);
             Connection con = Conexion.getConexion();

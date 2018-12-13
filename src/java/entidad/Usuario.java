@@ -83,12 +83,13 @@ public class Usuario implements Serializable {
         this.rutUsuario = rutUsuario;
     }
     
-    public Usuario(String nombre, String apellido, String correo, String password, int perfil) {
+    public Usuario(String nombre, String apellido, String correo, String password, int perfil, String rutUsuario) {
         this.nombreUsuario = nombre;
         this.apellidoUsuario= apellido;
         this.correoUsuario = correo;
         this.passwordUsuario = password;
         this.idPerfil = perfil;
+        this.rutUsuario = rutUsuario;
     } 
 
     public String getRutUsuario() {

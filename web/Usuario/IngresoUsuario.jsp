@@ -39,7 +39,7 @@
     <body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-color="bg-gradient-x-purple-blue" data-col="2-columns">
 
     <!-- fixed-top-->
-    <jsp:useBean id="usuarioConectado" class="entidad.Usuario" scope="session"/> 
+    <jsp:useBean id="usuarioConectado" class="entidad.Usuario" scope="session"/>
     <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
       <div class="navbar-wrapper">
         <div class="navbar-container content">
@@ -66,16 +66,13 @@
 
     <!-- ////////////////////////////////////////////////////////////////////////////-->
     <c:choose>        
-                <c:when test="${sessionScope.usuarioConectado.idUsuario==null}">
-                    <% response.sendRedirect("../login.jsp"); %>
-                </c:when>
-                <c:when test="${sessionScope.perfil==2}">
-                   <% response.sendRedirect("../Index.jsp"); %>
-                </c:when>
-                <c:when test="${sessionScope.perfil==4}">
-                   <% response.sendRedirect("../Index.jsp"); %>
-                </c:when>
-            <c:otherwise>  
+        <c:when test="${sessionScope.usuarioConectado.idUsuario==null}">
+            <% response.sendRedirect("../login.jsp"); %>
+        </c:when>
+        <c:when test="${sessionScope.perfil==2}">
+           <% response.sendRedirect("../Index.jsp"); %>
+        </c:when>
+    <c:otherwise>  
 
     <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="../theme-assets/images/backgrounds/02.jpg">
       <div class="navbar-header">
@@ -134,7 +131,7 @@
                 <c:when test="${sessionScope.usuarioAEditar==null}">
                         <div class="container">
                             <br>
-                            <center><h4 class="card-title">Ingresar usuario</h4></center>
+                            <center><h4 class="card-title">Ingresar Usuario</h4></center>
                               <br>
                             <form name="formGuardaUsuarioNuevo" onsubmit="return validapass()" method="post" action="../UsuarioServlet">
                               <div class="container">
@@ -196,6 +193,7 @@
                             <center><h2>Editar Usuario</h2></center>
                             <form name="formGuardaUsuarioEditado" method="post" onsubmit="return validapassvacia()" action="../UsuarioServlet">
                                 <div class="container">
+                                    
                                     <div class="form-group">
                                         <label>RUT Usuario</label>
                                         <input type="text" oninput="checkRut(this)" name="RutEditar" value="<c:out value="${usuarioAEditar.rutUsuario}" ></c:out>" class="form-control" placeholder="Ingrese Rut" required readonly=""/>
@@ -235,7 +233,7 @@
                                                 </c:if>
                                             </c:forEach>                                                                                        
                                          </select></fieldset>
-                                    </div>  
+                                    </div>
                                     <div class="form-group">
                                         <label>Estado </label>
                                         <fieldset class="form-group">
@@ -251,7 +249,7 @@
                                                 </c:otherwise>
                                             </c:choose>                                                                                                                                     
                                          </select></fieldset>
-                                    </div>  
+                                    </div>
                                     <div class="form-group">
                                         <label></label>
                                         <center><input type="submit" class="btn btn-success" name="btnGuardarUsuarioEditado" class="btn btn-info btn-min-width mr-1 mb-1" value="Guardar"/></i></center>
@@ -260,9 +258,10 @@
                                     <script src="validaPassVacia.js"></script>
                             </form>
                         </div>
-                   <center><a href="../Usuario/MantenedorUsuario.jsp" type="button"  class="btn btn-info btn-min-width mr-1 mb-1"><i class="ft-arrow-left"></i> Volver </a></center>
-                        
+                    <center><a href="../Usuario/MantenedorUsuario.jsp" type="button"  class="btn btn-info btn-min-width mr-1 mb-1"><i class="ft-arrow-left"></i> Volver </a></center>
+                       
                     </c:when>
+                    
                 </c:choose>   
                         
                          </div>

@@ -29,6 +29,11 @@ public class UsuarioBO {
      public List<Usuario> ListadoUsuarios(){
         return this.objUsuarioDAO.readElementos();
     }
+     
+    public List<Usuario> ListadoUsuariosXContrato(int id){
+        return this.objUsuarioDAO.readElementosXContrato(id);
+    }
+    
     public Usuario buscaUsuarioPorId(int id){
         return this.objUsuarioDAO.buscaUsuarioPorId(id);
     }

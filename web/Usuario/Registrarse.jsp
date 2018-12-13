@@ -42,7 +42,7 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form" name="formGuardaApoderadoNuevo" onsubmit="return validapass()" method="post" action="../RegistroServlet">
+				<form class="login100-form validate-form" name="formGuardaApoderadoNuevo" onsubmit="return validapass()" method="post" action="../Registro">
 					<span class="login100-form-title p-b-26">
 						Registro
 					</span>
@@ -58,6 +58,10 @@
                                                     <c:remove var="msgError"></c:remove>
                                                 </div>
                                                 </c:if>
+                                        <div class="wrap-input100 validate-input">
+						<input type="text" name="Rut" class="input100"  required/>
+						<span class="focus-input100" data-placeholder="Rut"></span>
+					</div>
 					<div class="wrap-input100 validate-input">
 						<input type="text" name="Nombre" class="input100"  required/>
 						<span class="focus-input100" data-placeholder="Nombre"></span>
@@ -107,7 +111,7 @@
 						
 
 						<a class="txt2" href="../login.jsp">
-							Volver
+                                                    Volver
 						</a>
 					</div>
 					<script src="../Colegio/validaRUT.js"></script>

@@ -80,6 +80,7 @@ public class ApoderadoServlet extends HttpServlet {
            //PENDIENTE
         }
         else {
+            String rut=request.getParameter("Rur");
             String nombre=request.getParameter("Nombre");
             String apellido =request.getParameter("Apellido");
             String correo=request.getParameter("Correo");
@@ -87,7 +88,7 @@ public class ApoderadoServlet extends HttpServlet {
             String rut_alumno=request.getParameter("Alumno");
             String codigo=request.getParameter("Contrato");
             int perfil=2;
-            Usuario infoUsuario= new Usuario(nombre,apellido,correo,password,perfil);
+            Usuario infoUsuario= new Usuario(nombre,apellido,correo,password,perfil,rut);
             UsuarioBO objUsuarioBO= new UsuarioBO();
             int id_alumno = objUsuarioBO.buscaAlumnoXRUTXContratoXCodigo(rut_alumno, codigo);
             if(id_alumno != 0){            

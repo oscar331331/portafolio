@@ -68,7 +68,8 @@
                         </li>
                         <li class=" nav-item"><a href="Evento/MantenedorEvento.jsp"><i class="ft-speaker"></i><span class="menu-title" data-i18n="">Eventos</span></a>
                         </li>
-                        
+                        <li class=" nav-item"><a href="Usuario/MantenedorUsuario.jsp"><i class="ft-speaker"></i><span class="menu-title" data-i18n="">Mis Apoderados</span></a>
+                        </li>  
                         <li class="nav-item"><a href="Alumno/MantenedorAlumno.jsp"><i class="ft-users"></i><span class="menu-title" data-i18n=""> Mis Alumnos</span></a>
                         </li>
                     </c:when>

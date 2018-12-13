@@ -80,6 +80,7 @@ public class RegistroServlet extends HttpServlet {
            //PENDIENTE
         }
         else {
+            String rut=request.getParameter("Rut");
             String nombre=request.getParameter("Nombre");
             String apellido =request.getParameter("Apellido");
             String correo=request.getParameter("Correo");
@@ -87,7 +88,7 @@ public class RegistroServlet extends HttpServlet {
             String rut_alumno=request.getParameter("Alumno");
             String codigo=request.getParameter("Contrato");
             int perfil=2;
-            Usuario infoUsuario= new Usuario(nombre,apellido,correo,password,perfil);
+            Usuario infoUsuario= new Usuario(nombre,apellido,correo,password,perfil,rut);
             UsuarioBO objUsuarioBO= new UsuarioBO();
             int id_alumno = objUsuarioBO.buscaAlumnoXRUTXContratoXCodigo(rut_alumno, codigo);
             if(id_alumno != 0){
@@ -98,13 +99,14 @@ public class RegistroServlet extends HttpServlet {
                     }
                 else if(objUsuarioBO.addUsuario(infoUsuario)){
                     //Usuario infoUsuario_up= (Usuario) objUsuarioBO.buscaUsuarioPorCorreo(correo);
+                    //response.sendRedirect("Usuario/Registrarse.jsp");
                     if(objUsuarioBO.ActualizaApoderadoDelAlumno(infoUsuario_up,id_alumno)){
                         sesion.setAttribute("msgError", "Registrado correctamente! Contacte con su Encargado de curso para habilitar su cuenta");
-                        response.sendRedirect("../login.jsp");
+                        response.sendRedirect("Usuario/Registrarse.jsp");
                     }
                     else{
-                        sesion.setAttribute("msgError", "Error al actualizar alumno");
-                        response.sendRedirect("../login.jsp");
+                        sesion.setAttribute("msgError", "Se registra usuario, pero no se actualiza alumno");
+                        response.sendRedirect("Usuario/Registrarse.jsp");
                         //Bajo este error eliminar usuario;
                     }
                 }else{
@@ -114,9 +116,8 @@ public class RegistroServlet extends HttpServlet {
             }
             else{
                 sesion.setAttribute("msgError", "Datos de alumno y contrato no concuerdan con los registrados");
-               response.sendRedirect("Usuario/Registrarse.jsp");  
-            }
-           
+                response.sendRedirect("Usuario/Registrarse.jsp");  
+            }      
         }
     }
     

@@ -72,8 +72,14 @@ public class UsuarioServlet extends HttpServlet {
         }
         else
         {
-          HttpSession session = request.getSession();        
-          session.setAttribute("listadoUsuario", objUsuarioBO.ListadoUsuarios());   
+            HttpSession session = request.getSession();
+            if ((int)session.getAttribute("perfil")==4){
+                int idEncargado = (int) session.getAttribute("idUsuario");    
+                session.setAttribute("listadoUsuario", objUsuarioBO.ListadoUsuariosXContrato(idEncargado));
+            }else{
+                session.setAttribute("listadoUsuario", objUsuarioBO.ListadoUsuarios()); 
+            }
+              
         }               
     }
 
