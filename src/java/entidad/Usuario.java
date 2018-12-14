@@ -182,8 +182,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Usuario{" + "idUsuario=" + idUsuario + ", apellidoUsuario=" + apellidoUsuario + ", rutUsuario=" + rutUsuario + ", correoUsuario=" + correoUsuario + ", nombreUsuario=" + nombreUsuario + ", passwordUsuario=" + passwordUsuario + ", idPerfil=" + idPerfil + ", active=" + active + '}';
+        return "entity.Usuario[ idUsuario=" + idUsuario + " ]";
     }
-    
     
 }
