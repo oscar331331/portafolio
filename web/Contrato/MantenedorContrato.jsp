@@ -1,6 +1,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -129,6 +130,9 @@
 					
 					<div class="table-responsive">
                                             <jsp:include page="../ContratoServlet" flush="true"/>
+                                            <jsp:include page="../UsuarioServlet" flush="true"/>
+                                            <jsp:include page="../CursoServlet" flush="true"/>
+                                            <jsp:include page="../ColegioServlet" flush="true"/>
                                             <jsp:useBean id="contrato" class="entidad.Contrato" scope="session"/>
                                             <center><h2>Mantenedor Contratos</h2></center>
                                             <% HttpSession sesion = request.getSession(); %>
@@ -143,9 +147,9 @@
                                                                     <th>Fecha Final<font style="color:white;">aaaa</font></th>
                                                                     <th>Monto Meta<font style="color:white;">aaaa</font></th>                                    
                                                                     <th>Monto Actual Contrato</th>
-                                                                    <th>ID Curso</th>
-                                                                    <th>ID Ejecutivo de Venta</th>
-                                                                    <th>ID Encargado Curso</th>
+                                                                    <th>Curso-Colegio</th>
+                                                                    <th>Ejecutivo Venta</th>
+                                                                    <th>Encargado Curso</th>
                                                                     <th>Paquete Turistico</th>
                                                                     <c:if test="${sessionScope.perfil==2}">
                                                                     <th>Cuotas</th>
@@ -178,9 +182,43 @@
                                                                     
                                                                     <td>$ <c:out value="${contrato.montoMeta}"></c:out></td>
                                                                     <td>$ <c:out value="${contrato.montoActualContrato}"></c:out></td>
-                                                                    <td><c:out value="${contrato.idCurso}"></c:out></td>
-                                                                    <td><c:out value="${contrato.idPromotor}"></c:out></td>
-                                                                    <td><c:out value="${contrato.idCliente}"></c:out></td>
+                                                                    
+                                                                    <c:forEach items="${listadoColegio}" var="colegio">
+                                                                        <c:forEach items="${listadoCurso}" var="curso">
+                                                                            <c:if test="${curso.idCurso == contrato.idCurso && curso.idColegio == colegio.idColegio}">
+                                                                                <td>
+                                                                                    <c:out value="${curso.getDescripcionCurso()}"></c:out> - <br>
+                                                                                    <c:out value="${colegio.getRazonSocialColegio()}"></c:out>.
+                                                                                </td>
+                                                                            </c:if>
+                                                                        </c:forEach> 
+                                                                    </c:forEach>
+                                                                    
+                                                                     
+                                                                    <c:forEach items="${listadoUsuario}" var="usuario">
+                                                                            <c:if test="${usuario.idUsuario == contrato.idPromotor}">
+                                                                                <td>
+                                                                                    <c:out value="${usuario.getNombreUsuario()}"></c:out> 
+                                                                                    <c:out value="${usuario.getApellidoUsuario()}"></c:out> - <br>
+                                                                                    <c:out value="${usuario.getCorreoUsuario()}"></c:out>
+                                                                                   
+                                                                                </td>
+                                                                            </c:if>
+                                                                    </c:forEach> 
+                                                                                
+                                                                    <c:forEach items="${listadoUsuario}" var="usuario">
+                                                                            <c:if test="${usuario.idUsuario == contrato.idCliente}">
+                                                                                <td>
+                                                                                    <c:out value="${usuario.getNombreUsuario()}"></c:out> 
+                                                                                    <c:out value="${usuario.getApellidoUsuario()}"></c:out> - <br>
+                                                                                    <c:out value="${usuario.getCorreoUsuario()}"></c:out>
+                                                                                   
+                                                                                </td>
+                                                                            </c:if>
+                                                                    </c:forEach> 
+                                                                    
+                                                                                
+                                                                    
                                                                     <td><c:out value="${contrato.idPaquete}"></c:out></td>
                                                                     
                                                                     

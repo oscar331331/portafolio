@@ -174,7 +174,7 @@
                                 <div class="container">
                                     <div class="form-group">
                                         <label>RUT Sostenedor</label>
-                                        <input type="text" name="RutSostenedorEditar" value="<c:out value="${colegioAEditar.rutSostenedor}" ></c:out>" class="form-control" placeholder="Ingrese RUT sostenedor" readonly=""/>
+                                        <input type="text" name="RutSostenedorEditar" value="<c:out value="${colegioAEditar.rutSostenedor}" ></c:out>" class="form-control" placeholder="Ingrese RUT sostenedor" />
                                     </div>
                                     <div class="form-group">
                                         <label>Razon Social</label>
