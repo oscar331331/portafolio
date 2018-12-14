@@ -74,10 +74,12 @@ public class ColegioDAO implements ICrud {
         try {
             Connection con = Conexion.getConexion();
             CallableStatement cs = null;
-            cs = con.prepareCall("{call EditarColegios(?,?,?)}");
+            cs = con.prepareCall("{call EditarColegios(?,?,?,?)}");
             cs.setInt(1, objColegio.getIdColegio());
-            cs.setString(2, objColegio.getRazonSocialColegio());
-            cs.setString(3, objColegio.getDireccionColegio());            
+            
+            cs.setString(2, objColegio.getRutSostenedor());
+            cs.setString(3, objColegio.getRazonSocialColegio());
+            cs.setString(4, objColegio.getDireccionColegio());            
             try {
                 return cs.executeUpdate() == 1;
             } catch (Exception e) {

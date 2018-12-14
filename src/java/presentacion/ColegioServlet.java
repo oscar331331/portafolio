@@ -91,9 +91,10 @@ public class ColegioServlet extends HttpServlet {
         HttpSession sesion= request.getSession();     
         if(sesion.getAttribute("colegioAEditar") != null){
             String razonsocial=request.getParameter("RazonSocialEditar");
+            String rut=request.getParameter("RutSostenedorEditar");
             String direccion =request.getParameter("DireccionEditar");
             
-            Colegio infoColegio= new Colegio(razonsocial,direccion);
+            Colegio infoColegio= new Colegio(rut,razonsocial,direccion);
             infoColegio.setIdColegio(((Colegio)sesion.getAttribute("colegioAEditar")).getIdColegio());
             ColegioBO objColegioBO= new ColegioBO();
             if(objColegioBO.updateColegio(infoColegio)){
