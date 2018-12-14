@@ -129,6 +129,8 @@
             <jsp:useBean id="usuario" class="entidad.Usuario" scope="session"/>
             <jsp:include page="/PaqueteServlet" flush="true"/>
             <jsp:useBean id="paquete" class="entidad.PaqueteTuristico" scope="session"/>
+             <jsp:include page="/ColegioServlet" flush="true"/>
+            <jsp:useBean id="colegio" class="entidad.PaqueteTuristico" scope="session"/>
             <c:choose>
                     <c:when test="${sessionScope.contratoAEditar==null}">
                         <div class="container">
@@ -173,9 +175,15 @@
                                          <fieldset class="form-group">
                                          <select class="form-control" name="Curso" required="true">                                            
                                              <option value="">Seleccione un Curso...</option>
+                                             <c:forEach items="${listadoColegio}" var="colegio">
+                                                 
                                              <c:forEach items="${listadoCurso}" var="curso">
-                                                 <option value="${curso.idCurso}">${curso.descripcionCurso}</option>
-                                             </c:forEach>                                                                                        
+                                                 <c:if test="${colegio.idColegio == curso.idColegio}">
+                                                 <option value="${curso.idCurso}">${curso.descripcionCurso} - ${colegio.razonSocialColegio}</option>
+                                                 </c:if>
+                                             </c:forEach>      
+                                                 
+                                             </c:forEach>
                                          </select></fieldset>
                                     </div>                                  
                                     <div class="form-group">
@@ -184,7 +192,7 @@
                                          <select class="form-control" name="Cliente" required="true">                                            
                                             <option value="">Seleccione un Encargado...</option>
                                             <c:forEach items="${listadoEncargado}" var="usuario">
-                                                <option value="${usuario.idUsuario}">${usuario.nombreUsuario} ${usuario.apellidoUsuario}</option>
+                                                <option value="${usuario.idUsuario}">${usuario.nombreUsuario} ${usuario.apellidoUsuario} - ${usuario.correoUsuario}</option>
                                             </c:forEach>                                                                                        
                                          </select></fieldset>
                                     </div>
@@ -194,7 +202,7 @@
                                          <select class="form-control" name="Promotor" required="true">                                            
                                              <option value="">Seleccione un Ejecutivo...</option>
                                              <c:forEach items="${listadoEjecutivo}" var="usuario">
-                                                 <option value="${usuario.idUsuario}">${usuario.nombreUsuario} ${usuario.nombreUsuario}</option>
+                                                 <option value="${usuario.idUsuario}">${usuario.nombreUsuario} ${usuario.nombreUsuario} - ${usuario.correoUsuario}</option>
                                              </c:forEach>                                                                                        
                                          </select>
                                          </fieldset>
@@ -222,6 +230,10 @@
                             <center><h2>Editar Contrato</h2></center>
                             <form name="formGuardaContratoEditado" method="post" action="../ContratoServlet">
                                 <div class="container">
+                                    <div class="form-group">
+                                        <label>Codigo Contrato</label>
+                                        <input type="text" name="CodigoContrato" value="<c:out value="${contratoAEditar.codigo}" ></c:out>" class="form-control" required readonly=""/>
+                                    </div>
                                     <div class="form-group">
                                         <label>Fecha Incorporacion</label>
                                         <input type="date" name="FechaIncorporacionEditar" value="<c:out value="${contratoAEditar.fechaIncorporacion}" ></c:out>" class="form-control" required/>
@@ -263,18 +275,21 @@
                                     </div>
                                     
                                     <div class="form-group">
-                                         <label>Codigo Curso </label>
+                                         <label>Curso </label>
                                          <fieldset class="form-group">
                                          <select class="form-control" name="CursoEditar" required="true">                                            
                                              <option value="">Seleccione un curso...</option>
-                                             <c:forEach items="${listadoCurso}" var="curso">
-                                                 <c:if test= "${contratoAEditar.idCurso == curso.idCurso}"> 
-                                                     <option value="${curso.idCurso}" selected="">${curso.idCurso}</option>
+                                             
+                                             <c:forEach items="${listadoColegio}" var="colegio">
+                                                 <c:forEach items="${listadoCurso}" var="curso">
+                                                 <c:if test= "${contratoAEditar.idCurso == curso.idCurso && curso.idColegio == colegio.idColegio}"> 
+                                                     <option value="${curso.idCurso}" selected="">ID: ${curso.idCurso} - ${curso.descripcionCurso} - ${colegio.razonSocialColegio}</option>
                                                  </c:if>
                                                     
-                                                 <c:if test= "${contratoAEditar.idCurso != curso.idCurso}"> 
-                                                    <option value="${curso.idCurso}">${curso.idCurso}</option>
+                                                 <c:if test= "${contratoAEditar.idCurso != curso.idCurso && curso.idColegio == colegio.idColegio}"> 
+                                                    <option value="${curso.idCurso}">ID: ${curso.idCurso} - ${curso.descripcionCurso} - ${colegio.razonSocialColegio}</option>
                                                  </c:if>   
+                                             </c:forEach>                                                                                        
                                              </c:forEach>                                                                                        
                                          </select></fieldset>
                                      </div>
@@ -285,10 +300,10 @@
                                                  <option value="">Seleccione un cliente...</option>
                                                  <c:forEach items="${listadoUsuario}" var="usuario">
                                                      <c:if test= "${contratoAEditar.idCliente == usuario.idUsuario}">  
-                                                        <option value="${usuario.idUsuario}" selected="">${usuario.correoUsuario}</option>
+                                                         <option value="${usuario.idUsuario}" selected="">${usuario.nombreUsuario} ${usuario.apellidoUsuario} - ${usuario.correoUsuario}</option>
                                                     </c:if>
                                                     <c:if test= "${contratoAEditar.idCliente != usuario.idUsuario}">  
-                                                        <option value="${usuario.idUsuario}">${usuario.correoUsuario}</option>
+                                                        <option value="${usuario.idUsuario}">${usuario.nombreUsuario} ${usuario.apellidoUsuario} - ${usuario.correoUsuario}</option>
                                                     </c:if>
                                                         
                                                      
@@ -302,11 +317,11 @@
                                                  <option value="">Seleccione un correo...</option>
                                                  <c:forEach items="${listadoUsuario}" var="usuario">
                                                      <c:if test= "${contratoAEditar.idPromotor == usuario.idUsuario}">   
-                                                         <option value="${usuario.idUsuario}" selected="">${usuario.correoUsuario}</option>
+                                                         <option value="${usuario.idUsuario}" selected="">${usuario.nombreUsuario} ${usuario.apellidoUsuario} - ${usuario.correoUsuario}</option>
                                                     </c:if>
                                                         
                                                     <c:if test= "${contratoAEditar.idPromotor != usuario.idUsuario}">   
-                                                         <option value="${usuario.idUsuario}">${usuario.correoUsuario}</option>
+                                                         <option value="${usuario.idUsuario}">${usuario.nombreUsuario} ${usuario.apellidoUsuario} - ${usuario.correoUsuario}</option>
                                                     </c:if>    
                                                  </c:forEach>                                                                                        
                                          </select></fieldset>

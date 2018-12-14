@@ -135,23 +135,43 @@
 					
 					<div class="table-responsive">
 						<jsp:include page="/CursoServlet" flush="true"/>
+						<jsp:include page="/ColegioServlet" flush="true"/>
             <jsp:useBean id="curso" class="entidad.Curso" scope="session"/>
             <center><h2>Mantenedor Cursos </h2></center>
                 <table class="table table-striped">
                             <thead>
                                 <tr>                            
                                     <th>Descripcion</th>
-                                    <th>Codigo Colegio</th>
-                                    <th>Cantidad de Alumnos</th>
+                                    <th>Colegio</th>
+                                    <th>Cant.<br> Alumnos</th>
+                                    <th>Estado</th>
                                     <th>Editar</th>
                                 </tr>
                             </thead>
                             <tbody>
                             <c:forEach items="${listadoCurso}" var="curso">
                                 <tr>
-                                    <td><c:out value="${curso.descripcionCurso}"></c:out></td>                            
-                                    <td><c:out value="${curso.idColegio}"></c:out></td> 
+                                    <td><c:out value="${curso.descripcionCurso}"></c:out></td>    
+                                    <c:forEach items="${listadoColegio}" var="colegio">
+                                        
+                                            <c:if test="${colegio.idColegio == curso.idColegio}">
+                                                <td>
+                                                    <c:out value="${colegio.getRazonSocialColegio()}"></c:out>. <br> 
+                                                <c:out value="${colegio.getDireccionColegio()}"></c:out>.
+                                                </td>
+                                            </c:if>
+                                         
+                                    </c:forEach>     
                                     <td><c:out value="${curso.cantAlumnos}"></c:out></td> 
+                                    
+                                    <td><c:if test="${curso.active==1}">
+                                            Activado
+                                        </c:if>
+                                            <c:if test="${curso.active!=1}">
+                                                <font color="red">Desactivado</font>
+                                        </c:if>
+                                    </td> 
+                                    
                                     <td>
                                     <c:url value="/CursoServlet" var="urlEdit">
                                         <c:param name="id_curso" value="${curso.idCurso}"></c:param>

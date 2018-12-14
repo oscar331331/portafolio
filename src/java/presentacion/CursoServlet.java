@@ -95,7 +95,7 @@ public class CursoServlet extends HttpServlet {
             int estado =Integer.parseInt(request.getParameter("ActiveEditar"));
             int cantidad =Integer.parseInt(request.getParameter("CantidadEditar"));
             int id_curso = ((Curso)sesion.getAttribute("cursoAEditar")).getIdCurso();
-            Curso infoCurso= new Curso(id_curso,descripcion,colegio,estado,cantidad);
+            Curso infoCurso= new Curso(id_curso,descripcion,estado,colegio,cantidad);
             
             CursoBO objCursoBO= new CursoBO();
             if(objCursoBO.updateCurso(infoCurso)){
