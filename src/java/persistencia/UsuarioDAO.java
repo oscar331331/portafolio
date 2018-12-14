@@ -210,8 +210,9 @@ public class UsuarioDAO implements ICrud {
     
      public boolean ActualizaApoderadoDelAlumno(Object objetoUpdate,int alumno) {
         Usuario objUsuario = (Usuario) objetoUpdate;
+        //System.out.println(alumno);
         try {
-            System.out.println("ID USER : "+objUsuario.getIdUsuario()+ " Alumno ID: "+alumno);
+            //System.out.println("ID USER : "+objUsuario.getIdUsuario()+ " Alumno ID: "+alumno);
             Connection con = Conexion.getConexion();
             CallableStatement cs = null;
             cs = con.prepareCall("{call ACTUALIZAAPODERADO(?,?)}");
@@ -321,7 +322,7 @@ public class UsuarioDAO implements ICrud {
             cs.executeQuery();
             ResultSet rs = (ResultSet)cs.getObject(3);
             if(rs.next()){
-                System.out.println("AQUI "+rs.getInt("ID_ALUMNO"));
+                System.out.println("ID_ALUMNO "+rs.getInt("ID_ALUMNO"));
                 return rs.getInt("ID_ALUMNO");                
             }
             else
