@@ -157,7 +157,7 @@ public class pdf extends HttpServlet {
                 par4.add(new Phrase(" " + infoContrato.getMontoMeta() + " (Pesos Chilenos CLP)",fonttitulo5));
                 par4.add(new Phrase(Chunk.NEWLINE));
                 par4.add(new Phrase("- Cantidad de alumnos: ",fonttituloitem));
-                par4.add(new Phrase("" + infoContrato.getCantAlumnos(),fonttitulo5));
+                par4.add(new Phrase("" + infoCurso.getCantAlumnos(),fonttitulo5));
                 par4.add(new Phrase(Chunk.NEWLINE));
                 par4.add(new Phrase("- Paquete tursitico contratado: ",fonttituloitem));
                 par4.add(new Phrase(infoPaquete.getDescripcion(),fonttitulo5));

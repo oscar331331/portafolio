@@ -1,5 +1,5 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -165,8 +165,8 @@
                                          <select class="form-control" name="Paquete" required="true">                                            
                                              <option value="">Seleccione un paquete...</option>
                                              <c:forEach items="${listadoPaquetes}" var="paquete">
-                                                 <option value="${paquete.idPaquete}">${paquete.descripcion}</option>
-                                             </c:forEach>                                                                                        
+                                                 <option value="${paquete.idPaquete}">${fn:substring(paquete.descripcion, 0, 41)}</option>
+                                             </c:forEach>                                                                                       
                                          </select></fieldset>
                                     </div>
                                   
@@ -263,11 +263,11 @@
                                              <option value="">Seleccione un paquete turistico...</option>
                                              <c:forEach items="${listadoPaquetes}" var="paquete">
                                                  <c:if test= "${contratoAEditar.idPaquete == paquete.idPaquete}">
-                                                     <option value="${paquete.idPaquete}" selected="">${paquete.descripcion}</option>
+                                                     <option value="${paquete.idPaquete}" selected="">${fn:substring(paquete.descripcion, 0, 41)}</option>
                                                  </c:if>
                                                     
                                                  <c:if test= "${contratoAEditar.idPaquete != paquete.idPaquete}">
-                                                     <option value="${paquete.idPaquete}">${paquete.descripcion}</option>
+                                                     <option value="${paquete.idPaquete}">${fn:substring(paquete.descripcion, 0, 41)}</option>
                                                  </c:if>
                                                     
                                              </c:forEach>                                                                                        
