@@ -75,6 +75,47 @@ public class UsuarioDAO implements ICrud {
         return listadoUsuario;
     }
     
+    public List readEncargados() {
+        List<Usuario> listadoEncargado = new LinkedList<>();
+        try {
+            Connection con = Conexion.getConexion();
+            CallableStatement cs = null;
+            cs = con.prepareCall("{call MOSTRARENCARGADOS(?)}");
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.executeQuery();
+            ResultSet rs = (ResultSet)cs.getObject(1); 
+            while (rs.next()) {
+                Usuario  infoUsuario = new Usuario(rs.getInt("id_usuario"), rs.getString("nombre_usuario"), rs.getString("apellido_usuario"), rs.getString("correo_usuario"), rs.getInt("fk_id_perfil"), rs.getInt("active"), rs.getString("rut_usuario"));
+                System.out.println(infoUsuario.toString());
+                listadoEncargado.add(infoUsuario);
+            }
+        } catch (Exception e) {
+            System.out.println("no se pudo ingresar al sistema");
+        }
+        return listadoEncargado;
+    }
+    
+
+    public List readEjecutivos() {
+        List<Usuario> listadoEjecutivo = new LinkedList<>();
+        try {
+            Connection con = Conexion.getConexion();
+            CallableStatement cs = null;
+            cs = con.prepareCall("{call MOSTRAREJECUTIVOS(?)}");
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.executeQuery();
+            ResultSet rs = (ResultSet)cs.getObject(1); 
+            while (rs.next()) {
+                Usuario  infoUsuario = new Usuario(rs.getInt("id_usuario"), rs.getString("nombre_usuario"), rs.getString("apellido_usuario"), rs.getString("correo_usuario"), rs.getInt("fk_id_perfil"), rs.getInt("active"), rs.getString("rut_usuario"));
+                System.out.println(infoUsuario.toString());
+                listadoEjecutivo.add(infoUsuario);
+            }
+        } catch (Exception e) {
+            System.out.println("no se pudo ingresar al sistema");
+        }
+        return listadoEjecutivo;
+    }
+    
     public List readElementosXContrato(int id) {
         List<Usuario> listadoUsuario = new LinkedList<>();
         try {
@@ -137,6 +178,25 @@ public class UsuarioDAO implements ICrud {
             cs.setInt(5, objUsuario.getIdPerfil());
             cs.setInt(6, objUsuario.getActive());//active
             
+            try {
+                return cs.executeUpdate() == 1;
+            } catch (Exception e) {
+                System.out.println("Problemas al actualizar");
+            }
+        } catch (Exception e) {
+            System.out.println("No se pudo updatear la base de datos");
+        }
+        return false;        
+    }
+    
+    public boolean updateEstado(Object objetoUpdate) {
+       Usuario objUsuario = (Usuario) objetoUpdate;
+        try {
+            Connection con = Conexion.getConexion();
+            CallableStatement cs = null;
+            cs = con.prepareCall("{call EDITARUSUARIOESTADO(?,?)}");
+            cs.setInt(1, objUsuario.getIdUsuario());
+            cs.setInt(2, objUsuario.getActive());//active
             try {
                 return cs.executeUpdate() == 1;
             } catch (Exception e) {

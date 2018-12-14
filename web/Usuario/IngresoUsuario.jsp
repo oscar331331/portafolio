@@ -112,21 +112,21 @@
             </div>
           </div>
         </div>
-           <c:if test="${sessionScope.msgError!=null}">
-             <div class="container"><div class="alert alert-danger">
-                     <a href="#" class="close" data-dismiss="alert">&times;</a>       
-                     <center><c:out value="${msgError}"></c:out> </center>                          
-                        </div>                            
-                            <c:remove var="msgError"></c:remove>
-                        </div></c:if>
-        
-        
+            <c:if test="${sessionScope.msgError!=null}">
+                 <div class="container">
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>       
+                        <center><c:out value="${msgError}"></c:out> </center>                          
+                    </div>                            
+                    <c:remove var="msgError"></c:remove>
+                </div>
+            </c:if>
       <section id="chartjs-bar-charts">  
        <div class="row">
         <div class="col-12">
             <div class="card">
         <jsp:include page="/PerfilServlet" flush="true"/>
-            
+                                                
             <c:choose>
                 <c:when test="${sessionScope.usuarioAEditar==null}">
                         <div class="container">
@@ -189,11 +189,12 @@
                     </c:when>
                     <c:when test="${sessionScope.usuarioAEditar!=null}">
                         <jsp:useBean id="usuarioAEditar" class="entidad.Usuario" scope="session"></jsp:useBean>
+                        
                         <div class="container">
                             <center><h2>Editar Usuario</h2></center>
                             <form name="formGuardaUsuarioEditado" method="post" onsubmit="return validapassvacia()" action="../UsuarioServlet">
                                 <div class="container">
-                                    
+                                    <c:if test="${sessionScope.perfil!=4}">
                                     <div class="form-group">
                                         <label>RUT Usuario</label>
                                         <input type="text" oninput="checkRut(this)" name="RutEditar" value="<c:out value="${usuarioAEditar.rutUsuario}" ></c:out>" class="form-control" placeholder="Ingrese Rut" required readonly=""/>
@@ -209,7 +210,8 @@
                                     <div class="form-group">
                                         <label>Correo</label>
                                         <input type="email" name="CorreoEditar" value="<c:out value="${usuarioAEditar.correoUsuario}" ></c:out>" class="form-control" placeholder="Ingrese Correo" required/>
-                                    </div>                                    
+                                    </div>
+                                                                        
                                     <div class="form-group">
                                         <label>Password</label>
                                         <input type="password" name="PasswordEditar" id="pass1" class="form-control" placeholder="(dejar en blanco para no modificar). Minimo 6 caracteres, sin espacios." />
@@ -218,11 +220,12 @@
                                         <label>Repetir Password</label>
                                         <input type="password" name="PasswordEditarRep" id="pass2" class="form-control" placeholder="(dejar en blanco para no modificar)" />
                                     </div>
+                                    
                                     <div class="form-group">
-                                        <label>Perfil </label>
+                                        <label>Perfil</label>
                                         <fieldset class="form-group">
                                          <select class="form-control" name="PerfilEditar" required="true">                                            
-                                            <option value="">Seleccione un perfil...</option>
+                                            <option value="">Seleccione un Perfil...</option>
                                             <c:forEach items="${listadoPerfil}" var="perfil">
                                                 <c:if test= "${usuarioAEditar.idPerfil == perfil.idPerfil}">
                                                     <option value="${perfil.idPerfil}" selected="">${perfil.descripcionPerfil}</option>
@@ -234,6 +237,8 @@
                                             </c:forEach>                                                                                        
                                          </select></fieldset>
                                     </div>
+                                    
+                                    </c:if>
                                     <div class="form-group">
                                         <label>Estado </label>
                                         <fieldset class="form-group">
@@ -254,15 +259,16 @@
                                         <label></label>
                                         <center><input type="submit" class="btn btn-success" name="btnGuardarUsuarioEditado" class="btn btn-info btn-min-width mr-1 mb-1" value="Guardar"/></i></center>
                                     </div>
+                                
                                 </div>                  
                                     <script src="validaPassVacia.js"></script>
                             </form>
                         </div>
-                    <center><a href="../Usuario/MantenedorUsuario.jsp" type="button"  class="btn btn-info btn-min-width mr-1 mb-1"><i class="ft-arrow-left"></i> Volver </a></center>
-                       
+                    <center><a href="../Usuario/MantenedorUsuario.jsp" type="button"  class="btn btn-info btn-min-width mr-1 mb-1"><i class="ft-arrow-left"></i> Volver </a></center> 
                     </c:when>
-                    
-                </c:choose>   
+                </c:choose>
+                
+                
                         
                          </div>
                 <div class="card-content collapse show">
@@ -275,7 +281,6 @@
             </div>
         </div>
     </div>
-        sessionscope.msgError = null;
 </c:otherwise>
         </c:choose> 
         

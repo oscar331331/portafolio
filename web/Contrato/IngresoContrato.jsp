@@ -169,32 +169,32 @@
                                     </div>
                                   
                                     <div class="form-group">
-                                         <label>Curso codigo </label>
+                                         <label>Curso</label>
                                          <fieldset class="form-group">
                                          <select class="form-control" name="Curso" required="true">                                            
-                                             <option value="">Seleccione un correo...</option>
+                                             <option value="">Seleccione un Curso...</option>
                                              <c:forEach items="${listadoCurso}" var="curso">
-                                                 <option value="${curso.idCurso}">${curso.idCurso}</option>
+                                                 <option value="${curso.idCurso}">${curso.descripcionCurso}</option>
                                              </c:forEach>                                                                                        
                                          </select></fieldset>
                                     </div>                                  
                                     <div class="form-group">
-                                        <label>Cliente </label>
+                                        <label>Encargado de Curso </label>
                                         <fieldset class="form-group">
                                          <select class="form-control" name="Cliente" required="true">                                            
-                                            <option value="">Seleccione un correo...</option>
-                                            <c:forEach items="${listadoUsuario}" var="usuario">
-                                                <option value="${usuario.idUsuario}">${usuario.correoUsuario}</option>
+                                            <option value="">Seleccione un Encargado...</option>
+                                            <c:forEach items="${listadoEncargado}" var="usuario">
+                                                <option value="${usuario.idUsuario}">${usuario.nombreUsuario} ${usuario.apellidoUsuario}</option>
                                             </c:forEach>                                                                                        
                                          </select></fieldset>
                                     </div>
                                     <div class="form-group">
-                                         <label>Promotor </label>
+                                         <label>Ejecutivo de Venta</label>
                                          <fieldset class="form-group">
                                          <select class="form-control" name="Promotor" required="true">                                            
-                                             <option value="">Seleccione un correo...</option>
-                                             <c:forEach items="${listadoUsuario}" var="usuario">
-                                                 <option value="${usuario.idUsuario}">${usuario.correoUsuario}</option>
+                                             <option value="">Seleccione un Ejecutivo...</option>
+                                             <c:forEach items="${listadoEjecutivo}" var="usuario">
+                                                 <option value="${usuario.idUsuario}">${usuario.nombreUsuario} ${usuario.nombreUsuario}</option>
                                              </c:forEach>                                                                                        
                                          </select>
                                          </fieldset>

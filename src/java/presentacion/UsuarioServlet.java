@@ -77,9 +77,10 @@ public class UsuarioServlet extends HttpServlet {
                 int idEncargado = (int) session.getAttribute("idUsuario");    
                 session.setAttribute("listadoUsuario", objUsuarioBO.ListadoUsuariosXContrato(idEncargado));
             }else{
-                session.setAttribute("listadoUsuario", objUsuarioBO.ListadoUsuarios()); 
+                session.setAttribute("listadoUsuario", objUsuarioBO.ListadoUsuarios());
+                session.setAttribute("listadoEncargado", objUsuarioBO.ListadoEncargados());
+                session.setAttribute("listadoEjecutivo", objUsuarioBO.ListadoEjecutivos());
             }
-              
         }               
     }
 
@@ -101,44 +102,56 @@ public class UsuarioServlet extends HttpServlet {
             String apellido =request.getParameter("ApellidoEditar");
             String correo=request.getParameter("CorreoEditar");
             String password=request.getParameter("PasswordEditar");
-            
-            int perfil=Integer.parseInt(request.getParameter("PerfilEditar"));
+            //int perfil=Integer.parseInt(request.getParameter("PerfilEditar"));
             int active=Integer.parseInt(request.getParameter("ActiveEditar"));
             Usuario infoUsuario= new Usuario();
-            
-            if(!"".equals(password)){
-                
+            if ((int)sesion.getAttribute("perfil")==4){
+                infoUsuario= new Usuario(active);
+            }else if(!"".equals(password)){
+                int perfil=Integer.parseInt(request.getParameter("PerfilEditar"));
                 infoUsuario= new Usuario(nombre,apellido,correo,password,perfil,active,rut);
-            }
-            else
+            }else{
+                int perfil=Integer.parseInt(request.getParameter("PerfilEditar"));
                 infoUsuario= new Usuario(nombre,apellido,correo,perfil,active,rut);
+            }
             
             infoUsuario.setIdUsuario(((Usuario)sesion.getAttribute("usuarioAEditar")).getIdUsuario());
             UsuarioBO objUsuarioBO= new UsuarioBO();
+            if ((int)sesion.getAttribute("perfil")==4){ 
             
-            if(!"".equals(password)){
+                if(objUsuarioBO.updateUsuarioEstado(infoUsuario)){
+                response.sendRedirect("Usuario/MantenedorUsuario.jsp");
+                sesion.setAttribute("msgBueno", "Usuario editado correctamente");
+                sesion.removeAttribute("usuarioAEditar");
+                }else{
+                    sesion.setAttribute("msgError", "no se pudo actualizar a la BD");
+                    response.sendRedirect("Usuario/IngresoUsuario.jsp");
+                }
+                
+                
+                
+            }else if(!"".equals(password)){   
                 if(objUsuarioBO.updateUsuario(infoUsuario)){
                 response.sendRedirect("Usuario/MantenedorUsuario.jsp");
                 sesion.setAttribute("msgBueno", "Usuario editado correctamente");
                 sesion.removeAttribute("usuarioAEditar");
+                }else{
+                    sesion.setAttribute("msgError", "no se pudo actualizar a la BD");
+                    response.sendRedirect("Usuario/IngresoUsuario.jsp");
+                }
             }else{
-                sesion.setAttribute("msgError", "no se pudo actualizar a la BD");
-                response.sendRedirect("Usuario/IngresoUsuario.jsp");
-            } 
-            } else
-            {
                 if(objUsuarioBO.updateUsuarioSinPw(infoUsuario)){
                 response.sendRedirect("Usuario/MantenedorUsuario.jsp");
                 sesion.setAttribute("msgBueno", "Usuario editado correctamente");
                 sesion.removeAttribute("usuarioAEditar");
-            }else{
-                sesion.setAttribute("msgError", "no se pudo actualizar a la BD");
-                response.sendRedirect("Usuario/IngresoUsuario.jsp");
-            } 
+                }else{
+                    sesion.setAttribute("msgError", "no se pudo actualizar a la BD");
+                    response.sendRedirect("Usuario/IngresoUsuario.jsp");
+                }
             }
             
         }
-        else {
+        else{
             String rut=request.getParameter("Rut");
             String nombre=request.getParameter("Nombre");
             String apellido =request.getParameter("Apellido");

@@ -26,8 +26,16 @@ public class UsuarioBO {
     public int buscaAlumnoXRUTXContratoXCodigo(String alumno,String contrato){
         return this.objUsuarioDAO.buscaAlumnoXRUTXContratoXCodigo(alumno, contrato);
     }    
-     public List<Usuario> ListadoUsuarios(){
+    public List<Usuario> ListadoUsuarios(){
         return this.objUsuarioDAO.readElementos();
+    }
+    
+    public List<Usuario> ListadoEncargados(){
+        return this.objUsuarioDAO.readEncargados();
+    }
+    
+    public List<Usuario> ListadoEjecutivos(){
+        return this.objUsuarioDAO.readEjecutivos();
     }
      
     public List<Usuario> ListadoUsuariosXContrato(int id){
@@ -45,6 +53,9 @@ public class UsuarioBO {
     }
     public boolean updateUsuarioSinPw(Usuario infoUsuario){
         return this.objUsuarioDAO.updateElementoSinPw(infoUsuario);
+    }
+    public boolean updateUsuarioEstado(Usuario infoUsuario){
+        return this.objUsuarioDAO.updateEstado(infoUsuario);
     }
     public boolean ActualizaApoderadoDelAlumno(Usuario infoUsuario,int id_alumno){
         return this.objUsuarioDAO.ActualizaApoderadoDelAlumno(infoUsuario, id_alumno);
