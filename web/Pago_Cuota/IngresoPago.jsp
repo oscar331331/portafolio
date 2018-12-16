@@ -70,9 +70,7 @@
                 <c:when test="${sessionScope.usuarioConectado.idUsuario==null}">
                     <% response.sendRedirect("../login.jsp"); %>
                 </c:when>
-    <c:when test="${objCuota.idCuotaViaje == 0 || objCuota == null}">
-                    <% response.sendRedirect("../Cuota/MantenedorCuotaViaje.jsp"); %>
-                </c:when>
+    
 
             <c:otherwise>  
 

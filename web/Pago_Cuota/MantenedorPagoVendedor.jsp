@@ -149,17 +149,15 @@
                                                 <td><fmt:formatDate value="${fechaP}" pattern="dd-MM-yyyy" /></td> 
                                                 
                                                 <td>$ <c:out value="${pagocuota.valorPagoCuota}"></c:out></td>
-                                                
-                                                <c:if test= "${pagocuota.fkIdEstadoPagoCuota == 1}">
-                                                    <td>Pendiente</td>
+
+                                                <c:if test= "${pagocuota.fkIdEstadoPagoCuota ==1}">
+                                                   <td> <input type="button" class="btn btn-warning" value="Pendiente"/></td>
                                                 </c:if>
-                                                    
-                                                 <c:if test= "${pagocuota.fkIdEstadoPagoCuota == 2}">
-                                                    <td>Pagado</td>
+                                                <c:if test= "${pagocuota.fkIdEstadoPagoCuota ==2}">
+                                                    <td> <input type="button" class="btn btn-success" value="Aceptado"/></td>
                                                 </c:if>
-                                                    
-                                                <c:if test= "${pagocuota.fkIdEstadoPagoCuota == 3}">
-                                                    <td>Rechazado</td>
+                                                <c:if test= "${pagocuota.fkIdEstadoPagoCuota ==3}">
+                                                    <td> <input type="button" class="btn btn-danger" value="Rechazado"/></td>
                                                 </c:if>
                                                     
                                                 <td style="text-align: center;">
