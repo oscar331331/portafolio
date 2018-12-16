@@ -62,16 +62,14 @@ public class AlumnoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         AlumnoBO objAlumnoBO= new AlumnoBO();
-        if(request.getParameter("id_alumno")!=null)
-        {
+        if(request.getParameter("id_alumno")!=null){
             HttpSession sesion = request.getSession();
             int alumnoEditar=Integer.parseInt(request.getParameter("id_alumno"));        
             Alumno infoAlumno=objAlumnoBO.buscaAlumnoPorId(alumnoEditar);
             sesion.setAttribute("alumnoAEditar", infoAlumno);
-            //response.sendRedirect("Colegio/IngresoColegio.jsp");
+            response.sendRedirect("Alumno/IngresoAlumno.jsp");
         }
-        else
-        {
+        else{
             HttpSession session = request.getSession(); 
             if ((int)session.getAttribute("perfil")==2){
                 int idApoderado = (int) session.getAttribute("idUsuario");    
@@ -98,7 +96,27 @@ public class AlumnoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+            HttpSession sesion= request.getSession(); 
+            //if(sesion.getAttribute("alumnoAEditar") != null){
+            String nombre=request.getParameter("NomebreEditar");
+            String apellido=request.getParameter("ApellidoEditar");
+            String rut=request.getParameter("RutEditar");
+            int contrato=Integer.parseInt(request.getParameter("ContratoEditar"));
+            int apoderado=Integer.parseInt(request.getParameter("ApoderadoEditar"));
+            int id_alumno = ((Alumno)sesion.getAttribute("alumnoAEditar")).getIdAlumno();
+            Alumno infoAlumno= new Alumno(id_alumno,nombre,apellido,rut,contrato,apoderado);
+            AlumnoBO objAlumnoBO= new AlumnoBO();
+            if(objAlumnoBO.updateAlumno(infoAlumno)){
+                sesion.setAttribute("msgBueno", "Alumno Editado Correctamente");
+                response.sendRedirect("Alumno/MantenedorAlumno.jsp");
+                sesion.removeAttribute("alumnoAEditar");
+            }else{
+                sesion.setAttribute("msgError", "No se pudo actualizar a la BD");
+                response.sendRedirect("Alumno/IngresoAlumno.jsp");
+            }
+            //}else{
+                
+            //}
     }
 
     /**

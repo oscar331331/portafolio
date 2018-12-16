@@ -72,6 +72,14 @@ public class Alumno implements Serializable {
         this.idContrato = idContrato;
         this.idUsuario = idUsuario;
     }
+    
+    public Alumno(String nombreAlumno, String apellidoAlumno, String rutAlumno, int idContrato, int idUsuario) {
+        this.nombreAlumno = nombreAlumno;
+        this.apellidoAlumno = apellidoAlumno;
+        this.rutAlumno = rutAlumno;
+        this.idContrato = idContrato;
+        this.idUsuario = idUsuario;
+    }
 
     public Alumno(String nombreAlumno, String apellidoAlumno, String rutAlumno, int idContrato) {
         this.nombreAlumno = nombreAlumno;
