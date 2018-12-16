@@ -132,6 +132,7 @@
                                             <jsp:include page="../ContratoServlet" flush="true"/>
                                             <jsp:include page="../UsuarioServlet" flush="true"/>
                                             <jsp:include page="../CursoServlet" flush="true"/>
+                                            <jsp:include page="../PaqueteServlet" flush="true"/>
                                             <jsp:include page="../ColegioServlet" flush="true"/>
                                             <jsp:useBean id="contrato" class="entidad.Contrato" scope="session"/>
                                             <center><h2>Mantenedor Contratos</h2></center>
@@ -158,7 +159,7 @@
                                                                     <th>Cuotas</th>
                                                                     <th>Pago evento</th>
                                                                     </c:if>
-                                                                    <c:if test="${sessionScope.perfil==1}">
+                                                                    <c:if test="${sessionScope.perfil==1 || sessionScope.perfil==3}">
                                                                     <th>Editar</th>
                                                                     </c:if>
                                                                     
@@ -217,9 +218,17 @@
                                                                             </c:if>
                                                                     </c:forEach> 
                                                                     
-                                                                                
                                                                     
-                                                                    <td><c:out value="${contrato.idPaquete}"></c:out></td>
+                                                                    <c:forEach items="${listadoPaquetes}" var="paquete">
+                                                                            
+                                                                        <c:if test="${paquete.idPaquete == contrato.idPaquete}">
+                                                                                    <td>
+                                                                                    <c:out value="${fn:substring(paquete.getDescripcion(),0,41)}"></c:out>
+                                                                                    </td>
+                                                                                </c:if>   
+                                                                    </c:forEach>      
+                                                                    
+                                                    
                                                                     
                                                                     
                                                                     <c:if test="${sessionScope.perfil==1 || sessionScope.perfil==3}">
@@ -234,10 +243,10 @@
                                                                     
                                                                     <c:if test="${sessionScope.perfil==2}">
                                                                     <td>
-                                                                    <c:url value="/Pago_Cuota/MantenedorPago.jsp" var="urlEdit">
+                                                                    <c:url value="/Pago_Cuota/MantenedorCuotaViaje.jsp" var="urlEdit">
                                                                         <c:param name="id_contrato" value="${contrato.idContrato}"></c:param>
                                                                     </c:url>
-                                                                    <input type="button" class="btn btn-info" name="btnCuota" value="Cuota" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
+                                                                    <input type="button" class="btn btn-info" name="btnCuota" value="Cuotas" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
                                                                     </td>
                                                                     </c:if>
                                                                     
@@ -247,7 +256,7 @@
                                                                     <c:url value="/Cuota/MantenedorCuotaViaje.jsp" var="urlEdit">
                                                                         <c:param name="id_contrato" value="${contrato.idContrato}"></c:param>
                                                                     </c:url>
-                                                                    <input type="button" class="btn btn-info" name="btnCuota" value="Cuota" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
+                                                                    <input type="button" class="btn btn-info" name="btnCuota" value="Pagar Cuota" onclick="window.location.href = '<c:out value="${urlEdit}"></c:out>'"/>
                                                                     </td>
                                                                     
                                                                     <td>

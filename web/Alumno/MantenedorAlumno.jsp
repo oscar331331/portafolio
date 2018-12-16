@@ -132,6 +132,8 @@
                         <div class="card-body">
                             <div class="table-responsive">
                             <jsp:include page="../AlumnoServlet" flush="true"/>
+                            <jsp:include page="../ContratoServlet" flush="true"/>
+                            <jsp:include page="../UsuarioServlet" flush="true"/>
                             <jsp:useBean id="usuario" class="entidad.Usuario" scope="page"/>
                             <jsp:useBean id="alumno" class="entidad.Alumno" scope="page"/>
                             <% HttpSession sesion = request.getSession(); %>
@@ -143,8 +145,8 @@
                                         <th>Rut</th>
                                         <th>Nombre</th>
                                         <th>Apellido</th>
-                                        <th>Id Contrato</th>
-                                        <th>Id Apoderado</th>
+                                        <th>Codigo Contrato</th>
+                                        <th>Apoderado</th>
                                         <c:if test="${sessionScope.perfil==1}">
                                             <th>Editar</th>
                                         </c:if>
@@ -156,8 +158,19 @@
                                         <td><c:out value="${alumno.rutAlumno}"></c:out></td>
                                         <td><c:out value="${alumno.nombreAlumno}"></c:out></td>                            
                                         <td><c:out value="${alumno.apellidoAlumno}"></c:out></td>
-                                        <td><c:out value="${alumno.idContrato}"></c:out></td>
-                                        <td><c:out value="${alumno.idUsuario}"></c:out></td>
+                                        
+                                        <c:forEach items="${listadoContrato}" var="contrato">
+                                                                        <c:if test="${contrato.idContrato == alumno.idContrato}">
+                                                                                   <td><c:out value="${contrato.codigo}"></c:out></td>
+                                                                            </c:if>
+                                                                    </c:forEach> 
+                                        <c:forEach items="${listadoUsuario}" var="usuario">
+                                                                        <c:if test="${usuario.idUsuario == alumno.idUsuario}">
+                                                                        <td>RUT: <c:out value="${usuario.rutUsuario}"></c:out>.<br>
+                                                                            <c:out value="${usuario.nombreUsuario}"></c:out> <c:out value="${usuario.apellidoUsuario}"></c:out></td>
+                                                                        </c:if>
+                                                                    </c:forEach> 
+                                        
                                         <c:if test="${sessionScope.perfil==1}">
                                             <td>
                                             <c:url value="../AlumnoServlet" var="urlEdit">

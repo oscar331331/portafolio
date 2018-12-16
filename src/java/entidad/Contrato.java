@@ -66,6 +66,11 @@ public class Contrato implements Serializable {
     @JoinColumn(name = "FK_ID_ESTADO_CONTRATO", referencedColumnName = "ID_CONTRATO")
     @ManyToOne(optional = false)
     private EstadoContrato fkIdEstadoContrato;
+    
+    @JoinColumn(name = "FK_ID_PAQUETE", referencedColumnName = "ID_PAQUETE")
+    @ManyToOne(optional = false)
+    private PaqueteTuristico fkIdPaquete;
+    
     @JoinColumn(name = "FK_ID_CLIENTE", referencedColumnName = "ID_USUARIO")
     @ManyToOne(optional = false)
     private Usuario_1 fkIdCliente;
@@ -226,6 +231,14 @@ public class Contrato implements Serializable {
     public void setFkIdCliente(Usuario_1 fkIdCliente) {
         this.fkIdCliente = fkIdCliente;
     }
+    
+    public PaqueteTuristico getFkIdPaquete() {
+        return fkIdPaquete;
+    }
+
+    public void setFkIdPaquete(PaqueteTuristico fkIdPaquete) {
+        this.fkIdPaquete = fkIdPaquete;
+    }
 
     public Usuario_1 getFkIdPromotor() {
         return fkIdPromotor;
@@ -243,6 +256,7 @@ public class Contrato implements Serializable {
     public void setIdCurso(int IdCurso) {
         this.IdCurso = IdCurso;
     }
+   
 
     public int getIdCliente() {
         return IdCliente;
@@ -259,6 +273,8 @@ public class Contrato implements Serializable {
     public void setIdPromotor(int IdPromotor) {
         this.IdPromotor = IdPromotor;
     }
+    
+    
     
     @Override
     public String toString() {

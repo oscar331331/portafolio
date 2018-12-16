@@ -127,6 +127,7 @@
 					
 					<div class="table-responsive">
                                             <jsp:include page="../CuotaServlet" flush="true"/>
+                                            <jsp:include page="../AlumnoServlet" flush="true"/>
                                             <jsp:useBean id="cuota" class="entidad.CuotaViaje" scope="session"/>
                                             <center><h2>Mis Cuotas</h2></center>
                                             <% HttpSession sesion = request.getSession(); %>
@@ -150,8 +151,15 @@
                                                                 <tr>
                                                                     <td><c:out value="${cuota.idCuotaViaje}"></c:out></td>
                                                                     <td>$ <c:out value="${cuota.valorCuotaViaje}"></c:out></td>
-                                                                    <td><c:out value="${cuota.fkIdEstadoCuota}"></c:out></td>
-                                                                    <td><c:out value="${cuota.fkIdAlumno}"></c:out></td>
+                                                                    <td><c:if test="${cuota.fkIdEstadoCuota==1}">En Proceso</c:if></td>
+                                                                    
+                                                                    <c:forEach items="${listadoAlumnos}" var="alumno">
+                                                                        <c:if test="${alumno.idAlumno == cuota.fkIdAlumno}">
+                                                                        <td>RUT: <c:out value="${alumno.rutAlumno}"></c:out>.<br>
+                                                                            <c:out value="${alumno.nombreAlumno}"></c:out> <c:out value="${alumno.apellidoAlumno}"></c:out></td>
+                                                                        </c:if>
+                                                                    </c:forEach> 
+                                                                    
                                                                     <c:if test="${sessionScope.perfil==2 || sessionScope.perfil==4}">
                                                                     <td>
                                                                     <c:url value="/CuotaServlet" var="urlEdit">
