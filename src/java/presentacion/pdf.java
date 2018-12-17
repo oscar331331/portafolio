@@ -162,9 +162,6 @@ public class pdf extends HttpServlet {
                 par4.add(new Phrase("- Paquete tursitico contratado: ",fonttituloitem));
                 par4.add(new Phrase(infoPaquete.getDescripcion(),fonttitulo5));
                 par4.add(new Phrase(Chunk.NEWLINE));
-                par4.add(new Phrase("- Seguro Contratado: ",fonttituloitem));
-                par4.add(new Phrase("Aca va su seguro (si es que tiene uno).",fonttitulo5));
-                par4.add(new Phrase(Chunk.NEWLINE));
                 par4.setAlignment(Element.ALIGN_JUSTIFIED);
                 par4.add(new Phrase(Chunk.NEWLINE));
                 documento.add(par4);
