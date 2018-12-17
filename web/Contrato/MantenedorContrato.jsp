@@ -196,7 +196,7 @@
                                                                     </c:forEach>
                                                                     
                                                                      
-                                                                    <c:forEach items="${listadoUsuario}" var="usuario">
+                                                                    <c:forEach items="${listadoEjecutivo}" var="usuario">
                                                                             <c:if test="${usuario.idUsuario == contrato.idPromotor}">
                                                                                 <td>
                                                                                     <c:out value="${usuario.getNombreUsuario()}"></c:out> 
@@ -207,7 +207,7 @@
                                                                             </c:if>
                                                                     </c:forEach> 
                                                                                 
-                                                                    <c:forEach items="${listadoUsuario}" var="usuario">
+                                                                    <c:forEach items="${listadoEncargado}" var="usuario">
                                                                             <c:if test="${usuario.idUsuario == contrato.idCliente}">
                                                                                 <td>
                                                                                     <c:out value="${usuario.getNombreUsuario()}"></c:out> 

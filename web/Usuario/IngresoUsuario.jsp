@@ -69,7 +69,7 @@
         <c:when test="${sessionScope.usuarioConectado.idUsuario==null}">
             <% response.sendRedirect("../login.jsp"); %>
         </c:when>
-        <c:when test="${sessionScope.perfil==2 || sessionScope.perfil==4}">
+        <c:when test="${sessionScope.perfil==2}">
            <% response.sendRedirect("../Index.jsp"); %>
         </c:when>
     <c:otherwise>  

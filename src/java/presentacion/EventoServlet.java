@@ -146,7 +146,7 @@ public class EventoServlet extends HttpServlet {
         }
         else {
             
-            String archivo="C:\\Users\\Vito\\Desktop\\WebAppTourV1\\portafolio\\web\\comprobantes";
+            String archivo="D:\\Documentos\\NetBeansProjects\\portafolio\\web\\comprobantes";
             DiskFileItemFactory factory=new DiskFileItemFactory();
             factory.setSizeThreshold(1024);
             factory.setRepository(new File(archivo));

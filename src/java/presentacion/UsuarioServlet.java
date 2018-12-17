@@ -76,6 +76,8 @@ public class UsuarioServlet extends HttpServlet {
             if ((int)session.getAttribute("perfil")==4){
                 int idEncargado = (int) session.getAttribute("idUsuario");    
                 session.setAttribute("listadoUsuario", objUsuarioBO.ListadoUsuariosXContrato(idEncargado));
+                session.setAttribute("listadoEncargado", objUsuarioBO.ListadoEncargados());
+                session.setAttribute("listadoEjecutivo", objUsuarioBO.ListadoEjecutivos());
             }else{
                 session.setAttribute("listadoUsuario", objUsuarioBO.ListadoUsuarios());
                 session.setAttribute("listadoEncargado", objUsuarioBO.ListadoEncargados());
