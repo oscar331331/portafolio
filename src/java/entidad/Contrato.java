@@ -278,7 +278,7 @@ public class Contrato implements Serializable {
     
     @Override
     public String toString() {
-        return "entidad.Contrato[ idContrato=" + idContrato + " ]";
+        return "entidad.Contrato[ idContrato=" + codigo + " ]";
     }
     
     public String generarCodigo(){

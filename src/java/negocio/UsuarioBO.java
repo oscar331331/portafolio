@@ -37,6 +37,10 @@ public class UsuarioBO {
     public List<Usuario> ListadoEjecutivos(){
         return this.objUsuarioDAO.readEjecutivos();
     }
+    
+    public List<Usuario> ListadoApoderados(){
+        return this.objUsuarioDAO.readApoderados();
+    }
      
     public List<Usuario> ListadoUsuariosXContrato(int id){
         return this.objUsuarioDAO.readElementosXContrato(id);

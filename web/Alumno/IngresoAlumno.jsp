@@ -102,7 +102,7 @@
                     <div class="content-wrapper-before"></div>
                     <div class="content-header row">
                       <div class="content-header-left col-md-4 col-12 mb-2">
-                        <h3 class="content-header-title">Pagos</h3>
+                        <h3 class="content-header-title">Alumnos</h3>
                       </div>
                       <div class="content-header-right col-md-8 col-12">
                         <div class="breadcrumbs-top float-md-right">
@@ -122,34 +122,110 @@
                    <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="container">
-                                 <br> <center><h4>Ingresar Alumnos de forma masiva</h4></center><br>
-                                  <form name="formGuardaPagoNuevo" method="post" action="../AlumnoCargaMasivaServlet" enctype="multipart/form-data">
+                            <jsp:include page="/ContratoServlet" flush="true"/>
+                            <jsp:useBean id="contrato" class="entidad.Contrato" scope="session"/>
+                            <jsp:include page="/UsuarioServlet" flush="true"/>
+                            <jsp:useBean id="apoderado" class="entidad.Usuario" scope="session"/>
+                            <c:choose>
+                                <c:when test="${sessionScope.alumnoAEditar==null}">
                                     <div class="container">
-                                          <fieldset>
-                                              <div class="form-group">
-                                                  <label>Codigo del contrato: </label>
-                                                  <input type="text" name="codigo" class="form-control"  required/>
-                                              </div>
-                                          </fieldset>  
-                                          <fieldset> 
-                                              <div class="form-group">
-                                                  <label>Excel con alumnos: </label>
-                                                  <input type="file" name="file" id="file" required>    
-                                              </div>
-                                          </fieldset>                                   
-                                          <div class="form-group">
-                                              <label></label>
-                                              <center><input type="submit" class="btn btn-success" name="btnGuardarPago" value="Guardar"/></center>
-                                          </div>
-                                      </div>                          
-                                  </form>
-                             </div>
-                            <center> <a class="btn" href="MantenedorAlumno.jsp">Volver</a></center>
-                            <c:if test="${sessionScope.msgError!=null}">
-                                <c:out value="${msgError}"></c:out>
-                                <c:remove var="msgError"></c:remove>
-                            </c:if>  
+                                        <br> <center><h4>Ingresar Alumnos de forma masiva</h4></center><br>
+                                         <form name="formGuardaPagoNuevo" method="post" action="../AlumnoCargaMasivaServlet" enctype="multipart/form-data">
+                                           <div class="container">
+                                                 <fieldset>
+                                                     <div class="form-group">
+                                                         <label>Codigo del contrato: </label>
+                                                         <input type="text" name="codigo" class="form-control"  required/>
+                                                     </div>
+                                                 </fieldset>  
+                                                 <fieldset> 
+                                                     <div class="form-group">
+                                                         <label>Excel con alumnos: </label>
+                                                         <input type="file" name="file" id="file" required>    
+                                                     </div>
+                                                 </fieldset>                                   
+                                                 <div class="form-group">
+                                                     <label></label>
+                                                     <center><input type="submit" class="btn btn-success" name="btnGuardarPago" value="Guardar"/></center>
+                                                 </div>
+                                             </div>                          
+                                         </form>
+                                    </div>
+                                    <center> <a class="btn" href="MantenedorAlumno.jsp">Volver</a></center>
+                                    <c:if test="${sessionScope.msgError!=null}">
+                                        <c:out value="${msgError}"></c:out>
+                                        <c:remove var="msgError"></c:remove>
+                                    </c:if>
+                                </c:when>
+                                    <c:when test="${sessionScope.alumnoAEditar!=null}">
+                                    <jsp:useBean id="alumnoAEditar" class="entidad.Alumno" scope="session"></jsp:useBean>
+                                        <div class="container">
+                                        <br> <center><h4>Editar Alumnos</h4></center><br>
+                                        <form name="formEditaAlumno" method="post" action="../AlumnoServlet">
+                                            <div class="container">
+                                            <div class="form-group">
+                                                <label>Nombre Alumno</label>
+                                                <input type="text" name="NomebreEditar" value="<c:out value="${alumnoAEditar.nombreAlumno}" ></c:out>" class="form-control" placeholder="Ingrese Nombre" required/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Apellido Alumno</label>
+                                                <input type="text" name="ApellidoEditar" value="<c:out value="${alumnoAEditar.apellidoAlumno}" ></c:out>" class="form-control" placeholder="Ingrese Apellido" required/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Rut Alumno</label>
+                                                <input type="text" name="RutEditar" value="<c:out value="${alumnoAEditar.rutAlumno}" ></c:out>" class="form-control" placeholder="Ingrese Rut" readonly/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Contrato</label>
+                                                <fieldset class="form-group">
+                                                 <select class="form-control" name="ContratoEditar" required="true">                                            
+                                                    <option value="">Seleccione un Contrato...</option>                                            
+                                                    <c:forEach items="${listadoContrato}" var="contrato">
+                                                        <c:choose>
+                                                            <c:when test="${contrato.idContrato == alumnoAEditar.idContrato}">
+                                                                <option value="${contrato.idContrato}" selected="selected">${contrato.codigo}</option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="${contrato.idContrato}">${contrato.codigo}</option>
+                                                            </c:otherwise>
+                                                        </c:choose>                                                
+                                                    </c:forEach>                                                                                        
+                                                 </select>
+                                                </fieldset>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Apoderado</label>
+                                                <fieldset class="form-group">
+                                                 <select class="form-control" name="ApoderadoEditar" required="true">                                            
+                                                    <option value="">Seleccione un Apoderado...</option>                                            
+                                                    <c:forEach items="${listadoApoderado}" var="apoderado">
+                                                        <c:choose>
+                                                            <c:when test="${apoderado.idUsuario == alumnoAEditar.idUsuario}">
+                                                                <option value="${apoderado.idUsuario}" selected="selected">${apoderado.nombreUsuario} ${apoderado.apellidoUsuario}</option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="${apoderado.idUsuario}">${apoderado.nombreUsuario} ${apoderado.apellidoUsuario}</option>
+                                                            </c:otherwise>
+                                                        </c:choose>                                                
+                                                    </c:forEach>                                                                                        
+                                                 </select>
+                                                </fieldset>
+                                            </div>
+                                            <div class="form-group">
+                                                <label></label>
+                                                <center><input type="submit" class="btn btn-success" name="btnGuardarPago" value="Guardar"/></center>
+                                            </div>
+                                            </div>                          
+                                        </form>
+                                    </div>
+                                    <center> <a class="btn" href="MantenedorAlumno.jsp">Volver</a></center>
+                                    <c:if test="${sessionScope.msgError!=null}">
+                                        <c:out value="${msgError}"></c:out>
+                                        <c:remove var="msgError"></c:remove>
+                                    </c:if>
+                                    </c:when>
+                            </c:choose>
+                              
                         </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">

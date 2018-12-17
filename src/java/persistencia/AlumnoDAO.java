@@ -307,7 +307,26 @@ public class AlumnoDAO implements ICrud {
 
     @Override
     public boolean updateElemento(Object objetoUpdate) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       Alumno objAlumno = (Alumno) objetoUpdate;
+        try {
+            Connection con = Conexion.getConexion();
+            CallableStatement cs = null;
+            cs = con.prepareCall("{call EDITARALUMNOS(?,?,?,?,?,?)}");
+            cs.setInt(1, objAlumno.getIdAlumno());
+            cs.setString(2, objAlumno.getNombreAlumno());
+            cs.setString(3, objAlumno.getApellidoAlumno());
+            cs.setString(4, objAlumno.getRutAlumno());
+            cs.setInt(5, objAlumno.getIdContrato());
+            cs.setInt(6, objAlumno.getIdUsuario());
+            try {
+                return cs.executeUpdate() == 1;
+            } catch (Exception e) {
+                System.out.println("Problemas al actualizar");
+            }
+        } catch (Exception e) {
+            System.out.println("No se pudo updatear la base de datos "+e.getMessage());
+        }
+        return false;        
     }
 
     @Override

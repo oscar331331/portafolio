@@ -80,6 +80,7 @@ public class UsuarioServlet extends HttpServlet {
                 session.setAttribute("listadoUsuario", objUsuarioBO.ListadoUsuarios());
                 session.setAttribute("listadoEncargado", objUsuarioBO.ListadoEncargados());
                 session.setAttribute("listadoEjecutivo", objUsuarioBO.ListadoEjecutivos());
+                session.setAttribute("listadoApoderado", objUsuarioBO.ListadoApoderados());
             }
         }               
     }
