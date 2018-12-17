@@ -97,7 +97,7 @@ public class AlumnoCargaMasivaServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession sesion= request.getSession();
         try{
-            String archivo="C:\\Users\\Pabarcac\\Downloads\\WebAppTour\\WebAppTour\\web\\cargaDeAlumno"; 
+            String archivo="C:\\Users\\Pabarcac\\Downloads"; 
             /*
                 Asignar a la variable archivo la dirección del servidor o en caso de desarrollo la dirección local
             */
@@ -192,7 +192,7 @@ public class AlumnoCargaMasivaServlet extends HttpServlet {
     }// </editor-fold>
     private String IngresoCM(String archivo, Contrato objContrato, AlumnoBO objAlumnoBO) 
     {
-        File file = new File("C:\\Users\\Pabarcac\\Downloads\\WebAppTour\\WebAppTour\\web\\cargaDeAlumno\\"+archivo);
+        File file = new File("C:\\Users\\Pabarcac\\Downloads\\"+archivo);
         /*
             Asignar a la variable file la dirección del servidor o en caso de desarrollo la dirección local
         */

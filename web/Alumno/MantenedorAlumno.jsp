@@ -160,17 +160,21 @@
                                         <td><c:out value="${alumno.apellidoAlumno}"></c:out></td>
                                         
                                         <c:forEach items="${listadoContrato}" var="contrato">
-                                                                        <c:if test="${contrato.idContrato == alumno.idContrato}">
-                                                                                   <td><c:out value="${contrato.codigo}"></c:out></td>
-                                                                            </c:if>
-                                                                    </c:forEach> 
-                                        <c:forEach items="${listadoUsuario}" var="usuario">
-                                                                        <c:if test="${usuario.idUsuario == alumno.idUsuario}">
-                                                                        <td>RUT: <c:out value="${usuario.rutUsuario}"></c:out>.<br>
-                                                                            <c:out value="${usuario.nombreUsuario}"></c:out> <c:out value="${usuario.apellidoUsuario}"></c:out></td>
-                                                                        </c:if>
-                                                                    </c:forEach> 
-                                        
+                                            <c:if test="${contrato.idContrato == alumno.idContrato}">
+                                                <td><c:out value="${contrato.codigo}"></c:out></td>
+                                            </c:if>
+                                        </c:forEach> 
+                                        <c:if test="${alumno.idUsuario == 0}">
+                                            <td>No asignado</td>
+                                        </c:if> 
+                                        <c:if test="${alumno.idUsuario != 0}">    
+                                            <c:forEach items="${listadoUsuario}" var="usuario">
+                                                <c:if test="${usuario.idUsuario == alumno.idUsuario}">
+                                                    <td>RUT: <c:out value="${usuario.rutUsuario}"></c:out>.<br>
+                                                    <c:out value="${usuario.nombreUsuario}"></c:out> <c:out value="${usuario.apellidoUsuario}"></c:out></td>
+                                                </c:if>                                                                        
+                                            </c:forEach> 
+                                        </c:if>
                                         <c:if test="${sessionScope.perfil==1}">
                                             <td>
                                             <c:url value="../AlumnoServlet" var="urlEdit">
