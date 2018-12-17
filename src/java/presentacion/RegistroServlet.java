@@ -5,6 +5,7 @@
  */
 package presentacion;
 
+import entidad.Email;
 import entidad.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -61,7 +62,7 @@ public class RegistroServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                      
+                      System.out.println("REGISTRO SERVLET");
     }
 
     /**
@@ -101,7 +102,8 @@ public class RegistroServlet extends HttpServlet {
                     infoUsuario_up= (Usuario) objUsuarioBO.buscaUsuarioPorCorreo(correo);
                     //response.sendRedirect("Usuario/Registrarse.jsp");
                     if(objUsuarioBO.ActualizaApoderadoDelAlumno(infoUsuario_up,id_alumno)){
-                        sesion.setAttribute("msgError", "Registrado correctamente! Contacte con su Encargado de curso para habilitar su cuenta");
+                        sendMail(correo);
+                        sesion.setAttribute("msgExito", "Registrado correctamente! Contacte con su Encargado de curso para habilitar su cuenta");
                         response.sendRedirect("Usuario/Registrarse.jsp");
                     }
                     else{
@@ -127,4 +129,14 @@ public class RegistroServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private void sendMail(String correo){
+        Email InfoMail = new Email();
+        boolean result = InfoMail.enviarCorreo(correo, "Bienvenido a On Tour, ha sido registrado correctamente ", "Registro OnTour");
+        if(result == true){
+            System.out.println("OK mail");            
+        }
+        else{
+            System.out.println("Fail");
+        }
+    }
 }

@@ -51,13 +51,20 @@
 						<img src="../loginCSS/images/img-01.png" alt="IMG">
 					</span>
                                         <br>
-                                    <c:if test="${sessionScope.msgError!=null}">
-                                                <div class="alert alert-danger">
-                                                    <a href="#" class="close" data-dismiss="alert">&times;</a>
-                                                    <c:out value="${msgError}"></c:out>
-                                                    <c:remove var="msgError"></c:remove>
-                                                </div>
-                                                </c:if>
+                                        <c:if test="${sessionScope.msgError!=null}">
+                                            <div class="alert alert-danger">
+                                                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                                <c:out value="${msgError}"></c:out>
+                                                <c:remove var="msgError"></c:remove>
+                                            </div>
+                                        </c:if>    
+                                        <c:if test="${sessionScope.msgExito!=null}">
+                                            <div class="alert alert-success">
+                                                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                                <c:out value="${msgExito}"></c:out>
+                                                <c:remove var="msgExito"></c:remove>
+                                            </div>
+                                        </c:if> 
                                         <div class="wrap-input100 validate-input">
 						<input type="text" name="Rut" class="input100"  required/>
 						<span class="focus-input100" data-placeholder="Rut"></span>
