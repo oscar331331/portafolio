@@ -5,6 +5,8 @@
  */
 package presentacion;
 
+import entidad.GraficoAdmin;
+import entidad.GraficoApoderado;
 import entidad.Usuario;
 import negocio.UsuarioBO;
 import java.io.IOException;
@@ -15,6 +17,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import negocio.GraficoAdminBO;
+import negocio.GraficoApoderadoBO;
 
 /**
  *
@@ -47,12 +51,32 @@ public class LoginServlet extends HttpServlet {
             sesion.setAttribute("user",u);
             sesion.setAttribute("perfil",objUsuario.getIdPerfil());
             sesion.setAttribute("idUsuario",objUsuario.getIdUsuario());
-            
-            response.sendRedirect("Index.jsp"); 
+            int id_usuario=objUsuario.getIdUsuario();
+            if (objUsuario.getIdPerfil()==1 || objUsuario.getIdPerfil()==3 || objUsuario.getIdPerfil()==5){
+                GraficoAdmin objGraficoAdmin = new GraficoAdmin();
+                GraficoAdminBO objGraficoAdminBO = new GraficoAdminBO();
+                objGraficoAdmin=objGraficoAdminBO.obtenerGrafico();
+                sesion.setAttribute("graficoAdmin",objGraficoAdmin);
+                sesion.removeAttribute("msgLogin");
+                response.sendRedirect("Index.jsp");
+            }else if(objUsuario.getIdPerfil()==2){
 
-            sesion.setAttribute("msgLogin", "Datos Correctos");
-            sesion.removeAttribute("msgLogin");
-            
+                GraficoApoderado objGraficoApoderado = new GraficoApoderado();
+                GraficoApoderadoBO objGraficoApoderadoBO = new GraficoApoderadoBO();
+                objGraficoApoderado=objGraficoApoderadoBO.obtenerGrafico(id_usuario);
+                sesion.setAttribute("graficoApoderado",objGraficoApoderado);
+                sesion.removeAttribute("msgLogin");
+                response.sendRedirect("Index.jsp");
+            }else if(objUsuario.getIdPerfil()==4){
+
+                GraficoApoderado objGraficoApoderado = new GraficoApoderado();
+                GraficoApoderadoBO objGraficoApoderadoBO = new GraficoApoderadoBO();
+                objGraficoApoderado=objGraficoApoderadoBO.obtenerGrafico(id_usuario);
+                sesion.setAttribute("msgBueno", "Graficos en mantención para encargado de curso, disculpe las molestias");
+                sesion.removeAttribute("msgLogin");
+                response.sendRedirect("Index.jsp");
+            }
+                        
         }else{
             sesion.setAttribute("msgError", "no se pudo ingresar a la BD");
             sesion.setAttribute("msgLogin", "Uusario o password incorrectos, verifique e intente nuevamente");
