@@ -124,7 +124,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                            <h4 class="card-title">Mantenedor Alumnos</h4>
+                            <h4 class="card-title">Alumnos</h4>
                             <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
 
                     </div>
@@ -138,7 +138,7 @@
                             <jsp:useBean id="alumno" class="entidad.Alumno" scope="page"/>
                             <% HttpSession sesion = request.getSession(); %>
                             <% sesion.setAttribute("alumnoAEditar", null); %>
-                            <center><h2>Mantenedor Alumnos</h2></center>
+                            <center><h2>Alumnos</h2></center>
                             <table class="table table-striped">
                                 <thead>
                                     <tr> 
@@ -186,9 +186,7 @@
                             <c:if test="${sessionScope.perfil==1}">
                             <center><a href="../Alumno/IngresoAlumno.jsp" type="button"  class="btn btn-info btn-min-width mr-1 mb-1"><i class="ft-plus-square"></i> Agregar Alumnos</a></center>
                             </c:if>
-                            <c:if test="${sessionScope.perfil==2}">
-                            <center><a href="../Usuario/IngresoApoderado.jsp" type="button"  class="btn btn-info btn-min-width mr-1 mb-1"><i class="ft-plus-square"></i> Agregar Alumno</a></center>
-                            </c:if>
+                            
                             </div>
                         </div>
                     </div>

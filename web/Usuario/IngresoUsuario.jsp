@@ -69,7 +69,7 @@
         <c:when test="${sessionScope.usuarioConectado.idUsuario==null}">
             <% response.sendRedirect("../login.jsp"); %>
         </c:when>
-        <c:when test="${sessionScope.perfil==2}">
+        <c:when test="${sessionScope.perfil==2 || sessionScope.perfil==4}">
            <% response.sendRedirect("../Index.jsp"); %>
         </c:when>
     <c:otherwise>  
@@ -191,7 +191,7 @@
                         <jsp:useBean id="usuarioAEditar" class="entidad.Usuario" scope="session"></jsp:useBean>
                         
                         <div class="container">
-                            <center><h2>Editar Usuario</h2></center>
+                            <center><br><h2>Editar Usuario: RUT: <c:out value="${usuarioAEditar.rutUsuario}" ></c:out> - <c:out value="${usuarioAEditar.nombreUsuario}" ></c:out> <c:out value="${usuarioAEditar.apellidoUsuario}" ></c:out> - <c:out value="${usuarioAEditar.correoUsuario}" ></c:out></h2></center>
                             <form name="formGuardaUsuarioEditado" method="post" onsubmit="return validapassvacia()" action="../UsuarioServlet">
                                 <div class="container">
                                     <c:if test="${sessionScope.perfil!=4}">
