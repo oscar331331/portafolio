@@ -21,8 +21,8 @@ import negocio.UsuarioBO;
  *
  * @author pablo.abarca
  */
-@WebServlet(name = "RegistroServlet", urlPatterns = {"/RegistroServlet","/Registro"})
-public class RegistroServlet extends HttpServlet {
+@WebServlet(name = "RegistrarseServlet", urlPatterns = {"/RegistrarseServlet","/Registrarse"})
+public class RegistrarseServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
