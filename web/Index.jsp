@@ -119,6 +119,10 @@
 
         chart.draw(data, options);
       }
+      
+      $(window).resize(function(){
+      drawChart();
+      })
     </script>
   
   
@@ -230,7 +234,7 @@
                                 </div>
                                 <div class="card-content collapse show">
                                     <div class="app-content content">
-                                        <div id="piechartAdmin" style="width: 900px; height: 500px;"></div>
+                                        <div id="piechartAdmin"></div>
 
                                         </div>
                                 </div>
@@ -251,7 +255,7 @@
                                 </div>
                                 <div class="card-content collapse show">
                                     <div class="app-content content">
-                                        <div id="piechartAdmin2" style="width: 900px; height: 500px;"></div>
+                                        <div id="piechartAdmin2"></div>
 
                                         </div>
                                 </div>
@@ -350,7 +354,7 @@
                                 </div>
                                 <div class="card-content collapse show">
                                     <div class="app-content content">
-                                        <div id="piechartApoderado" style="width: 900px; height: 500px;"></div>
+                                        <div id="piechartApoderado"></div>
 
                                         </div>
                                 </div>
@@ -371,7 +375,7 @@
                                 </div>
                                 <div class="card-content collapse show">
                                     <div class="app-content content">
-                                        <div id="piechartApoderado2" style="width: 900px; height: 500px;"></div>
+                                        <div id="piechartApoderado2"></div>
 
                                         </div>
                                 </div>

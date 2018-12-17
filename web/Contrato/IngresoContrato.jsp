@@ -1,5 +1,6 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -235,24 +236,28 @@
                                         <input type="text" name="CodigoContrato" value="<c:out value="${contratoAEditar.codigo}" ></c:out>" class="form-control" required readonly=""/>
                                     </div>
                                     <div class="form-group">
-                                        <label>Fecha Incorporacion</label>
-                                        <input type="date" name="FechaIncorporacionEditar" value="<c:out value="${contratoAEditar.fechaIncorporacion}" ></c:out>" class="form-control" required/>
+                                        <label>Fecha Incorporacion (dd-MM-aaaa)</label>
+                                        <fmt:parseDate value="${contratoAEditar.fechaIncorporacion}" pattern="yyyy-MM-dd" var="fechaI"></fmt:parseDate>
+                                        <fmt:parseDate value="${contratoAEditar.fechaMeta}" pattern="yyyy-MM-dd" var="fechaM"></fmt:parseDate>
+                                        <fmt:parseDate value="${contratoAEditar.fechaFinal}" pattern="yyyy-MM-dd" var="fechaF"></fmt:parseDate>                                        
+                                        
+                                        <input type="date" id="fechaI" name="FechaIncorporacionEditar" value="<fmt:formatDate value="${fechaI}" pattern="yyyy-MM-dd" />" class="form-control" required/>
                                     </div>
                                     <div class="form-group">
-                                        <label>Fecha meta</label>
-                                        <input type="date" name="FechaMetaEditar" value="<c:out value="${contratoAEditar.fechaMeta}" ></c:out>" class="form-control" required/>
+                                        <label>Fecha meta (dd-MM-aaaa)</label>
+                                        <input type="date" name="FechaMetaEditar" value="<fmt:formatDate value="${fechaM}" pattern="yyyy-MM-dd" />" class="form-control" required/>
                                     </div>
                                     <div class="form-group">
-                                        <label>Fecha final</label>
-                                        <input type="date" name="FechaFinalEditar" value="<c:out value="${contratoAEditar.fechaFinal}" ></c:out>" class="form-control" required/>
+                                        <label>Fecha final (dd-MM-aaaa)</label>
+                                        <input type="date" name="FechaFinalEditar" value="<fmt:formatDate value="${fechaF}" pattern="yyyy-MM-dd" />" class="form-control" required/>
                                     </div>                                    
                                     <div class="form-group">
-                                        <label>Monto Meta</label>
+                                        <label>Monto Meta (Peso Chileno CLP) $</label>
                                         <input type="number" name="MontoMetaEditar" min="1" max="900000000" value="<c:out value="${contratoAEditar.montoMeta}" ></c:out>" class="form-control" placeholder="Ingrese monto meta en pesos" />
                                     </div>
                                     
                                     <div class="form-group">
-                                        <label>Monto Actual</label>
+                                        <label>Monto Actual (Peso Chileno CLP) $</label>
                                         <input type="number" name="MontoActualEditar" min="0" max="700000000" value="<c:out value="${contratoAEditar.montoActualContrato}" ></c:out>" class="form-control" placeholder="Ingrese monto actual en pesos" />
                                     </div>
                                     

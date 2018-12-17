@@ -188,8 +188,9 @@
                             </c:forEach>                                               
                         </tbody>
                     </table>  
+                <c:if test= "${sessionScope.perfil==1 || sessionScope.perfil==3 || sessionScope.perfil==5}">
                    <center><a href="../Usuario/IngresoUsuario.jsp" type="button"  class="btn btn-info btn-min-width mr-1 mb-1"><i class="ft-plus-square"></i> Agregar Usuario</a></center>
-
+                </c:if>
 					</div>
 				</div>
 			</div>
