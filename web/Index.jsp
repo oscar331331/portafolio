@@ -441,7 +441,7 @@
                 
             <div class="container">
                 <div class="alert alert-success"><a href="#" class="close" data-dismiss="alert">&times;</a>       
-                    <center><c:out value="${msgBueno}"></c:out> </center>                          
+                    <center>Graficos en mantención para usuario encargado de curso</center>                          
                 </div>                            
                 
             </div>

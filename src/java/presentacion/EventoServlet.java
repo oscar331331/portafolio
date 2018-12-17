@@ -74,8 +74,18 @@ public class EventoServlet extends HttpServlet {
             ContratoBO objContratoBO= new ContratoBO();
             EventoBO objEventoBO= new EventoBO();
             
-            if(request.getParameter("eventoAEditarVende")!=null)
+            
+            
+            if(request.getParameter("id_contrato")!=null)
             {
+            HttpSession sesion = request.getSession();
+            int contratoEditar=Integer.parseInt(request.getParameter("id_contrato"));        
+            Contrato infoContrato=objContratoBO.buscaContratoPorId(contratoEditar);
+            sesion.setAttribute("objContrato", infoContrato);
+            response.sendRedirect("Evento/IngresoEvento.jsp");
+            
+            }
+            else if(request.getParameter("eventoAEditarVende")!=null)            {
             HttpSession sesion = request.getSession();
             int eventoEditar=Integer.parseInt(request.getParameter("eventoAEditarVende"));        
             Evento infoEvento=objEventoBO.buscaEventoPorId(eventoEditar);
@@ -136,7 +146,7 @@ public class EventoServlet extends HttpServlet {
         }
         else {
             
-            String archivo="D:\\Documentos\\NetBeansProjects\\portafolio\\web\\comprobantes";
+            String archivo="C:\\Users\\Vito\\Desktop\\WebAppTourV1\\portafolio\\web\\comprobantes";
             DiskFileItemFactory factory=new DiskFileItemFactory();
             factory.setSizeThreshold(1024);
             factory.setRepository(new File(archivo));
@@ -150,7 +160,7 @@ public class EventoServlet extends HttpServlet {
              if( upload == null){
 
                 sesion.setAttribute("msgError", "no se pudo actualizar a la BD");
-                response.sendRedirect("Pago_Cuota/IngresoPago.jsp");
+                response.sendRedirect("Evento/MantenedorEvento.jsp");
 
             } 
             else {

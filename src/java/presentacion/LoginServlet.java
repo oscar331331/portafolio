@@ -72,7 +72,7 @@ public class LoginServlet extends HttpServlet {
                 GraficoApoderado objGraficoApoderado = new GraficoApoderado();
                 GraficoApoderadoBO objGraficoApoderadoBO = new GraficoApoderadoBO();
                 objGraficoApoderado=objGraficoApoderadoBO.obtenerGrafico(id_usuario);
-                sesion.setAttribute("msgBueno", "Graficos en mantención para encargado de curso, disculpe las molestias");
+                
                 sesion.removeAttribute("msgLogin");
                 response.sendRedirect("Index.jsp");
             }

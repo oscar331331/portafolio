@@ -68,8 +68,8 @@ public class ContratoServlet extends HttpServlet {
         if(request.getParameter("id_contrato")!=null)
         {
             HttpSession sesion = request.getSession();
-            int usuarioEditar=Integer.parseInt(request.getParameter("id_contrato"));        
-            Contrato infoContrato=objContratoBO.buscaContratoPorId(usuarioEditar);
+            int contratoEditar=Integer.parseInt(request.getParameter("id_contrato"));        
+            Contrato infoContrato=objContratoBO.buscaContratoPorId(contratoEditar);
             sesion.setAttribute("contratoAEditar", infoContrato);
             response.sendRedirect("Contrato/IngresoContrato.jsp");
         }
