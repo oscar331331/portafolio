@@ -75,6 +75,52 @@
         chart.draw(data, options);
       }
     </script>
+    <!-- GRAFICOS ENCARGADO-->
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Contrato', 'Cantidad'],
+          ['Cantidad faltante',<c:out value=" ${graficoEncargado.cantFaltanteContrato}"></c:out>],
+          ['Cantidad pagada eventos',<c:out value=" ${graficoEncargado.cantDineroEventos}"></c:out>],
+          ['Cantidad pagada cuotas',<c:out value=" ${graficoEncargado.cantDineroCuotas}"></c:out>]
+          
+        ]);
+
+        var options = {
+          title: 'Contrato: cantidades pagadas y pendientes'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechartEncargado'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Eventos', 'Estado'],
+          ['Eventos aceptados',<c:out value=" ${graficoEncargado.cantEventosAceptados}"></c:out>],
+          ['Eventos pendientes',<c:out value=" ${graficoEncargado.cantEventosPendientes}"></c:out>]
+          
+        ]);
+
+        var options = {
+          title: 'Contrato: cantidades pagadas y pendientes'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechartEncargado2'));
+
+        chart.draw(data, options);
+      }
+    </script>
     <!-- GRAFICOS APODERADO-->
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
@@ -124,7 +170,6 @@
       drawChart();
       })
     </script>
-  
   
   
   
@@ -438,13 +483,107 @@
 <!-- // Pie charts section end -->
             </c:when>
             <c:when test="${sessionScope.perfil==4}">
-                
-            <div class="container">
-                <div class="alert alert-success"><a href="#" class="close" data-dismiss="alert">&times;</a>       
-                    <center>Graficos en mantención para usuario encargado de curso</center>                          
-                </div>                            
-                
-            </div>
+             <!-- Pie charts section start -->
+<section id="chartjs-pie-charts">
+    <div class="row">
+        <!-- Simple Pie Chart -->
+                        <div class="col-md-6 col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Mi contrato</h4>
+                                    <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                                    <div class="heading-elements">
+                                        <ul class="list-inline mb-0">
+
+                                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                            <li><a data-action="close"><i class="ft-x"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-content collapse show">
+                                    <div class="app-content content">
+                                        <div id="piechartEncargado"></div>
+
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Mi Cuota</h4>
+                                    <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                                    <div class="heading-elements">
+                                        <ul class="list-inline mb-0">
+
+                                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                            <li><a data-action="close"><i class="ft-x"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-content collapse show">
+                                    <div class="app-content content">
+                                        <div id="piechartEncargado2"></div>
+
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Simple Doughnut Chart -->
+                        
+                        
+                        
+                        
+    </div>    
+</section>
+
+
+
+
+<section id="line-awesome-icons">
+  <div class="row">
+      <div class="col-12">
+          <div class="card">
+              <div class="card-header">
+                  <h4 class="card-title">Cantidades</h4>
+                  <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                  <div class="heading-elements">
+                      <ul class="list-inline mb-0">
+                          <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                          <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                          <li><a data-action="close"><i class="ft-x"></i></a></li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="card-content collapse show">
+                  <div class="card-body">
+                      <div class="feather-icons overflow-hidden row">
+                          <div class="col-md-4 col-sm-6 col-12 fonticon-container">
+                            <div class="fonticon-wrap icon-shadow icon-shadow-primary"><i class="la la-money"></i></div>
+                            <label class="fonticon-classname">Pagos realizados</label>
+                            <label class="fonticon-unit"><c:out value=" ${graficoEncargado.cantPagosRealizados}"></c:out></label>
+                          </div>
+                          <div class="col-md-4 col-sm-6 col-12 fonticon-container">
+                            <div class="fonticon-wrap icon-shadow icon-shadow-primary"><i class="la la-hourglass-start"></i></div>
+                            <label class="fonticon-classname">Cuotas Pendientes</label>
+                            <label class="fonticon-unit"><c:out value=" ${graficoEncargado.cantCuotasPendiente}"></c:out></label>
+                          </div>
+                          <div class="col-md-4 col-sm-6 col-12 fonticon-container">
+                            <div class="fonticon-wrap icon-shadow icon-shadow-primary"><i class="la la-thumbs-o-up"></i></div>
+                            <label class="fonticon-classname">Cuotas Finalizadas</label>
+                            <label class="fonticon-unit"><c:out value=" ${graficoEncargado.cantCuotasPagadas}"></c:out></label>
+                          </div>
+                          
+                          
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+<!-- // Pie charts section end -->
         
             </c:when>
             <c:otherwise>

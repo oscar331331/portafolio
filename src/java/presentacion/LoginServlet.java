@@ -7,6 +7,7 @@ package presentacion;
 
 import entidad.GraficoAdmin;
 import entidad.GraficoApoderado;
+import entidad.GraficoEncargado;
 import entidad.Usuario;
 import negocio.UsuarioBO;
 import java.io.IOException;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import negocio.GraficoAdminBO;
 import negocio.GraficoApoderadoBO;
+import negocio.GraficoEncargadoBO;
 
 /**
  *
@@ -68,11 +70,10 @@ public class LoginServlet extends HttpServlet {
                 sesion.removeAttribute("msgLogin");
                 response.sendRedirect("Index.jsp");
             }else if(objUsuario.getIdPerfil()==4){
-
-                GraficoApoderado objGraficoApoderado = new GraficoApoderado();
-                GraficoApoderadoBO objGraficoApoderadoBO = new GraficoApoderadoBO();
-                objGraficoApoderado=objGraficoApoderadoBO.obtenerGrafico(id_usuario);
-                
+                GraficoEncargado objGraficoEncargado = new GraficoEncargado();
+                GraficoEncargadoBO objGraficoEncargadoBO = new GraficoEncargadoBO();
+                objGraficoEncargado=objGraficoEncargadoBO.obtenerGrafico(id_usuario);
+                sesion.setAttribute("graficoEncargado",objGraficoEncargado);
                 sesion.removeAttribute("msgLogin");
                 response.sendRedirect("Index.jsp");
             }
